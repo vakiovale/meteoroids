@@ -5,10 +5,9 @@ package meteoroids.Meteoroids;
  *
  */
 public class Main {
-    
-	public static void main(String[] args) {
-    	System.out.println("Starting Meteoroids!");
-    	System.out.println("Exiting Meteoroids...");
+
+    public static void main(String[] args) {
+        System.out.println("Starting Meteoroids!");
+        System.out.println("Exiting Meteoroids...");
     }
-	
 }
