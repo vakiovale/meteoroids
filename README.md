@@ -42,6 +42,17 @@ Run Meteoroids:
 
 More information on setting up LWJGL project with Maven: http://wiki.lwjgl.org/wiki/Setting_Up_LWJGL_with_Maven
 
+### Importing project to Eclipse, Netbeans, etc. (IDE)
+
+Use IDE's own import Maven project tool and import the Meteoroids folder.
+Add <code>-Djava.library.path=target/natives</code> to the project's VM options.
+
+**Eclipse:**
+"Run" -> "Run configurations..." -> "Java Application" -> "Main" -> "Arguments" -> "VM arguments:"
+
+**NetBeans:**
+Project Properties -> "Run" -> "VM Options:"
+
 ### Troubleshooting
 
 Problems starting the application?
