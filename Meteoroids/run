@@ -1,4 +1,5 @@
 #!/bin/bash
 
 echo Compiling and running Meteoroids
+export MAVEN_OPTS=-Djava.library.path=target/natives
 mvn compile exec:java -Dexec.mainClass=meteoroids.Meteoroids.Main

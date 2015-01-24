@@ -18,10 +18,4 @@ mvn nativedependencies:copy
 
 ##mvn package
 
-echo -e "\n************************************"
-echo Setting natives-folder to MAVEN_OPTS
-echo -e "************************************\n"
-
-export MAVEN_OPTS=-Djava.library.path=target/natives
-
 echo Done!
