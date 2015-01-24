@@ -41,3 +41,20 @@ Run Meteoroids:
 <code>mvn compile exec:java -Dexec.mainClass=meteoroids.Meteoroids.Main</code>
 
 More information on setting up LWJGL project with Maven: http://wiki.lwjgl.org/wiki/Setting_Up_LWJGL_with_Maven
+
+### Troubleshooting
+
+Problems starting the application?
+
+Try this:
+
+<code>
+mvn clean:clean
+mvn compile
+mvn nativedependencies:copy
+mvn package
+export MAVEN_OPTS=-Djava.library.path=target/natives
+mvn compile exec:java -Dexec.mainClass=meteoroids.Meteoroids.Main
+</code>
+
+After this, the program should start. Hope this works!
