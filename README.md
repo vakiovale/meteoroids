@@ -22,8 +22,7 @@ Happy shooting!
 Clean and compile project with Maven:
 
 <code>
-mvn clean:clean
-mvn compile
+mvn clean:clean && mvn compile
 </code>
 
 Set up MAVEN_OPTS environment variable:
