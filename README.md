@@ -29,8 +29,11 @@ mvn compile
 Set up MAVEN_OPTS environment variable:
 
 <code>
-windows: set MAVEN_OPTS="-Djava.library.path=target/natives"   
-   unix: export MAVEN_OPTS=-Djava.library.path=target/natives
+**windows:** set MAVEN_OPTS="-Djava.library.path=target/natives"
+</code>
+
+<code>
+   **unix:** export MAVEN_OPTS=-Djava.library.path=target/natives
 </code>
 
 Run Meteoroids:
