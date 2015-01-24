@@ -5,9 +5,9 @@ import org.junit.Test;
 public class MainTest {
 
     @Test
-    public void testMainApplication() {
-        Main.main(null);
-        assert(true);
+    public void testGameApplication() {
+    	// TODO: test case for application
+    	assert(true);
     }
     
 }
