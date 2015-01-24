@@ -1,0 +1,7 @@
+#!/bin/bash
+
+echo -e "***********"
+echo Cleaning...
+echo -e "***********\n"
+
+mvn clean:clean

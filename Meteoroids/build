@@ -1,0 +1,27 @@
+#!/bin/bash
+
+echo -e "************"
+echo Compiling...
+echo -e "************\n"
+
+mvn compile
+
+echo -e "\n***************************"
+echo Copying native libraries...
+echo -e "***************************\n"
+
+mvn nativedependencies:copy
+
+##echo -e "\n************"
+##echo Packaging...
+##echo -e "************\n"
+
+##mvn package
+
+echo -e "\n************************************"
+echo Setting natives-folder to MAVEN_OPTS
+echo -e "************************************\n"
+
+export MAVEN_OPTS=-Djava.library.path=target/natives
+
+echo Done!

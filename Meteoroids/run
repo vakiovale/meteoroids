@@ -1,0 +1,4 @@
+#!/bin/bash
+
+echo Compiling and running Meteoroids
+mvn compile exec:java -Dexec.mainClass=meteoroids.Meteoroids.Main
