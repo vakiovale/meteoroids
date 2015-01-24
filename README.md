@@ -61,10 +61,15 @@ Try this:
 
 <code>
 mvn clean:clean
+&&
 mvn compile
+&&
 mvn nativedependencies:copy
+&&
 mvn package
+&&
 export MAVEN_OPTS=-Djava.library.path=target/natives
+&&
 mvn compile exec:java -Dexec.mainClass=meteoroids.Meteoroids.Main
 </code>
 
