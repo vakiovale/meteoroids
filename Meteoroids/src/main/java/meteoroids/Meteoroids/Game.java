@@ -13,12 +13,13 @@ import org.lwjgl.opengl.DisplayMode;
  * @author vpyyhtia
  *
  */
-public class Game {
+class Game {
 	
+	private static double timeFactor = 1.0;
 	private GameController gameController;
 	private GameTimer timer;
 
-	public Game() {
+	Game() {
 		gameController = new GameController();
 		timer = new GameTimer();
 		Sys.getTime();
@@ -29,7 +30,7 @@ public class Game {
 	 * Uses GameController to update the game world.
 	 * 
 	 */
-	public void start() {
+	void start() {
               
 		if(!init()) {
 			// TODO: Error
@@ -75,6 +76,10 @@ public class Game {
         	return false;
         }
 		return true;
+	}
+	
+	double getTimeFactor() {
+		return timeFactor;
 	}
 	
 }

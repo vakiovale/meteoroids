@@ -8,8 +8,6 @@ package meteoroids.Meteoroids;
  */
 public class Main {
 	
-	public static double timeFactor = 1.0;
-	
 	public static void main(String[] args) {
         System.out.println("Starting Meteoroids!");
         
@@ -18,4 +16,6 @@ public class Main {
         
         System.out.println("Exiting Meteoroids...");
     }
+	
+	
 }
