@@ -1,7 +1,7 @@
 # meteoroids
 Clone of the classic Asteroids game.
 
-### Running Meteoroids from command line (Linux - quick)
+## Running Meteoroids from command line (Linux - quick)
 
 Run these Linux scripts from <code>Meteoroids/</code> folder:
 
@@ -17,13 +17,12 @@ Run these Linux scripts from <code>Meteoroids/</code> folder:
 
 Happy shooting!
 
-### Running Meteoroids from command line
+## Running Meteoroids from command line
 
 Clean and compile project with Maven:
 
 <code>
-mvn clean:clean
-mvn compile
+mvn clean:clean && mvn compile
 </code>
 
 Set up MAVEN_OPTS environment variable:
@@ -42,7 +41,7 @@ Run Meteoroids:
 
 More information on setting up LWJGL project with Maven: http://wiki.lwjgl.org/wiki/Setting_Up_LWJGL_with_Maven
 
-### Importing project to Eclipse, Netbeans, etc. (IDE)
+## Importing project to Eclipse, Netbeans, etc. (IDE)
 
 Use IDE's own import Maven project tool and import the Meteoroids folder.
 Add <code>-Djava.library.path=target/natives</code> to the project's VM options.
@@ -53,7 +52,7 @@ Add <code>-Djava.library.path=target/natives</code> to the project's VM options.
 **NetBeans:**
 Project Properties -> "Run" -> "VM Options:"
 
-### Troubleshooting
+## Troubleshooting
 
 Problems starting the application?
 
@@ -61,10 +60,15 @@ Try this:
 
 <code>
 mvn clean:clean
+&&
 mvn compile
+&&
 mvn nativedependencies:copy
+&&
 mvn package
+&&
 export MAVEN_OPTS=-Djava.library.path=target/natives
+&&
 mvn compile exec:java -Dexec.mainClass=meteoroids.Meteoroids.Main
 </code>
 
