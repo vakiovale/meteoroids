@@ -31,7 +31,10 @@ public class Game {
 	 */
 	public void start() {
               
-		init();
+		if(!init()) {
+			// TODO: Error
+			System.exit(0);
+		}
 		
 		int deltaTime = timer.getDeltaTime();		
 		
@@ -42,23 +45,36 @@ public class Game {
         	gameController.update(deltaTime);
         	Display.update();
         	Display.sync(60);
-        }    
+        }            
         
-        Display.destroy();
+        destroy();
     }
+	
+	/**
+	 * Display destroy
+	 * 
+	 * @return true
+	 *  
+	 */
+	boolean destroy() {
+        Display.destroy();
+        return true;
+	}
 	
 	/**
 	 * Initialize LWJGL
 	 * 
+	 * @return true if initializing LWJGL successfully
+	 * 
 	 */
-	private void init() {
+	boolean init() {
 		try {
             Display.setDisplayMode(new DisplayMode(800,600));
             Display.create();
         } catch (LWJGLException e) {
-            e.printStackTrace();
-            System.exit(0);
+        	return false;
         }
+		return true;
 	}
 	
 }
