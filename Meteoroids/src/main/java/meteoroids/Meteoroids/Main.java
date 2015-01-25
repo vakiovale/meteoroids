@@ -3,8 +3,12 @@ package meteoroids.Meteoroids;
 /**
  * Main application - Meteoroids
  *
+ * @author vpyyhtia
+ * 
  */
 public class Main {
+	
+	public static double timeFactor = 1.0;
 	
 	public static void main(String[] args) {
         System.out.println("Starting Meteoroids!");
