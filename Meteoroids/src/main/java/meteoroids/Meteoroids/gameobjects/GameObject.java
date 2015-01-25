@@ -10,7 +10,7 @@ import javax.vecmath.Vector2d;
  */
 public class GameObject {
 	
-	private Vector2d position;
+	protected Vector2d position;
 	
 	public GameObject() {
 		position = new Vector2d(0, 0);
@@ -37,8 +37,8 @@ public class GameObject {
 	/**
 	 * Set position.
 	 * 
-	 * @param x new position coordinate
-	 * @param y new position coordinate
+	 * @param x coordinate
+	 * @param y coordinate
 	 */
 	public void setPosition(double x, double y) {
 		this.position.set(x, y);
