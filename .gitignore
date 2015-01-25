@@ -1,4 +1,5 @@
 .settings
 .project
 .classpath
+nbactions.xml
 target/
