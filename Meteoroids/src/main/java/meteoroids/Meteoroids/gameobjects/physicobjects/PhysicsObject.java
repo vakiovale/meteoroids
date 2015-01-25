@@ -5,7 +5,7 @@ import meteoroids.Meteoroids.gameobjects.DUGameObject;
 /**
  * Abstract game object that is affected by the law of physics.
  * Extends DUGameObject so the PhysicsObject is always drawable
- * and updatable.
+ * and updateable.
  * 
  * @author vpyyhtia
  *
