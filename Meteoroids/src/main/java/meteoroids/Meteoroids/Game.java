@@ -13,13 +13,13 @@ import org.lwjgl.opengl.DisplayMode;
  * @author vpyyhtia
  *
  */
-class Game {
+public class Game {
 	
 	private static double timeFactor = 1.0;
 	private GameController gameController;
 	private GameTimer timer;
 
-	Game() {
+	public Game() {
 		gameController = new GameController();
 		timer = new GameTimer();
 	}
@@ -77,7 +77,14 @@ class Game {
 		return true;
 	}
 	
-	double getTimeFactor() {
+	/**
+	 * Time factor tells how fast game should be run.
+	 * It's possible to speed up / slow down the game by 
+	 * multiplying delta time with time factor.
+	 * 
+	 * @return time factor
+	 */
+	public static double getTimeFactor() {
 		return timeFactor;
 	}
 	

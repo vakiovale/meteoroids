@@ -9,7 +9,9 @@ package meteoroids.Meteoroids.gameobjects.physicsobjects;
 public class Asteroid extends PhysicsObject {
 
 	public Asteroid() {
-		super(5.0, 5.0, 50.0);
+		super(Math.random() * 20.0 - 10.0, 
+		      Math.random() * 20.0 - 10.0, 
+		      500.0);
 	}
 	
     @Override

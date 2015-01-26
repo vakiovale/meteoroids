@@ -9,7 +9,7 @@ package meteoroids.Meteoroids.gameobjects.physicsobjects;
 public class Ship extends PhysicsObject {
 
 	public Ship() {
-		super(10.0);
+		super(100.0);
 	}
 	
 	@Override

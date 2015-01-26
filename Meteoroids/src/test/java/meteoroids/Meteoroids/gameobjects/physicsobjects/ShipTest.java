@@ -17,7 +17,7 @@ public class ShipTest {
     @Test
     public void testShipMass() {
         double mass = ship.getMass();
-        assertEquals("Ship mass should be 10.0, but it was " + mass + ".", 10.0, mass, 0.01);
+        assertEquals("Ship mass should be 100.0, but it was " + mass + ".", 100.0, mass, 0.01);
     }
 
 }

@@ -37,6 +37,7 @@ public abstract class PhysicsObject extends DUGameObject implements IPosition {
 	    this.velocity = velocity;
 	    
 	    this.mass = mass <= 1.0 ? 1.0 : mass; // Don't allow mass lower than 1.0
+	    this.inverseMass = 1/mass;
 	}
 	
 	public PhysicsObject(double posX, double posY) {
@@ -51,6 +52,10 @@ public abstract class PhysicsObject extends DUGameObject implements IPosition {
         this(new Vector2d(0.0, 0.0), new Vector2d(posX, posY), new Vector2d(0.0, 0.0), new Vector2d(0.0, 0.0), mass);
 	}
 	
+	/**
+	 * Update object's position, velocity and acceleration with current forces.
+	 * 
+	 */
 	@Override
 	public void update(double deltaTime) {
 	    sumOfForces.scale(inverseMass);

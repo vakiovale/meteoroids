@@ -19,7 +19,7 @@ public class AsteroidTest {
     @Test
     public void testAsteroidMass() {
         double mass = asteroid.getMass();
-        assertEquals("Asteroid mass should be 50.0, but it was " + mass + ".", 50.0, mass, 0.01);
+        assertEquals("Asteroid mass should be 500.0, but it was " + mass + ".", 500.0, mass, 0.01);
     }
 
 }
