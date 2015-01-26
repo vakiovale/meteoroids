@@ -3,7 +3,7 @@ package meteoroids.Meteoroids.controllers;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.vecmath.Vector2d;
+import javax.vecmath.Vector2f;
 
 import meteoroids.Meteoroids.Game;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.Asteroid;
@@ -38,7 +38,7 @@ public class GameController implements Controller {
 	}
 
 	@Override
-	public void update(double deltaTime) {
+	public void update(float deltaTime) {
 		
 	    /* TODO:
 	     * 
@@ -50,8 +50,8 @@ public class GameController implements Controller {
 	    
 	    // Add forces
 	    for(PhysicsObject p : physicsObjects) {
-		    p.addForce(new Vector2d(Math.random()-0.5, 
-		                            Math.random()-0.5));
+		    p.addForce(new Vector2f((float)Math.random()*0.1f-0.5f*0.1f, 
+		                            (float)Math.random()*0.1f-0.5f*0.1f));
 		}
 		
 	    // Update objects and clear forces and draw object

@@ -1,6 +1,6 @@
 package meteoroids.Meteoroids.gameobjects;
 
-import javax.vecmath.Vector2d;
+import javax.vecmath.Vector2f;
 
 /**
  * Basic interface for objects with a position
@@ -13,16 +13,16 @@ public interface IPosition {
     /**
      * Get 2D position of the object.
      * 
-     * @return Vector2d
+     * @return Vector2f
      */
-    public Vector2d getPosition();
+    public Vector2f getPosition();
     
     /**
      * Set position.
      * 
-     * @param position Vector2d
+     * @param position Vector2f
      */
-    public void setPosition(Vector2d position);
+    public void setPosition(Vector2f position);
     
     /**
      * Set position.
@@ -30,19 +30,19 @@ public interface IPosition {
      * @param x coordinate
      * @param y coordinate
      */
-    public void setPosition(double x, double y);
+    public void setPosition(float x, float y);
     
     /**
      * Returns x position.
      * 
      * @return x
      */
-    public double getX();
+    public float getX();
     
     /**
      * Returns y position.
      *  
      * @return y
      */
-    public double getY();
+    public float getY();
 }

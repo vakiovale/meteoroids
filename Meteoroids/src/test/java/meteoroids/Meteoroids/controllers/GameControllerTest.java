@@ -22,8 +22,8 @@ public class GameControllerTest {
 	@Test
 	public void testUpdate() {
 		try {
-			controller.update(0.2);
-			controller.update(0.8);
+			controller.update(0.2f);
+			controller.update(0.8f);
 		} catch(Exception e) {
 			assertTrue("GameController's update function doesn't work", false);
 		}
@@ -34,7 +34,7 @@ public class GameControllerTest {
 	public void testInterface() {
 		try {
 			Controller c = controller;
-			c.update(100.0);
+			c.update(100.0f);
 		} catch(Exception e) {
 			assertTrue("GameController problem with Controller interface", false);
 		}

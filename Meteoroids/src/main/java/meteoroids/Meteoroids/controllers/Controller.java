@@ -13,6 +13,6 @@ public interface Controller {
 	 * 
 	 * @param deltaTime time since last frame
 	 */
-	public void update(double deltaTime);
+	public void update(float deltaTime);
 	
 }
