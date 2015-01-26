@@ -1,0 +1,7 @@
+#!/bin/bash
+
+echo -e "**********"
+echo -e "Testing..."
+echo -e "**********\n"
+
+mvn test org.pitest:pitest-maven:mutationCoverage
