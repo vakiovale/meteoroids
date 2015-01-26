@@ -8,7 +8,7 @@ import javax.vecmath.Vector2d;
  * @author vpyyhtia
  *
  */
-public class GameObject {
+public class GameObject implements IPosition {
 	
 	protected Vector2d position;
 	
@@ -16,48 +16,27 @@ public class GameObject {
 		position = new Vector2d(0, 0);
 	}
 
-	/**
-	 * Get 2D position of the object.
-	 * 
-	 * @return Vector2d
-	 */
+	@Override
 	public Vector2d getPosition() {
 		return (Vector2d)position.clone();
 	}
 	
-	/**
-	 * Set position.
-	 * 
-	 * @param position Vector2d
-	 */
+    @Override
 	public void setPosition(Vector2d position) {
 		this.position = position;
 	}
 	
-	/**
-	 * Set position.
-	 * 
-	 * @param x coordinate
-	 * @param y coordinate
-	 */
+    @Override
 	public void setPosition(double x, double y) {
 		this.position.set(x, y);
 	}
 	
-	/**
-	 * Returns x position.
-	 * 
-	 * @return x
-	 */
+    @Override
 	public double getX() {
 		return position.x;
 	}
 	
-	/**
-	 * Returns y position.
-	 * 	
-	 * @return y
-	 */
+    @Override
 	public double getY() {
 		return position.y;
 	}
