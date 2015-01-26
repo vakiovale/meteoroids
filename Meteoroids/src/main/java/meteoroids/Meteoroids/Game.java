@@ -22,7 +22,6 @@ class Game {
 	Game() {
 		gameController = new GameController();
 		timer = new GameTimer();
-		Sys.getTime();
 	}
 	
 	/**
