@@ -54,10 +54,11 @@ public abstract class PhysicsObject extends DUGameObject implements IPosition {
 	
 	/**
 	 * Update object's position, velocity and acceleration with current forces.
+	 * Clears forces at the end of the method.
 	 * 
 	 */
 	@Override
-	public void update(float deltaTime) {
+	public void update(float deltaTime) {  
 	    // Calculate acceleration (a = F/m)
 		sumOfForces.scale(inverseMass);
 	    acceleration = sumOfForces;
@@ -71,6 +72,8 @@ public abstract class PhysicsObject extends DUGameObject implements IPosition {
 	    Vector2f positionAdd = (Vector2f)velocity.clone();
 	    positionAdd.scale(deltaTime);	    
 	    position.add(positionAdd);
+	    
+	    clearForces();
 	}
 	
 	/**

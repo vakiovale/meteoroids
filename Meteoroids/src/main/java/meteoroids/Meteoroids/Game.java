@@ -2,6 +2,7 @@ package meteoroids.Meteoroids;
 
 import meteoroids.Meteoroids.controllers.GameController;
 import meteoroids.Meteoroids.controllers.GraphicsController;
+import meteoroids.Meteoroids.controllers.GravityController;
 
 import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.Display;
@@ -18,8 +19,11 @@ public class Game {
 	private static float timeFactor = 1.0f;
 	public static final int WIDTH = 800;
 	public static final int HEIGHT = 600;
+	
 	private GameController gameController;
 	private GraphicsController graphicsController;
+	private GravityController gravityController;
+	
 	private GameTimer timer;
 	
 	private final int FPS = 60;
@@ -27,6 +31,7 @@ public class Game {
 	public Game() {
 		gameController = new GameController();
 		graphicsController = new GraphicsController(WIDTH, HEIGHT);
+		gravityController = new GravityController();
 		timer = new GameTimer();
 	}
 	
@@ -50,6 +55,11 @@ public class Game {
             
             // Refresh screen
             graphicsController.update(deltaTime);
+            
+            // Calculate gravity fields
+            gravityController.update(gameController.getGravityObjects(), 
+                                     gameController.getPhysicsObjects(), 
+                                     deltaTime);
             
             // Update game world
         	gameController.update(deltaTime);

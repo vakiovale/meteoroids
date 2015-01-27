@@ -12,11 +12,11 @@ public class Planet extends GravityObject {
     private float size;
     
     public Planet() {
-        this(0.0f, 0.0f, 100.0f, 1000.0f);
+        this(0.0f, 0.0f, 100.0f, 500.0f);
     }
     
     public Planet(float size) {
-        this(0.0f, 0.0f, size, 1000.0f);
+        this(0.0f, 0.0f, size, 500.0f);
     }
     
     public Planet(float size, float mass) {
