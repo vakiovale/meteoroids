@@ -1,12 +1,11 @@
 package meteoroids.Meteoroids;
 
 import meteoroids.Meteoroids.controllers.GameController;
+import meteoroids.Meteoroids.controllers.GraphicsController;
 
 import org.lwjgl.LWJGLException;
-import org.lwjgl.Sys;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
-import org.lwjgl.opengl.GL11;
 
 /**
  * Main Game Loop that handles the game
@@ -17,11 +16,17 @@ import org.lwjgl.opengl.GL11;
 public class Game {
 	
 	private static float timeFactor = 1.0f;
+	public static final int WIDTH = 1300;
+	public static final int HEIGHT = 400;
 	private GameController gameController;
+	private GraphicsController graphicsController;
 	private GameTimer timer;
+	
+	private final int FPS = 60;
 
 	public Game() {
 		gameController = new GameController();
+		graphicsController = new GraphicsController(WIDTH, HEIGHT);
 		timer = new GameTimer();
 	}
 	
@@ -32,32 +37,28 @@ public class Game {
 	 */
 	void start() {
               
-		if(!init()) {
+		if(!init() || !graphicsController.init()) {
 			// TODO: Error
 			System.exit(0);
 		}
 		
-		GL11.glMatrixMode(GL11.GL_PROJECTION);
-		GL11.glLoadIdentity();
-		GL11.glOrtho(0, 800, 0, 600, 1, -1);
-		GL11.glMatrixMode(GL11.GL_MODELVIEW);
-		
-		int deltaTime = timer.getDeltaTime();		
+		int deltaTime = 1/FPS * 1000;		
 		
 		// Game loop
-        while (!Display.isCloseRequested()) {
-            // Clear the screen and depth buffer
-            GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT); 
-                     
-            // set the color of the quad (R,G,B,A)
-            GL11.glColor3f(0.5f,0.5f,1.0f);
-            
-            
+        while (!Display.isCloseRequested()) {            
             deltaTime = timer.getDeltaTime();
-                        	        	
+            
+            // Refresh screen
+            graphicsController.update(deltaTime);
+            
+            // Update game world
         	gameController.update(deltaTime);
+        	
+        	// Draw
+        	graphicsController.draw(gameController.getDrawables());
+        	
         	Display.update();
-        	Display.sync(60);
+        	Display.sync(FPS);
         }            
         
         destroy();
@@ -82,7 +83,7 @@ public class Game {
 	 */
 	boolean init() {
 		try {
-            Display.setDisplayMode(new DisplayMode(800,600));
+            Display.setDisplayMode(new DisplayMode(WIDTH, HEIGHT));
             Display.create();
         } catch (LWJGLException e) {
         	return false;

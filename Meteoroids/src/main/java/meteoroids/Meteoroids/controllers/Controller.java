@@ -7,7 +7,7 @@ package meteoroids.Meteoroids.controllers;
  *
  */
 public interface Controller {
-
+	
 	/**
 	 * Update controller with deltaTime
 	 * 
