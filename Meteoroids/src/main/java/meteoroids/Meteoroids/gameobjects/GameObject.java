@@ -1,6 +1,6 @@
 package meteoroids.Meteoroids.gameobjects;
 
-import javax.vecmath.Vector2d;
+import javax.vecmath.Vector2f;
 
 /**
  * Basic GameObject
@@ -10,34 +10,34 @@ import javax.vecmath.Vector2d;
  */
 public class GameObject implements IPosition {
 	
-	protected Vector2d position;
+	protected Vector2f position;
 	
 	public GameObject() {
-		position = new Vector2d(0, 0);
+		position = new Vector2f(0, 0);
 	}
 
 	@Override
-	public Vector2d getPosition() {
-		return (Vector2d)position.clone();
+	public Vector2f getPosition() {
+		return (Vector2f)position.clone();
 	}
 	
     @Override
-	public void setPosition(Vector2d position) {
+	public void setPosition(Vector2f position) {
 		this.position = position;
 	}
 	
     @Override
-	public void setPosition(double x, double y) {
+	public void setPosition(float x, float y) {
 		this.position.set(x, y);
 	}
 	
     @Override
-	public double getX() {
+	public float getX() {
 		return position.x;
 	}
 	
     @Override
-	public double getY() {
+	public float getY() {
 		return position.y;
 	}
 	

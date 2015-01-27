@@ -16,7 +16,7 @@ public class ShipTest {
     
     @Test
     public void testShipMass() {
-        double mass = ship.getMass();
+        float mass = ship.getMass();
         assertEquals("Ship mass should be 100.0, but it was " + mass + ".", 100.0, mass, 0.01);
     }
 

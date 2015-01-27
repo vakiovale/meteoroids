@@ -1,6 +1,6 @@
 package meteoroids.Meteoroids.gameobjects.physicsobjects;
 
-import javax.vecmath.Vector2d;
+import javax.vecmath.Vector2f;
 
 import meteoroids.Meteoroids.gameobjects.DUGameObject;
 import meteoroids.Meteoroids.gameobjects.IPosition;
@@ -15,41 +15,41 @@ import meteoroids.Meteoroids.gameobjects.IPosition;
  */
 public abstract class PhysicsObject extends DUGameObject implements IPosition {
 		
-	protected Vector2d sumOfForces;
+	protected Vector2f sumOfForces;
 	
-	protected Vector2d acceleration;
-	protected Vector2d velocity;
+	protected Vector2f acceleration;
+	protected Vector2f velocity;
 	
 	// TODO: Instead of the actual mass, it could be wiser to use an inverse of mass.
 	// The mass itself is rarely used and it's inverse mass is more common.
 	// One way could be to add also an inverse mass variable;
-	protected double mass;
-	private double inverseMass;
+	protected float mass;
+	private float inverseMass;
 	
 	public PhysicsObject() {
-		this(new Vector2d(0.0, 0.0), new Vector2d(0.0, 0.0), new Vector2d(0.0, 0.0), new Vector2d(0.0, 0.0), 1.0);
+		this(new Vector2f(0.0f, 0.0f), new Vector2f(0.0f, 0.0f), new Vector2f(0.0f, 0.0f), new Vector2f(0.0f, 0.0f), 1.0f);
 	}
 	
-	public PhysicsObject(Vector2d sumOfForces, Vector2d position, Vector2d acceleration, Vector2d velocity, double mass) {
+	public PhysicsObject(Vector2f sumOfForces, Vector2f position, Vector2f acceleration, Vector2f velocity, float mass) {
 	    this.sumOfForces = sumOfForces;
 	    this.position = position;
 	    this.acceleration = acceleration;
 	    this.velocity = velocity;
 	    
-	    this.mass = mass <= 1.0 ? 1.0 : mass; // Don't allow mass lower than 1.0
+	    this.mass = mass <= 1.0f ? 1.0f : mass; // Don't allow mass lower than 1.0
 	    this.inverseMass = 1/mass;
 	}
 	
-	public PhysicsObject(double posX, double posY) {
-        this(new Vector2d(0.0, 0.0), new Vector2d(posX, posY), new Vector2d(0.0, 0.0), new Vector2d(0.0, 0.0), 1.0);
+	public PhysicsObject(float posX, float posY) {
+        this(new Vector2f(0.0f, 0.0f), new Vector2f(posX, posY), new Vector2f(0.0f, 0.0f), new Vector2f(0.0f, 0.0f), 1.0f);
 	}
 	
-	public PhysicsObject(double mass) {
-        this(new Vector2d(0.0, 0.0), new Vector2d(0.0, 0.0), new Vector2d(0.0, 0.0), new Vector2d(0.0, 0.0), mass);
+	public PhysicsObject(float mass) {
+        this(new Vector2f(0.0f, 0.0f), new Vector2f(0.0f, 0.0f), new Vector2f(0.0f, 0.0f), new Vector2f(0.0f, 0.0f), mass);
 	}
 	
-	public PhysicsObject(double posX, double posY, double mass) {
-        this(new Vector2d(0.0, 0.0), new Vector2d(posX, posY), new Vector2d(0.0, 0.0), new Vector2d(0.0, 0.0), mass);
+	public PhysicsObject(float posX, float posY, float mass) {
+        this(new Vector2f(0.0f, 0.0f), new Vector2f(posX, posY), new Vector2f(0.0f, 0.0f), new Vector2f(0.0f, 0.0f), mass);
 	}
 	
 	/**
@@ -57,18 +57,19 @@ public abstract class PhysicsObject extends DUGameObject implements IPosition {
 	 * 
 	 */
 	@Override
-	public void update(double deltaTime) {
-	    sumOfForces.scale(inverseMass);
+	public void update(float deltaTime) {
+	    // Calculate acceleration (a = F/m)
+		sumOfForces.scale(inverseMass);
 	    acceleration = sumOfForces;
-	    
-	    Vector2d velocityAdd = (Vector2d)acceleration.clone();
-	    velocityAdd.scale(deltaTime);
-	    
+	    	    
+	    // Calculate velocity with delta time
+	    Vector2f velocityAdd = (Vector2f)acceleration.clone();
+	    velocityAdd.scale(deltaTime);	    
 	    velocity.add(velocityAdd);
 	    
-	    Vector2d positionAdd = (Vector2d)velocity.clone();
-	    positionAdd.scale(deltaTime);
-	    
+	    // Calculate position with delta time
+	    Vector2f positionAdd = (Vector2f)velocity.clone();
+	    positionAdd.scale(deltaTime);	    
 	    position.add(positionAdd);
 	}
 	
@@ -77,17 +78,17 @@ public abstract class PhysicsObject extends DUGameObject implements IPosition {
 	 * 
 	 * @param force 2d vector
 	 */
-	public void addForce(Vector2d force) {
+	public void addForce(Vector2f force) {
 		sumOfForces.add(force);
 	}
 	
 	/**
 	 * Returns the force vector that is affected to the object.
 	 * 
-	 * @return Vector2d sum of forces
+	 * @return Vector2f sum of forces
 	 */
-	public Vector2d getForces() {
-		return (Vector2d)sumOfForces.clone();
+	public Vector2f getForces() {
+		return (Vector2f)sumOfForces.clone();
 	}
 	
 	/**
@@ -95,15 +96,24 @@ public abstract class PhysicsObject extends DUGameObject implements IPosition {
 	 * 
 	 */
 	public void clearForces() {
-		sumOfForces.set(0.0, 0.0);
+		sumOfForces.set(0.0f, 0.0f);
 	}
 	
 	/**
-	 * Mass of the object
+	 * Mass of the object.
 	 * 
 	 * @return mass
 	 */
-	public double getMass() {
+	public float getMass() {
 	    return mass;
+	}
+	
+	/**
+	 * Velocity of the object
+	 * 
+	 * @return velocity
+	 */
+	public Vector2f getVelocity() {
+		return (Vector2f)velocity.clone();
 	}
 }

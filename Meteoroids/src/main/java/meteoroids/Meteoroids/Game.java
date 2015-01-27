@@ -1,9 +1,9 @@
 package meteoroids.Meteoroids;
 
 import meteoroids.Meteoroids.controllers.GameController;
+import meteoroids.Meteoroids.controllers.GraphicsController;
 
 import org.lwjgl.LWJGLException;
-import org.lwjgl.Sys;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 
@@ -15,12 +15,18 @@ import org.lwjgl.opengl.DisplayMode;
  */
 public class Game {
 	
-	private static double timeFactor = 1.0;
+	private static float timeFactor = 1.0f;
+	public static final int WIDTH = 800;
+	public static final int HEIGHT = 600;
 	private GameController gameController;
+	private GraphicsController graphicsController;
 	private GameTimer timer;
+	
+	private final int FPS = 60;
 
 	public Game() {
 		gameController = new GameController();
+		graphicsController = new GraphicsController(WIDTH, HEIGHT);
 		timer = new GameTimer();
 	}
 	
@@ -31,20 +37,28 @@ public class Game {
 	 */
 	void start() {
               
-		if(!init()) {
+		if(!init() || !graphicsController.init()) {
 			// TODO: Error
 			System.exit(0);
 		}
 		
-		int deltaTime = timer.getDeltaTime();		
+		int deltaTime = 1/FPS * 1000;		
 		
 		// Game loop
-        while (!Display.isCloseRequested()) {
-        	deltaTime = timer.getDeltaTime();
-                        	        	
+        while (!Display.isCloseRequested()) {            
+            deltaTime = timer.getDeltaTime();
+            
+            // Refresh screen
+            graphicsController.update(deltaTime);
+            
+            // Update game world
         	gameController.update(deltaTime);
+        	
+        	// Draw
+        	graphicsController.draw(gameController.getDrawables());
+        	
         	Display.update();
-        	Display.sync(60);
+        	Display.sync(FPS);
         }            
         
         destroy();
@@ -69,7 +83,7 @@ public class Game {
 	 */
 	boolean init() {
 		try {
-            Display.setDisplayMode(new DisplayMode(800,600));
+            Display.setDisplayMode(new DisplayMode(WIDTH, HEIGHT));
             Display.create();
         } catch (LWJGLException e) {
         	return false;
@@ -84,7 +98,7 @@ public class Game {
 	 * 
 	 * @return time factor
 	 */
-	public static double getTimeFactor() {
+	public static float getTimeFactor() {
 		return timeFactor;
 	}
 	

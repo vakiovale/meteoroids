@@ -10,7 +10,7 @@ package meteoroids.Meteoroids.gameobjects;
 public class DUGameObject extends GameObject implements Drawable, Updateable {
 
 	@Override
-	public void update(double deltaTime) {
+	public void update(float deltaTime) {
 		System.out.println(this + " update"); 
 	}
 
