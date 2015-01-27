@@ -22,9 +22,7 @@ public class GameController implements Controller {
 
     Ship ship;
     Ship ship2;
-    Asteroid asteroid1;
-    Asteroid asteroid2;
-    Asteroid asteroid3;
+    Asteroid[] asteroids = new Asteroid[10000];
     List<PhysicsObject> physicsObjects;
     List<Drawable> drawableObjects;
     List<Updateable> updateableObjects;
@@ -36,30 +34,26 @@ public class GameController implements Controller {
 		
 		ship = new Ship(midX, midY);
 		ship2 = new Ship(midX, midY);
-		asteroid1 = new Asteroid(midX, midY);
-		asteroid2 = new Asteroid(midX, midY);
-		asteroid3 = new Asteroid(midX, midY);
 		
 		physicsObjects = new ArrayList<>();
 		physicsObjects.add(ship);
-		physicsObjects.add(asteroid1);
-		physicsObjects.add(asteroid2);
-		physicsObjects.add(asteroid3);
 		
 		drawableObjects = new ArrayList<>();
 		drawableObjects.add(ship);
 		drawableObjects.add(ship2);
-		drawableObjects.add(asteroid1);
-		drawableObjects.add(asteroid2);
-		drawableObjects.add(asteroid3);
 		
 		updateableObjects = new ArrayList<>();
 		updateableObjects.add(ship);
 		updateableObjects.add(ship2);
-		updateableObjects.add(asteroid1);
-		updateableObjects.add(asteroid2);
-		updateableObjects.add(asteroid3);
 		
+		for(int i = 0; i < asteroids.length; i++) {
+			asteroids[i] = new Asteroid(midX, midY);
+			physicsObjects.add(asteroids[i]);
+			drawableObjects.add(asteroids[i]);
+			updateableObjects.add(asteroids[i]);
+		}
+		
+		// Give a little push to the ship number two
 		ship2.addForce(new Vector2f(0.01f, 0.01f));
 	}
 
@@ -77,6 +71,7 @@ public class GameController implements Controller {
 	    // Add forces
 	    for(PhysicsObject p : physicsObjects) {
 	        p.clearForces();
+	        // Random movement for ship and asteroids
 		    p.addForce(new Vector2f((float)Math.random()*0.1f-0.5f*0.1f, 
 		                            (float)Math.random()*0.1f-0.5f*0.1f));
 		}

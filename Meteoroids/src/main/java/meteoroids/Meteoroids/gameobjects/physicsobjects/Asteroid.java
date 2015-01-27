@@ -47,9 +47,9 @@ public class Asteroid extends PhysicsObject {
     public void draw() {
         GL11.glBegin(GL11.GL_QUADS);
             GL11.glVertex2f(this.position.x, this.position.y);
-            GL11.glVertex2f(this.position.x+20,this.position.y);
-            GL11.glVertex2f(this.position.x+20,this.position.y+20);
-            GL11.glVertex2f(this.position.x,this.position.y+20);
+            GL11.glVertex2f(this.position.x+2,this.position.y);
+            GL11.glVertex2f(this.position.x+2,this.position.y+2);
+            GL11.glVertex2f(this.position.x,this.position.y+2);
         GL11.glEnd();
     }
 	
