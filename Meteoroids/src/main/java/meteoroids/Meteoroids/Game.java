@@ -16,8 +16,8 @@ import org.lwjgl.opengl.DisplayMode;
 public class Game {
 	
 	private static float timeFactor = 1.0f;
-	public static final int WIDTH = 1300;
-	public static final int HEIGHT = 400;
+	public static final int WIDTH = 800;
+	public static final int HEIGHT = 600;
 	private GameController gameController;
 	private GraphicsController graphicsController;
 	private GameTimer timer;
