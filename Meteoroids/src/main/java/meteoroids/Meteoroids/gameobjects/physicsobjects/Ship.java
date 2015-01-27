@@ -1,5 +1,7 @@
 package meteoroids.Meteoroids.gameobjects.physicsobjects;
 
+import meteoroids.Meteoroids.Game;
+
 import org.lwjgl.opengl.GL11;
 
 /**
@@ -11,7 +13,34 @@ import org.lwjgl.opengl.GL11;
 public class Ship extends PhysicsObject {
 
 	public Ship() {
-		super(400.0f, 300.0f, 100.0f);
+		super(100.0f);
+	}
+	
+	public Ship(float posX, float posY) {
+		super(posX, posY, 100.0f);
+	}
+	
+	public Ship(float posX, float posY, float mass) {
+		super(posX, posY, mass);
+	}
+	
+	@Override
+	public void update(float deltaTime) {
+		super.update(deltaTime);
+		
+		// Keep ship inside the window
+		if(this.position.x > Game.WIDTH) {
+			this.position.x = 0.0f;
+		}
+		else if(this.position.x < 0.0f) {
+			this.position.x = Game.WIDTH;
+		}
+		if(this.position.y > Game.HEIGHT) {
+			this.position.y = 0.0f;
+		}
+		else if(this.position.y < 0.0f) {
+			this.position.y = Game.HEIGHT;
+		}
 	}
 	
 	@Override

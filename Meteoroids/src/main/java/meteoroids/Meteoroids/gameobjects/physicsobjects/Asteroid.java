@@ -1,5 +1,7 @@
 package meteoroids.Meteoroids.gameobjects.physicsobjects;
 
+import meteoroids.Meteoroids.Game;
+
 import org.lwjgl.opengl.GL11;
 
 /**
@@ -11,7 +13,34 @@ import org.lwjgl.opengl.GL11;
 public class Asteroid extends PhysicsObject {
 
 	public Asteroid() {
-		super(400.0f, 300.0f, 500.0f);
+		super(500.0f);
+	}
+	
+	public Asteroid(float posX, float posY) {
+		super(posX, posY, 500.0f);
+	}
+	
+	public Asteroid(float posX, float posY, float mass) {
+		super(posX, posY, mass);
+	}
+	
+	@Override
+	public void update(float deltaTime) {
+		super.update(deltaTime);
+		
+		// Keep asteroid inside the window
+		if(this.position.x > Game.WIDTH) {
+			this.position.x = 0.0f;
+		}
+		else if(this.position.x < 0.0f) {
+			this.position.x = Game.WIDTH;
+		}
+		if(this.position.y > Game.HEIGHT) {
+			this.position.y = 0.0f;
+		}
+		else if(this.position.y < 0.0f) {
+			this.position.y = Game.HEIGHT;
+		}
 	}
 	
     @Override

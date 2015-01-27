@@ -58,17 +58,18 @@ public abstract class PhysicsObject extends DUGameObject implements IPosition {
 	 */
 	@Override
 	public void update(float deltaTime) {
-	    sumOfForces.scale(inverseMass);
+	    // Calculate acceleration (a = F/m)
+		sumOfForces.scale(inverseMass);
 	    acceleration = sumOfForces;
-	    
+	    	    
+	    // Calculate velocity with delta time
 	    Vector2f velocityAdd = (Vector2f)acceleration.clone();
-	    velocityAdd.scale(deltaTime);
-	    
+	    velocityAdd.scale(deltaTime);	    
 	    velocity.add(velocityAdd);
 	    
+	    // Calculate position with delta time
 	    Vector2f positionAdd = (Vector2f)velocity.clone();
-	    positionAdd.scale(deltaTime);
-	    
+	    positionAdd.scale(deltaTime);	    
 	    position.add(positionAdd);
 	}
 	
@@ -99,11 +100,20 @@ public abstract class PhysicsObject extends DUGameObject implements IPosition {
 	}
 	
 	/**
-	 * Mass of the object
+	 * Mass of the object.
 	 * 
 	 * @return mass
 	 */
 	public float getMass() {
 	    return mass;
+	}
+	
+	/**
+	 * Velocity of the object
+	 * 
+	 * @return velocity
+	 */
+	public Vector2f getVelocity() {
+		return (Vector2f)velocity.clone();
 	}
 }
