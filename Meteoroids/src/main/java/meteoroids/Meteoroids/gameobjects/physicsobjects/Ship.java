@@ -26,7 +26,7 @@ public class Ship extends PhysicsObject {
 	
 	@Override
 	public void update(float deltaTime) {
-		super.update(deltaTime);
+	    super.update(deltaTime);
 		
 		// Keep ship inside the window
 		if(this.position.x > Game.WIDTH) {
@@ -44,12 +44,18 @@ public class Ship extends PhysicsObject {
 	}
 	
 	@Override
-	public void draw() {
+	public void draw() {  
+	    GL11.glPushMatrix();
+	    	    
+	    GL11.glColor3f(1.0f,0.2f,0.2f);
+
 	    GL11.glBegin(GL11.GL_TRIANGLES);
 	        GL11.glVertex2f(this.position.x, this.position.y);
 	        GL11.glVertex2f(this.position.x+20,this.position.y);
 	        GL11.glVertex2f(this.position.x+10,this.position.y+20);
 	    GL11.glEnd();
+	        
+	    GL11.glPopMatrix();
 	}
 	
 	public String toString() {

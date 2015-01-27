@@ -2,6 +2,8 @@ package meteoroids.Meteoroids.gameobjects.physicsobjects;
 
 import javax.vecmath.Vector2f;
 
+import org.lwjgl.opengl.GL11;
+
 import meteoroids.Meteoroids.gameobjects.DUGameObject;
 import meteoroids.Meteoroids.gameobjects.IPosition;
 
@@ -57,7 +59,7 @@ public abstract class PhysicsObject extends DUGameObject implements IPosition {
 	 * 
 	 */
 	@Override
-	public void update(float deltaTime) {
+	public void update(float deltaTime) {  	    
 	    // Calculate acceleration (a = F/m)
 		sumOfForces.scale(inverseMass);
 	    acceleration = sumOfForces;

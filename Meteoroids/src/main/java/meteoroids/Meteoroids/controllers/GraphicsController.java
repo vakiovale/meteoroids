@@ -32,9 +32,6 @@ public class GraphicsController implements Controller {
 	public void update(float deltaTime) {
         // Clear the screen and depth buffer
         GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT); 
-                 
-        // set the color of the quad (R,G,B,A)
-        GL11.glColor3f(0.5f,0.5f,1.0f);
 	}
 	
 	/**

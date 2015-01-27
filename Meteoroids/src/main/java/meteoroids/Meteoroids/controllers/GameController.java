@@ -22,7 +22,8 @@ public class GameController implements Controller {
 
     Ship ship;
     Ship ship2;
-    Asteroid[] asteroids = new Asteroid[10000];
+    Ship s;
+    Asteroid[] asteroids = new Asteroid[100];
     List<PhysicsObject> physicsObjects;
     List<Drawable> drawableObjects;
     List<Updateable> updateableObjects;
@@ -34,17 +35,20 @@ public class GameController implements Controller {
 		
 		ship = new Ship(midX, midY);
 		ship2 = new Ship(midX, midY);
+		s = new Ship(0, midY);
 		
 		physicsObjects = new ArrayList<>();
 		physicsObjects.add(ship);
 		
 		drawableObjects = new ArrayList<>();
-		drawableObjects.add(ship);
+		//drawableObjects.add(ship);
 		drawableObjects.add(ship2);
+		//drawableObjects.add(s);
 		
 		updateableObjects = new ArrayList<>();
 		updateableObjects.add(ship);
 		updateableObjects.add(ship2);
+		updateableObjects.add(s);
 		
 		for(int i = 0; i < asteroids.length; i++) {
 			asteroids[i] = new Asteroid(midX, midY);
@@ -53,8 +57,9 @@ public class GameController implements Controller {
 			updateableObjects.add(asteroids[i]);
 		}
 		
-		// Give a little push to the ship number two
+		// Give a little push to ships
 		ship2.addForce(new Vector2f(0.01f, 0.01f));
+		s.addForce(new Vector2f((Game.WIDTH/Game.FPS)*0.001f, 0.0f));
 	}
 
 	@Override
@@ -83,6 +88,8 @@ public class GameController implements Controller {
 	    
 	    ship2.update(deltaTime);
 	    ship2.clearForces();
+	    s.update(deltaTime);
+	    s.clearForces();
 	    
 	}
 	

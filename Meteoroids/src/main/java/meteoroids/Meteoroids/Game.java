@@ -4,6 +4,7 @@ import meteoroids.Meteoroids.controllers.GameController;
 import meteoroids.Meteoroids.controllers.GraphicsController;
 
 import org.lwjgl.LWJGLException;
+import org.lwjgl.Sys;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 
@@ -18,12 +19,12 @@ public class Game {
 	private static float timeFactor = 1.0f;
 	public static final int WIDTH = 1300;
 	public static final int HEIGHT = 400;
-	private GameController gameController;
+    public static final int FPS = 60;
+
+    private GameController gameController;
 	private GraphicsController graphicsController;
 	private GameTimer timer;
 	
-	private final int FPS = 60;
-
 	public Game() {
 		gameController = new GameController();
 		graphicsController = new GraphicsController(WIDTH, HEIGHT);
@@ -45,7 +46,8 @@ public class Game {
 		int deltaTime = 1/FPS * 1000;		
 		
 		// Game loop
-        while (!Display.isCloseRequested()) {            
+        while (!Display.isCloseRequested()) {   
+            long time = Sys.getTime();
             deltaTime = timer.getDeltaTime();
             
             // Refresh screen
