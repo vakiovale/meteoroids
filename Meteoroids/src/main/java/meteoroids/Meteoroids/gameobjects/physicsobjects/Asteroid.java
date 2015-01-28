@@ -34,6 +34,12 @@ public class Asteroid extends PhysicsObject {
 	@Override
 	public void update(float deltaTime) {
 		super.update(deltaTime);
+	
+        // MAX speed for asteroid
+        if(this.velocity.length() > 0.2f) {
+            this.velocity.normalize();
+            this.velocity.scale(0.2f);
+        }
 		
 		// Keep asteroid inside the window
 		if(this.position.x > Game.WIDTH) {

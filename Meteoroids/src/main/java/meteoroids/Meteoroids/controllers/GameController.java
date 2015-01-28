@@ -36,23 +36,15 @@ public class GameController implements Controller {
         drawableObjects = new ArrayList<>();
         updateableObjects = new ArrayList<>();
         gravityObjects = new ArrayList<>();
-
-        Asteroid[] asteroids = new Asteroid[10];
-        Planet planet = new Planet(400.0f, 300.0f, 10.0f, 500000.0f);
-        ship = new Ship(300.0f, 250.0f, 100.0f);
-
-        gravityObjects.add(planet);
-        drawableObjects.add(planet);
-        physicsObjects.add(planet);
-
+        
+        ship = new Ship(100.0f, 300.0f, 100.0f);
         drawableObjects.add(ship);
         physicsObjects.add(ship);
         updateableObjects.add(ship);
 
-        ship.addForce(0.0f, 0.02f);
-
+        Asteroid[] asteroids = new Asteroid[100];
         for (int i = 0; i < asteroids.length; i++) {
-            asteroids[i] = new Asteroid(500.0f, 400.0f, 100.0f, 4.0f);
+            asteroids[i] = new Asteroid(500.0f, 400.0f, 100.0f, 2.0f);
             physicsObjects.add(asteroids[i]);
             drawableObjects.add(asteroids[i]);
             updateableObjects.add(asteroids[i]);
@@ -60,6 +52,21 @@ public class GameController implements Controller {
             asteroids[i].addForce(((float) Math.random() - 0.5f) * 0.05f,
                     ((float) Math.random() - 0.5f) * 0.05f);
         }
+        
+        Planet planet = new Planet(400.0f, 300.0f, 50.0f, 500000.0f);
+        gravityObjects.add(planet);
+        drawableObjects.add(planet);
+        physicsObjects.add(planet);
+        
+        Planet planet2 = new Planet(200.0f, 100.0f, 50.0f, 500000.0f);
+        //gravityObjects.add(planet2);
+        //drawableObjects.add(planet2);
+        //physicsObjects.add(planet2);
+        
+        Planet planet3 = new Planet(700.0f, 500.0f, 50.0f, 500000.0f);
+        //gravityObjects.add(planet3);
+        //drawableObjects.add(planet3);
+        //physicsObjects.add(planet3);
 
     }
 
@@ -80,7 +87,10 @@ public class GameController implements Controller {
             ship.rotate(-0.3f, deltaTime);
         }
         if (Keyboard.isKeyDown(Keyboard.KEY_UP)) {
-            ship.accelerate(0.005f, deltaTime);
+            ship.accelerate(0.002f, deltaTime);
+        }
+        if (Keyboard.isKeyDown(Keyboard.KEY_DOWN)) {
+            ship.accelerate(-0.002f, deltaTime);
         }
         /* TESTING ENDS */
 

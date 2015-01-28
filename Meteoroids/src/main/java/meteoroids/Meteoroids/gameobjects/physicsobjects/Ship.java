@@ -51,6 +51,12 @@ public class Ship extends PhysicsObject implements Movable {
     @Override
     public void update(float deltaTime) {
         super.update(deltaTime);
+        
+        // MAX speed for space ship
+        if(this.velocity.length() > 0.3f) {
+            this.velocity.normalize();
+            this.velocity.scale(0.3f);
+        }
 
         // Keep ship inside the window
         if (this.position.x > Game.WIDTH) {

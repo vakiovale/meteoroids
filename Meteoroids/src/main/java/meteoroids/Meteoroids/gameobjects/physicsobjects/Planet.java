@@ -36,6 +36,7 @@ public class Planet extends GravityObject {
     @Override
     public void draw() {
     	GL11.glPushMatrix();
+    	GL11.glColor3f(0.1f, 0.3f, 0.7f);
     	GL11.glTranslatef(this.position.x, this.position.y, 0);
     	GL11.glScalef(radius, radius, 1);
     	GL11.glBegin(GL11.GL_TRIANGLE_FAN);
