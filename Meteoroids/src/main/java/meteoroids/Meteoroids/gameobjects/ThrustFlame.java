@@ -31,7 +31,6 @@ public class ThrustFlame implements Drawable {
 		for(int i = 0; i < numberOfFlames; i++) {
 			Flame flame = flames.pollLast();
 			flame.draw(i);
-			System.out.println(i + ": flame");
 			tmp.push(flame);
 		}
 		flames = tmp;
@@ -43,7 +42,6 @@ public class ThrustFlame implements Drawable {
 		
 		if(counter == 0) {
 			flames.push(new Flame(x, y));
-			System.out.println("add flame " + x + " " + y);
 			flames.pollLast();
 		}		
 	}
