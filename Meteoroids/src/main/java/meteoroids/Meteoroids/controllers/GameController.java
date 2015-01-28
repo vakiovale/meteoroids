@@ -36,7 +36,7 @@ public class GameController implements Controller {
 		
 		Asteroid[] asteroids = new Asteroid[10];
 		Planet planet = new Planet(400.0f, 300.0f, 10.0f, 500000.0f);
-		Ship ship = new Ship(30.0f, 30.0f, 50.0f);
+		Ship ship = new Ship(300.0f, 250.0f, 100.0f);
 		
 		gravityObjects.add(planet);
 		drawableObjects.add(planet);
@@ -46,10 +46,10 @@ public class GameController implements Controller {
 		physicsObjects.add(ship);
 		updateableObjects.add(ship);
 		
-		ship.addForce(0.0f, 0.01f);
+		ship.addForce(0.0f, 0.02f);
 		
 		for(int i = 0; i < asteroids.length; i++) {
-		    asteroids[i] = new Asteroid(500.0f, 400.0f, 100.0f, 2.5f);
+		    asteroids[i] = new Asteroid(500.0f, 400.0f, 100.0f, 4.0f);
 		    physicsObjects.add(asteroids[i]);
 		    drawableObjects.add(asteroids[i]);
 		    updateableObjects.add(asteroids[i]);
