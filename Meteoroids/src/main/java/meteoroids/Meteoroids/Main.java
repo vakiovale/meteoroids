@@ -7,15 +7,14 @@ package meteoroids.Meteoroids;
  * 
  */
 public class Main {
-	
-	public static void main(String[] args) {
+
+    public static void main(String[] args) {
         System.out.println("Starting Meteoroids!");
-        
+
         Game game = new Game();
         game.start();
-        
+
         System.out.println("Exiting Meteoroids...");
     }
-	
-	
+
 }

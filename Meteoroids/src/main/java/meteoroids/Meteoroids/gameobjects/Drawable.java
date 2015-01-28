@@ -8,9 +8,9 @@ package meteoroids.Meteoroids.gameobjects;
  */
 public interface Drawable {
 
-	/**
-	 * Draw object to the screen
-	 * 
-	 */
-	public void draw();
+    /**
+     * Draw object to the screen
+     * 
+     */
+    public void draw();
 }

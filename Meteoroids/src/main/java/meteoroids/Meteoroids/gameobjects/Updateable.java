@@ -8,10 +8,10 @@ package meteoroids.Meteoroids.gameobjects;
  */
 public interface Updateable {
 
-	/**
-	 * Update object with delta time.
-	 * 
-	 * @param deltaTime time since last frame
-	 */
-	public void update(float deltaTime);
+    /**
+     * Update object with delta time.
+     * 
+     * @param deltaTime time since last frame
+     */
+    public void update(float deltaTime);
 }

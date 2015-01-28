@@ -9,21 +9,21 @@ import javax.vecmath.Vector2f;
  *
  */
 public interface IPosition {
-    
+
     /**
      * Get 2D position of the object.
      * 
      * @return Vector2f
      */
     public Vector2f getPosition();
-    
+
     /**
      * Set position.
      * 
      * @param position Vector2f
      */
     public void setPosition(Vector2f position);
-    
+
     /**
      * Set position.
      * 
@@ -31,17 +31,17 @@ public interface IPosition {
      * @param y coordinate
      */
     public void setPosition(float x, float y);
-    
+
     /**
      * Returns x position.
      * 
      * @return x
      */
     public float getX();
-    
+
     /**
      * Returns y position.
-     *  
+     * 
      * @return y
      */
     public float getY();

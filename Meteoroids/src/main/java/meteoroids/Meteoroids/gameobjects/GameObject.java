@@ -9,39 +9,39 @@ import javax.vecmath.Vector2f;
  *
  */
 public class GameObject implements IPosition {
-	
-	protected Vector2f position;
-	
-	public GameObject() {
-		position = new Vector2f(0, 0);
-	}
 
-	@Override
-	public Vector2f getPosition() {
-		return (Vector2f)position.clone();
-	}
-	
+    protected Vector2f position;
+
+    public GameObject() {
+        position = new Vector2f(0, 0);
+    }
+
     @Override
-	public void setPosition(Vector2f position) {
-		this.position = position;
-	}
-	
+    public Vector2f getPosition() {
+        return (Vector2f) position.clone();
+    }
+
     @Override
-	public void setPosition(float x, float y) {
-		this.position.set(x, y);
-	}
-	
+    public void setPosition(Vector2f position) {
+        this.position = position;
+    }
+
     @Override
-	public float getX() {
-		return position.x;
-	}
-	
+    public void setPosition(float x, float y) {
+        this.position.set(x, y);
+    }
+
     @Override
-	public float getY() {
-		return position.y;
-	}
-	
-	public String toString() {
-		return "GameObject";
-	}
+    public float getX() {
+        return position.x;
+    }
+
+    @Override
+    public float getY() {
+        return position.y;
+    }
+
+    public String toString() {
+        return "GameObject";
+    }
 }

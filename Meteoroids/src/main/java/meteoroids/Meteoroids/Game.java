@@ -15,101 +15,98 @@ import org.lwjgl.opengl.DisplayMode;
  *
  */
 public class Game {
-	
-	private static float timeFactor = 1.0f;
-	public static final int WIDTH = 800;
-	public static final int HEIGHT = 600;
-	
-	private GameController gameController;
-	private GraphicsController graphicsController;
-	private GravityController gravityController;
-	
-	private GameTimer timer;
-	
-	private final int FPS = 60;
 
-	public Game() {
-		gameController = new GameController();
-		graphicsController = new GraphicsController(WIDTH, HEIGHT);
-		gravityController = new GravityController();
-		timer = new GameTimer();
-	}
-	
-	/**
-	 * Starts the main game loop. 
-	 * Uses GameController to update the game world.
-	 * 
-	 */
-	void start() {
-              
-		if(!init() || !graphicsController.init()) {
-			// TODO: Error
-			System.exit(0);
-		}
-		
-		int deltaTime = 1/FPS * 1000;		
-		
-		// Game loop
-        while (!Display.isCloseRequested()) {            
+    private static float timeFactor = 1.0f;
+    public static final int WIDTH = 800;
+    public static final int HEIGHT = 600;
+
+    private GameController gameController;
+    private GraphicsController graphicsController;
+    private GravityController gravityController;
+
+    private GameTimer timer;
+
+    private final int FPS = 60;
+
+    public Game() {
+        gameController = new GameController();
+        graphicsController = new GraphicsController(WIDTH, HEIGHT);
+        gravityController = new GravityController();
+        timer = new GameTimer();
+    }
+
+    /**
+     * Starts the main game loop. Uses GameController to update the game world.
+     * 
+     */
+    void start() {
+
+        if (!init() || !graphicsController.init()) {
+            // TODO: Error
+            System.exit(0);
+        }
+
+        int deltaTime = 1 / FPS * 1000;
+
+        // Game loop
+        while (!Display.isCloseRequested()) {
             deltaTime = timer.getDeltaTime();
-            
+
             // Refresh screen
             graphicsController.update(deltaTime);
-            
+
             // Calculate gravity fields
-            gravityController.update(gameController.getGravityObjects(), 
-                                     gameController.getPhysicsObjects(), 
-                                     deltaTime);
-            
+            gravityController.update(gameController.getGravityObjects(),
+                    gameController.getPhysicsObjects(), deltaTime);
+
             // Update game world
-        	gameController.update(deltaTime);
-        	
-        	// Draw
-        	graphicsController.draw(gameController.getDrawables());
-        	
-        	Display.update();
-        	Display.sync(FPS);
-        }            
-        
+            gameController.update(deltaTime);
+
+            // Draw
+            graphicsController.draw(gameController.getDrawables());
+
+            Display.update();
+            Display.sync(FPS);
+        }
+
         destroy();
     }
-	
-	/**
-	 * Display destroy
-	 * 
-	 * @return true
-	 *  
-	 */
-	boolean destroy() {
+
+    /**
+     * Display destroy
+     * 
+     * @return true
+     * 
+     */
+    boolean destroy() {
         Display.destroy();
         return true;
-	}
-	
-	/**
-	 * Initialize LWJGL
-	 * 
-	 * @return true if initializing LWJGL successfully
-	 * 
-	 */
-	boolean init() {
-		try {
+    }
+
+    /**
+     * Initialize LWJGL
+     * 
+     * @return true if initializing LWJGL successfully
+     * 
+     */
+    boolean init() {
+        try {
             Display.setDisplayMode(new DisplayMode(WIDTH, HEIGHT));
             Display.create();
         } catch (LWJGLException e) {
-        	return false;
+            return false;
         }
-		return true;
-	}
-	
-	/**
-	 * Time factor tells how fast game should be run.
-	 * It's possible to speed up / slow down the game by 
-	 * multiplying delta time with time factor.
-	 * 
-	 * @return time factor
-	 */
-	public static float getTimeFactor() {
-		return timeFactor;
-	}
-	
+        return true;
+    }
+
+    /**
+     * Time factor tells how fast game should be run. It's possible to speed up
+     * / slow down the game by multiplying delta time with time factor.
+     * 
+     * @return time factor
+     */
+    public static float getTimeFactor() {
+        return timeFactor;
+    }
+
 }
