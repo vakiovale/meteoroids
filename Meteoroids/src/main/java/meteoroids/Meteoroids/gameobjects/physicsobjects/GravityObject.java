@@ -24,7 +24,7 @@ public abstract class GravityObject extends PhysicsObject {
         gravityVector.sub(other.getPosition());
         float lengthSquared = gravityVector.lengthSquared();
         gravityVector.normalize();
-        gravityVector.scale(0.0001f*((this.mass*other.mass)/lengthSquared));
+        gravityVector.scale(0.000001f*((this.mass*other.mass)/lengthSquared));
         other.addForce(gravityVector);
     }
 }

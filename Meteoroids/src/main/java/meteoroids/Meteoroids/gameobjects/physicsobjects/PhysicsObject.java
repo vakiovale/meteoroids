@@ -86,6 +86,16 @@ public abstract class PhysicsObject extends DUGameObject implements IPosition {
 	}
 	
 	/**
+	 * Add a force vector to the sum of forces.
+	 * 
+	 * @param x 
+	 * @param y
+	 */
+	public void addForce(float x, float y) {
+		sumOfForces.add(new Vector2f(x, y));
+	}
+	
+	/**
 	 * Returns the force vector that is affected to the object.
 	 * 
 	 * @return Vector2f sum of forces

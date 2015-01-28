@@ -12,17 +12,24 @@ import org.lwjgl.opengl.GL11;
  */
 public class Asteroid extends PhysicsObject {
 
+	private float radius;
+	
 	public Asteroid() {
-		super(500.0f);
+		this(0.0f, 0.0f, 500.0f, 2.5f);
 	}
 	
 	public Asteroid(float posX, float posY) {
-		super(posX, posY, 500.0f);
+		this(posX, posY, 500.0f, 2.5f);
 	}
 	
 	public Asteroid(float posX, float posY, float mass) {
-		super(posX, posY, mass);
+		this(posX, posY, mass, 2.5f);
 	}
+	
+	public Asteroid(float posX, float posY, float mass, float radius) {
+		super(posX, posY, mass);
+		this.radius = radius;
+	}	
 	
 	@Override
 	public void update(float deltaTime) {
@@ -45,11 +52,12 @@ public class Asteroid extends PhysicsObject {
 	
     @Override
     public void draw() {
+    	GL11.glColor3f(0.5f, 0.5f, 0.5f);
         GL11.glBegin(GL11.GL_QUADS);
-            GL11.glVertex2f(this.position.x, this.position.y);
-            GL11.glVertex2f(this.position.x+2,this.position.y);
-            GL11.glVertex2f(this.position.x+2,this.position.y+2);
-            GL11.glVertex2f(this.position.x,this.position.y+2);
+            GL11.glVertex2f(this.position.x-radius, this.position.y-radius);
+            GL11.glVertex2f(this.position.x+radius,this.position.y-radius);
+            GL11.glVertex2f(this.position.x+radius,this.position.y+radius);
+            GL11.glVertex2f(this.position.x-radius,this.position.y+radius);
         GL11.glEnd();
     }
 	
