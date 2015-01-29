@@ -37,6 +37,20 @@ public class GameController implements Controller {
         asteroids = objectController.getAsteroids();
         planet = objectController.getPlanet();
         
+        printHelp();
+        
+    }
+
+    private void printHelp() {
+         System.out.println("***********************");
+         System.out.println(" H O W   T O   P L A Y");
+         System.out.println("***********************");
+         System.out.println("UP:\tAccelerate");
+         System.out.println("DOWN:\tReverse");
+         System.out.println("LEFT:\tSteer left");
+         System.out.println("RIGHT:\tSteer right");
+         System.out.println("ESC:\tExit game");
+         System.out.println("***********************");
     }
 
     @Override
@@ -60,6 +74,9 @@ public class GameController implements Controller {
         }
         if (Keyboard.isKeyDown(Keyboard.KEY_DOWN)) {
             ship.accelerate(-0.002f, deltaTime);
+        }
+        if (Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)) {
+            Game.exit();
         }
         /* TESTING ENDS */
 

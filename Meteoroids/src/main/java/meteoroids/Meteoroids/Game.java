@@ -28,12 +28,15 @@ public class Game {
     private GameTimer timer;
 
     private final int FPS = 60;
+    
+    private static boolean gameOver;
 
     public Game() {
         gameController = new GameController();
         graphicsController = new GraphicsController(WIDTH, HEIGHT);
         physicsController = new PhysicsController();
         timer = new GameTimer();
+        gameOver = false;
     }
 
     /**
@@ -50,7 +53,7 @@ public class Game {
         int deltaTime = 1 / FPS * 1000;
 
         // Game loop
-        while (!Display.isCloseRequested()) {
+        while (!Display.isCloseRequested() && !gameOver) {
             deltaTime = timer.getDeltaTime();
 
             // Refresh screen
@@ -73,6 +76,14 @@ public class Game {
         }
 
         destroy();
+    }
+    
+    /**
+     * Exit from game loop.
+     * 
+     */
+    public static void exit() {
+        gameOver = true;
     }
 
     /**
