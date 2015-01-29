@@ -2,8 +2,6 @@ package meteoroids.Meteoroids.gameobjects.physicsobjects;
 
 import static org.junit.Assert.*;
 
-import javax.vecmath.Vector2f;
-
 import org.junit.Before;
 import org.junit.Test;
 
