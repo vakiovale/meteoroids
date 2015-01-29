@@ -1,6 +1,10 @@
 # meteoroids
 Clone of the classic Asteroids game.
 
+## What's happening?
+
+You must protect Earth from flying meteoroids! Destroy all the meteoroids before they hit the ground.
+
 ## Running Meteoroids from command line (Linux - quick)
 
 Run these Linux scripts from <code>Meteoroids/</code> folder:
