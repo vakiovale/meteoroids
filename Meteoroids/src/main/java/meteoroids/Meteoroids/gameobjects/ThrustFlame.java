@@ -57,7 +57,7 @@ public class ThrustFlame implements Drawable {
         }
 
         void draw(int index) {
-            GL11.glColor3f(0.04f * index, 0.01f * index, 0.01f * index);
+            GL11.glColor3f(0.05f * (index+1), 0.01f * (index+1), 0.0f);
             GL11.glBegin(GL11.GL_QUADS);
             GL11.glVertex2f(this.x - 1.5f, this.y - 1.5f);
             GL11.glVertex2f(this.x + 1.5f, this.y - 1.5f);
