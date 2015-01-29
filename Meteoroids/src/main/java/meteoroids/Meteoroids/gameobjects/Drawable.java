@@ -13,4 +13,11 @@ public interface Drawable {
      * 
      */
     public void draw();
+    
+    /**
+     * Object ID.
+     * 
+     * @return id
+     */
+    public int getID();
 }

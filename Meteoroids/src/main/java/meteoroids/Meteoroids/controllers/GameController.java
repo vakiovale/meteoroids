@@ -7,6 +7,7 @@ import org.lwjgl.input.Keyboard;
 
 import meteoroids.Meteoroids.Game;
 import meteoroids.Meteoroids.gameobjects.Drawable;
+import meteoroids.Meteoroids.gameobjects.GameObject;
 import meteoroids.Meteoroids.gameobjects.Updateable;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.Asteroid;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.GravityObject;
@@ -21,50 +22,21 @@ import meteoroids.Meteoroids.gameobjects.physicsobjects.Ship;
  *
  */
 public class GameController implements Controller {
-
-    List<PhysicsObject> physicsObjects;
-    List<GravityObject> gravityObjects;
-    List<Drawable> drawableObjects;
-    List<Updateable> updateableObjects;
-    Ship ship;
+   
+    private GameObjectController objectController;
+    
+    private Ship ship;
+    private Asteroid[] asteroids;
+    private Planet planet;
 
     public GameController() {
-
-        physicsObjects = new ArrayList<>();
-        drawableObjects = new ArrayList<>();
-        updateableObjects = new ArrayList<>();
-        gravityObjects = new ArrayList<>();
+       
+        objectController = new GameObjectController();
         
-        ship = new Ship(100.0f, 300.0f, 100.0f);
-        drawableObjects.add(ship);
-        physicsObjects.add(ship);
-        updateableObjects.add(ship);
-
-        Asteroid[] asteroids = new Asteroid[25];
-        for (int i = 0; i < asteroids.length; i++) {
-            asteroids[i] = new Asteroid(750.0f, 550.0f, 200.0f, 10.0f);
-            physicsObjects.add(asteroids[i]);
-            drawableObjects.add(asteroids[i]);
-            updateableObjects.add(asteroids[i]);
-            asteroids[i].addForce(((float) Math.random() - 0.5f) * 0.02f,
-                    ((float) Math.random() - 0.5f) * 0.02f);
-        }
+        ship = objectController.getShip();
+        asteroids = objectController.getAsteroids();
+        planet = objectController.getPlanet();
         
-        Planet planet = new Planet(400.0f, 300.0f, 50.0f, 500000.0f);
-        gravityObjects.add(planet);
-        drawableObjects.add(planet);
-        physicsObjects.add(planet);
-        
-        //Planet planet2 = new Planet(200.0f, 100.0f, 50.0f, 500000.0f);
-        //gravityObjects.add(planet2);
-        //drawableObjects.add(planet2);
-        //physicsObjects.add(planet2);
-        
-        //Planet planet3 = new Planet(700.0f, 500.0f, 50.0f, 500000.0f);
-        //gravityObjects.add(planet3);
-        //drawableObjects.add(planet3);
-        //physicsObjects.add(planet3);
-
     }
 
     @Override
@@ -91,26 +63,34 @@ public class GameController implements Controller {
         }
         /* TESTING ENDS */
 
-        for (Updateable u : updateableObjects) {
-            u.update(deltaTime);
-        }
+        objectController.update(deltaTime);
 
     }
 
     public List<Updateable> getUpdateables() {
-        return updateableObjects;
+        return objectController.getUpdateables();
     }
 
     public List<Drawable> getDrawables() {
-        return drawableObjects;
+        return objectController.getDrawables();
     }
 
     public List<PhysicsObject> getPhysicsObjects() {
-        return physicsObjects;
+        return objectController.getPhysicsObjects();
     }
 
     public List<GravityObject> getGravityObjects() {
-        return gravityObjects;
+        return objectController.getGravityObjects();
+    }
+    
+    /**
+     * Kills GameObject and removes it from the game.
+     * 
+     * @param object
+     */
+    public void killGameObjects(List<GameObject> objects) {
+        for(GameObject object : objects) 
+            objectController.killGameObject(object);
     }
 
 }

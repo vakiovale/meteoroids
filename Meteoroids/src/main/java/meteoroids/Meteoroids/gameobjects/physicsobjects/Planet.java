@@ -7,7 +7,7 @@ import org.lwjgl.opengl.GL11;
  * 
  * @author vpyyhtia
  */
-public class Planet extends GravityObject {
+public class Planet extends GravityObject implements BoundingSphere {
     
     private float radius;
     
@@ -47,6 +47,11 @@ public class Planet extends GravityObject {
     	}
     	GL11.glEnd();
     	GL11.glPopMatrix();
+    }
+
+    @Override
+    public float getRadius() {
+        return radius;
     }
 
 }

@@ -11,9 +11,19 @@ import javax.vecmath.Vector2f;
 public class GameObject implements IPosition {
 
     protected Vector2f position;
+    protected int id;
 
     public GameObject() {
         position = new Vector2f(0, 0);
+        id = 0;
+    }
+    
+    public int getID() {
+        return id;
+    }
+    
+    public void setID(int id) {
+        this.id = id;
     }
 
     @Override

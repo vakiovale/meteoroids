@@ -66,4 +66,9 @@ public class ThrustFlame implements Drawable {
             GL11.glEnd();
         }
     }
+
+    @Override
+    public int getID() {
+        return -1;
+    }
 }

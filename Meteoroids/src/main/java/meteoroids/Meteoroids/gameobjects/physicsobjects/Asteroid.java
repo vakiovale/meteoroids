@@ -12,7 +12,7 @@ import org.lwjgl.opengl.GL11;
  * @author vpyyhtia
  *
  */
-public class Asteroid extends PhysicsObject implements Movable {
+public class Asteroid extends PhysicsObject implements Movable, BoundingSphere {
 
 	private float radius;
 	private float rotation;
@@ -112,5 +112,10 @@ public class Asteroid extends PhysicsObject implements Movable {
     @Override
     public void rotate(float angle, double deltaTime) {
         this.rotation += angle * deltaTime;        
+    }
+
+    @Override
+    public float getRadius() {
+        return radius;
     }
 }

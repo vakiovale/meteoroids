@@ -122,11 +122,31 @@ public abstract class PhysicsObject extends DUGameObject implements IPosition {
 	}
 	
 	/**
-	 * Velocity of the object
+	 * Velocity of the object.
 	 * 
 	 * @return velocity
 	 */
 	public Vector2f getVelocity() {
 		return (Vector2f)velocity.clone();
 	}
+	
+	/**
+	 * Set velocity for the object.
+	 * 
+	 * @param velocity
+	 */
+	public void setVelocity(Vector2f velocity) {
+	    this.velocity = velocity;
+	}
+	
+
+    /**
+     * Set velocity for the object.
+     * 
+     * @param x
+     * @param y
+     */
+    public void setVelocity(float x, float y) {
+        this.velocity.set(x, y);
+    }
 }

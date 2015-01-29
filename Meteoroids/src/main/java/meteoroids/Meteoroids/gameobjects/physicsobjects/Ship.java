@@ -14,10 +14,11 @@ import org.lwjgl.opengl.GL11;
  * @author vpyyhtia
  *
  */
-public class Ship extends PhysicsObject implements Movable {
+public class Ship extends PhysicsObject implements Movable, BoundingSphere {
 
     private ThrustFlame thrustFlame;
     private float rotation;
+    private float radius;
 
     public Ship() {
         this(0.0f, 0.0f, 100.0f);
@@ -29,8 +30,9 @@ public class Ship extends PhysicsObject implements Movable {
 
     public Ship(float posX, float posY, float mass) {
         super(posX, posY, mass);
-        thrustFlame = new ThrustFlame(posX, posY);
-        rotation = 0.0f;
+        this.thrustFlame = new ThrustFlame(posX, posY);
+        this.rotation = 0.0f;
+        this.radius = 10.0f;
     }
 
     @Override
@@ -84,16 +86,22 @@ public class Ship extends PhysicsObject implements Movable {
 
         GL11.glColor3f(1.0f, 0.2f, 0.2f);
         GL11.glBegin(GL11.GL_QUADS);
-        GL11.glVertex2f(this.position.x - 10, this.position.y - 10);
-        GL11.glVertex2f(this.position.x, this.position.y - 3);
-        GL11.glVertex2f(this.position.x + 10, this.position.y - 10);
-        GL11.glVertex2f(this.position.x, this.position.y + 10);
+        GL11.glVertex2f(this.position.x - radius, this.position.y - radius);
+        GL11.glVertex2f(this.position.x, this.position.y - (radius/3));
+        GL11.glVertex2f(this.position.x + radius, this.position.y - radius);
+        GL11.glVertex2f(this.position.x, this.position.y + radius);
         GL11.glEnd();
         GL11.glPopMatrix();
     }
 
     public String toString() {
         return "Ship";
+    }
+
+    @Override
+    public float getRadius() {
+        // TODO Auto-generated method stub
+        return 0;
     }
 
 }
