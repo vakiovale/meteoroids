@@ -1,6 +1,7 @@
 package meteoroids.Meteoroids.gameobjects.physicsobjects;
 
 import static org.junit.Assert.*;
+import meteoroids.Meteoroids.gameobjects.physicsobjects.ships.Ship;
 
 import org.junit.Before;
 import org.junit.Test;
