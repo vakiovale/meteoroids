@@ -118,5 +118,10 @@ public class Ship extends PhysicsObject implements Movable, BoundingSphere, Shoo
         }
         return null;
     }
+    
+    @Override
+    public Weapon getWeapon() {
+        return weapon;
+    }
 
 }

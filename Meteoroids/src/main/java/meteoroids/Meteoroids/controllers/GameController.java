@@ -50,6 +50,7 @@ public class GameController implements Controller {
          System.out.println("LEFT:\tSteer left");
          System.out.println("RIGHT:\tSteer right");
          System.out.println("SPACE:\tFire");
+         System.out.println("LEFT CTRL\tChange weapon");
          System.out.println("ESC:\tExit game");
          System.out.println("***********************");
     }
@@ -64,29 +65,12 @@ public class GameController implements Controller {
          * 
          * TODO: Add these to the InputController class
          */
-        if (Keyboard.isKeyDown(Keyboard.KEY_LEFT)) {
-            ship.rotate(0.3f, deltaTime);
-        }
-        if (Keyboard.isKeyDown(Keyboard.KEY_RIGHT)) {
-            ship.rotate(-0.3f, deltaTime);
-        }
-        if (Keyboard.isKeyDown(Keyboard.KEY_UP)) {
-            ship.accelerate(0.002f, deltaTime);
-        }
-        if (Keyboard.isKeyDown(Keyboard.KEY_DOWN)) {
-            ship.accelerate(-0.002f, deltaTime);
-        }
-        if (Keyboard.isKeyDown(Keyboard.KEY_SPACE)) {
-            objectController.fire(ship);
-        }
-        if (Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)) {
-            Game.exit();
-        }
+        pollInputs(deltaTime);
         /* TESTING ENDS */
 
         objectController.update(deltaTime);
     }
-
+    
     public List<Updateable> getUpdateables() {
         return objectController.getUpdateables();
     }
@@ -111,6 +95,42 @@ public class GameController implements Controller {
     public void killGameObjects(List<GameObject> objects) {
         for(GameObject object : objects) 
             objectController.killGameObject(object);
+    }
+    /**
+     * TODO:
+     * 
+     * !! TESTING INPUTS !!
+     * 
+     * Implement InputController
+     * 
+     * @param deltaTime
+     */
+    private void pollInputs(float deltaTime) {
+        while(Keyboard.next()) {
+            if (Keyboard.getEventKey() == Keyboard.KEY_LCONTROL) {
+                if (!Keyboard.getEventKeyState()) {
+                    objectController.changeWeapon(ship);
+                }
+            }    
+        }
+        if(Keyboard.isKeyDown(Keyboard.KEY_LEFT)) {
+            ship.rotate(0.3f, deltaTime);
+        }
+        if(Keyboard.isKeyDown(Keyboard.KEY_RIGHT)) {
+            ship.rotate(-0.3f, deltaTime);
+        }
+        if(Keyboard.isKeyDown(Keyboard.KEY_UP)) {
+            ship.accelerate(0.002f, deltaTime);
+        }
+        if(Keyboard.isKeyDown(Keyboard.KEY_DOWN)) {
+            ship.accelerate(-0.002f, deltaTime);
+        }
+        if(Keyboard.isKeyDown(Keyboard.KEY_SPACE)) {
+            objectController.fire(ship);
+        }
+        if(Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)) {
+            Game.exit();
+        }        
     }
 
 }

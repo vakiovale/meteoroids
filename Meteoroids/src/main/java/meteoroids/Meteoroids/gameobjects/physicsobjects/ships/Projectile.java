@@ -13,8 +13,13 @@ import meteoroids.Meteoroids.gameobjects.physicsobjects.PhysicsObject;
  */
 public abstract class Projectile extends PhysicsObject implements BoundingSphere {
       
+    protected int coolOffTime;
+    protected ProjectileType type;
+    
     public Projectile(float posX, float posY) {
         super(posX, posY, 1.0f);
+        coolOffTime = 100;
+        type = ProjectileType.BASIC_PROJECTILE;
     }
     
     /**
@@ -23,4 +28,35 @@ public abstract class Projectile extends PhysicsObject implements BoundingSphere
      * @return projectile
      */
     public abstract Projectile getProjectile(Vector2f position, Vector2f velocity, Vector2f orientation);
+    
+    /**
+     * Clone projectile from this projectile.
+     * 
+     * @param position of the new projectile 
+     */
+    public abstract Projectile clone(Vector2f position);
+    
+    /**
+     * Cool off time.
+     * 
+     * @return time to wait after a second shot
+     */
+    public int getCoolOffTime() {
+        return coolOffTime;
+    }
+    
+    public ProjectileType getType() {
+        return type;
+    }
+    
+    /**
+     * Types for different weapons.
+     * 
+     * @author vpyyhtia
+     *
+     */
+    public enum ProjectileType {
+        BASIC_PROJECTILE,
+        PLASMA_PROJECTILE 
+    }
 }

@@ -41,7 +41,7 @@ public class Planet extends GravityObject implements BoundingSphere {
     	GL11.glScalef(radius, radius, 1);
     	GL11.glBegin(GL11.GL_TRIANGLE_FAN);
     	GL11.glVertex2f(0, 0);
-    	for(int i = 0; i <= 64; i++){ //NUM_PIZZA_SLICES decides how round the circle looks.
+    	for(int i = 0; i <= 64; i++){
     	    double angle = Math.PI * 2 * i / 64;
     	    GL11.glVertex2f((float)Math.cos(angle), (float)Math.sin(angle));
     	}

@@ -21,4 +21,11 @@ public interface ShootingShip {
      * @return Projectile
      */
     public Projectile fire();
+    
+    /**
+     * Ship's main weapon.
+     * 
+     * @return Weapon
+     */
+    public Weapon getWeapon();
 }

@@ -12,15 +12,16 @@ import org.lwjgl.opengl.GL11;
  */
 public class BasicProjectile extends Projectile {
 
-    private float startSpeed;
-    private int killOffTime;
-    private float radius;
+    protected float startSpeed;
+    protected int killOffTime;
+    protected float radius;
     
     public BasicProjectile(float posX, float posY) {
         super(posX, posY);
         this.startSpeed = 10.0f;
         this.killOffTime = 5000;
         this.radius = 2.0f;
+        this.type = ProjectileType.BASIC_PROJECTILE;
     }
     
     @Override
@@ -39,7 +40,7 @@ public class BasicProjectile extends Projectile {
     
     @Override
     public Projectile getProjectile(Vector2f position, Vector2f velocity, Vector2f orientation) {
-        BasicProjectile projectile = new BasicProjectile(position.x, position.y);
+        Projectile projectile = this.clone(position);
         
         velocity.add(orientation);
         orientation.scale(0.03f*startSpeed*velocity.length());
@@ -64,6 +65,12 @@ public class BasicProjectile extends Projectile {
     @Override
     public float getRadius() {
         return radius;
+    }
+
+    @Override
+    public Projectile clone(Vector2f position) {
+        BasicProjectile projectile = new BasicProjectile(position.x, position.y);
+        return projectile;
     }
     
 }
