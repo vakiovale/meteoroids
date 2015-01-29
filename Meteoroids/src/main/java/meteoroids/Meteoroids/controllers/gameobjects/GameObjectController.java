@@ -1,8 +1,9 @@
-package meteoroids.Meteoroids.controllers;
+package meteoroids.Meteoroids.controllers.gameobjects;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import meteoroids.Meteoroids.controllers.Controller;
 import meteoroids.Meteoroids.gameobjects.Drawable;
 import meteoroids.Meteoroids.gameobjects.GameObject;
 import meteoroids.Meteoroids.gameobjects.Updateable;
@@ -10,7 +11,11 @@ import meteoroids.Meteoroids.gameobjects.physicsobjects.Asteroid;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.GravityObject;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.PhysicsObject;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.Planet;
-import meteoroids.Meteoroids.gameobjects.physicsobjects.Ship;
+import meteoroids.Meteoroids.gameobjects.physicsobjects.ships.BasicGun;
+import meteoroids.Meteoroids.gameobjects.physicsobjects.ships.BasicProjectile;
+import meteoroids.Meteoroids.gameobjects.physicsobjects.ships.Projectile;
+import meteoroids.Meteoroids.gameobjects.physicsobjects.ships.Ship;
+import meteoroids.Meteoroids.gameobjects.physicsobjects.ships.ShootingShip;
 
 /**
  * Controller for game objects.
@@ -20,7 +25,11 @@ import meteoroids.Meteoroids.gameobjects.physicsobjects.Ship;
  */
 public class GameObjectController implements Controller {
 
+    private List<GameObject> killed;
+    
     private int idCounter;
+    
+    private FiringController firingController;
     
     private List<PhysicsObject> physicsObjects;
     private List<GravityObject> gravityObjects;
@@ -29,10 +38,27 @@ public class GameObjectController implements Controller {
     
     public GameObjectController() {
         idCounter = 0;
+        killed = new ArrayList<>();
         physicsObjects = new ArrayList<>();
         drawableObjects = new ArrayList<>();
         updateableObjects = new ArrayList<>();
         gravityObjects = new ArrayList<>();
+        firingController = new FiringController(this);
+    }
+    
+    /**
+     * Shoot with ship.
+     * 
+     * @param ship
+     */
+    public void fire(ShootingShip ship) {
+        Projectile projectile = firingController.fire(ship);
+        if(projectile != null) {
+            projectile.setID(++idCounter);
+            updateableObjects.add(projectile);
+            drawableObjects.add(projectile);
+            physicsObjects.add(projectile);
+        }
     }
     
     /**
@@ -45,6 +71,11 @@ public class GameObjectController implements Controller {
         drawableObjects.add(ship);
         physicsObjects.add(ship);
         updateableObjects.add(ship);
+        
+        BasicProjectile projectile = new BasicProjectile(100.0f, 300.0f);
+        BasicGun gun = new BasicGun(projectile);
+        ship.bindWeapon(gun);
+        
         ship.setID(++idCounter);
         return ship;
     }
@@ -84,9 +115,14 @@ public class GameObjectController implements Controller {
     
     @Override
     public void update(float deltaTime) {
-        for (Updateable u : updateableObjects) {
+        for(Updateable u : updateableObjects) {
             u.update(deltaTime);
         }
+        for(GameObject object : killed) {
+            killGameObject(object);
+            System.out.println("kill " + object);
+        }
+        firingController.update(deltaTime);
     }
     
     /**
@@ -121,6 +157,10 @@ public class GameObjectController implements Controller {
         idCounter = 0;
     }
     
+    public List<GameObject> getKilled() {
+        return killed;
+    }
+    
     private void removeFromList(List<?> list, GameObject object) {
         int id = object.getID();
         for(int i = list.size()-1; i >= 0; i--) {
@@ -131,5 +171,6 @@ public class GameObjectController implements Controller {
             }
         }
     }
+    
 
 }

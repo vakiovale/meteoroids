@@ -6,6 +6,7 @@ import java.util.List;
 import org.lwjgl.input.Keyboard;
 
 import meteoroids.Meteoroids.Game;
+import meteoroids.Meteoroids.controllers.gameobjects.GameObjectController;
 import meteoroids.Meteoroids.gameobjects.Drawable;
 import meteoroids.Meteoroids.gameobjects.GameObject;
 import meteoroids.Meteoroids.gameobjects.Updateable;
@@ -13,7 +14,7 @@ import meteoroids.Meteoroids.gameobjects.physicsobjects.Asteroid;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.GravityObject;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.PhysicsObject;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.Planet;
-import meteoroids.Meteoroids.gameobjects.physicsobjects.Ship;
+import meteoroids.Meteoroids.gameobjects.physicsobjects.ships.Ship;
 
 /**
  * Handles all the controllers in the game
@@ -49,6 +50,7 @@ public class GameController implements Controller {
          System.out.println("DOWN:\tReverse");
          System.out.println("LEFT:\tSteer left");
          System.out.println("RIGHT:\tSteer right");
+         System.out.println("SPACE:\tFire");
          System.out.println("ESC:\tExit game");
          System.out.println("***********************");
     }
@@ -75,13 +77,15 @@ public class GameController implements Controller {
         if (Keyboard.isKeyDown(Keyboard.KEY_DOWN)) {
             ship.accelerate(-0.002f, deltaTime);
         }
+        if (Keyboard.isKeyDown(Keyboard.KEY_SPACE)) {
+            objectController.fire(ship);
+        }
         if (Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)) {
             Game.exit();
         }
         /* TESTING ENDS */
 
         objectController.update(deltaTime);
-
     }
 
     public List<Updateable> getUpdateables() {

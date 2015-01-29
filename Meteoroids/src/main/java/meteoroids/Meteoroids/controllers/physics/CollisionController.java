@@ -1,15 +1,18 @@
-package meteoroids.Meteoroids.controllers;
+package meteoroids.Meteoroids.controllers.physics;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.vecmath.Vector2f;
 
+import meteoroids.Meteoroids.controllers.Controller;
 import meteoroids.Meteoroids.gameobjects.GameObject;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.Asteroid;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.BoundingSphere;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.PhysicsObject;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.Planet;
+import meteoroids.Meteoroids.gameobjects.physicsobjects.ships.Projectile;
+import meteoroids.Meteoroids.gameobjects.physicsobjects.ships.Ship;
 
 /**
  * Handles collision detection.
@@ -76,6 +79,15 @@ public class CollisionController implements Controller {
     private void collide(BoundingSphere bsA, BoundingSphere bsB) {
         if(checkPlanetHit(bsA, bsB))
             return;
+        if(checkBulletHit(bsA, bsB)) {
+            return;
+        }
+        if(checkBulletToBulletHit(bsA, bsB)) {
+            return;
+        }
+        if(checkBulletToShipHit(bsA, bsB)) {
+            return;
+        }
         
         Vector2f center = bsB.getPosition();
         center.sub(bsA.getPosition());        
@@ -90,9 +102,22 @@ public class CollisionController implements Controller {
         bsB.setVelocity(velB);
     }
     
+    private boolean checkBulletToShipHit(BoundingSphere bsA, BoundingSphere bsB) {
+        if((bsA instanceof Projectile && bsB instanceof Ship) ||
+           (bsA instanceof Ship && bsB instanceof Projectile))
+            return true;
+        return false;
+    }
+    
     public List<GameObject> getKilled() {
         return killed;
     }
+    
+    private boolean checkBulletToBulletHit(BoundingSphere bsA, BoundingSphere bsB) {
+        if(bsA instanceof Projectile && bsB instanceof Projectile)
+            return true;
+        return false;
+    }    
     
     private boolean checkPlanetHit(BoundingSphere bsA, BoundingSphere bsB) {
         if(bsA instanceof Planet) {
@@ -104,6 +129,25 @@ public class CollisionController implements Controller {
         else if(bsB instanceof Planet) {
             if(bsA instanceof Asteroid) {
                 killed.add((GameObject)bsA);
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    private boolean checkBulletHit(BoundingSphere bsA, BoundingSphere bsB) {
+        if(bsA instanceof Projectile) {
+            if(bsB instanceof Asteroid) {
+                killed.add((GameObject)bsB);
+                killed.add((GameObject)bsA);
+                return true;
+            }
+            return true;
+        }
+        else if(bsA instanceof Asteroid) {
+            if(bsB instanceof Projectile) {
+                killed.add((GameObject)bsA);
+                killed.add((GameObject)bsB);
                 return true;
             }
         }

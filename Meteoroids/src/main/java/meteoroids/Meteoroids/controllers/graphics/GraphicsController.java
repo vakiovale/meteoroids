@@ -1,7 +1,8 @@
-package meteoroids.Meteoroids.controllers;
+package meteoroids.Meteoroids.controllers.graphics;
 
 import java.util.List;
 
+import meteoroids.Meteoroids.controllers.Controller;
 import meteoroids.Meteoroids.gameobjects.Drawable;
 
 import org.lwjgl.opengl.GL11;

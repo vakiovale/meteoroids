@@ -1,10 +1,12 @@
-package meteoroids.Meteoroids.gameobjects.physicsobjects;
+package meteoroids.Meteoroids.gameobjects.physicsobjects.ships;
 
 import javax.vecmath.Vector2f;
 
 import meteoroids.Meteoroids.Game;
 import meteoroids.Meteoroids.gameobjects.Movable;
 import meteoroids.Meteoroids.gameobjects.ThrustFlame;
+import meteoroids.Meteoroids.gameobjects.physicsobjects.BoundingSphere;
+import meteoroids.Meteoroids.gameobjects.physicsobjects.PhysicsObject;
 
 import org.lwjgl.opengl.GL11;
 
@@ -14,11 +16,12 @@ import org.lwjgl.opengl.GL11;
  * @author vpyyhtia
  *
  */
-public class Ship extends PhysicsObject implements Movable, BoundingSphere {
+public class Ship extends PhysicsObject implements Movable, BoundingSphere, ShootingShip {
 
     private ThrustFlame thrustFlame;
     private float rotation;
     private float radius;
+    private Weapon weapon;
 
     public Ship() {
         this(0.0f, 0.0f, 100.0f);
@@ -33,13 +36,12 @@ public class Ship extends PhysicsObject implements Movable, BoundingSphere {
         this.thrustFlame = new ThrustFlame(posX, posY);
         this.rotation = 0.0f;
         this.radius = 10.0f;
+        this.weapon = null;
     }
 
     @Override
     public void accelerate(float amount, double deltaTime) {
-        Vector2f force = new Vector2f((float) Math.cos(Math
-                .toRadians(rotation + 90.0f)), (float) Math.sin(Math
-                .toRadians(rotation + 90.0f)));
+        Vector2f force = PhysicsObject.getRotationVector(rotation);
         force.normalize();
         force.scale((float) (amount * deltaTime));
         this.addForce(force);
@@ -72,6 +74,7 @@ public class Ship extends PhysicsObject implements Movable, BoundingSphere {
             this.position.y = Game.HEIGHT;
         }
 
+        weapon.update(deltaTime);
         thrustFlame.addFlame(this.position.x, this.position.y - 4.0f);
     }
 
@@ -100,8 +103,20 @@ public class Ship extends PhysicsObject implements Movable, BoundingSphere {
 
     @Override
     public float getRadius() {
-        // TODO Auto-generated method stub
-        return 0;
+        return radius;
+    }
+
+    @Override
+    public void bindWeapon(Weapon weapon) {
+        this.weapon = weapon;
+    }
+
+    @Override
+    public Projectile fire() {
+        if(this.weapon != null) {
+            return weapon.fire(getPosition(), getVelocity(), PhysicsObject.getRotationVector(rotation));
+        }
+        return null;
     }
 
 }

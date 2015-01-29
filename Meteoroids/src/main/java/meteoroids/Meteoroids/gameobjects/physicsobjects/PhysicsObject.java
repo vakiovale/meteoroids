@@ -149,4 +149,17 @@ public abstract class PhysicsObject extends DUGameObject implements IPosition {
     public void setVelocity(float x, float y) {
         this.velocity.set(x, y);
     }
+
+    /**
+     * Get vector from a rotation.
+     * 
+     * @param rotation
+     * @return vector
+     */
+    public static Vector2f getRotationVector(float rotation) {
+        Vector2f rotationVector = new Vector2f(
+                        (float)Math.cos(Math.toRadians(rotation + 90.0f)),
+                        (float) Math.sin(Math.toRadians(rotation + 90.0f)));
+        return rotationVector;
+    }
 }

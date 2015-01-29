@@ -1,7 +1,8 @@
-package meteoroids.Meteoroids.controllers;
+package meteoroids.Meteoroids.controllers.physics;
 
 import java.util.List;
 
+import meteoroids.Meteoroids.controllers.Controller;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.GravityObject;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.PhysicsObject;
 
