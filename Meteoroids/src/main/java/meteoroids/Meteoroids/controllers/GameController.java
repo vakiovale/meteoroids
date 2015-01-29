@@ -1,6 +1,5 @@
 package meteoroids.Meteoroids.controllers;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.lwjgl.input.Keyboard;

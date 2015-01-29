@@ -2,8 +2,6 @@ package meteoroids.Meteoroids.gameobjects.physicsobjects.ships;
 
 import javax.vecmath.Vector2f;
 
-import meteoroids.Meteoroids.gameobjects.Updateable;
-
 public class BasicGun extends Weapon {
 
     private Projectile projectileTemplate;

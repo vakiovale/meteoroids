@@ -2,7 +2,6 @@ package meteoroids.Meteoroids;
 
 import meteoroids.Meteoroids.controllers.GameController;
 import meteoroids.Meteoroids.controllers.graphics.GraphicsController;
-import meteoroids.Meteoroids.controllers.physics.GravityController;
 import meteoroids.Meteoroids.controllers.physics.PhysicsController;
 
 import org.lwjgl.LWJGLException;

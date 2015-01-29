@@ -4,10 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import meteoroids.Meteoroids.controllers.Controller;
-import meteoroids.Meteoroids.gameobjects.GameObject;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.ships.Projectile;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.ships.ShootingShip;
-import meteoroids.Meteoroids.gameobjects.physicsobjects.ships.Weapon;
 
 /**
  * Controller for shooting and firing.
