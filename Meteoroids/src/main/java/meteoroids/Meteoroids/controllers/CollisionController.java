@@ -96,12 +96,16 @@ public class CollisionController implements Controller {
     
     private boolean checkPlanetHit(BoundingSphere bsA, BoundingSphere bsB) {
         if(bsA instanceof Planet) {
-            killed.add((GameObject)bsB);
-            return true;
+            if(bsB instanceof Asteroid) {
+                killed.add((GameObject)bsB);
+                return true;
+            }
         }
         else if(bsB instanceof Planet) {
-            killed.add((GameObject)bsA);
-            return true;
+            if(bsA instanceof Asteroid) {
+                killed.add((GameObject)bsA);
+                return true;
+            }
         }
         return false;
     }
