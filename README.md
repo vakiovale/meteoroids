@@ -7,7 +7,10 @@ You must protect Earth from flying meteoroids! Destroy all the meteoroids before
 
 <img src="https://github.com/valtteripyyhtia/meteoroids/blob/master/doc/Meteoroids.png" alt="Save Earth! - Meteoroids" width="400px" />
 
-## Running Meteoroids from command line (Linux - quick)
+## Running Meteoroids from command line (Linux - easy)
+
+This is the easiest way to build and run Meteoroids when you are in Linux environment.
+This has been tested also on Windows when using GitBash (unix like shell).
 
 Run these Linux scripts from <code>Meteoroids/</code> folder:
 
