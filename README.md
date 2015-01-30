@@ -28,10 +28,13 @@ Happy shooting!
 Clean and compile project with Maven:
 
 <code>
-mvn clean:clean && mvn compile
+mvn clean:clean && mvn compile && mvn nativedependencies:copy
 </code>
 
-Set up MAVEN_OPTS environment variable:
+***Sometimes needed when failing to copy native dependencies to the target/natives directory:***
+<code>mvn package</code>
+
+Set up MAVEN_OPTS environment variable (use unix version ALSO in Windows when using GitBash in unix mode):
 
 <code>
 **windows:** set MAVEN_OPTS="-Djava.library.path=target/natives"
