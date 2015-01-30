@@ -1,6 +1,13 @@
 # meteoroids
 Clone of the classic Asteroids game.
 
+* <a href="#whats-happening">What's happening?</a>
+* <a href="#running-meteoroids-from-command-line-linux---easy">Running Meteoroids (easy)</a>
+* <a href="#running-meteoroids-from-command-line">Running Meteoroids (advanced)</a>
+* <a href="#importing-project-to-eclipse-netbeans-etc-IDE-">Importing project to Eclipse, Netbeans, etc. (IDE)</a>
+* <a href="#troubleshooting">Troubleshooting</a>
+* <a href="#known-issues">Known issues</a>
+
 ## What's happening?
 
 You must protect Earth from flying meteoroids! Destroy all the meteoroids before they hit the ground.
