@@ -14,7 +14,7 @@ public interface Updateable {
      * @param deltaTime time since last frame
      */
     public void update(float deltaTime);
-    
+
     /**
      * Object ID.
      * 

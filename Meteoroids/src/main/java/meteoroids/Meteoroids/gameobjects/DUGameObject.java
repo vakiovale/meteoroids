@@ -14,7 +14,7 @@ public class DUGameObject extends GameObject implements Drawable, Updateable {
     public DUGameObject() {
         this.dead = false;
     }
-    
+
     @Override
     public void update(float deltaTime) {
         System.out.println(this + " update");
@@ -24,7 +24,7 @@ public class DUGameObject extends GameObject implements Drawable, Updateable {
     public void draw() {
         System.out.println(this + " draw");
     }
-    
+
     /**
      * Check if GameObject is dead and can be removed.
      * 
@@ -33,7 +33,7 @@ public class DUGameObject extends GameObject implements Drawable, Updateable {
     public boolean isDead() {
         return dead;
     }
-    
+
     /**
      * The End for the GameObject. Let it die!
      * 

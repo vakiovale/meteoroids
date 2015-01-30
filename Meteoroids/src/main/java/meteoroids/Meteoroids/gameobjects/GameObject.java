@@ -17,18 +17,18 @@ public class GameObject implements IPosition {
         position = new Vector2f(0, 0);
         id = 0;
     }
-    
+
     public int getID() {
         return id;
     }
-    
+
     public void setID(int id) {
         this.id = id;
     }
 
     @Override
     public Vector2f getPosition() {
-        return (Vector2f) position.clone();
+        return (Vector2f)position.clone();
     }
 
     @Override

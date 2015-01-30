@@ -44,7 +44,7 @@ public class GraphicsController implements Controller {
      * @param objects list of Drawable objects
      */
     public void draw(List<Drawable> objects) {
-        for (Drawable d : objects) {
+        for(Drawable d : objects) {
             d.draw();
         }
     }

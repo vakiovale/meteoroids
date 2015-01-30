@@ -17,15 +17,15 @@ public class FiringController implements Controller {
 
     List<Projectile> projectiles;
     GameObjectController objectController;
-    
+
     public FiringController(GameObjectController objectController) {
         projectiles = new ArrayList<>();
         this.objectController = objectController;
     }
-    
+
     @Override
     public void update(float deltaTime) {
-        for(int i = projectiles.size()-1; i >= 0; i--) {
+        for(int i = projectiles.size() - 1; i >= 0; i--) {
             if(projectiles.get(i).isDead()) {
                 objectController.killGameObject(projectiles.get(i));
                 projectiles.remove(i);

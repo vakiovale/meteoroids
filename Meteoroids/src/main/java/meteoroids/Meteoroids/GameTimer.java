@@ -23,7 +23,7 @@ class GameTimer {
      */
     int getDeltaTime() {
         long currentTime = Sys.getTime();
-        int delta = (int) (currentTime - lastTime);
+        int delta = (int)(currentTime - lastTime);
         lastTime = currentTime;
         return delta;
     }

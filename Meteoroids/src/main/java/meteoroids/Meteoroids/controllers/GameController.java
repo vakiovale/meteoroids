@@ -22,37 +22,37 @@ import meteoroids.Meteoroids.gameobjects.physicsobjects.ships.Ship;
  *
  */
 public class GameController implements Controller {
-   
+
     private GameObjectController objectController;
-    
+
     private Ship ship;
     private Asteroid[] asteroids;
     private Planet planet;
 
     public GameController() {
-       
+
         objectController = new GameObjectController();
-        
+
         ship = objectController.getShip();
         asteroids = objectController.getAsteroids();
         planet = objectController.getPlanet();
-        
+
         printHelp();
-        
+
     }
 
     private void printHelp() {
-         System.out.println("***********************");
-         System.out.println(" H O W   T O   P L A Y");
-         System.out.println("***********************");
-         System.out.println("UP:\tAccelerate");
-         System.out.println("DOWN:\tReverse");
-         System.out.println("LEFT:\tSteer left");
-         System.out.println("RIGHT:\tSteer right");
-         System.out.println("SPACE:\tFire");
-         System.out.println("LEFT CTRL\tChange weapon");
-         System.out.println("ESC:\tExit game");
-         System.out.println("***********************");
+        System.out.println("***********************");
+        System.out.println(" H O W   T O   P L A Y");
+        System.out.println("***********************");
+        System.out.println("UP:\tAccelerate");
+        System.out.println("DOWN:\tReverse");
+        System.out.println("LEFT:\tSteer left");
+        System.out.println("RIGHT:\tSteer right");
+        System.out.println("SPACE:\tFire");
+        System.out.println("LEFT CTRL\tChange weapon");
+        System.out.println("ESC:\tExit game");
+        System.out.println("***********************");
     }
 
     @Override
@@ -70,7 +70,7 @@ public class GameController implements Controller {
 
         objectController.update(deltaTime);
     }
-    
+
     public List<Updateable> getUpdateables() {
         return objectController.getUpdateables();
     }
@@ -86,16 +86,17 @@ public class GameController implements Controller {
     public List<GravityObject> getGravityObjects() {
         return objectController.getGravityObjects();
     }
-    
+
     /**
      * Kills GameObject and removes it from the game.
      * 
      * @param object
      */
     public void killGameObjects(List<GameObject> objects) {
-        for(GameObject object : objects) 
+        for(GameObject object : objects)
             objectController.killGameObject(object);
     }
+
     /**
      * TODO:
      * 
@@ -107,11 +108,11 @@ public class GameController implements Controller {
      */
     private void pollInputs(float deltaTime) {
         while(Keyboard.next()) {
-            if (Keyboard.getEventKey() == Keyboard.KEY_LCONTROL) {
-                if (!Keyboard.getEventKeyState()) {
+            if(Keyboard.getEventKey() == Keyboard.KEY_LCONTROL) {
+                if(!Keyboard.getEventKeyState()) {
                     objectController.changeWeapon(ship);
                 }
-            }    
+            }
         }
         if(Keyboard.isKeyDown(Keyboard.KEY_LEFT)) {
             ship.rotate(0.3f, deltaTime);
@@ -130,7 +131,7 @@ public class GameController implements Controller {
         }
         if(Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)) {
             Game.exit();
-        }        
+        }
     }
 
 }

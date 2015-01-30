@@ -43,7 +43,7 @@ public class Ship extends PhysicsObject implements Movable, BoundingSphere, Shoo
     public void accelerate(float amount, double deltaTime) {
         Vector2f force = PhysicsObject.getRotationVector(rotation);
         force.normalize();
-        force.scale((float) (amount * deltaTime));
+        force.scale((float)(amount * deltaTime));
         this.addForce(force);
     }
 
@@ -55,7 +55,7 @@ public class Ship extends PhysicsObject implements Movable, BoundingSphere, Shoo
     @Override
     public void update(float deltaTime) {
         super.update(deltaTime);
-        
+
         // MAX speed for space ship
         if(this.velocity.length() > 0.3f) {
             this.velocity.normalize();
@@ -63,14 +63,14 @@ public class Ship extends PhysicsObject implements Movable, BoundingSphere, Shoo
         }
 
         // Keep ship inside the window
-        if (this.position.x > Game.WIDTH) {
+        if(this.position.x > Game.WIDTH) {
             this.position.x = 0.0f;
-        } else if (this.position.x < 0.0f) {
+        } else if(this.position.x < 0.0f) {
             this.position.x = Game.WIDTH;
         }
-        if (this.position.y > Game.HEIGHT) {
+        if(this.position.y > Game.HEIGHT) {
             this.position.y = 0.0f;
-        } else if (this.position.y < 0.0f) {
+        } else if(this.position.y < 0.0f) {
             this.position.y = Game.HEIGHT;
         }
 
@@ -90,7 +90,7 @@ public class Ship extends PhysicsObject implements Movable, BoundingSphere, Shoo
         GL11.glColor3f(1.0f, 0.2f, 0.2f);
         GL11.glBegin(GL11.GL_QUADS);
         GL11.glVertex2f(this.position.x - radius, this.position.y - radius);
-        GL11.glVertex2f(this.position.x, this.position.y - (radius/3));
+        GL11.glVertex2f(this.position.x, this.position.y - (radius / 3));
         GL11.glVertex2f(this.position.x + radius, this.position.y - radius);
         GL11.glVertex2f(this.position.x, this.position.y + radius);
         GL11.glEnd();
@@ -114,11 +114,12 @@ public class Ship extends PhysicsObject implements Movable, BoundingSphere, Shoo
     @Override
     public Projectile fire() {
         if(this.weapon != null) {
-            return weapon.fire(getPosition(), getVelocity(), PhysicsObject.getRotationVector(rotation));
+            return weapon.fire(getPosition(), getVelocity(),
+                    PhysicsObject.getRotationVector(rotation));
         }
         return null;
     }
-    
+
     @Override
     public Weapon getWeapon() {
         return weapon;

@@ -12,7 +12,7 @@ public class BasicGun extends Weapon {
 
     private Projectile projectileTemplate;
     private int coolOffTime;
-    
+
     public BasicGun() {
         this.projectileTemplate = null;
         this.coolOffTime = 0;
@@ -27,12 +27,12 @@ public class BasicGun extends Weapon {
     }
 
     @Override
-    public Projectile fire(Vector2f position, Vector2f velocity, Vector2f orientation) {
+    public Projectile fire(Vector2f position, Vector2f velocity,
+            Vector2f orientation) {
         if(projectileTemplate != null && coolOffTime <= 0) {
             coolOffTime = projectileTemplate.getCoolOffTime();
             return projectileTemplate.getProjectile(position, velocity, orientation);
-        }
-        else {
+        } else {
             return null;
         }
     }
@@ -42,14 +42,15 @@ public class BasicGun extends Weapon {
         if(coolOffTime > 0) {
             coolOffTime -= deltaTime;
         }
-        if(coolOffTime < 0) coolOffTime = 0;
+        if(coolOffTime < 0)
+            coolOffTime = 0;
     }
 
     @Override
     public int getID() {
         return this.getID();
     }
-    
+
     @Override
     public Projectile getProjectile() {
         return projectileTemplate;

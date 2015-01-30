@@ -27,7 +27,7 @@ public class Game {
     private GameTimer timer;
 
     private final int FPS = 60;
-    
+
     private static boolean gameOver;
 
     public Game() {
@@ -44,7 +44,7 @@ public class Game {
      */
     void start() {
 
-        if (!init() || !graphicsController.init()) {
+        if(!init() || !graphicsController.init()) {
             // TODO: Error
             System.exit(0);
         }
@@ -52,18 +52,19 @@ public class Game {
         int deltaTime = 1 / FPS * 1000;
 
         // Game loop
-        while (!Display.isCloseRequested() && !gameOver) {
+        while(!Display.isCloseRequested() && !gameOver) {
             deltaTime = timer.getDeltaTime();
 
             // Refresh screen
             graphicsController.update(deltaTime);
 
             // Calculate gravity fields
-            physicsController.update(gameController.getGravityObjects(), gameController.getPhysicsObjects(), deltaTime);
+            physicsController.update(gameController.getGravityObjects(),
+                    gameController.getPhysicsObjects(), deltaTime);
 
             // Kill dead objects
             gameController.killGameObjects(physicsController.getKilled());
-            
+
             // Update game world
             gameController.update(deltaTime);
 
@@ -76,7 +77,7 @@ public class Game {
 
         destroy();
     }
-    
+
     /**
      * Exit from game loop.
      * 

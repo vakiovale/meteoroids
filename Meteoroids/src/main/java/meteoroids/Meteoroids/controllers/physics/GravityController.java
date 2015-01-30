@@ -16,9 +16,9 @@ public class GravityController implements Controller {
 
     public void update(List<GravityObject> gravityObjects,
             List<PhysicsObject> objects, float deltaTime) {
-        
-        for (int i = 0; i < gravityObjects.size(); i++) {
-            for (int j = 0; j < objects.size(); j++) {
+
+        for(int i = 0; i < gravityObjects.size(); i++) {
+            for(int j = 0; j < objects.size(); j++) {
                 gravityObjects.get(i).addGravityForce(objects.get(j));
             }
         }
