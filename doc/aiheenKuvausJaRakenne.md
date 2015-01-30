@@ -1,7 +1,7 @@
 # Aiheen kuvaus ja rakenne
 
 ### Aihemäärittely
-Klassisen Asteroids-pelin klooni **Meteoroids**. Pelissä lennetään avaruusaluksella ja pyritään tuhoamaan lähestyviä meteoriitteja ampumalla niitä. Pelin tavoitteena on selviytyä mahdollisimman pitkään hengissä ja keräämällä mahdollisimman paljon pisteitä tuhotuista meteoriiteista. Pelaajien parhaat tulokset tallentuvat highscore-listalle.
+Klassisen Asteroids-pelin klooni **Meteoroids**. Pelissä lennetään avaruusaluksella ja pyritään tuhoamaan lähestyviä meteoriitteja ampumalla niitä. Pelin tavoitteena on selviytyä mahdollisimman pitkään hengissä ja kerätä mahdollisimman paljon pisteitä tuhotuista meteoriiteista. Pelaajan on samalla myös suojeltava planeettaa meteoriittien törmäyksiltä, jotta planeetan asukkaat selviäisivät hengissä. Mikäli planeetta tai pelaajan alus tuhoutuu, peli päättyy. Pelaajien parhaat tulokset tallentuvat highscore-listalle.
 
 **Käyttäjät:** Pelaaja
 
