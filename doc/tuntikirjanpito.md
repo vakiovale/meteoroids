@@ -9,4 +9,5 @@
 | 25.1.2015 | Luokkakaavio, ensimmäiset luokat ja testit           |           8 |
 | 26.1.2015 | Ensimmäiset fysiikka- ja grafiikkatestit             |           7 |
 | 27.1.2015 | Lisää luokkia ja niiden kehittämistä                 |           5 |
-| 28.1.2015 | Planeetan painovoimakentän kehittämistä / IO         |           6 |    
+| 28.1.2015 | Planeetan painovoimakentän kehittämistä / IO         |           6 |   
+| 29.1.2015 | Lisää luokkia ja kehittämistä (huom. testejä lisää!) |          10 | 
