@@ -10,4 +10,5 @@
 | 26.1.2015 | Ensimmäiset fysiikka- ja grafiikkatestit             |           7 |
 | 27.1.2015 | Lisää luokkia ja niiden kehittämistä                 |           5 |
 | 28.1.2015 | Planeetan painovoimakentän kehittämistä / IO         |           6 |   
-| 29.1.2015 | Lisää luokkia ja kehittämistä (huom. testejä lisää!) |          10 | 
+| 29.1.2015 | Lisää luokkia (huom. testejä lisättävä!)             |          10 | 
+| 30.1.2015 | Testausta Windows-ympäristössä, ohjeiden päivitystä  |           3 |
