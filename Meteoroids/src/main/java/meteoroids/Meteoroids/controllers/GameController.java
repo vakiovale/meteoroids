@@ -34,7 +34,7 @@ public class GameController implements Controller {
         objectController = new GameObjectController();
 
         ship = objectController.getShip();
-        asteroids = objectController.getAsteroids();
+        asteroids = objectController.getAsteroids(8, 1000.0f, 30.0f);
         planet = objectController.getPlanet();
 
         printHelp();

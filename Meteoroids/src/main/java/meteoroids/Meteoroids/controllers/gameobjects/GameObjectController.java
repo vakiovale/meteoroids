@@ -3,7 +3,10 @@ package meteoroids.Meteoroids.controllers.gameobjects;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.vecmath.Vector2f;
+
 import meteoroids.Meteoroids.controllers.Controller;
+import meteoroids.Meteoroids.gameobjects.DUGameObject;
 import meteoroids.Meteoroids.gameobjects.Drawable;
 import meteoroids.Meteoroids.gameobjects.GameObject;
 import meteoroids.Meteoroids.gameobjects.Updateable;
@@ -57,10 +60,7 @@ public class GameObjectController implements Controller {
     public void fire(ShootingShip ship) {
         Projectile projectile = firingController.fire(ship);
         if(projectile != null) {
-            projectile.setID(++idCounter);
-            updateableObjects.add(projectile);
-            drawableObjects.add(projectile);
-            physicsObjects.add(projectile);
+            addGameObject(projectile);
         }
     }
 
@@ -71,16 +71,14 @@ public class GameObjectController implements Controller {
      */
     public Ship getShip() {
         Ship ship = new Ship(100.0f, 300.0f, 100.0f);
-        drawableObjects.add(ship);
-        physicsObjects.add(ship);
-        updateableObjects.add(ship);
 
+        addGameObject(ship);
+        
         BasicGun gun = new BasicGun();
         bindProjectile(gun, ProjectileType.BASIC_PROJECTILE);
 
         ship.bindWeapon(gun);
 
-        ship.setID(++idCounter);
         return ship;
     }
 
@@ -123,17 +121,20 @@ public class GameObjectController implements Controller {
      * 
      * @return array of Asteroids
      */
-    public Asteroid[] getAsteroids() {
-        Asteroid[] asteroids = new Asteroid[20];
+    public Asteroid[] getAsteroids(int numberOfAsteroids, float mass, float size) {
+        Asteroid[] asteroids = new Asteroid[numberOfAsteroids];
         for(int i = 0; i < asteroids.length; i++) {
-            asteroids[i] = new Asteroid(750.0f * (float)Math.random(),
-                    550.0f * (float)Math.random(), 100.0f, 8.0f);
-            physicsObjects.add(asteroids[i]);
-            drawableObjects.add(asteroids[i]);
-            updateableObjects.add(asteroids[i]);
+            float x = 800.0f * (float)Math.random();
+            float y = 600.0f * (float)Math.random();
+            while(x > 200.0f && x < 600.0f)
+                x = 800.0f * (float)Math.random();
+            while(y > 200.0f && y < 400.0f)
+                y = 600.0f * (float)Math.random();
+                        
+            asteroids[i] = new Asteroid(x, y, mass, size);
+            addGameObject(asteroids[i]);
             asteroids[i].addForce(((float)Math.random() - 0.5f) * 0.05f,
                     ((float)Math.random() - 0.5f) * 0.05f);
-            asteroids[i].setID(++idCounter);
         }
         return asteroids;
     }
@@ -170,10 +171,59 @@ public class GameObjectController implements Controller {
      * @param object to be removed
      */
     public void killGameObject(GameObject object) {
+        if(object == null) return;
         removeFromList(physicsObjects, object);
         removeFromList(gravityObjects, object);
         removeFromList(drawableObjects, object);
         removeFromList(updateableObjects, object);
+        if(object instanceof Asteroid) {
+            Asteroid a = (Asteroid)object;
+            destroyAsteroid(a);
+        }
+    }
+
+    /**
+     * Destroys an asteroid and creates two smaller one from it.
+     * 
+     * @param a Asteroid to be destroyed
+     */
+    private void destroyAsteroid(Asteroid a) {
+        float size = a.getRadius()/2;
+        float mass = a.getMass()/2;
+        Vector2f position = a.getPosition();
+        Vector2f velocity = a.getVelocity();
+        
+        if(size >= 3.0f) {
+            Asteroid asteroidA = new Asteroid(position.x-size, position.y-size, mass, size);
+            Asteroid asteroidB = new Asteroid(position.x+size, position.y+size, mass, size);
+            
+            asteroidA.setVelocity(velocity);
+            asteroidA.addForce(((float)Math.random() - 0.5f) * 1.5f,
+                    ((float)Math.random() - 0.5f) * 1.5f);
+
+            asteroidB.setVelocity(velocity);
+            asteroidB.addForce(((float)Math.random() - 0.5f) * 1.5f,
+                    ((float)Math.random() - 0.5f) * 1.5f);
+            
+            addGameObject(asteroidA);
+            addGameObject(asteroidB);
+        }
+    }
+
+    /**
+     * Adds DUGameObject to the game. Works for PhysicsObject also.
+     * 
+     * @param object
+     */
+    public void addGameObject(DUGameObject object) {
+        if(object == null) return;
+        if(object instanceof PhysicsObject) {
+            PhysicsObject pobject = (PhysicsObject)object;
+            physicsObjects.add(pobject);
+        }
+        drawableObjects.add(object);
+        updateableObjects.add(object);
+        object.setID(++idCounter);        
     }
 
     public List<Updateable> getUpdateables() {
