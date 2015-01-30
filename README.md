@@ -82,3 +82,10 @@ mvn compile exec:java -Dexec.mainClass=meteoroids.Meteoroids.Main
 </code>
 
 After this, the program should start. Hope this works!
+
+## Known issues
+
+- graphics are still in testing phase and some graphical glitches appear
+  - some objects are drawn wrong when OpenGL version > 3.0
+- <code>mvn package</code> does not include native libraries
+- tests run with <code>mvn test</code> doesn't work if native libraries are needed (works well when using IDE)
