@@ -25,28 +25,26 @@ Happy shooting!
 
 ## Running Meteoroids from command line
 
-Clean and compile project with Maven:
+1. Clean and compile project with Maven:
+  <code>
+  mvn clean:clean && mvn compile && mvn nativedependencies:copy
+  </code>
 
-<code>
-mvn clean:clean && mvn compile && mvn nativedependencies:copy
-</code>
+2. ***Sometimes needed when failing to copy native dependencies to the target/natives directory:***
+  <code>mvn package</code>
 
-***Sometimes needed when failing to copy native dependencies to the target/natives directory:***
-<code>mvn package</code>
+3. Set up MAVEN_OPTS environment variable (use unix version ALSO in Windows when using GitBash in unix mode):
+  
+  <code>
+  **windows:** set MAVEN_OPTS="-Djava.library.path=target/natives"
+  </code>
 
-Set up MAVEN_OPTS environment variable (use unix version ALSO in Windows when using GitBash in unix mode):
-
-<code>
-**windows:** set MAVEN_OPTS="-Djava.library.path=target/natives"
-</code>
-
-<code>
-   **unix:** export MAVEN_OPTS=-Djava.library.path=target/natives
-</code>
-
-Run Meteoroids:
-
-<code>mvn compile exec:java -Dexec.mainClass=meteoroids.Meteoroids.Main</code>
+  <code>
+  **unix:** export MAVEN_OPTS=-Djava.library.path=target/natives
+  </code>
+    
+4. Run Meteoroids:
+  <code>mvn compile exec:java -Dexec.mainClass=meteoroids.Meteoroids.Main</code>
 
 More information on setting up LWJGL project with Maven: http://wiki.lwjgl.org/wiki/Setting_Up_LWJGL_with_Maven
 
