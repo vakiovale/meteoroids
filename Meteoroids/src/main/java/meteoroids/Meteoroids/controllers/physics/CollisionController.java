@@ -11,6 +11,7 @@ import meteoroids.Meteoroids.gameobjects.physicsobjects.Asteroid;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.BoundingSphere;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.PhysicsObject;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.Planet;
+import meteoroids.Meteoroids.gameobjects.physicsobjects.ships.PlasmaProjectile;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.ships.Projectile;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.ships.Ship;
 
@@ -140,14 +141,16 @@ public class CollisionController implements Controller {
         if(bsA instanceof Projectile) {
             if(bsB instanceof Asteroid) {
                 killed.add((GameObject)bsB);
-                killed.add((GameObject)bsA);
+                if(!(bsA instanceof PlasmaProjectile))
+                    killed.add((GameObject)bsA);
                 return true;
             }
             return true;
         } else if(bsA instanceof Asteroid) {
             if(bsB instanceof Projectile) {
                 killed.add((GameObject)bsA);
-                killed.add((GameObject)bsB);
+                if(!(bsB instanceof PlasmaProjectile))
+                    killed.add((GameObject)bsB);
                 return true;
             }
         }

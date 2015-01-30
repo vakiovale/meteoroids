@@ -41,9 +41,13 @@ public class GameObjectController implements Controller {
     private List<GravityObject> gravityObjects;
     private List<Drawable> drawableObjects;
     private List<Updateable> updateableObjects;
+    
+    private final int ASTEROIDS_BIRTH_TIME = 10000;
+    private int newAsteroidsCounter;
 
     public GameObjectController() {
         idCounter = 0;
+        newAsteroidsCounter = ASTEROIDS_BIRTH_TIME;
         killed = new ArrayList<>();
         physicsObjects = new ArrayList<>();
         drawableObjects = new ArrayList<>();
@@ -163,6 +167,15 @@ public class GameObjectController implements Controller {
             System.out.println("kill " + object);
         }
         firingController.update(deltaTime);
+        generateNewAsteroids(deltaTime);
+    }
+
+    private void generateNewAsteroids(float deltaTime) {
+        newAsteroidsCounter -= deltaTime;
+        if(newAsteroidsCounter <= 0) {
+            newAsteroidsCounter = ASTEROIDS_BIRTH_TIME;
+            getAsteroids(2, 1000.0f, 30.0f);
+        }        
     }
 
     /**
