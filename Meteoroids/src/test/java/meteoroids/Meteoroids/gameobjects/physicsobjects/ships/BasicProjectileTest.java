@@ -10,7 +10,6 @@ import org.junit.Test;
 public class BasicProjectileTest {
 
     BasicProjectile projectile;
-    private int killOffTime = 5000;
     
     @Before
     public void setUp() {

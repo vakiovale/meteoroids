@@ -5,7 +5,6 @@ import meteoroids.Meteoroids.gameobjects.physicsobjects.ships.BasicProjectile;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.ships.PlasmaProjectile;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.ships.Projectile;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.ships.Ship;
-import meteoroids.Meteoroids.gameobjects.physicsobjects.ships.ShootingShip;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.ships.Weapon;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.ships.Projectile.ProjectileType;
 

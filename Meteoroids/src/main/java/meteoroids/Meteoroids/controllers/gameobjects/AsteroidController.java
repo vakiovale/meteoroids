@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.vecmath.Vector2f;
 
-import meteoroids.Meteoroids.gameobjects.DUGameObject;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.Asteroid;
 
 /**

@@ -3,8 +3,6 @@ package meteoroids.Meteoroids.controllers.gameobjects;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.vecmath.Vector2f;
-
 import meteoroids.Meteoroids.controllers.Controller;
 import meteoroids.Meteoroids.gameobjects.DUGameObject;
 import meteoroids.Meteoroids.gameobjects.Drawable;
@@ -14,9 +12,6 @@ import meteoroids.Meteoroids.gameobjects.physicsobjects.Asteroid;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.GravityObject;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.PhysicsObject;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.Planet;
-import meteoroids.Meteoroids.gameobjects.physicsobjects.ships.BasicGun;
-import meteoroids.Meteoroids.gameobjects.physicsobjects.ships.BasicProjectile;
-import meteoroids.Meteoroids.gameobjects.physicsobjects.ships.PlasmaProjectile;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.ships.Projectile;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.ships.Projectile.ProjectileType;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.ships.Ship;
