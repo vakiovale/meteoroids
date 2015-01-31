@@ -36,24 +36,28 @@ public class GameObjectController implements Controller {
     private int idCounter;
 
     private FiringController firingController;
+    private ShipController shipController;
+    private AsteroidController asteroidController;
+    private PlanetController planetController;
 
     private List<PhysicsObject> physicsObjects;
     private List<GravityObject> gravityObjects;
     private List<Drawable> drawableObjects;
-    private List<Updateable> updateableObjects;
-    
-    private final int ASTEROIDS_BIRTH_TIME = 10000;
-    private int newAsteroidsCounter;
+    private List<Updateable> updateableObjects; 
 
     public GameObjectController() {
         idCounter = 0;
-        newAsteroidsCounter = ASTEROIDS_BIRTH_TIME;
+        
         killed = new ArrayList<>();
         physicsObjects = new ArrayList<>();
         drawableObjects = new ArrayList<>();
         updateableObjects = new ArrayList<>();
         gravityObjects = new ArrayList<>();
+        
         firingController = new FiringController(this);
+        shipController = new ShipController();
+        asteroidController = new AsteroidController();
+        planetController = new PlanetController();
     }
 
     /**
@@ -74,15 +78,8 @@ public class GameObjectController implements Controller {
      * @return Ship
      */
     public Ship getShip() {
-        Ship ship = new Ship(100.0f, 300.0f, 100.0f);
-
+        Ship ship = shipController.getShip();
         addGameObject(ship);
-        
-        BasicGun gun = new BasicGun();
-        bindProjectile(gun, ProjectileType.BASIC_PROJECTILE);
-
-        ship.bindWeapon(gun);
-
         return ship;
     }
 
@@ -93,10 +90,7 @@ public class GameObjectController implements Controller {
      * @param projectileType
      */
     public void bindProjectile(Ship ship, ProjectileType projectileType) {
-        Weapon weapon = ship.getWeapon();
-        if(weapon != null) {
-            bindProjectile(weapon, projectileType);
-        }
+        shipController.bindProjectile(ship, projectileType);
     }
 
     /**
@@ -106,18 +100,16 @@ public class GameObjectController implements Controller {
      * @param projectileType
      */
     public void bindProjectile(Weapon weapon, ProjectileType projectileType) {
-        Projectile projectile = null;
-        switch (projectileType) {
-        case BASIC_PROJECTILE:
-            projectile = new BasicProjectile(0.0f, 0.0f);
-            break;
-        case PLASMA_PROJECTILE:
-            projectile = new PlasmaProjectile(0.0f, 0.0f);
-            break;
-        default:
-            break;
-        }
-        weapon.bindProjectile(projectile);
+        shipController.bindProjectile(weapon, projectileType);
+    }
+    
+    /**
+     * Change to the next weapon from specific ship.
+     * 
+     * @param ship
+     */
+    public void changeWeapon(Ship ship) {
+        shipController.changeWeapon(ship);
     }
 
     /**
@@ -126,20 +118,8 @@ public class GameObjectController implements Controller {
      * @return array of Asteroids
      */
     public Asteroid[] getAsteroids(int numberOfAsteroids, float mass, float size) {
-        Asteroid[] asteroids = new Asteroid[numberOfAsteroids];
-        for(int i = 0; i < asteroids.length; i++) {
-            float x = 800.0f * (float)Math.random();
-            float y = 600.0f * (float)Math.random();
-            while(x > 200.0f && x < 600.0f)
-                x = 800.0f * (float)Math.random();
-            while(y > 200.0f && y < 400.0f)
-                y = 600.0f * (float)Math.random();
-                        
-            asteroids[i] = new Asteroid(x, y, mass, size);
-            addGameObject(asteroids[i]);
-            asteroids[i].addForce(((float)Math.random() - 0.5f) * 0.05f,
-                    ((float)Math.random() - 0.5f) * 0.05f);
-        }
+        Asteroid[] asteroids = asteroidController.getAsteroids(numberOfAsteroids, mass, size);
+        addGameObject(asteroids);
         return asteroids;
     }
 
@@ -150,10 +130,7 @@ public class GameObjectController implements Controller {
      */
     public Planet getPlanet() {
         Planet planet = new Planet(400.0f, 300.0f, 20.0f, 500000.0f);
-        gravityObjects.add(planet);
-        drawableObjects.add(planet);
-        physicsObjects.add(planet);
-        planet.setID(++idCounter);
+        addGameObject(planet);
         return planet;
     }
 
@@ -170,12 +147,13 @@ public class GameObjectController implements Controller {
         generateNewAsteroids(deltaTime);
     }
 
+    /**
+     * Generates new asteroids to the game.
+     * 
+     * @param deltaTime
+     */
     private void generateNewAsteroids(float deltaTime) {
-        newAsteroidsCounter -= deltaTime;
-        if(newAsteroidsCounter <= 0) {
-            newAsteroidsCounter = ASTEROIDS_BIRTH_TIME;
-            getAsteroids(2, 1000.0f, 30.0f);
-        }        
+        addGameObject(asteroidController.generateNewAsteroids(deltaTime));      
     }
 
     /**
@@ -200,26 +178,9 @@ public class GameObjectController implements Controller {
      * 
      * @param a Asteroid to be destroyed
      */
-    private void destroyAsteroid(Asteroid a) {
-        float size = a.getRadius()/2;
-        float mass = a.getMass()/2;
-        Vector2f position = a.getPosition();
-        Vector2f velocity = a.getVelocity();
-        
-        if(size >= 3.0f) {
-            Asteroid asteroidA = new Asteroid(position.x-size, position.y-size, mass, size);
-            Asteroid asteroidB = new Asteroid(position.x+size, position.y+size, mass, size);
-            
-            asteroidA.setVelocity(velocity);
-            asteroidA.addForce(((float)Math.random() - 0.5f) * 1.5f,
-                    ((float)Math.random() - 0.5f) * 1.5f);
-
-            asteroidB.setVelocity(velocity);
-            asteroidB.addForce(((float)Math.random() - 0.5f) * 1.5f,
-                    ((float)Math.random() - 0.5f) * 1.5f);
-            
-            addGameObject(asteroidA);
-            addGameObject(asteroidB);
+    private void destroyAsteroid(Asteroid asteroid) {
+        for(Asteroid a : asteroidController.destroyAsteroid(asteroid)) {
+            addGameObject(a);
         }
     }
 
@@ -234,9 +195,25 @@ public class GameObjectController implements Controller {
             PhysicsObject pobject = (PhysicsObject)object;
             physicsObjects.add(pobject);
         }
+        if(object instanceof GravityObject) {
+            GravityObject gobject = (GravityObject)object;
+            gravityObjects.add(gobject);
+        }
         drawableObjects.add(object);
         updateableObjects.add(object);
         object.setID(++idCounter);        
+    }
+    
+    /**
+     * Adds DUGameObjects to the game. Works for PhysicsObject also.
+     * 
+     * @param objects array of DUGameObjects
+     */
+    public void addGameObject(DUGameObject[] objects) {
+        if(objects == null) return;
+        for(DUGameObject o : objects) {
+            addGameObject(o);
+        }
     }
 
     public List<Updateable> getUpdateables() {
@@ -273,21 +250,6 @@ public class GameObjectController implements Controller {
                 break;
             }
         }
-    }
-
-    /**
-     * Change to the next weapon from specific ship.
-     * 
-     * @param ship
-     */
-    public void changeWeapon(Ship ship) {
-        ProjectileType[] types = ProjectileType.values();
-        int projectileNumber = ship.getWeapon().getProjectile().getType()
-                .ordinal();
-        projectileNumber++;
-        if(projectileNumber >= types.length)
-            projectileNumber = 0;
-        bindProjectile(ship, types[projectileNumber]);
     }
 
 }

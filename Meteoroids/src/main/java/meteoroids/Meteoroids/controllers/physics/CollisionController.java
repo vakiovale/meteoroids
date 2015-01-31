@@ -7,13 +7,8 @@ import javax.vecmath.Vector2f;
 
 import meteoroids.Meteoroids.controllers.Controller;
 import meteoroids.Meteoroids.gameobjects.GameObject;
-import meteoroids.Meteoroids.gameobjects.physicsobjects.Asteroid;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.BoundingSphere;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.PhysicsObject;
-import meteoroids.Meteoroids.gameobjects.physicsobjects.Planet;
-import meteoroids.Meteoroids.gameobjects.physicsobjects.ships.PlasmaProjectile;
-import meteoroids.Meteoroids.gameobjects.physicsobjects.ships.Projectile;
-import meteoroids.Meteoroids.gameobjects.physicsobjects.ships.Ship;
 
 /**
  * Handles collision detection.
@@ -24,9 +19,11 @@ import meteoroids.Meteoroids.gameobjects.physicsobjects.ships.Ship;
 public class CollisionController implements Controller {
 
     private List<GameObject> killed;
+    private CollisionRules collisionRules;
 
     public CollisionController() {
         this.killed = new ArrayList<>();
+        collisionRules = new CollisionRules(killed);
     }
 
     /**
@@ -79,21 +76,12 @@ public class CollisionController implements Controller {
      * 
      */
     private void collide(BoundingSphere bsA, BoundingSphere bsB) {
-        if(checkPlanetHit(bsA, bsB))
+        // Use a special rule for collision
+        if(collisionRules.checkHits(bsA, bsB)) {
             return;
-        if(checkBulletHit(bsA, bsB)) {
-            return;
-        }
-        if(checkBulletToBulletHit(bsA, bsB)) {
-            return;
-        }
-        if(checkBulletToShipHit(bsA, bsB)) {
-            return;
-        }
-        if(checkAsteroidToAsteroidHit(bsA, bsB)) {
-            return;
-        }
+        }            
 
+        // Default collision response
         Vector2f center = bsB.getPosition();
         center.sub(bsA.getPosition());
         center.scale(bsA.getRadius() / (bsA.getRadius() + bsB.getRadius()));
@@ -107,63 +95,12 @@ public class CollisionController implements Controller {
         bsB.setVelocity(velB);
     }
 
-    private boolean checkBulletToShipHit(BoundingSphere bsA, BoundingSphere bsB) {
-        if((bsA instanceof Projectile && bsB instanceof Ship) || 
-           (bsA instanceof Ship && bsB instanceof Projectile))
-            return true;
-        return false;
-    }
-
+    /**
+     * Killed GameObjects.
+     * 
+     * @return list of killed GameObjects
+     */
     public List<GameObject> getKilled() {
         return killed;
     }
-
-    private boolean checkBulletToBulletHit(BoundingSphere bsA,
-            BoundingSphere bsB) {
-        if(bsA instanceof Projectile && bsB instanceof Projectile)
-            return true;
-        return false;
-    }
-    
-    private boolean checkAsteroidToAsteroidHit(BoundingSphere bsA, BoundingSphere bsB) {
-        if(bsA instanceof Asteroid && bsB instanceof Asteroid)
-            return true;
-        return false;
-    }
-
-    private boolean checkPlanetHit(BoundingSphere bsA, BoundingSphere bsB) {
-        if(bsA instanceof Planet) {
-            if(bsB instanceof Asteroid) {
-                killed.add((GameObject)bsB);
-                return true;
-            }
-        } else if(bsB instanceof Planet) {
-            if(bsA instanceof Asteroid) {
-                killed.add((GameObject)bsA);
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private boolean checkBulletHit(BoundingSphere bsA, BoundingSphere bsB) {
-        if(bsA instanceof Projectile) {
-            if(bsB instanceof Asteroid) {
-                killed.add((GameObject)bsB);
-                if(!(bsA instanceof PlasmaProjectile))
-                    killed.add((GameObject)bsA);
-                return true;
-            }
-            return true;
-        } else if(bsA instanceof Asteroid) {
-            if(bsB instanceof Projectile) {
-                killed.add((GameObject)bsA);
-                if(!(bsB instanceof PlasmaProjectile))
-                    killed.add((GameObject)bsB);
-                return true;
-            }
-        }
-        return false;
-    }
-
 }

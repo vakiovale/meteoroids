@@ -53,5 +53,14 @@ public class Planet extends GravityObject implements BoundingSphere {
     public float getRadius() {
         return radius;
     }
+    
+    /**
+     * Planet stays still and doesn't update its position.
+     * 
+     */
+    @Override
+    public void update(float deltaTime) {
+        // Stay still
+    }
 
 }

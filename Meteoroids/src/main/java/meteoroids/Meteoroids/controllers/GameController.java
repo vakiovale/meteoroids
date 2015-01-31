@@ -42,17 +42,17 @@ public class GameController implements Controller {
     }
 
     private void printHelp() {
-        System.out.println("***********************");
-        System.out.println(" H O W   T O   P L A Y");
-        System.out.println("***********************");
-        System.out.println("UP:\tAccelerate");
-        System.out.println("DOWN:\tReverse");
-        System.out.println("LEFT:\tSteer left");
-        System.out.println("RIGHT:\tSteer right");
-        System.out.println("SPACE:\tFire");
+        System.out.println("******************************");
+        System.out.println("    H O W   T O   P L A Y");
+        System.out.println("******************************");
+        System.out.println("UP:\t\tAccelerate");
+        System.out.println("DOWN:\t\tReverse");
+        System.out.println("LEFT:\t\tSteer left");
+        System.out.println("RIGHT:\t\tSteer right");
+        System.out.println("SPACE:\t\tFire");
         System.out.println("LEFT CTRL\tChange weapon");
-        System.out.println("ESC:\tExit game");
-        System.out.println("***********************");
+        System.out.println("ESC:\t\tExit game");
+        System.out.println("******************************");
     }
 
     @Override
