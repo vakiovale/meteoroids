@@ -12,3 +12,4 @@
 | 28.1.2015 | Planeetan painovoimakentän kehittämistä / IO         |           6 |   
 | 29.1.2015 | Lisää luokkia (huom. testejä lisättävä!)             |          10 | 
 | 30.1.2015 | Testausta Windows-ympäristössä, ohjeiden päivitystä  |           4 |
+| 31.1.2015 | Lisää testiluokkia ja testausta                      |           6 |
