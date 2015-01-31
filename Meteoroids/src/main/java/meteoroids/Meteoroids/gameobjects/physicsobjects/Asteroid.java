@@ -109,7 +109,7 @@ public class Asteroid extends PhysicsObject implements Movable, BoundingSphere {
 
     @Override
     public void rotate(float angle, float deltaTime) {
-        this.rotation += angle * deltaTime;
+        this.rotation = PhysicsObject.getRotation(this.rotation, angle, deltaTime);
     }
     
     @Override
