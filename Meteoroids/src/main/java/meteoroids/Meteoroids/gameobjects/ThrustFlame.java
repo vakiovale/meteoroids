@@ -46,6 +46,10 @@ public class ThrustFlame implements Drawable {
             flames.pollLast();
         }
     }
+    
+    public ArrayDeque<Flame> getFlames() {
+        return flames;
+    }
 
     class Flame {
         private float x;
@@ -64,6 +68,14 @@ public class ThrustFlame implements Drawable {
             GL11.glVertex2f(this.x + 1.5f, this.y + 1.5f);
             GL11.glVertex2f(this.x - 1.5f, this.y + 1.5f);
             GL11.glEnd();
+        }
+        
+        public float getX() {
+            return x;
+        }
+        
+        public float getY() {
+            return y;
         }
     }
 
