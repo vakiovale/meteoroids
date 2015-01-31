@@ -90,6 +90,9 @@ public class CollisionController implements Controller {
         if(checkBulletToShipHit(bsA, bsB)) {
             return;
         }
+        if(checkAsteroidToAsteroidHit(bsA, bsB)) {
+            return;
+        }
 
         Vector2f center = bsB.getPosition();
         center.sub(bsA.getPosition());
@@ -118,6 +121,12 @@ public class CollisionController implements Controller {
     private boolean checkBulletToBulletHit(BoundingSphere bsA,
             BoundingSphere bsB) {
         if(bsA instanceof Projectile && bsB instanceof Projectile)
+            return true;
+        return false;
+    }
+    
+    private boolean checkAsteroidToAsteroidHit(BoundingSphere bsA, BoundingSphere bsB) {
+        if(bsA instanceof Asteroid && bsB instanceof Asteroid)
             return true;
         return false;
     }
