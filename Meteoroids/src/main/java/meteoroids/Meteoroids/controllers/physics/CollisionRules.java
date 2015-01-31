@@ -107,7 +107,6 @@ public class CollisionRules {
                     killed.add((GameObject)bsA);
                 return true;
             }
-            return true;
         } else if(bsA instanceof Asteroid) {
             if(bsB instanceof Projectile) {
                 killed.add((GameObject)bsA);
