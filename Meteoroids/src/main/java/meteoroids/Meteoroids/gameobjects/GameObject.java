@@ -2,6 +2,8 @@ package meteoroids.Meteoroids.gameobjects;
 
 import javax.vecmath.Vector2f;
 
+import meteoroids.Meteoroids.Game;
+
 /**
  * Basic GameObject
  * 
@@ -53,5 +55,23 @@ public class GameObject implements IPosition {
 
     public String toString() {
         return "GameObject";
+    }
+
+    /**
+     * Keeps position vector inside the Game window
+     * 
+     * @param position vector
+     */
+    public static void keepObjectInsideGameWindow(Vector2f position) {
+        if(position.x > Game.WIDTH) {
+            position.x = 0.0f;
+        } else if(position.x < 0.0f) {
+            position.x = Game.WIDTH;
+        }
+        if(position.y > Game.HEIGHT) {
+            position.y = 0.0f;
+        } else if(position.y < 0.0f) {
+            position.y = Game.HEIGHT;
+        }        
     }
 }

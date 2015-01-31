@@ -3,6 +3,7 @@ package meteoroids.Meteoroids.gameobjects.physicsobjects.ships;
 import javax.vecmath.Vector2f;
 
 import meteoroids.Meteoroids.Game;
+import meteoroids.Meteoroids.gameobjects.GameObject;
 import meteoroids.Meteoroids.gameobjects.Movable;
 import meteoroids.Meteoroids.gameobjects.ThrustFlame;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.BoundingSphere;
@@ -62,18 +63,8 @@ public class Ship extends PhysicsObject implements Movable, BoundingSphere, Shoo
             this.velocity.scale(0.3f);
         }
 
-        // Keep ship inside the window
-        if(this.position.x > Game.WIDTH) {
-            this.position.x = 0.0f;
-        } else if(this.position.x < 0.0f) {
-            this.position.x = Game.WIDTH;
-        }
-        if(this.position.y > Game.HEIGHT) {
-            this.position.y = 0.0f;
-        } else if(this.position.y < 0.0f) {
-            this.position.y = Game.HEIGHT;
-        }
-
+        GameObject.keepObjectInsideGameWindow(this.position);
+        
         if(weapon != null)
             weapon.update(deltaTime);
         

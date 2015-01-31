@@ -1,6 +1,7 @@
 package meteoroids.Meteoroids.gameobjects.physicsobjects;
 
 import meteoroids.Meteoroids.Game;
+import meteoroids.Meteoroids.gameobjects.GameObject;
 import meteoroids.Meteoroids.gameobjects.Movable;
 import meteoroids.Meteoroids.gameobjects.ThrustFlame;
 
@@ -48,17 +49,7 @@ public class Asteroid extends PhysicsObject implements Movable, BoundingSphere {
             this.velocity.scale(0.2f);
         }
 
-        // Keep asteroid inside the window
-        if(this.position.x > Game.WIDTH) {
-            this.position.x = 0.0f;
-        } else if(this.position.x < 0.0f) {
-            this.position.x = Game.WIDTH;
-        }
-        if(this.position.y > Game.HEIGHT) {
-            this.position.y = 0.0f;
-        } else if(this.position.y < 0.0f) {
-            this.position.y = Game.HEIGHT;
-        }
+        GameObject.keepObjectInsideGameWindow(this.position);
 
         this.flame.addFlame(this.position.x, this.position.y);
     }
