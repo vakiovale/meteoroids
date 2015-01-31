@@ -179,7 +179,7 @@ public abstract class PhysicsObject extends DUGameObject implements IPosition {
      * @return
      */
     public static float getRotation(float rotation, float angle,
-            double deltaTime) {
+            float deltaTime) {
         rotation += angle * deltaTime;
         if(rotation < -3600f) {
             rotation = 3600f + rotation;
