@@ -38,6 +38,7 @@ public class CollisionController implements Controller {
      */
     public void update(List<PhysicsObject> objects, float deltaTime) {
         killed.clear();
+        if(objects == null) return;
         for(int i = 0; i < objects.size(); i++) {
             for(int j = i + 1; j < objects.size(); j++) {
                 if(objects.get(i) instanceof BoundingSphere
@@ -54,10 +55,17 @@ public class CollisionController implements Controller {
 
     @Override
     public void update(float deltaTime) {
-        this.update(null, deltaTime);
+        // Do nothing
     }
 
-    private boolean checkSphereCollision(BoundingSphere bsA, BoundingSphere bsB) {
+    /**
+     * Check if two BoundingSphere objects collide.
+     * 
+     * @param bsA
+     * @param bsB
+     * @return
+     */
+    public boolean checkSphereCollision(BoundingSphere bsA, BoundingSphere bsB) {
         Vector2f center = bsB.getPosition();
         center.sub(bsA.getPosition());
         float distanceSquared = center.dot(center);

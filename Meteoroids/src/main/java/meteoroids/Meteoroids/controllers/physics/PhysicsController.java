@@ -25,6 +25,7 @@ public class PhysicsController implements Controller {
 
     public void update(List<GravityObject> gravityObjects,
             List<PhysicsObject> objects, float deltaTime) {
+        if(gravityObjects == null || objects == null) return;
         gravityController.update(gravityObjects, objects, deltaTime);
         collisionController.update(objects, deltaTime);
     }
@@ -35,7 +36,7 @@ public class PhysicsController implements Controller {
 
     @Override
     public void update(float deltaTime) {
-        update(null, null, deltaTime);
+        // Do nothing
     }
 
 }
