@@ -7,6 +7,12 @@ import meteoroids.Meteoroids.gameobjects.GameObject;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.GravityObject;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.PhysicsObject;
 
+/**
+ * PhysicsController updates all the physics.
+ * 
+ * @author vpyyhtia
+ *
+ */
 public class PhysicsController implements Controller {
 
     private GravityController gravityController;

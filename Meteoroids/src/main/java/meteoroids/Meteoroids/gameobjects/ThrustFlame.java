@@ -5,7 +5,7 @@ import java.util.ArrayDeque;
 import org.lwjgl.opengl.GL11;
 
 /**
- * Ship's thrust flame.
+ * Thrust flame for flying objects.
  * 
  * @author vpyyhtia
  *

@@ -51,7 +51,7 @@ public abstract class Projectile extends PhysicsObject implements BoundingSphere
     }
 
     /**
-     * Types for different weapons.
+     * Types for different projectiles.
      * 
      * @author vpyyhtia
      *

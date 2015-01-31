@@ -167,4 +167,26 @@ public abstract class PhysicsObject extends DUGameObject implements IPosition {
                 .toRadians(rotation + 90.0f)));
         return rotationVector;
     }
+
+    /**
+     * Calculates new rotation with current rotation, new angle and deltaTime.
+     * If rotation is greater than 3600 or smaller than -3600, it will be changed
+     * back to zero.
+     * 
+     * @param rotation
+     * @param angle
+     * @param deltaTime
+     * @return
+     */
+    public static float getRotation(float rotation, float angle,
+            double deltaTime) {
+        rotation += angle * deltaTime;
+        if(rotation < -3600f) {
+            rotation = 3600f + rotation;
+        }
+        else if(rotation > 3600f) {
+            rotation = rotation - 3600f;
+        }
+        return rotation;
+    }
 }

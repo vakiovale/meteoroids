@@ -99,17 +99,22 @@ public class Asteroid extends PhysicsObject implements Movable, BoundingSphere {
     }
 
     public String toString() {
-        return "Asteroid";
+        return "Asteroid " + this.id;
     }
 
     @Override
-    public void accelerate(float amount, double deltaTime) {
+    public void accelerate(float amount, float deltaTime) {
         // Don't accelerate
     }
 
     @Override
-    public void rotate(float angle, double deltaTime) {
+    public void rotate(float angle, float deltaTime) {
         this.rotation += angle * deltaTime;
+    }
+    
+    @Override
+    public float getRotation() {
+        return rotation;
     }
 
     @Override

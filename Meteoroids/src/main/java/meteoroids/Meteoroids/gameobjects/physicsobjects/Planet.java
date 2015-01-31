@@ -62,5 +62,10 @@ public class Planet extends GravityObject implements BoundingSphere {
     public void update(float deltaTime) {
         // Stay still
     }
+    
+    @Override
+    public String toString() {
+        return "Planet " + this.id;
+    }
 
 }

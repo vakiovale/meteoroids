@@ -40,7 +40,7 @@ public class Ship extends PhysicsObject implements Movable, BoundingSphere, Shoo
     }
 
     @Override
-    public void accelerate(float amount, double deltaTime) {
+    public void accelerate(float amount, float deltaTime) {
         Vector2f force = PhysicsObject.getRotationVector(rotation);
         force.normalize();
         force.scale((float)(amount * deltaTime));
@@ -48,8 +48,8 @@ public class Ship extends PhysicsObject implements Movable, BoundingSphere, Shoo
     }
 
     @Override
-    public void rotate(float angle, double deltaTime) {
-        rotation += angle * deltaTime;
+    public void rotate(float angle, float deltaTime) {
+        rotation = PhysicsObject.getRotation(rotation, angle, deltaTime);
     }
 
     @Override
@@ -74,8 +74,20 @@ public class Ship extends PhysicsObject implements Movable, BoundingSphere, Shoo
             this.position.y = Game.HEIGHT;
         }
 
-        weapon.update(deltaTime);
+        if(weapon != null)
+            weapon.update(deltaTime);
+        
         thrustFlame.addFlame(this.position.x, this.position.y - 4.0f);
+    }
+    
+    /**
+     * Ship rotation.
+     * 
+     * @return rotation (float number)
+     */
+    @Override
+    public float getRotation() {
+        return rotation;
     }
 
     @Override
@@ -98,7 +110,7 @@ public class Ship extends PhysicsObject implements Movable, BoundingSphere, Shoo
     }
 
     public String toString() {
-        return "Ship";
+        return "Ship " + id;
     }
 
     @Override

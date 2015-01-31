@@ -14,7 +14,7 @@ public interface Movable {
      * @param amount
      * @param deltaTime
      */
-    public void accelerate(float amount, double deltaTime);
+    public void accelerate(float amount, float deltaTime);
 
     /**
      * Rotate object.
@@ -22,5 +22,7 @@ public interface Movable {
      * @param angle of rotation
      * @param deltaTime
      */
-    public void rotate(float angle, double deltaTime);
+    public void rotate(float angle, float deltaTime);
+    
+    public float getRotation();
 }
