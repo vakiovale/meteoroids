@@ -21,7 +21,6 @@ public class Planet extends GravityObject implements BoundingSphere {
 
     public Planet(float radius, float mass) {
         this(0.0f, 0.0f, radius, mass);
-
     }
 
     public Planet(float posX, float posY, float radius) {
