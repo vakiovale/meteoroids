@@ -7,12 +7,12 @@ package meteoroids.Meteoroids.controllers;
  *
  */
 public interface Controller {
-	
-	/**
-	 * Update controller with deltaTime
-	 * 
-	 * @param deltaTime time since last frame
-	 */
-	public void update(float deltaTime);
-	
+
+    /**
+     * Update controller with deltaTime
+     * 
+     * @param deltaTime time since last frame
+     */
+    public void update(float deltaTime);
+
 }

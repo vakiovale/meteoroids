@@ -1,16 +1,19 @@
 package meteoroids.Meteoroids.controllers;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import javax.vecmath.Vector2f;
+import org.lwjgl.input.Keyboard;
 
 import meteoroids.Meteoroids.Game;
+import meteoroids.Meteoroids.controllers.gameobjects.GameObjectController;
 import meteoroids.Meteoroids.gameobjects.Drawable;
+import meteoroids.Meteoroids.gameobjects.GameObject;
 import meteoroids.Meteoroids.gameobjects.Updateable;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.Asteroid;
+import meteoroids.Meteoroids.gameobjects.physicsobjects.GravityObject;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.PhysicsObject;
-import meteoroids.Meteoroids.gameobjects.physicsobjects.Ship;
+import meteoroids.Meteoroids.gameobjects.physicsobjects.Planet;
+import meteoroids.Meteoroids.gameobjects.physicsobjects.ships.Ship;
 
 /**
  * Handles all the controllers in the game
@@ -20,89 +23,115 @@ import meteoroids.Meteoroids.gameobjects.physicsobjects.Ship;
  */
 public class GameController implements Controller {
 
-    Ship ship;
-    Ship ship2;
-    Ship s;
-    Asteroid[] asteroids = new Asteroid[100];
-    List<PhysicsObject> physicsObjects;
-    List<Drawable> drawableObjects;
-    List<Updateable> updateableObjects;
-    
-	public GameController() {
-		
-		float midX = Game.WIDTH/2;
-		float midY = Game.HEIGHT/2;
-		
-		ship = new Ship(midX, midY);
-		ship2 = new Ship(midX, midY);
-		s = new Ship(0, midY);
-		
-		physicsObjects = new ArrayList<>();
-		physicsObjects.add(ship);
-		
-		drawableObjects = new ArrayList<>();
-		//drawableObjects.add(ship);
-		drawableObjects.add(ship2);
-		//drawableObjects.add(s);
-		
-		updateableObjects = new ArrayList<>();
-		updateableObjects.add(ship);
-		updateableObjects.add(ship2);
-		updateableObjects.add(s);
-		
-		for(int i = 0; i < asteroids.length; i++) {
-			asteroids[i] = new Asteroid(midX, midY);
-			physicsObjects.add(asteroids[i]);
-			drawableObjects.add(asteroids[i]);
-			updateableObjects.add(asteroids[i]);
-		}
-		
-		// Give a little push to ships
-		ship2.addForce(new Vector2f(0.01f, 0.01f));
-		s.addForce(new Vector2f((Game.WIDTH/Game.FPS)*0.001f, 0.0f));
-	}
+    private GameObjectController objectController;
 
-	@Override
-	public void update(float deltaTime) {
-		
-	    /* TODO:
-	     * 
-	     * !!! All this is just testing for now !!!
-	     * 
-	     */
-	    
-	    deltaTime = deltaTime * Game.getTimeFactor();
-	    
-	    // Add forces
-	    for(PhysicsObject p : physicsObjects) {
-	        p.clearForces();
-	        // Random movement for ship and asteroids
-		    p.addForce(new Vector2f((float)Math.random()*0.1f-0.5f*0.1f, 
-		                            (float)Math.random()*0.1f-0.5f*0.1f));
-		}
-		
-	    // Update objects and clear forces and draw object
-	    for(Updateable u : updateableObjects) {
-	        u.update(deltaTime);
-	    }	    
-	    
-	    ship2.update(deltaTime);
-	    ship2.clearForces();
-	    s.update(deltaTime);
-	    s.clearForces();
-	    
-	}
-	
-	public List<Updateable> getUpdateables() {
-		return updateableObjects;
-	}
-	
-	public List<Drawable> getDrawables() {
-		return drawableObjects;
-	}
-	
-	public List<PhysicsObject> getPhysicsObjects() {
-		return physicsObjects;
-	}
-	
+    private Ship ship;
+    private Asteroid[] asteroids;
+    private Planet planet;
+
+    public GameController() {
+
+        objectController = new GameObjectController();
+
+        ship = objectController.getShip();
+        asteroids = objectController.getAsteroids(8, 1000.0f, 30.0f);
+        planet = objectController.getPlanet();
+
+        printHelp();
+
+    }
+
+    private void printHelp() {
+        System.out.println("******************************");
+        System.out.println("    H O W   T O   P L A Y");
+        System.out.println("******************************");
+        System.out.println("UP:\t\tAccelerate");
+        System.out.println("DOWN:\t\tReverse");
+        System.out.println("LEFT:\t\tSteer left");
+        System.out.println("RIGHT:\t\tSteer right");
+        System.out.println("SPACE:\t\tFire");
+        System.out.println("LEFT CTRL\tChange weapon");
+        System.out.println("ESC:\t\tExit game");
+        System.out.println("******************************");
+    }
+
+    @Override
+    public void update(float deltaTime) {
+
+        deltaTime = deltaTime * Game.getTimeFactor();
+
+        /*
+         * TESTING INPUT !!
+         * 
+         * TODO: Add these to the InputController class
+         */
+        pollInputs(deltaTime);
+        /* TESTING ENDS */
+
+        objectController.update(deltaTime);
+    }
+
+    public List<Updateable> getUpdateables() {
+        return objectController.getUpdateables();
+    }
+
+    public List<Drawable> getDrawables() {
+        return objectController.getDrawables();
+    }
+
+    public List<PhysicsObject> getPhysicsObjects() {
+        return objectController.getPhysicsObjects();
+    }
+
+    public List<GravityObject> getGravityObjects() {
+        return objectController.getGravityObjects();
+    }
+
+    /**
+     * Kills GameObject and removes it from the game.
+     * 
+     * @param object
+     */
+    public void killGameObjects(List<GameObject> objects) {
+        for(GameObject object : objects)
+            objectController.killGameObject(object);
+    }
+
+    /**
+     * TODO:
+     * 
+     * !! TESTING INPUTS !!
+     * 
+     * Implement InputController
+     * 
+     * @param deltaTime
+     */
+    private void pollInputs(float deltaTime) {
+        while(Keyboard.next()) {
+            if(Keyboard.getEventKey() == Keyboard.KEY_LCONTROL) {
+                if(!Keyboard.getEventKeyState()) {
+                    objectController.changeWeapon(ship);
+                }
+            }
+        }
+        if(Keyboard.isKeyDown(Keyboard.KEY_LEFT)) {
+            ship.rotate(0.3f, deltaTime);
+        }
+        if(Keyboard.isKeyDown(Keyboard.KEY_RIGHT)) {
+            ship.rotate(-0.3f, deltaTime);
+        }
+        if(Keyboard.isKeyDown(Keyboard.KEY_UP)) {
+            ship.accelerate(0.002f, deltaTime);
+        }
+        if(Keyboard.isKeyDown(Keyboard.KEY_DOWN)) {
+            ship.accelerate(-0.002f, deltaTime);
+        }
+        if(Keyboard.isKeyDown(Keyboard.KEY_SPACE)) {
+            objectController.fire(ship);
+        }
+        if(Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)) {
+            Game.exit();
+        }
+    }
+
 }

@@ -8,9 +8,9 @@ package meteoroids.Meteoroids.gameobjects;
  */
 public class DrawableGameObject extends GameObject implements Drawable {
 
-	@Override
-	public void draw() {
-		System.out.println(this + " draw");		
-	}
+    @Override
+    public void draw() {
+        System.out.println(this + " draw");
+    }
 
 }
