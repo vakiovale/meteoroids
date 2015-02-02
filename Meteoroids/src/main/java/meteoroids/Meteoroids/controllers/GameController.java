@@ -8,6 +8,7 @@ import meteoroids.Meteoroids.Game;
 import meteoroids.Meteoroids.controllers.gameobjects.GameObjectController;
 import meteoroids.Meteoroids.gameobjects.Drawable;
 import meteoroids.Meteoroids.gameobjects.GameObject;
+import meteoroids.Meteoroids.gameobjects.StarField;
 import meteoroids.Meteoroids.gameobjects.Updateable;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.Asteroid;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.GravityObject;
@@ -28,15 +29,17 @@ public class GameController implements Controller {
     private Ship ship;
     private Asteroid[] asteroids;
     private Planet planet;
+    private StarField starField;
 
     public GameController() {
 
         objectController = new GameObjectController();
 
+        starField = objectController.getStarField(Game.WIDTH, Game.HEIGHT);
         ship = objectController.getShip();
-        asteroids = objectController.getAsteroids(8, 1000.0f, 30.0f);
+        asteroids = objectController.getAsteroids(1, 1000.0f, 100.0f);
         planet = objectController.getPlanet();
-
+        
         printHelp();
 
     }

@@ -6,7 +6,9 @@ import java.util.List;
 import meteoroids.Meteoroids.controllers.Controller;
 import meteoroids.Meteoroids.gameobjects.DUGameObject;
 import meteoroids.Meteoroids.gameobjects.Drawable;
+import meteoroids.Meteoroids.gameobjects.DrawableGameObject;
 import meteoroids.Meteoroids.gameobjects.GameObject;
+import meteoroids.Meteoroids.gameobjects.StarField;
 import meteoroids.Meteoroids.gameobjects.Updateable;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.Asteroid;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.GravityObject;
@@ -34,6 +36,7 @@ public class GameObjectController implements Controller {
     private ShipController shipController;
     private AsteroidController asteroidController;
     private PlanetController planetController;
+    private StarController starController;
 
     private List<PhysicsObject> physicsObjects;
     private List<GravityObject> gravityObjects;
@@ -53,6 +56,7 @@ public class GameObjectController implements Controller {
         shipController = new ShipController();
         asteroidController = new AsteroidController();
         planetController = new PlanetController();
+        starController = new StarController();
     }
 
     /**
@@ -141,6 +145,19 @@ public class GameObjectController implements Controller {
         firingController.update(deltaTime);
         generateNewAsteroids(deltaTime);
     }
+    
+    /**
+     * Generates a star field to the game.
+     *  
+     * @param width of the star field
+     * @param height of the star field
+     * @return
+     */
+    public StarField getStarField(float width, float height) {
+        StarField starField = starController.generateStarField(width, height);
+        addGameObject(starField);
+        return starField;
+    }
 
     /**
      * Generates new asteroids to the game.
@@ -200,6 +217,16 @@ public class GameObjectController implements Controller {
     }
     
     /**
+     * Add a DrawableGameObject to the game.
+     * 
+     * @param object
+     */
+    public void addGameObject(DrawableGameObject object) {
+        drawableObjects.add(object);
+        object.setID(++idCounter);
+    }
+    
+    /**
      * Adds DUGameObjects to the game. Works for PhysicsObject also.
      * 
      * @param objects array of DUGameObjects
@@ -246,5 +273,4 @@ public class GameObjectController implements Controller {
             }
         }
     }
-
 }
