@@ -69,7 +69,7 @@ public class CollisionController implements Controller {
         Vector2f center = bsB.getPosition();
         center.sub(bsA.getPosition());
         float distanceSquared = center.dot(center);
-        if(distanceSquared < (bsA.getRadius() + bsB.getRadius())
+        if(distanceSquared <= (bsA.getRadius() + bsB.getRadius())
                 * (bsA.getRadius() + bsB.getRadius())) {
             return true;
         }

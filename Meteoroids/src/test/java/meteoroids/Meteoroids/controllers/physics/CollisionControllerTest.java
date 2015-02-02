@@ -52,14 +52,14 @@ public class CollisionControllerTest {
     public void checkSphereCollisionAlmostTouch() {
         Asteroid a = new Asteroid(0.0f, 10.0f, 10.0f, 10.0f);
         Planet b = new Planet(0.0f, 40.0f, 20.0f, 20.0f);
-        assertTrue("Objects should be ALMOST touching.", !controller.checkSphereCollision(a, b));
+        assertTrue("Objects should be touching.", controller.checkSphereCollision(a, b));
     }
     
     @Test
     public void checkSphereCollisionTouch() {
         Asteroid a = new Asteroid(0.0f, 10.0f, 10.0f, 10.0f);
         Planet b = new Planet(0.0f, 39.999f, 20.0f, 20.0f);
-        assertTrue("Objects should be just touching.", controller.checkSphereCollision(a, b));
+        assertTrue("Objects should be touching.", controller.checkSphereCollision(a, b));
     }
 
 }
