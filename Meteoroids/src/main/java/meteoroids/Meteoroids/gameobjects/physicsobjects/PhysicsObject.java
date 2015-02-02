@@ -130,6 +130,15 @@ public abstract class PhysicsObject extends DUGameObject implements IPosition {
     }
 
     /**
+     * Inverse mass of the object.
+     * 
+     * @return inverse mass
+     */
+    public float getInverseMass() {
+        return inverseMass;
+    }
+    
+    /**
      * Velocity of the object.
      * 
      * @return velocity

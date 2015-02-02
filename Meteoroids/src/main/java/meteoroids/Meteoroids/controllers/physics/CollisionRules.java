@@ -91,6 +91,28 @@ public class CollisionRules {
         }
         return false;
     }
+    
+    /**
+     * Check bullet to planet collision.
+     * 
+     * @param bsA
+     * @param bsB
+     * @return
+     */
+    public boolean checkBulletToPlanetHit(BoundingSphere bsA, BoundingSphere bsB) {
+        if(bsA instanceof Planet) {
+            if(bsB instanceof Projectile) {
+                killed.add((GameObject)bsB);
+                return true;
+            }
+        } else if(bsB instanceof Planet) {
+            if(bsA instanceof Projectile) {
+                killed.add((GameObject)bsA);
+                return true;
+            }
+        }
+        return false;
+    }
 
     /**
      * Check bullet to asteroid collision.
@@ -126,6 +148,6 @@ public class CollisionRules {
     public boolean checkHits(BoundingSphere bsA, BoundingSphere bsB) {
         return (checkBulletToAsteroidHit(bsA, bsB) || checkAsteroidToPlanetHit(bsA, bsB) 
                 || checkAsteroidToAsteroidHit(bsA, bsB) || checkBulletToBulletHit(bsA, bsB) 
-                || checkBulletToShipHit(bsA, bsB));
+                || checkBulletToShipHit(bsA, bsB) || checkBulletToPlanetHit(bsA, bsB));
     }
 }

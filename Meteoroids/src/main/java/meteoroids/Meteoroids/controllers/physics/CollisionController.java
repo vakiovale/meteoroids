@@ -31,7 +31,7 @@ public class CollisionController implements Controller {
      * BoundingSphere.
      * 
      * TODO: Implement collision detection for objects with other geometry if
-     * needed. TODO: Improve collision response!
+     * needed.
      * 
      * @param objects
      * @param deltaTime
@@ -91,17 +91,53 @@ public class CollisionController implements Controller {
         }            
 
         // Default collision response
-        Vector2f center = bsB.getPosition();
-        center.sub(bsA.getPosition());
-        center.scale(bsA.getRadius() / (bsA.getRadius() + bsB.getRadius()));
-        center.add(bsA.getPosition());
 
-        Vector2f velA = bsA.getVelocity();
-        velA.negate();
-        Vector2f velB = bsB.getVelocity();
-        velB.negate();
-        bsA.setVelocity(velA);
-        bsB.setVelocity(velB);
+        // TODO: testing one version of collision response
+        // this has to be improved !
+        Vector2f difference = bsA.getPosition();
+        difference.sub(bsB.getPosition());
+        float length = difference.length();
+        Vector2f midway = (Vector2f)difference.clone();
+        midway.scale(((bsA.getRadius() + bsB.getRadius())-length)/length);
+        
+        PhysicsObject phA = (PhysicsObject)bsA;
+        PhysicsObject phB = (PhysicsObject)bsB;
+        
+        Vector2f positionA = phA.getPosition();
+        Vector2f positionB = phB.getPosition();
+        
+        Vector2f midwaytmp = (Vector2f)midway.clone();
+        midwaytmp.scale(phA.getInverseMass() / (phA.getInverseMass()+phB.getInverseMass()));
+        positionA.add(midwaytmp);
+        midwaytmp = (Vector2f)midway.clone();
+        midwaytmp.scale(phB.getInverseMass() / (phA.getInverseMass() + phB.getInverseMass()));
+        positionB.add(midwaytmp);
+        
+        phA.setPosition(positionA);
+        phB.setPosition(positionB);
+        
+        Vector2f velocity = bsA.getVelocity();
+        velocity.sub(bsB.getVelocity());
+        midwaytmp = (Vector2f)midway.clone();
+        float vn = velocity.dot(midwaytmp);
+        
+        if(vn > 0.0f) return;
+        
+        float impulse = (-(1.0f) * vn) / (phA.getInverseMass() + phB.getInverseMass());
+        Vector2f impulseVector = (Vector2f)midway.clone();
+        impulseVector.scale(impulse);
+        
+        Vector2f velocitytmp = (Vector2f)phA.getVelocity();
+        Vector2f impulsetmp = (Vector2f)impulseVector.clone();
+        impulsetmp.scale(phA.getInverseMass());
+        velocitytmp.add(impulsetmp);
+        phA.setVelocity(velocitytmp);
+        
+        velocitytmp = (Vector2f)phB.getVelocity();
+        impulsetmp = (Vector2f)impulseVector.clone();
+        impulsetmp.scale(phB.getInverseMass());
+        velocitytmp.sub(impulsetmp);
+        phB.setVelocity(velocitytmp);
     }
 
     /**
