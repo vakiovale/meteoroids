@@ -15,7 +15,7 @@ import meteoroids.Meteoroids.gameobjects.physicsobjects.Asteroid;
  */
 public class AsteroidController {
     
-    private final int ASTEROIDS_BIRTH_TIME = 10000;
+    private final int ASTEROIDS_BIRTH_TIME = 20000;
     private int newAsteroidsCounter;
     
     public AsteroidController() {

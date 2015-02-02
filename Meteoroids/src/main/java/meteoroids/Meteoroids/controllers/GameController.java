@@ -37,7 +37,7 @@ public class GameController implements Controller {
 
         starField = objectController.getStarField(Game.WIDTH, Game.HEIGHT);
         ship = objectController.getShip();
-        asteroids = objectController.getAsteroids(1, 1000.0f, 100.0f);
+        asteroids = objectController.getAsteroids(4, 1000.0f, 30.0f);
         planet = objectController.getPlanet();
         
         printHelp();
