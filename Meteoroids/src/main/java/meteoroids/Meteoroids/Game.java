@@ -55,7 +55,7 @@ public class Game {
         // Game loop
         while(!Display.isCloseRequested() && !gameOver) {
             deltaTime = timer.getDeltaTime();
-
+            
             // Refresh screen
             graphicsController.update(deltaTime);
 
@@ -72,10 +72,13 @@ public class Game {
             // Draw
             graphicsController.draw(gameController.getDrawables());
 
+            // Check if game is over
+            gameOver = gameController.gameOver();
+            
             Display.update();
             Display.sync(FPS);
         }
-
+        
         destroy();
     }
 

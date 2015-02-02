@@ -37,11 +37,20 @@ public class GameController implements Controller {
 
         starField = objectController.getStarField(Game.WIDTH, Game.HEIGHT);
         ship = objectController.getShip();
-        asteroids = objectController.getAsteroids(4, 1000.0f, 30.0f);
+        asteroids = objectController.getAsteroids(2, 1000.0f, 30.0f);
         planet = objectController.getPlanet();
         
         printHelp();
 
+    }
+    
+    /**
+     * Check if game is over.
+     * 
+     * @return true if game is over
+     */
+    public boolean gameOver() {
+        return getNumberOfAsteroidsAlive() <= 0;
     }
 
     private void printHelp() {
@@ -98,6 +107,15 @@ public class GameController implements Controller {
     public void killGameObjects(List<GameObject> objects) {
         for(GameObject object : objects)
             objectController.killGameObject(object);
+    }
+    
+    /**
+     * Number of asteroids alive in the game.
+     * 
+     * @return number of asteroids
+     */
+    public int getNumberOfAsteroidsAlive() {
+        return objectController.numberOfAsteroidsAlive();
     }
 
     /**

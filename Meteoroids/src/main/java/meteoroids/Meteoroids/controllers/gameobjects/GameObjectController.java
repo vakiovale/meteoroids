@@ -31,6 +31,7 @@ public class GameObjectController implements Controller {
     private List<GameObject> killed;
 
     private int idCounter;
+    private int asteroidCounter;
 
     private FiringController firingController;
     private ShipController shipController;
@@ -45,6 +46,7 @@ public class GameObjectController implements Controller {
 
     public GameObjectController() {
         idCounter = 0;
+        asteroidCounter = 0;
         
         killed = new ArrayList<>();
         physicsObjects = new ArrayList<>();
@@ -182,6 +184,7 @@ public class GameObjectController implements Controller {
         if(object instanceof Asteroid) {
             Asteroid a = (Asteroid)object;
             destroyAsteroid(a);
+            asteroidCounter--;
         }
     }
 
@@ -206,6 +209,9 @@ public class GameObjectController implements Controller {
         if(object instanceof PhysicsObject) {
             PhysicsObject pobject = (PhysicsObject)object;
             physicsObjects.add(pobject);
+            if(object instanceof Asteroid) {
+                asteroidCounter++;
+            }
         }
         if(object instanceof GravityObject) {
             GravityObject gobject = (GravityObject)object;
@@ -236,6 +242,15 @@ public class GameObjectController implements Controller {
         for(DUGameObject o : objects) {
             addGameObject(o);
         }
+    }
+    
+    /**
+     * Number of asteroids alive in the game.
+     * 
+     * @return number of asteroids
+     */
+    public int numberOfAsteroidsAlive() {
+        return asteroidCounter;
     }
 
     public List<Updateable> getUpdateables() {
