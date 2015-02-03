@@ -54,6 +54,15 @@ public class Energy {
     }
     
     /**
+     * Get the start (MAX) energy
+     * 
+     * @return MAX_ENERGY
+     */
+    public int getMaxEnergy() {
+        return MAX_ENERGY;
+    }
+    
+    /**
      * Get current energy.
      * 
      * @return energy
