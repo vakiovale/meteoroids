@@ -5,9 +5,9 @@ import javax.vecmath.Vector2f;
 import meteoroids.Meteoroids.Game;
 import meteoroids.Meteoroids.gameobjects.GameObject;
 import meteoroids.Meteoroids.gameobjects.Movable;
-import meteoroids.Meteoroids.gameobjects.ThrustFlame;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.BoundingSphere;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.PhysicsObject;
+import meteoroids.Meteoroids.gameobjects.utilities.ThrustFlame;
 
 import org.lwjgl.opengl.GL11;
 

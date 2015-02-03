@@ -3,7 +3,7 @@ package meteoroids.Meteoroids.gameobjects.physicsobjects;
 import meteoroids.Meteoroids.Game;
 import meteoroids.Meteoroids.gameobjects.GameObject;
 import meteoroids.Meteoroids.gameobjects.Movable;
-import meteoroids.Meteoroids.gameobjects.ThrustFlame;
+import meteoroids.Meteoroids.gameobjects.utilities.ThrustFlame;
 
 import org.lwjgl.opengl.GL11;
 

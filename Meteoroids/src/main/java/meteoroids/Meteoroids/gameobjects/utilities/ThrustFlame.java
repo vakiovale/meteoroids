@@ -1,6 +1,8 @@
-package meteoroids.Meteoroids.gameobjects;
+package meteoroids.Meteoroids.gameobjects.utilities;
 
 import java.util.ArrayDeque;
+
+import meteoroids.Meteoroids.gameobjects.DrawableGameObject;
 
 import org.lwjgl.opengl.GL11;
 
@@ -10,7 +12,7 @@ import org.lwjgl.opengl.GL11;
  * @author vpyyhtia
  *
  */
-public class ThrustFlame implements Drawable {
+public class ThrustFlame extends DrawableGameObject {
 
     ArrayDeque<Flame> flames;
     private int counter;
@@ -51,7 +53,7 @@ public class ThrustFlame implements Drawable {
         return flames;
     }
 
-    class Flame {
+    public class Flame {
         private float x;
         private float y;
 

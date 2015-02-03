@@ -4,7 +4,8 @@ import static org.junit.Assert.*;
 
 import java.util.ArrayDeque;
 
-import meteoroids.Meteoroids.gameobjects.ThrustFlame.Flame;
+import meteoroids.Meteoroids.gameobjects.utilities.ThrustFlame;
+import meteoroids.Meteoroids.gameobjects.utilities.ThrustFlame.Flame;
 
 import org.junit.Before;
 import org.junit.Test;

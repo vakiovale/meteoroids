@@ -9,6 +9,7 @@ import meteoroids.Meteoroids.gameobjects.physicsobjects.Planet;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.ships.PlasmaProjectile;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.ships.Projectile;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.ships.Ship;
+import meteoroids.Meteoroids.gameobjects.utilities.IEnergy;
 
 /**
  * Rules what happens when different objects collide.
@@ -19,6 +20,7 @@ import meteoroids.Meteoroids.gameobjects.physicsobjects.ships.Ship;
 public class CollisionRules {
 
     private List<GameObject> killed;
+    private DamageController damageController;
     
     /**
      * CollisionRules constructor.
@@ -27,6 +29,7 @@ public class CollisionRules {
      */
     public CollisionRules(List<GameObject> killed) {
         this.killed = killed;
+        this.damageController = new DamageController();
     }
     
     /**
@@ -81,11 +84,13 @@ public class CollisionRules {
         if(bsA instanceof Planet) {
             if(bsB instanceof Asteroid) {
                 killed.add((GameObject)bsB);
+                damageController.hitIEnergyObject((Planet)bsA, (Asteroid)bsB);
                 return true;
             }
         } else if(bsB instanceof Planet) {
             if(bsA instanceof Asteroid) {
                 killed.add((GameObject)bsA);
+                damageController.hitIEnergyObject((Planet)bsA, (Asteroid)bsB);
                 return true;
             }
         }

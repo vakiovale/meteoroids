@@ -1,5 +1,8 @@
 package meteoroids.Meteoroids.gameobjects.physicsobjects;
 
+import meteoroids.Meteoroids.gameobjects.utilities.Energy;
+import meteoroids.Meteoroids.gameobjects.utilities.IEnergy;
+
 import org.lwjgl.opengl.GL11;
 
 /**
@@ -7,9 +10,10 @@ import org.lwjgl.opengl.GL11;
  * 
  * @author vpyyhtia
  */
-public class Planet extends GravityObject implements BoundingSphere {
+public class Planet extends GravityObject implements BoundingSphere, IEnergy {
 
     private float radius;
+    private Energy energy;
 
     public Planet() {
         this(0.0f, 0.0f, 100.0f, 500.0f);
@@ -30,6 +34,7 @@ public class Planet extends GravityObject implements BoundingSphere {
     public Planet(float posX, float posY, float radius, float mass) {
         super(posX, posY, mass);
         this.radius = radius;
+        this.energy = new Energy(100);
     }
 
     @Override
@@ -65,6 +70,21 @@ public class Planet extends GravityObject implements BoundingSphere {
     @Override
     public String toString() {
         return "Planet " + this.id;
+    }
+
+    @Override
+    public void decreaseEnergy() {
+        energy.decrease();        
+    }
+
+    @Override
+    public void decreseEnergy(int amount) {
+        energy.decrease(amount);
+    }
+
+    @Override
+    public int getEnergy() {
+        return energy.getEnergy();
     }
 
 }
