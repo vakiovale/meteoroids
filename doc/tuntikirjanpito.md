@@ -1,7 +1,7 @@
 ## Tuntikirjanpito
 
 | Pvm       | Työ                                                  | Tunnit (h)  |
-| :-------- |:----------------------------------------------------:| -----------:|
+| :-------: |:----------------------------------------------------:| -----------:|
 | 13.1.2015 | Aiheen suunnittelu                                   |           3 |
 | 14.1.2015 | Projektin aloittaminen ja ensimmäisen deadlinen teko |           6 |
 | 23.1.2015 | Kokonaisuuden hahmottamista ja luokkien suunnittelua |           4 |
@@ -13,3 +13,4 @@
 | 29.1.2015 | Lisää luokkia (huom. testejä lisättävä!)             |          10 | 
 | 30.1.2015 | Testausta Windows-ympäristössä, ohjeiden päivitystä  |           4 |
 | 31.1.2015 | Lisää testiluokkia ja testausta                      |           6 |
+|  2.2.2015 | Fysiikkatestausta, luokkien organisointia            |           6 |
