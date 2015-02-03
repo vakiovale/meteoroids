@@ -45,6 +45,15 @@ public class GraphicsController implements Controller {
             d.draw();
         }
     }
+    
+    /**
+     * Draw a single object to the screen.
+     * 
+     * @param object drawable
+     */
+    public void draw(Drawable object) {
+        object.draw();
+    }
 
     /**
      * Initialize OpenGL.

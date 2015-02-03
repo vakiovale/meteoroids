@@ -11,18 +11,14 @@ import meteoroids.Meteoroids.gameobjects.utilities.Energy;
  * @author vpyyhtia
  *
  */
-public class EnergyBar extends DUGameObject {
+public class EnergyBar extends HUDElement {
 
     private Energy energy;
     
-    public EnergyBar(int energy) {
-        this.energy = new Energy(energy);
+    public EnergyBar(Energy energy) {
+        this.energy = energy;
     }
-    
-    public void decreaseEnergy() {
-        this.energy.decrease();
-    }
-    
+        
     @Override
     public void update(float deltaTime) {
         // Do nothing

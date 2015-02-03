@@ -26,5 +26,12 @@ public interface IEnergy {
      * 
      * @return energy
      */
-    public int getEnergy();
+    public Energy getEnergy();
+    
+    /**
+     * Get integer value of current energy
+     * 
+     * @return energy (int)
+     */
+    public int getEnergyValue();
 }

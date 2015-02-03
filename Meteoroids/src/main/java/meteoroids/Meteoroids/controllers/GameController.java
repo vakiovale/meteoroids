@@ -6,6 +6,7 @@ import org.lwjgl.input.Keyboard;
 
 import meteoroids.Meteoroids.Game;
 import meteoroids.Meteoroids.controllers.gameobjects.GameObjectController;
+import meteoroids.Meteoroids.controllers.graphics.HUDController;
 import meteoroids.Meteoroids.gameobjects.Drawable;
 import meteoroids.Meteoroids.gameobjects.GameObject;
 import meteoroids.Meteoroids.gameobjects.StarField;
@@ -50,7 +51,7 @@ public class GameController implements Controller {
      * @return true if game is over
      */
     public boolean gameOver() {
-        return getNumberOfAsteroidsAlive() <= 0;
+        return getNumberOfAsteroidsAlive() <= 0 || planet.isDead();
     }
 
     private void printHelp() {
@@ -97,6 +98,10 @@ public class GameController implements Controller {
 
     public List<GravityObject> getGravityObjects() {
         return objectController.getGravityObjects();
+    }
+    
+    public HUDController getHUDController() {
+        return objectController.getHUDController();
     }
 
     /**

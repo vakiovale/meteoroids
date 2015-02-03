@@ -4,12 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import meteoroids.Meteoroids.controllers.Controller;
+import meteoroids.Meteoroids.controllers.graphics.HUDController;
 import meteoroids.Meteoroids.gameobjects.DUGameObject;
 import meteoroids.Meteoroids.gameobjects.Drawable;
 import meteoroids.Meteoroids.gameobjects.DrawableGameObject;
 import meteoroids.Meteoroids.gameobjects.GameObject;
 import meteoroids.Meteoroids.gameobjects.StarField;
 import meteoroids.Meteoroids.gameobjects.Updateable;
+import meteoroids.Meteoroids.gameobjects.hud.EnergyBar;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.Asteroid;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.GravityObject;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.PhysicsObject;
@@ -38,7 +40,8 @@ public class GameObjectController implements Controller {
     private AsteroidController asteroidController;
     private PlanetController planetController;
     private StarController starController;
-
+    private HUDController hudController;
+    
     private List<PhysicsObject> physicsObjects;
     private List<GravityObject> gravityObjects;
     private List<Drawable> drawableObjects;
@@ -59,6 +62,7 @@ public class GameObjectController implements Controller {
         asteroidController = new AsteroidController();
         planetController = new PlanetController();
         starController = new StarController();
+        hudController = new HUDController();
     }
 
     /**
@@ -132,7 +136,17 @@ public class GameObjectController implements Controller {
     public Planet getPlanet() {
         Planet planet = new Planet(400.0f, 300.0f, 20.0f, 500000.0f);
         addGameObject(planet);
+        hudController.addHUDElement(new EnergyBar(planet.getEnergy()));
         return planet;
+    }
+    
+    /**
+     * Get HUDController.
+     * 
+     * @return hudController
+     */
+    public HUDController getHUDController() {
+        return hudController;
     }
 
     @Override
@@ -276,7 +290,7 @@ public class GameObjectController implements Controller {
     public List<GameObject> getKilled() {
         return killed;
     }
-
+    
     private void removeFromList(List<?> list, GameObject object) {
         int id = object.getID();
         for(int i = list.size() - 1; i >= 0; i--) {

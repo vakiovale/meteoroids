@@ -71,6 +71,7 @@ public class Game {
 
             // Draw
             graphicsController.draw(gameController.getDrawables());
+            graphicsController.draw(gameController.getHUDController());
 
             // Check if game is over
             gameOver = gameController.gameOver();

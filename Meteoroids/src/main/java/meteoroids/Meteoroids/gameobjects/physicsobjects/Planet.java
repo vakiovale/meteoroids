@@ -59,12 +59,12 @@ public class Planet extends GravityObject implements BoundingSphere, IEnergy {
     }
     
     /**
-     * Planet stays still and doesn't update its position.
+     * Update planet's status
      * 
      */
     @Override
     public void update(float deltaTime) {
-        // Stay still
+        this.dead = energy.dead();
     }
     
     @Override
@@ -83,8 +83,13 @@ public class Planet extends GravityObject implements BoundingSphere, IEnergy {
     }
 
     @Override
-    public int getEnergy() {
+    public int getEnergyValue() {
         return energy.getEnergy();
+    }
+    
+    @Override
+    public Energy getEnergy() {
+        return energy;
     }
 
 }

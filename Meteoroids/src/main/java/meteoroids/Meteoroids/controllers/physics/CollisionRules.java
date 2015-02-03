@@ -83,14 +83,14 @@ public class CollisionRules {
     public boolean checkAsteroidToPlanetHit(BoundingSphere bsA, BoundingSphere bsB) {
         if(bsA instanceof Planet) {
             if(bsB instanceof Asteroid) {
-                killed.add((GameObject)bsB);
                 damageController.hitIEnergyObject((Planet)bsA, (Asteroid)bsB);
+                killed.add((GameObject)bsB);
                 return true;
             }
         } else if(bsB instanceof Planet) {
             if(bsA instanceof Asteroid) {
+                damageController.hitIEnergyObject((Planet)bsB, (Asteroid)bsA);
                 killed.add((GameObject)bsA);
-                damageController.hitIEnergyObject((Planet)bsA, (Asteroid)bsB);
                 return true;
             }
         }
