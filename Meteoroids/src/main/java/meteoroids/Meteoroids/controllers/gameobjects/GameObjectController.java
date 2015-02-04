@@ -3,6 +3,7 @@ package meteoroids.Meteoroids.controllers.gameobjects;
 import java.util.ArrayList;
 import java.util.List;
 
+import meteoroids.Meteoroids.Game;
 import meteoroids.Meteoroids.controllers.Controller;
 import meteoroids.Meteoroids.controllers.graphics.HUDController;
 import meteoroids.Meteoroids.gameobjects.DUGameObject;
@@ -134,7 +135,16 @@ public class GameObjectController implements Controller {
      * @return Planet
      */
     public Planet getPlanet() {
-        Planet planet = new Planet(400.0f, 300.0f, 20.0f, 500000.0f);
+        return getPlanet(Game.WIDTH/2, Game.HEIGHT/2);
+    }
+    
+    /**
+     * Create a Planet at certain position.
+     * 
+     * @return Planet
+     */
+    public Planet getPlanet(float x, float y) {
+        Planet planet = new Planet(x, y, 20.0f, 500000.0f);
         addGameObject(planet);
         hudController.addHUDElement(new EnergyBar(planet.getEnergy()));
         return planet;
@@ -185,24 +195,6 @@ public class GameObjectController implements Controller {
     }
 
     /**
-     * Kills game object and removes from the game.
-     * 
-     * @param object to be removed
-     */
-    public void killGameObject(GameObject object) {
-        if(object == null) return;
-        removeFromList(physicsObjects, object);
-        removeFromList(gravityObjects, object);
-        removeFromList(drawableObjects, object);
-        removeFromList(updateableObjects, object);
-        if(object instanceof Asteroid) {
-            Asteroid a = (Asteroid)object;
-            destroyAsteroid(a);
-            asteroidCounter--;
-        }
-    }
-
-    /**
      * Destroys an asteroid and creates two smaller one from it.
      * 
      * @param a Asteroid to be destroyed
@@ -219,7 +211,10 @@ public class GameObjectController implements Controller {
      * @param object
      */
     public void addGameObject(DUGameObject object) {
-        if(object == null) return;
+        if(object == null) {
+            System.out.println("adding object was null");
+            return;
+        }
         if(object instanceof PhysicsObject) {
             PhysicsObject pobject = (PhysicsObject)object;
             physicsObjects.add(pobject);
@@ -234,6 +229,27 @@ public class GameObjectController implements Controller {
         drawableObjects.add(object);
         updateableObjects.add(object);
         object.setID(++idCounter);        
+    }
+    
+    /**
+     * Kills game object and removes from the game.
+     * 
+     * @param object to be removed
+     */
+    public void killGameObject(GameObject object) {
+        if(object == null) {
+            System.out.println("object was null");
+            return;
+        }
+        removeFromList(physicsObjects, object);
+        removeFromList(gravityObjects, object);
+        removeFromList(drawableObjects, object);
+        removeFromList(updateableObjects, object);
+        if(object instanceof Asteroid) {
+            Asteroid a = (Asteroid)object;
+            destroyAsteroid(a);
+            asteroidCounter--;
+        }
     }
     
     /**

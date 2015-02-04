@@ -14,6 +14,9 @@ public class Planet extends GravityObject implements BoundingSphere, IEnergy {
 
     private float radius;
     private Energy energy;
+    private float red;
+    private float green;
+    private float blue;
 
     public Planet() {
         this(0.0f, 0.0f, 100.0f, 500.0f);
@@ -35,12 +38,15 @@ public class Planet extends GravityObject implements BoundingSphere, IEnergy {
         super(posX, posY, mass);
         this.radius = radius;
         this.energy = new Energy(100);
+        this.red = (float)Math.random();
+        this.green = (float)Math.random();
+        this.blue = (float)Math.random();
     }
 
     @Override
     public void draw() {
         GL11.glPushMatrix();
-        GL11.glColor3f(0.1f, 0.3f, 0.7f);
+        GL11.glColor3f(red, green, blue);
         GL11.glTranslatef(this.position.x, this.position.y, 0);
         GL11.glScalef(radius, radius, 1);
         GL11.glBegin(GL11.GL_TRIANGLE_FAN);

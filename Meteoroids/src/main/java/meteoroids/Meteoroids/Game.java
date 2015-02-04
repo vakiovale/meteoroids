@@ -2,10 +2,7 @@ package meteoroids.Meteoroids;
 
 import meteoroids.Meteoroids.controllers.GameController;
 import meteoroids.Meteoroids.controllers.graphics.GraphicsController;
-import meteoroids.Meteoroids.controllers.physics.PhysicsController;
-
 import org.lwjgl.LWJGLException;
-import org.lwjgl.Sys;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 
@@ -16,27 +13,21 @@ import org.lwjgl.opengl.DisplayMode;
  *
  */
 public class Game {
-
-    private static float timeFactor = 1.0f;
-    public static final int WIDTH = 800;
-    public static final int HEIGHT = 600;
-
-    private GameController gameController;
-    private GraphicsController graphicsController;
-    private PhysicsController physicsController;
-
-    private GameTimer timer;
+    
+    public static final int WIDTH = 1900;
+    public static final int HEIGHT = 1000;
 
     private final int FPS = 60;
-
-    private static boolean gameOver;
-
+    
+    private GameController gameController;
+    private GraphicsController graphicsController;
+    
+    private GameTimer timer;
+    
     public Game() {
-        gameController = new GameController();
-        graphicsController = new GraphicsController(WIDTH, HEIGHT);
-        physicsController = new PhysicsController();
+        graphicsController = new GraphicsController(Game.WIDTH, Game.HEIGHT);
+        gameController = new GameController(graphicsController);
         timer = new GameTimer();
-        gameOver = false;
     }
 
     /**
@@ -53,42 +44,14 @@ public class Game {
         int deltaTime = 1 / FPS * 1000;
 
         // Game loop
-        while(!Display.isCloseRequested() && !gameOver) {
-            deltaTime = timer.getDeltaTime();
-            
-            // Refresh screen
-            graphicsController.update(deltaTime);
-
-            // Calculate gravity fields
-            physicsController.update(gameController.getGravityObjects(),
-                    gameController.getPhysicsObjects(), deltaTime);
-
-            // Kill dead objects
-            gameController.killGameObjects(physicsController.getKilled());
-
-            // Update game world
+        while(!Display.isCloseRequested()) {
+            deltaTime = timer.getDeltaTime();          
             gameController.update(deltaTime);
-
-            // Draw
-            graphicsController.draw(gameController.getDrawables());
-            graphicsController.draw(gameController.getHUDController());
-
-            // Check if game is over
-            gameOver = gameController.gameOver();
-            
             Display.update();
             Display.sync(FPS);
         }
         
         destroy();
-    }
-
-    /**
-     * Exit from game loop.
-     * 
-     */
-    public static void exit() {
-        gameOver = true;
     }
 
     /**
@@ -116,16 +79,6 @@ public class Game {
             return false;
         }
         return true;
-    }
-
-    /**
-     * Time factor tells how fast game should be run. It's possible to speed up
-     * / slow down the game by multiplying delta time with time factor.
-     * 
-     * @return time factor
-     */
-    public static float getTimeFactor() {
-        return timeFactor;
     }
 
 }

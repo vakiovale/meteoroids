@@ -36,8 +36,8 @@ public class EnergyBar extends HUDElement {
         GL11.glColor3f(red+0.2f, green-0.2f, 0.0f);
         GL11.glBegin(GL11.GL_QUADS);
         GL11.glVertex2f(10, 10);
-        GL11.glVertex2f(this.energy.getEnergy()*5, 10);
-        GL11.glVertex2f(this.energy.getEnergy()*5, 30);
+        GL11.glVertex2f(this.energy.getEnergy()*5+10, 10);
+        GL11.glVertex2f(this.energy.getEnergy()*5+10, 30);
         GL11.glVertex2f(10, 30);
         GL11.glEnd();
     }

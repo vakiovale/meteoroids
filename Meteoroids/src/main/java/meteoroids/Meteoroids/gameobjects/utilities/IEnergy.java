@@ -34,4 +34,5 @@ public interface IEnergy {
      * @return energy (int)
      */
     public int getEnergyValue();
+    
 }

@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.vecmath.Vector2f;
 
+import meteoroids.Meteoroids.Game;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.Asteroid;
 
 /**
@@ -59,19 +60,36 @@ public class AsteroidController {
      */
     public Asteroid[] getAsteroids(int numberOfAsteroids, float mass, float size) {
         Asteroid[] asteroids = new Asteroid[numberOfAsteroids];
+        float x;
+        float y;
         for(int i = 0; i < asteroids.length; i++) {
-            float x = 800.0f * (float)Math.random();
-            float y = 600.0f * (float)Math.random();
-            while(x > 200.0f && x < 600.0f)
-                x = 800.0f * (float)Math.random();
-            while(y > 200.0f && y < 400.0f)
-                y = 600.0f * (float)Math.random();
-                        
+            do {
+                x = Game.WIDTH * (float)Math.random();
+                y = Game.HEIGHT * (float)Math.random();
+            } while(spawningFails(x, y));                       
             asteroids[i] = new Asteroid(x, y, mass, size);
             asteroids[i].addForce(((float)Math.random() - 0.5f) * 0.05f,
                     ((float)Math.random() - 0.5f) * 0.05f);
         }
         return asteroids;
+    }
+
+    /**
+     * Check if position (x, y) is allowed for spawning. This returns false
+     * if position is near the borders of the window.
+     * 
+     * @param x
+     * @param y
+     * @return true if spawning fails
+     */
+    private boolean spawningFails(float x, float y) {
+        if(x < Game.WIDTH*0.1f || x > Game.WIDTH*0.9f) {
+            return false;
+        }
+        else if(y < Game.HEIGHT*0.1f || y > Game.HEIGHT*0.9f) {
+            return false;
+        }
+        return true;
     }
 
     /**

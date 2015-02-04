@@ -19,13 +19,5 @@ public class GameTest {
     	boolean b = game.init();
     	game.destroy();
     	assertTrue("Initializing LWJGL failed", b);
-    }
-    
-    @Test
-    public void testTimeFactor() {
-        float timeFactor = Game.getTimeFactor();
-        assertEquals("Time factor should be 1.0 as default, but it was "
-                + timeFactor + ".", 1.0, timeFactor, 0.01);
-    }
-    
+    }    
 }

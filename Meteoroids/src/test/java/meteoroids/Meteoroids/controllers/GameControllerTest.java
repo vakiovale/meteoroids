@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
+import meteoroids.Meteoroids.controllers.graphics.GraphicsController;
 
 public class GameControllerTest {
 
@@ -11,7 +12,8 @@ public class GameControllerTest {
 	
 	@Before
 	public void setUp() {
-		controller = new GameController();
+	    GraphicsController graphics = new GraphicsController(800, 600);
+		controller = new GameController(graphics);
 	}
 
 	@Test

@@ -15,6 +15,7 @@ public class Energy {
     public Energy(final int MAX_ENERGY) {
         this.MAX_ENERGY = MAX_ENERGY;
         this.energy = MAX_ENERGY;
+        this.dead = false;
     }
     
     /**
@@ -36,7 +37,7 @@ public class Energy {
         decrease(1);
         return energy;
     }
-    
+          
     /**
      * Decrease energy.
      * 
@@ -45,6 +46,9 @@ public class Energy {
      */
     public int decrease(int damage) {
         if(dead) return 0;
+        if(damage < 0) {
+            return energy;
+        }
         energy -= damage;
         if(energy <= 0) {
             dead = true;
