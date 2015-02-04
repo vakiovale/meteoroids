@@ -22,6 +22,10 @@ This has been tested also on Windows when using GitBash (unix like shell).
 Run these Linux scripts from <code>Meteoroids/</code> folder:
 
 <code>
+./libinstall
+</code>
+
+<code>
 ./cleanbuild
 </code>
 
@@ -35,15 +39,20 @@ Happy shooting!
 
 ## Running Meteoroids from command line
 
-1. Clean and compile project with Maven:
+1. Install slick-util library:
+  <code>
+  mvn install:install-file -Dfile=lib/slick-util.jar -DgroupId=slick-util -DartifactId=slick-util -Dversion=1.0 -Dpackaging=jar
+  </code>
+
+2. Clean and compile project with Maven:
   <code>
   mvn clean:clean && mvn compile && mvn nativedependencies:copy
   </code>
 
-2. ***Sometimes needed when failing to copy native dependencies to the target/natives directory:***
+3. ***Sometimes needed when failing to copy native dependencies to the target/natives directory:***
   <code>mvn package</code>
 
-3. Set up MAVEN_OPTS environment variable (use unix version ALSO in Windows when using GitBash in unix mode):
+4. Set up MAVEN_OPTS environment variable (use unix version ALSO in Windows when using GitBash in unix mode):
   
   <code>
   **windows:** set MAVEN_OPTS="-Djava.library.path=target/natives"
@@ -53,7 +62,7 @@ Happy shooting!
   **unix:** export MAVEN_OPTS=-Djava.library.path=target/natives
   </code>
     
-4. Run Meteoroids:
+5. Run Meteoroids:
   <code>mvn compile exec:java -Dexec.mainClass=meteoroids.Meteoroids.Main</code>
 
 More information on setting up LWJGL project with Maven: http://wiki.lwjgl.org/wiki/Setting_Up_LWJGL_with_Maven

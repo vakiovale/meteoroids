@@ -44,11 +44,9 @@
     </dependency>
 
     <dependency>
-        <groupId>org.newdawn</groupId>
-        <artifactId>slick</artifactId>
-        <version>237</version>
-        <scope>system</scope>
-        <systemPath>${project.basedir}/lib/slick-util.jar</systemPath>
+      <groupId>slick-util</groupId>
+      <artifactId>slick-util</artifactId>
+      <version>1.0</version>
     </dependency>
 
     <dependency>

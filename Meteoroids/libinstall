@@ -1,0 +1,3 @@
+#!/bin/bash
+mvn install:install-file -Dfile=lib/slick-util.jar -DgroupId=slick-util -DartifactId=slick-util -Dversion=1.0 -Dpackaging=jar
+
