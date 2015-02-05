@@ -45,7 +45,7 @@ public class GameStatePlay extends GameStateMachine {
         // Initialize game objects
         this.starField = objectController.getStarField(Game.WIDTH, Game.HEIGHT);
         this.ship = objectController.getShip();
-        this.asteroids = objectController.getAsteroids(10, 1000.0f, 30.0f);
+        this.asteroids = objectController.getAsteroids(30, 1000.0f, 30.0f);
         this.planet = objectController.getPlanet();
         
         // Initialize input controller

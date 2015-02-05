@@ -1,8 +1,6 @@
 package meteoroids.Meteoroids.controllers.gamestates;
 
-import meteoroids.Meteoroids.Game;
 import meteoroids.Meteoroids.controllers.gameobjects.GameObjectController;
-import meteoroids.Meteoroids.gameobjects.physicsobjects.Planet;
 
 /**
  * Game Over state
@@ -14,7 +12,7 @@ public class GameStateGameOver extends GameStateMachine {
 
     private int gameOverCounter;
     private GameObjectController gameObjectController;
-    
+        
     public GameStateGameOver(GameStateController controller, GameObjectController gameObjectController) {
         super(controller);
         
@@ -22,6 +20,7 @@ public class GameStateGameOver extends GameStateMachine {
         
         gameState = GameState.GAME_OVER;
         gameOverCounter = 5000;
+        
     }
 
     @Override
