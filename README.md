@@ -2,6 +2,7 @@
 Clone of the classic Asteroids game.
 
 * <a href="#whats-happening">What's happening?</a>
+* <a href="#how-to-play">How to play</a>
 * <a href="#running-meteoroids-from-command-line-linux---easy">Running Meteoroids (easy)</a>
 * <a href="#running-meteoroids-from-command-line">Running Meteoroids (advanced)</a>
 * <a href="#importing-project-to-eclipse-netbeans-etc-ide">Importing project to Eclipse, Netbeans, etc. (IDE)</a>
@@ -12,7 +13,22 @@ Clone of the classic Asteroids game.
 
 You must protect Earth from flying meteoroids! Destroy all the meteoroids before they hit the ground.
 
-<img src="https://github.com/valtteripyyhtia/meteoroids/blob/master/doc/Meteoroids.png" alt="Save Earth! - Meteoroids" width="400px" />
+<img src="https://github.com/valtteripyyhtia/meteoroids/blob/master/doc/Meteoroids_Play.png" alt="Save Earth! - Meteoroids" width="800px" />
+<img src="https://github.com/valtteripyyhtia/meteoroids/blob/master/doc/Meteoroids_Menu.png" alt="Menu - Meteoroids" width="800px" />
+
+## How to play
+
+Try to keep the planet alive as long as you can by shooting all the meteoroids.
+
+Key       | Action
+----------| -------------
+UP        | Accelerate
+DOWN      | Reverse
+LEFT      | Steer left
+RIGHT     | Steer right
+SPACE     | Fire
+LEFT CTRL | Change weapon
+ESC       | Main menu
 
 ## Running Meteoroids from command line (Linux - easy)
 
