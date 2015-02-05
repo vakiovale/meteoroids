@@ -17,10 +17,16 @@ import meteoroids.Meteoroids.gameobjects.physicsobjects.Asteroid;
 public class AsteroidController {
     
     private final int ASTEROIDS_BIRTH_TIME = 20000;
+    private final float BIG_ASTEROID_RADIUS_START = 30.0f;
+    private final float BIG_ASTEROID_MASS_START = 1000.0f;
+    private float bigAsteroidRadius;
+    private float bigAsteroidMass;
     private int newAsteroidsCounter;
     
     public AsteroidController() {
         newAsteroidsCounter = ASTEROIDS_BIRTH_TIME;
+        bigAsteroidRadius = BIG_ASTEROID_RADIUS_START;
+        bigAsteroidMass = BIG_ASTEROID_MASS_START;
     }
     
     /**
@@ -102,7 +108,13 @@ public class AsteroidController {
         newAsteroidsCounter -= deltaTime;
         if(newAsteroidsCounter <= 0) {
             newAsteroidsCounter = ASTEROIDS_BIRTH_TIME;
-            return getAsteroids(2, 1000.0f, 30.0f);
+            Asteroid[] asteroids = getAsteroids(2, bigAsteroidMass, bigAsteroidRadius);
+
+            // Next spawn will be even bigger asteroids!
+            bigAsteroidRadius = bigAsteroidRadius + bigAsteroidRadius/3;
+            bigAsteroidMass = bigAsteroidMass + bigAsteroidMass/3;
+            
+            return asteroids;
         }
         return null;
     }

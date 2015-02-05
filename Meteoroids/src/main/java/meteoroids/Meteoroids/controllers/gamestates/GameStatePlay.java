@@ -43,7 +43,7 @@ public class GameStatePlay extends GameStateMachine {
         // Initialize game objects
         this.starField = objectController.getStarField(Game.WIDTH, Game.HEIGHT);
         this.ship = objectController.getShip();
-        this.asteroids = objectController.getAsteroids(30, 1000.0f, 30.0f);
+        this.asteroids = objectController.getAsteroids(4, 1000.0f, 30.0f);
         this.planet = initPlanet();
         
     }
@@ -147,8 +147,8 @@ public class GameStatePlay extends GameStateMachine {
      * @return true if spawning fails
      */
     private boolean spawningFails(float x, float y) {
-        if(x > Game.WIDTH*0.15f && x < Game.WIDTH*0.85f) {
-            if(y > Game.HEIGHT*0.15f && y < Game.HEIGHT*0.85f) {
+        if(x > Game.WIDTH*0.3f && x < Game.WIDTH*0.7f) {
+            if(y > Game.HEIGHT*0.3f && y < Game.HEIGHT*0.7f) {
                 return false;
             }
         }
