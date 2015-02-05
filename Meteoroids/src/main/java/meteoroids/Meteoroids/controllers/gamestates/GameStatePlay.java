@@ -5,7 +5,6 @@ import java.util.List;
 import meteoroids.Meteoroids.Game;
 import meteoroids.Meteoroids.controllers.gameobjects.GameObjectController;
 import meteoroids.Meteoroids.controllers.graphics.GraphicsController;
-import meteoroids.Meteoroids.controllers.input.InputController;
 import meteoroids.Meteoroids.controllers.physics.PhysicsController;
 import meteoroids.Meteoroids.gameobjects.GameObject;
 import meteoroids.Meteoroids.gameobjects.StarField;
@@ -30,7 +29,7 @@ public class GameStatePlay extends GameStateMachine {
     private Asteroid[] asteroids;
     private Planet planet;
     private StarField starField;
-        
+            
     public GameStatePlay(GameStateController controller) {
         super(controller);
         gameState = GameState.PLAY;
@@ -83,9 +82,6 @@ public class GameStatePlay extends GameStateMachine {
 
     @Override
     public void update(float deltaTime) {
-        // Refresh screen
-        graphicsController.update(deltaTime);
-
         // Calculate gravity fields
         physicsController.update(objectController.getGravityObjects(),
                     objectController.getPhysicsObjects(), deltaTime);
@@ -101,7 +97,7 @@ public class GameStatePlay extends GameStateMachine {
         graphicsController.draw(objectController.getHUDController());
 
         // Check if game is over
-        gameOver();    
+        checkGameOver();    
     }
     
     /**
@@ -133,11 +129,11 @@ public class GameStatePlay extends GameStateMachine {
      * 
      * @return true if game is over
      */
-    public void gameOver() {
+    public void checkGameOver() {
         if(planet != null && planet.isDead()) {               
+            exit();
             objectController.killGameObject(planet);
             GameStateGameOver gameOverGameState = new GameStateGameOver(controller, objectController);
-            controller.removeGameState();
             controller.addGameState(gameOverGameState);                    
         }
     }

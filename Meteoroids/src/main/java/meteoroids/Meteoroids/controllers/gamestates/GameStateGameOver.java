@@ -24,13 +24,13 @@ public class GameStateGameOver extends GameStateMachine {
         super(controller);
         
         this.gameObjectController = gameObjectController;        
-        this.textHandler = controller.getTextHandler();
+        this.textHandler = new TextHandler();
         
         gameState = GameState.GAME_OVER;
-        gameOverCounter = 10000;
+        gameOverCounter = 5000;
         
         Text textGameOver = new Text("Game Over!", Game.WIDTH/2-(Game.WIDTH/14), Game.HEIGHT/2-(Game.HEIGHT/10));
-        Text askToContinueText = new Text("Continue? (Press P)", Game.WIDTH/2-(Game.WIDTH/8), Game.HEIGHT/2);
+        Text askToContinueText = new Text("New game? (Press N)", Game.WIDTH/2-(Game.WIDTH/8), Game.HEIGHT/2);
         
         textHandler.addText(textGameOver);
         textHandler.addText(askToContinueText);
@@ -47,7 +47,7 @@ public class GameStateGameOver extends GameStateMachine {
         textHandler.addText(textCounter);
         
         if(gameOverCounter <= 0) {
-            controller.removeGameState();
+            exit();
             textHandler.removeText(textGameOver);
             textHandler.removeText(askToContinueText);
         }

@@ -5,11 +5,13 @@ import org.lwjgl.input.Keyboard;
 import meteoroids.Meteoroids.controllers.Controller;
 import meteoroids.Meteoroids.controllers.gamestates.GameState;
 import meteoroids.Meteoroids.controllers.gamestates.GameStateController;
+import meteoroids.Meteoroids.controllers.gamestates.GameStateGameOver;
 import meteoroids.Meteoroids.controllers.gamestates.GameStateMachine;
 import meteoroids.Meteoroids.controllers.gamestates.GameStatePlay;
+import meteoroids.Meteoroids.controllers.gamestates.GameStateMainMenu;
 
 /**
- * Handles the game input.
+ * Handles the game input in all different game states.
  * 
  * @author vpyyhtia
  *
@@ -41,6 +43,7 @@ public class InputController implements Controller {
             case HIGH_SCORES:
                 break;
             case MAIN_MENU:
+                pollMenuInputs(deltaTime);
                 break;
             case PLAY:
                 pollPlayInputs(deltaTime);
@@ -50,13 +53,64 @@ public class InputController implements Controller {
         }
     }
 
-    private void pollGameOverInputs(float deltaTime) {
-        if(Keyboard.isKeyDown(Keyboard.KEY_P)) {
-            gameStateController.removeGameState();
-            gameStateController.addGameState(new GameStatePlay(gameStateController));
+    /**
+     * GameState.MAIN_MENU inputs
+     * 
+     * @param deltaTime
+     */
+    private void pollMenuInputs(float deltaTime) {
+        while(Keyboard.next()) {
+            if(Keyboard.getEventKey() == Keyboard.KEY_UP) {
+                if(!Keyboard.getEventKeyState()) {
+                    ((GameStateMainMenu)stateMachine).moveUp();
+                }
+            }
+            if(Keyboard.getEventKey() == Keyboard.KEY_DOWN) {
+                if(!Keyboard.getEventKeyState()) {
+                    ((GameStateMainMenu)stateMachine).moveDown();
+                }
+            }
+            if(Keyboard.getEventKey() == Keyboard.KEY_RETURN || Keyboard.getEventKey() == Keyboard.KEY_SPACE) {
+                switch (((GameStateMainMenu)stateMachine).getActiveButtonState()) {
+                    case EXIT:
+                        ((GameStateMainMenu)stateMachine).exit();
+                        break;
+                    case GAME_OVER:
+                        break;
+                    case HIGH_SCORES:
+                        break;
+                    case MAIN_MENU:
+                        break;
+                    case PLAY:
+                        gameStateController.addGameState(new GameStatePlay(gameStateController));
+                        break;
+                    default:
+                        break;
+                }
+            }
         }
     }
 
+    /**
+     * GameState.GAME_OVER inputs
+     * 
+     * @param deltaTime
+     */
+    private void pollGameOverInputs(float deltaTime) {
+        if(Keyboard.isKeyDown(Keyboard.KEY_N)) {
+            ((GameStateGameOver)stateMachine).exit();
+            gameStateController.addGameState(new GameStatePlay(gameStateController));
+        }
+        if(Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)) {
+            ((GameStateGameOver)stateMachine).exit();
+        }
+    }
+
+    /**
+     * GameState.PLAY inputs
+     * 
+     * @param deltaTime
+     */
     private void pollPlayInputs(float deltaTime) {
         while(Keyboard.next()) {
             if(Keyboard.getEventKey() == Keyboard.KEY_LCONTROL) {
@@ -79,7 +133,10 @@ public class InputController implements Controller {
         }
         if(Keyboard.isKeyDown(Keyboard.KEY_SPACE)) {
             ((GameStatePlay)stateMachine).getObjectController().fire(((GameStatePlay)stateMachine).getShip());
-        }        
+        }
+        if(Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)) {
+            ((GameStatePlay)stateMachine).exit();
+        }
     }
 
     /**

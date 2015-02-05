@@ -32,7 +32,7 @@ public class TextHandler implements Drawable {
     
     private void initFont() {
         try {
-            InputStream inputStream = ResourceLoader.getResourceAsStream("Munro.ttf");
+            InputStream inputStream = ResourceLoader.getResourceAsStream("resources/fonts/Munro.ttf");
             
             Font awtFont = Font.createFont(Font.TRUETYPE_FONT, inputStream);
             awtFont = awtFont.deriveFont(30f*2);
@@ -67,12 +67,11 @@ public class TextHandler implements Drawable {
             GL11.glOrtho(0, Game.WIDTH, Game.HEIGHT, 0, 1, -1);
             GL11.glMatrixMode(GL11.GL_MODELVIEW);
             for(Text text : texts) {
-                font.drawString(text.getX(), text.getY(), text.toString(), Color.lightGray);
+                font.drawString(text.getX(), text.getY(), text.toString(), text.isActive() ? Color.yellow : Color.lightGray);
             }
         }
-        
     }
-
+    
     @Override
     public int getID() {
         return -1;

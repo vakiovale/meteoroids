@@ -60,11 +60,10 @@ public class Game {
         while(!Display.isCloseRequested() && !gameOver) {
             deltaTime = timer.getDeltaTime();
                       
+            // Refresh screen
+            graphicsController.update(deltaTime);
+            
             gameController.update(deltaTime);
-                        
-            if(Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)) {
-                gameOver = true;
-            }
             
             Display.update();
             Display.sync(FPS);

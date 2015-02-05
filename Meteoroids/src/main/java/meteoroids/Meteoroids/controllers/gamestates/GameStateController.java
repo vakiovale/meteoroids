@@ -6,7 +6,6 @@ import meteoroids.Meteoroids.Game;
 import meteoroids.Meteoroids.controllers.Controller;
 import meteoroids.Meteoroids.controllers.graphics.GraphicsController;
 import meteoroids.Meteoroids.controllers.input.InputController;
-import meteoroids.Meteoroids.controllers.resources.TextHandler;
 
 /**
  * Handles the controlling of game states.
@@ -19,29 +18,27 @@ public class GameStateController implements Controller {
     private GameStateMachine currentGameState;
     private ArrayDeque<GameStateMachine> gameStates;
     private GraphicsController graphicsController;
-    private TextHandler textHandler;
     private InputController inputController;
     
     
     public GameStateController(GraphicsController graphicsController) {
         this.graphicsController = graphicsController;
         this.inputController = new InputController(this);
-        this.textHandler = new TextHandler();
         currentGameState = null;
         gameStates = new ArrayDeque<>();
     }
     
     @Override
-    public void update(float deltaTime) {
+    public void update(float deltaTime) {        
         if(currentGameState != null) {
             if(currentGameState.isFinished()) {
+                gameStates.poll();
                 if(!gameStates.isEmpty()) {
-                    currentGameState = gameStates.pop();
-                    inputController.bindState(gameStates.peek());
+                    currentGameState = gameStates.peek();
+                    inputController.bindState(currentGameState);
                 }
                 else {
                     currentGameState = null;
-                    inputController.bindState(gameStates.peek());
                     Game.gameOver();
                 }
             }
@@ -80,9 +77,5 @@ public class GameStateController implements Controller {
     
     public GameState getGameState() {
         return currentGameState.getGameState();
-    }
-    
-    public TextHandler getTextHandler() {
-        return textHandler;
     }
 }

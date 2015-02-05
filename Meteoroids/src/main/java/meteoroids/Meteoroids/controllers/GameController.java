@@ -2,6 +2,7 @@ package meteoroids.Meteoroids.controllers;
 
 import meteoroids.Meteoroids.controllers.gamestates.GameStateController;
 import meteoroids.Meteoroids.controllers.gamestates.GameStateMachine;
+import meteoroids.Meteoroids.controllers.gamestates.GameStateMainMenu;
 import meteoroids.Meteoroids.controllers.gamestates.GameStatePlay;
 import meteoroids.Meteoroids.controllers.graphics.GraphicsController;
 
@@ -19,7 +20,7 @@ public class GameController implements Controller {
     
     public GameController(GraphicsController graphics) {
         this.stateController = new GameStateController(graphics);
-        GameStateMachine startingGameState = new GameStatePlay(stateController);
+        GameStateMachine startingGameState = new GameStateMainMenu(stateController);
         this.stateController.addGameState(startingGameState);
     }
 

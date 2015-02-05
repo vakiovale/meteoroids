@@ -17,11 +17,6 @@ public class GameControllerTest {
 	}
 
 	@Test
-	public void testGameController() {
-		assert(true);
-	}
-
-	@Test
 	public void testUpdate() {
 		try {
 			controller.update(0.2f);

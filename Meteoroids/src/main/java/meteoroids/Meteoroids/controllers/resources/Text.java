@@ -13,6 +13,7 @@ public class Text {
     private String text;
     private float x;
     private float y;
+    private boolean active;
     
     public Text(String text) {
         this(text, Game.WIDTH/2-(Game.WIDTH/14), Game.HEIGHT/2);
@@ -22,10 +23,19 @@ public class Text {
         this.text = text;
         this.x = x;
         this.y = y;
+        active = false;
     }
     
     public String getText() {
         return text;
+    }
+    
+    public void toggleActive() {
+        active = !active;
+    }
+    
+    public boolean isActive() {
+        return active;
     }
     
     @Override
