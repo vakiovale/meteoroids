@@ -1,5 +1,6 @@
 package meteoroids.Meteoroids.controllers.gamestates;
 
+import meteoroids.Meteoroids.Game;
 import meteoroids.Meteoroids.controllers.gameobjects.GameObjectController;
 import meteoroids.Meteoroids.controllers.resources.Text;
 import meteoroids.Meteoroids.controllers.resources.TextHandler;
@@ -14,17 +15,25 @@ public class GameStateGameOver extends GameStateMachine {
 
     private int gameOverCounter;
     private GameObjectController gameObjectController;
-    private Text text;
+    private TextHandler textHandler;
+    private Text textGameOver;
+    private Text askToContinueText;
+    private Text textCounter;
         
     public GameStateGameOver(GameStateController controller, GameObjectController gameObjectController) {
         super(controller);
         
         this.gameObjectController = gameObjectController;        
+        this.textHandler = controller.getTextHandler();
         
         gameState = GameState.GAME_OVER;
-        gameOverCounter = 5000;
-        Text text = new Text("Game Over!");
-        controller.getTextHandler().addText(text);
+        gameOverCounter = 10000;
+        
+        Text textGameOver = new Text("Game Over!");
+        Text askToContinueText = new Text("Continue? (Press P)", Game.WIDTH/2-(Game.WIDTH/8), Game.HEIGHT/2+(Game.HEIGHT/10));
+        
+        textHandler.addText(textGameOver);
+        textHandler.addText(askToContinueText);
         
     }
 
@@ -33,13 +42,20 @@ public class GameStateGameOver extends GameStateMachine {
         controller.getGraphicsController().update(deltaTime);
 
         gameOverCounter -= deltaTime;
+        
+        textHandler.removeText(textCounter);
+        textCounter = new Text(Integer.toString(gameOverCounter/1000) + "...", Game.WIDTH/2, Game.HEIGHT/2+(Game.HEIGHT/6));
+        textHandler.addText(textCounter);
+        
         if(gameOverCounter <= 0) {
             controller.removeGameState();
-            controller.getTextHandler().removeText(text);
+            textHandler.removeText(textGameOver);
+            textHandler.removeText(askToContinueText);
         }
         
         controller.getGraphicsController().draw(gameObjectController.getDrawables());
-        controller.getTextHandler().draw();
+        textHandler.draw();
+        
     }
 
 }

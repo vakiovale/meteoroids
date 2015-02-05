@@ -25,7 +25,6 @@ public class GameStatePlay extends GameStateMachine {
 
     private GraphicsController graphicsController;
     private PhysicsController physicsController;
-    private InputController inputController;
     
     private Ship ship;
     private Asteroid[] asteroids;
@@ -46,10 +45,40 @@ public class GameStatePlay extends GameStateMachine {
         this.starField = objectController.getStarField(Game.WIDTH, Game.HEIGHT);
         this.ship = objectController.getShip();
         this.asteroids = objectController.getAsteroids(30, 1000.0f, 30.0f);
-        this.planet = objectController.getPlanet();
+        this.planet = initPlanet();
         
-        // Initialize input controller
-        this.inputController = new InputController(objectController, ship);
+    }
+    
+    private Planet initPlanet() {
+        float x;
+        float y;
+        do {
+            x = (float)Math.random()*Game.WIDTH;
+            y = (float)Math.random()*Game.HEIGHT;
+        } while(spawningFails(x, y));
+        
+        float radius = (float)Math.random()*100.0f + 10.0f;
+        float mass = (float)(Math.random()*500000.0f+25000.0f)*(radius/10.0f);
+        
+        return objectController.getPlanet(x, y, radius, mass);
+    }
+
+    /**
+     * Player's current ship
+     * 
+     * @return ship
+     */
+    public Ship getShip() {
+        return ship;
+    }
+    
+    /**
+     * Current GameObjectController
+     * 
+     * @return objectController
+     */
+    public GameObjectController getObjectController() {
+        return objectController;
     }
 
     @Override
@@ -67,9 +96,6 @@ public class GameStatePlay extends GameStateMachine {
         // Update game world
         objectController.update(deltaTime);
             
-        // Get input
-        inputController.update(deltaTime);
-
         // Draw
         graphicsController.draw(objectController.getDrawables());
         graphicsController.draw(objectController.getHUDController());
@@ -111,19 +137,8 @@ public class GameStatePlay extends GameStateMachine {
         if(planet != null && planet.isDead()) {               
             objectController.killGameObject(planet);
             GameStateGameOver gameOverGameState = new GameStateGameOver(controller, objectController);
-            controller.addGameState(gameOverGameState);
-            
-            float x;
-            float y;
-            do {
-                x = (float)Math.random()*Game.WIDTH;
-                y = (float)Math.random()*Game.HEIGHT;
-            } while(spawningFails(x, y));
-            
-            float radius = (float)Math.random()*100.0f + 10.0f;
-            float mass = (float)(Math.random()*500000.0f+25000.0f)*(radius/10.0f);
-            planet = objectController.getPlanet(x, y, radius, mass); 
-                    
+            controller.removeGameState();
+            controller.addGameState(gameOverGameState);                    
         }
     }
     

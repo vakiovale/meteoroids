@@ -9,6 +9,7 @@ import meteoroids.Meteoroids.controllers.graphics.GraphicsController;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
+import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.TrueTypeFont;
@@ -29,6 +30,8 @@ public class Game {
     
     private GameController gameController;
     private GraphicsController graphicsController;
+    
+    private static boolean gameOver = false;
     
     private GameTimer timer;
     
@@ -52,16 +55,15 @@ public class Game {
         gameController = new GameController(graphicsController);
 
         int deltaTime = 1 / FPS * 1000;
-        boolean exit = false;
-        
+                
         // Game loop
-        while(!Display.isCloseRequested() && !exit) {
+        while(!Display.isCloseRequested() && !gameOver) {
             deltaTime = timer.getDeltaTime();
                       
             gameController.update(deltaTime);
                         
             if(Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)) {
-                exit = true;
+                gameOver = true;
             }
             
             Display.update();
@@ -69,6 +71,14 @@ public class Game {
         }
         
         destroy();
+    }
+    
+    /**
+     * Quit game.
+     * 
+     */
+    public static void gameOver() {
+        gameOver = true;
     }
 
     /**
