@@ -29,8 +29,8 @@ public class GameStateGameOver extends GameStateMachine {
         gameState = GameState.GAME_OVER;
         gameOverCounter = 10000;
         
-        Text textGameOver = new Text("Game Over!");
-        Text askToContinueText = new Text("Continue? (Press P)", Game.WIDTH/2-(Game.WIDTH/8), Game.HEIGHT/2+(Game.HEIGHT/10));
+        Text textGameOver = new Text("Game Over!", Game.WIDTH/2-(Game.WIDTH/14), Game.HEIGHT/2-(Game.HEIGHT/10));
+        Text askToContinueText = new Text("Continue? (Press P)", Game.WIDTH/2-(Game.WIDTH/8), Game.HEIGHT/2);
         
         textHandler.addText(textGameOver);
         textHandler.addText(askToContinueText);
@@ -43,8 +43,7 @@ public class GameStateGameOver extends GameStateMachine {
 
         gameOverCounter -= deltaTime;
         
-        textHandler.removeText(textCounter);
-        textCounter = new Text(Integer.toString(gameOverCounter/1000) + "...", Game.WIDTH/2, Game.HEIGHT/2+(Game.HEIGHT/6));
+        textCounter = new Text(Integer.toString(gameOverCounter/1000) + "...", Game.WIDTH/2, Game.HEIGHT/2+(Game.HEIGHT/10));
         textHandler.addText(textCounter);
         
         if(gameOverCounter <= 0) {
@@ -52,10 +51,10 @@ public class GameStateGameOver extends GameStateMachine {
             textHandler.removeText(textGameOver);
             textHandler.removeText(askToContinueText);
         }
-        
+                
         controller.getGraphicsController().draw(gameObjectController.getDrawables());
         textHandler.draw();
-        
+        textHandler.removeText(textCounter);
     }
 
 }
