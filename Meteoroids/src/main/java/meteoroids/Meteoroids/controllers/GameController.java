@@ -3,7 +3,6 @@ package meteoroids.Meteoroids.controllers;
 import meteoroids.Meteoroids.controllers.gamestates.GameStateController;
 import meteoroids.Meteoroids.controllers.gamestates.GameStateMachine;
 import meteoroids.Meteoroids.controllers.gamestates.GameStateMainMenu;
-import meteoroids.Meteoroids.controllers.gamestates.GameStatePlay;
 import meteoroids.Meteoroids.controllers.graphics.GraphicsController;
 
 /**
