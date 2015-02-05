@@ -17,7 +17,7 @@ import meteoroids.Meteoroids.gameobjects.hud.HUDElement;
 public class HUDController implements Controller, Drawable {
 
     private List<HUDElement> hudElements;
-    
+        
     public HUDController() {
         this.hudElements = new ArrayList<>();
     }

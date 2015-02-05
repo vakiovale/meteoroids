@@ -1,15 +1,11 @@
 package meteoroids.Meteoroids.controllers.graphics;
 
-import java.io.IOException;
 import java.util.List;
 
 import meteoroids.Meteoroids.controllers.Controller;
 import meteoroids.Meteoroids.gameobjects.Drawable;
 
 import org.lwjgl.opengl.GL11;
-import org.newdawn.slick.opengl.Texture;
-import org.newdawn.slick.opengl.TextureLoader;
-import org.newdawn.slick.util.ResourceLoader;
 
 /**
  * Handles drawing all the objects. OpenGL is also handled here.
@@ -46,7 +42,7 @@ public class GraphicsController implements Controller {
      */
     public void draw(List<Drawable> objects) {
         for(Drawable d : objects) {
-            d.draw();
+            draw(d);
         }
     }
     
@@ -56,6 +52,11 @@ public class GraphicsController implements Controller {
      * @param object drawable
      */
     public void draw(Drawable object) {
+        GL11.glMatrixMode(GL11.GL_PROJECTION);
+        GL11.glLoadIdentity();
+        GL11.glOrtho(0, width, 0, height, 1, -1);
+        GL11.glMatrixMode(GL11.GL_MODELVIEW);
+        GL11.glDisable(GL11.GL_TEXTURE_2D);
         object.draw();
     }
 
@@ -64,16 +65,22 @@ public class GraphicsController implements Controller {
      * 
      * @return true
      */
-    public boolean init() {                  
+    public boolean init() {           
+        GL11.glShadeModel(GL11.GL_SMOOTH);       
+        GL11.glDisable(GL11.GL_DEPTH_TEST);
+        GL11.glDisable(GL11.GL_LIGHTING);                   
+  
+        GL11.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);               
+        GL11.glClearDepth(1);                                      
+  
         GL11.glEnable(GL11.GL_BLEND);
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-                
+        
         GL11.glMatrixMode(GL11.GL_PROJECTION);
         GL11.glLoadIdentity();
         GL11.glOrtho(0, width, 0, height, 1, -1);
         GL11.glMatrixMode(GL11.GL_MODELVIEW);
-        
-        GL11.glEnable(GL11.GL_TEXTURE_2D); 
+        GL11.glDisable(GL11.GL_TEXTURE_2D);
         
         return true;
     }

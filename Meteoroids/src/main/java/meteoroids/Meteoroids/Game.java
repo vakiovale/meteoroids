@@ -1,6 +1,7 @@
 package meteoroids.Meteoroids;
 
-import java.awt.RenderingHints.Key;
+import java.awt.Font;
+import java.io.InputStream;
 
 import meteoroids.Meteoroids.controllers.GameController;
 import meteoroids.Meteoroids.controllers.graphics.GraphicsController;
@@ -8,7 +9,10 @@ import meteoroids.Meteoroids.controllers.graphics.GraphicsController;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
-import org.lwjgl.opengl.DisplayMode;
+import org.lwjgl.opengl.GL11;
+import org.newdawn.slick.Color;
+import org.newdawn.slick.TrueTypeFont;
+import org.newdawn.slick.util.ResourceLoader;
 
 /**
  * Main Game Loop that handles the game
@@ -20,7 +24,7 @@ public class Game {
     
     public static final int WIDTH = 1920;
     public static final int HEIGHT = 1080;
-
+    
     private final int FPS = 60;
     
     private GameController gameController;
@@ -43,7 +47,7 @@ public class Game {
         if(!init() || !graphicsController.init()) {
             // TODO: Error
             System.exit(0);
-        }
+        }       
         
         gameController = new GameController(graphicsController);
 
@@ -52,9 +56,10 @@ public class Game {
         
         // Game loop
         while(!Display.isCloseRequested() && !exit) {
-            deltaTime = timer.getDeltaTime();          
+            deltaTime = timer.getDeltaTime();
+                      
             gameController.update(deltaTime);
-            
+                        
             if(Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)) {
                 exit = true;
             }

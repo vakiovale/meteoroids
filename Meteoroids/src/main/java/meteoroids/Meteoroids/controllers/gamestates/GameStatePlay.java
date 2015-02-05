@@ -108,12 +108,40 @@ public class GameStatePlay extends GameStateMachine {
      * @return true if game is over
      */
     public void gameOver() {
-        if(getNumberOfAsteroidsAlive() <= 0 || (planet != null && planet.isDead())) {               
+        if(planet != null && planet.isDead()) {               
             objectController.killGameObject(planet);
             GameStateGameOver gameOverGameState = new GameStateGameOver(controller, objectController);
             controller.addGameState(gameOverGameState);
-            planet = objectController.getPlanet((float)Math.random()*Game.WIDTH, (float)Math.random()*Game.HEIGHT);
+            
+            float x;
+            float y;
+            do {
+                x = (float)Math.random()*Game.WIDTH;
+                y = (float)Math.random()*Game.HEIGHT;
+            } while(spawningFails(x, y));
+            
+            float radius = (float)Math.random()*100.0f + 10.0f;
+            float mass = (float)(Math.random()*500000.0f+25000.0f)*(radius/10.0f);
+            planet = objectController.getPlanet(x, y, radius, mass); 
+                    
         }
+    }
+    
+    /**
+     * Check if position (x, y) is allowed for spawning. This returns false
+     * if position is not near the borders of the window.
+     * 
+     * @param x
+     * @param y
+     * @return true if spawning fails
+     */
+    private boolean spawningFails(float x, float y) {
+        if(x > Game.WIDTH*0.15f && x < Game.WIDTH*0.85f) {
+            if(y > Game.HEIGHT*0.15f && y < Game.HEIGHT*0.85f) {
+                return false;
+            }
+        }
+        return true;
     }
     
     /**

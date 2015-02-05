@@ -3,6 +3,7 @@ package meteoroids.Meteoroids.controllers.resources;
 import java.awt.Font;
 import java.io.InputStream;
 import java.util.ArrayDeque;
+import java.util.HashSet;
 
 import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.Color;
@@ -20,12 +21,12 @@ import meteoroids.Meteoroids.gameobjects.Drawable;
  */
 public class TextHandler implements Drawable {
 
-    private ArrayDeque<Text> texts;
+    private HashSet<Text> texts;
 
     private TrueTypeFont font;
     
     public TextHandler() {
-        texts = new ArrayDeque<>();
+        texts = new HashSet<>();
         initFont();
     }
     
@@ -45,19 +46,21 @@ public class TextHandler implements Drawable {
     }
     
     public void addText(String text) {
-        texts.push(new Text(text));
+        texts.add(new Text(text));
     }
     
-    public String removeText() {
-        if(!texts.isEmpty()) {
-            return texts.pop().getText();
-        }
-        return null;
+    public void addText(Text text) {
+        texts.add(text);
+    }
+    
+    public boolean removeText(Text text) {
+        return texts.remove(text);
     }
 
     @Override
     public void draw() {
         if(!texts.isEmpty()) {
+            Color.white.bind();
             GL11.glEnable(GL11.GL_TEXTURE_2D);
             GL11.glMatrixMode(GL11.GL_PROJECTION);
             GL11.glLoadIdentity();

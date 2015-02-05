@@ -73,7 +73,7 @@ public class AsteroidController {
         }
         return asteroids;
     }
-
+    
     /**
      * Check if position (x, y) is allowed for spawning. This returns false
      * if position is near the borders of the window.
@@ -91,7 +91,7 @@ public class AsteroidController {
         }
         return true;
     }
-
+    
     /**
      * Generates new asteroids.
      * 

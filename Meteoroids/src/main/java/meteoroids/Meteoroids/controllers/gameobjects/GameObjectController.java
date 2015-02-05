@@ -144,12 +144,21 @@ public class GameObjectController implements Controller {
      * @return Planet
      */
     public Planet getPlanet(float x, float y) {
-        Planet planet = new Planet(x, y, 20.0f, 500000.0f);
-        addGameObject(planet);
-        hudController.addHUDElement(new EnergyBar(planet.getEnergy()));
-        return planet;
+        return getPlanet(x, y, 20.0f, 500000.0f);
     }
     
+    /**
+     * Create a Planet at certain position with certain radius and mass.
+     * 
+     * @return Planet
+     */
+    public Planet getPlanet(float x, float y, float radius, float mass) {
+        Planet planet = new Planet(x, y, radius, mass);
+        addGameObject(planet);
+        hudController.addHUDElement(new EnergyBar(planet.getEnergy(), x-(radius*1.5f), y+(radius+10), radius*3));
+        return planet;
+    }
+        
     /**
      * Get HUDController.
      * 

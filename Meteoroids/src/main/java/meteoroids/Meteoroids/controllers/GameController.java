@@ -3,6 +3,7 @@ package meteoroids.Meteoroids.controllers;
 import meteoroids.Meteoroids.controllers.gamestates.GameStateController;
 import meteoroids.Meteoroids.controllers.gamestates.GameStatePlay;
 import meteoroids.Meteoroids.controllers.graphics.GraphicsController;
+import meteoroids.Meteoroids.controllers.resources.TextHandler;
 
 /**
  * Handles all the controllers in the game

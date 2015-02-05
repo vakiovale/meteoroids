@@ -32,6 +32,22 @@ public class Text {
     public String toString() {
         return text;
     }
+    
+    @Override
+    public int hashCode() {
+        return text.hashCode();
+    }    
+    
+    @Override
+    public boolean equals(Object object) {
+        if(!(object instanceof Text)) {
+            return false;
+        }
+        else {
+            Text text = (Text)object;
+            return text.getText().equals(this.text);  
+        }
+    }
 
     public float getX() {
         return x;
