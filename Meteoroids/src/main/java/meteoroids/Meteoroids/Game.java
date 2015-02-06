@@ -101,7 +101,7 @@ public class Game {
         try {
             //Display.setDisplayMode(new DisplayMode(WIDTH, HEIGHT));
             Display.setFullscreen(true);
-            //Display.setResizable(true);
+            Display.setResizable(true);
             Display.create();
         } catch (LWJGLException e) {
             return false;
