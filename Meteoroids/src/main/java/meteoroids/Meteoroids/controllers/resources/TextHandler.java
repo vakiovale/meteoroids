@@ -11,10 +11,12 @@ import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.util.ResourceLoader;
 
 import meteoroids.Meteoroids.Game;
+import meteoroids.Meteoroids.Main;
 import meteoroids.Meteoroids.gameobjects.Drawable;
 
 /**
- * Handles drawing texts to the screen.
+ * Handles drawing texts to the screen. Call initFont() method
+ * before using this class to load the desired TrueType font.
  * 
  * @author vpyyhtia
  *
@@ -23,26 +25,29 @@ public class TextHandler implements Drawable {
 
     private HashSet<Text> texts;
 
-    private TrueTypeFont font;
+    private static TrueTypeFont font = null;
     
     public TextHandler() {
         texts = new HashSet<>();
-        initFont();
     }
     
-    private void initFont() {
+    /**
+     * Initialize font and load resources.
+     * 
+     * @param fontPath path to the font
+     * @return true if font was loaded successfully
+     */
+    public static boolean initFont(String fontPath) {
         try {
-            InputStream inputStream = ResourceLoader.getResourceAsStream("resources/fonts/Munro.ttf");
+            InputStream inputStream = ResourceLoader.getResourceAsStream(fontPath);
             
             Font awtFont = Font.createFont(Font.TRUETYPE_FONT, inputStream);
             awtFont = awtFont.deriveFont(30f*2);
             font = new TrueTypeFont(awtFont, false);
-     
+            return true;     
         } catch (Exception e) {
-            // TODO: Error message
-            e.printStackTrace();
-            System.exit(0);
-        }        
+            return false;
+        }
     }
     
     public void addText(String text) {
@@ -59,7 +64,7 @@ public class TextHandler implements Drawable {
 
     @Override
     public void draw() {
-        if(!texts.isEmpty()) {
+        if(!texts.isEmpty() && font != null) {
             Color.white.bind();
             GL11.glEnable(GL11.GL_TEXTURE_2D);
             GL11.glMatrixMode(GL11.GL_PROJECTION);

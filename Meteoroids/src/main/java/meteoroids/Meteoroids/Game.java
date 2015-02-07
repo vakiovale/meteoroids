@@ -5,6 +5,7 @@ import java.io.InputStream;
 
 import meteoroids.Meteoroids.controllers.GameController;
 import meteoroids.Meteoroids.controllers.graphics.GraphicsController;
+import meteoroids.Meteoroids.controllers.resources.TextHandler;
 
 import org.lwjgl.LWJGLException;
 import org.lwjgl.input.Keyboard;
@@ -23,18 +24,34 @@ import org.newdawn.slick.util.ResourceLoader;
  */
 public class Game {
     
+    /** Width of the screen */
     public static final int WIDTH = 1920;
+    
+    /** Height of the screen */
     public static final int HEIGHT = 1080;
     
+    /** Frames per second - ALTERING THIS WILL ALSO AFFECT THE GAME PHYSICS*/
     private final int FPS = 60;
     
+    /** GameController for conrolling all the game objects and game states */
     private GameController gameController;
+    
+    /** GraphicsControlelr for controlling initializing graphics and drawing OpenGL object */
     private GraphicsController graphicsController;
     
+    /** gamOver variable will exit the game when set to true */
     private static boolean gameOver = false;
     
+    /** Path to font */
+    private final String FONT_PATH = "resources/fonts/Munro.ttf";
+    
+    /** Handles calculating delta time and game time */
     private GameTimer timer;
     
+    /**
+     * Start Meteoroids!
+     * 
+     */
     public Game() {
         graphicsController = new GraphicsController(Game.WIDTH, Game.HEIGHT);
         gameController = null;
@@ -47,13 +64,19 @@ public class Game {
      */
     void start() {
 
+        // Initialize LWJGL and OpenGL
         if(!init() || !graphicsController.init()) {
-            // TODO: Error
+            Main.error.displayError();
             System.exit(0);
         }       
         
+        // Initialize font resources
+        if(!TextHandler.initFont(FONT_PATH)) {
+            Main.error.fontResourceError(FONT_PATH);
+            System.exit(0);
+        }
+        
         gameController = new GameController(graphicsController);
-
         int deltaTime = 1 / FPS * 1000;
                 
         // Game loop
@@ -63,6 +86,7 @@ public class Game {
             // Refresh screen
             graphicsController.update(deltaTime);
             
+            // Update game world
             gameController.update(deltaTime);
             
             Display.update();
