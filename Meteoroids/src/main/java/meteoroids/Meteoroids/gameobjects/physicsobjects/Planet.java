@@ -37,7 +37,7 @@ public class Planet extends GravityObject implements BoundingSphere, IEnergy {
     public Planet(float posX, float posY, float radius, float mass) {
         super(posX, posY, mass);
         this.radius = radius;
-        this.energy = new Energy(100);
+        this.energy = new Energy((int)(100*(radius/10.0f)));
         this.red = (float)Math.random();
         this.green = (float)Math.random();
         this.blue = (float)Math.random();
