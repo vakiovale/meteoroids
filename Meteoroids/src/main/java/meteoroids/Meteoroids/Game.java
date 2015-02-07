@@ -43,7 +43,7 @@ public class Game {
     private static boolean gameOver = false;
     
     /** Path to font */
-    private final String FONT_PATH = "resources/fonts/Munro.ttf";
+    private final String FONT_PATH = "/resources/fonts/Munro.ttf";
     
     /** Handles calculating delta time and game time */
     private GameTimer timer;

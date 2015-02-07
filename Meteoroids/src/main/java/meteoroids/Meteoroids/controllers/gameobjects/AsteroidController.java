@@ -42,14 +42,14 @@ public class AsteroidController {
         Vector2f velocity = asteroid.getVelocity();
         List<Asteroid> newAsteroids = new ArrayList<>();        
         if(size >= 3.0f) {
-            Asteroid asteroidA = new Asteroid(position.x-size, position.y-size, mass, size);
-            Asteroid asteroidB = new Asteroid(position.x+size, position.y+size, mass, size);
+            Asteroid asteroidA = new Asteroid(position.x, position.y, mass, size);
+            Asteroid asteroidB = new Asteroid(position.x, position.y, mass, size);
             
-            asteroidA.setVelocity(velocity);
+            asteroidA.addForce(velocity);
             asteroidA.addForce(((float)Math.random() - 0.5f) * 1.5f,
                     ((float)Math.random() - 0.5f) * 1.5f);
 
-            asteroidB.setVelocity(velocity);
+            asteroidB.addForce(velocity);
             asteroidB.addForce(((float)Math.random() - 0.5f) * 1.5f,
                     ((float)Math.random() - 0.5f) * 1.5f);
             
