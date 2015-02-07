@@ -3,6 +3,7 @@ package meteoroids.Meteoroids.controllers.gamestates;
 import java.util.List;
 
 import meteoroids.Meteoroids.Game;
+import meteoroids.Meteoroids.controllers.PointsController;
 import meteoroids.Meteoroids.controllers.gameobjects.GameObjectController;
 import meteoroids.Meteoroids.controllers.graphics.GraphicsController;
 import meteoroids.Meteoroids.controllers.physics.PhysicsController;
@@ -24,6 +25,7 @@ public class GameStatePlay extends GameStateMachine {
 
     private GraphicsController graphicsController;
     private PhysicsController physicsController;
+    private PointsController pointsController;
     
     private Ship ship;
     private Asteroid[] asteroids;
@@ -39,12 +41,16 @@ public class GameStatePlay extends GameStateMachine {
         objectController = new GameObjectController();
         physicsController = new PhysicsController();
         graphicsController = this.controller.getGraphicsController();
-        
+                
         // Initialize game objects
         this.starField = objectController.getStarField(Game.WIDTH, Game.HEIGHT);
         this.ship = objectController.getShip();
         this.asteroids = objectController.getAsteroids(4, 1000.0f, 30.0f);
         this.planet = initPlanet();
+        
+        // Add player's ship to the PointsController
+        PointsController.addPlayer(ship);
+        PointsController.bindMainPlayer(ship);
         
     }
     

@@ -3,6 +3,7 @@ package meteoroids.Meteoroids.controllers.physics;
 import java.util.List;
 
 import meteoroids.Meteoroids.controllers.Controller;
+import meteoroids.Meteoroids.controllers.PointsController;
 import meteoroids.Meteoroids.gameobjects.GameObject;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.GravityObject;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.PhysicsObject;

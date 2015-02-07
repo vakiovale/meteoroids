@@ -2,6 +2,7 @@ package meteoroids.Meteoroids.controllers.physics;
 
 import java.util.List;
 
+import meteoroids.Meteoroids.controllers.PointsController;
 import meteoroids.Meteoroids.gameobjects.GameObject;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.Asteroid;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.BoundingSphere;
@@ -130,15 +131,19 @@ public class CollisionRules {
         if(bsA instanceof Projectile) {
             if(bsB instanceof Asteroid) {
                 killed.add((GameObject)bsB);
-                if(!(bsA instanceof PlasmaProjectile))
+                if(!(bsA instanceof PlasmaProjectile)) {
+                    PointsController.addPoints(PointsController.mainPlayer, (int)(((Asteroid)bsB).getMass()/100.0f));
                     killed.add((GameObject)bsA);
+                }
                 return true;
             }
         } else if(bsA instanceof Asteroid) {
             if(bsB instanceof Projectile) {
                 killed.add((GameObject)bsA);
-                if(!(bsB instanceof PlasmaProjectile))
+                if(!(bsB instanceof PlasmaProjectile)) {
+                    PointsController.addPoints(PointsController.mainPlayer, (int)(((Asteroid)bsA).getMass()/100.0f));
                     killed.add((GameObject)bsB);
+                }
                 return true;
             }
         }

@@ -74,4 +74,25 @@ public class GameObject implements IPosition {
             position.y = Game.HEIGHT;
         }        
     }
+    
+    @Override
+    public boolean equals(Object object) {
+        if(object == null) {
+            return false;
+        }
+        if(!(object instanceof GameObject)) {
+            return false;
+        }
+        
+        GameObject gobject = (GameObject)object;
+        if(gobject.id == this.id) {
+            return true;
+        }
+        return false;
+    }
+    
+    @Override
+    public int hashCode() {
+        return 31 * Math.abs(id);
+    }
 }
