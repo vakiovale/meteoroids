@@ -82,10 +82,6 @@ public class HighScores {
             scoresInputStream = new FileInputStream(HIGHSCORES_PATH);
             scoresObjectStream = new ObjectInputStream(scoresInputStream);
             scores = (ArrayList<Score>)scoresObjectStream.readObject();
-            Collections.sort(scores);
-            if(scores.size() > 10) {
-                scores = scores.subList(0, 10);
-            }
         } catch (FileNotFoundException e1) {
             e1.printStackTrace();
         } catch (IOException e1) {
