@@ -2,8 +2,10 @@ package meteoroids.Meteoroids.controllers.gamestates;
 
 import meteoroids.Meteoroids.Game;
 import meteoroids.Meteoroids.controllers.gameobjects.GameObjectController;
+import meteoroids.Meteoroids.controllers.utilities.PointsController;
 import meteoroids.Meteoroids.controllers.utilities.TextHandler;
 import meteoroids.Meteoroids.utilities.Text;
+import meteoroids.Meteoroids.utilities.highscores.HighScores;
 
 /**
  * Game Over state
@@ -19,6 +21,8 @@ public class GameStateGameOver extends GameStateMachine {
     private Text textGameOver;
     private Text askToContinueText;
     private Text textCounter;
+    private final long POINTS;
+    private final String HIGHSCORES_PATH = "highscores.dat";
         
     public GameStateGameOver(GameStateController controller, GameObjectController gameObjectController) {
         super(controller);
@@ -33,7 +37,13 @@ public class GameStateGameOver extends GameStateMachine {
         Text askToContinueText = new Text("New game? (Press N)", Game.WIDTH/2-(Game.WIDTH/8), Game.HEIGHT/2);
         
         textHandler.addText(textGameOver);
-        textHandler.addText(askToContinueText);        
+        textHandler.addText(askToContinueText);  
+        
+        POINTS = PointsController.getPoints(PointsController.mainPlayer);
+        HighScores highScores = new HighScores(HIGHSCORES_PATH);
+        if(highScores.topTenCheck(POINTS)) {
+            controller.addGameState(new GameStateGotHighScore(controller, gameObjectController));
+        }
     }
 
     @Override

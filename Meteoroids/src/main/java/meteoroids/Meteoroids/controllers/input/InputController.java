@@ -6,6 +6,8 @@ import meteoroids.Meteoroids.controllers.Controller;
 import meteoroids.Meteoroids.controllers.gamestates.GameState;
 import meteoroids.Meteoroids.controllers.gamestates.GameStateController;
 import meteoroids.Meteoroids.controllers.gamestates.GameStateGameOver;
+import meteoroids.Meteoroids.controllers.gamestates.GameStateGotHighScore;
+import meteoroids.Meteoroids.controllers.gamestates.GameStateHighScores;
 import meteoroids.Meteoroids.controllers.gamestates.GameStateMachine;
 import meteoroids.Meteoroids.controllers.gamestates.GameStatePlay;
 import meteoroids.Meteoroids.controllers.gamestates.GameStateMainMenu;
@@ -41,6 +43,10 @@ public class InputController implements Controller {
                 pollGameOverInputs(deltaTime);
                 break;
             case HIGH_SCORES:
+                pollHighScoresInputs(deltaTime);
+                break;
+            case GOT_HIGH_SCORE:
+                pollGotHighScoreInputs(deltaTime);
                 break;
             case MAIN_MENU:
                 pollMenuInputs(deltaTime);
@@ -50,6 +56,56 @@ public class InputController implements Controller {
                 break;
             default:
                 break;
+        }
+    }
+
+    /**
+     * GameState.GOT_HIGH_SCORE inputs
+     * 
+     * @param deltaTime
+     */
+    private void pollGotHighScoreInputs(float deltaTime) {
+        while(Keyboard.next()) {
+            int key = Keyboard.getEventKey();
+            if((key >= 16 && key <= 25) || (key >= 30 && key <= 38) || (key >= 44 && key <= 50)) {
+                if(!Keyboard.getEventKeyState()) {
+                    GameStateGotHighScore.name.append(Keyboard.getKeyName(Keyboard.getEventKey()));
+                    if(GameStateGotHighScore.name.length() > 8) {
+                        GameStateGotHighScore.name = new StringBuilder(GameStateGotHighScore.name.substring(0, 8));
+                    }
+                }
+            }
+            if(Keyboard.getEventKey() == Keyboard.KEY_BACK) {
+                if(!Keyboard.getEventKeyState()) {    
+                    if(GameStateGotHighScore.name.length() > 0) {
+                        GameStateGotHighScore.name.delete(GameStateGotHighScore.name.length()-1, GameStateGotHighScore.name.length());
+                    }
+                }
+            }            
+            if(Keyboard.getEventKey() == Keyboard.KEY_ESCAPE ||
+               Keyboard.getEventKey() == Keyboard.KEY_RETURN) {
+                if(!Keyboard.getEventKeyState()) {
+                    ((GameStateGotHighScore)stateMachine).save();
+                    ((GameStateGotHighScore)stateMachine).exit();
+                }
+            }
+        }
+    }
+
+    /**
+     * GameState.HIGH_SCORES inputs
+     * 
+     * @param deltaTime
+     */
+    private void pollHighScoresInputs(float deltaTime) {
+        while(Keyboard.next()) {
+            if(Keyboard.getEventKey() == Keyboard.KEY_ESCAPE ||
+               Keyboard.getEventKey() == Keyboard.KEY_RETURN ||
+               Keyboard.getEventKey() == Keyboard.KEY_SPACE) {
+                if(!Keyboard.getEventKeyState()) {
+                    ((GameStateHighScores)stateMachine).exit();   
+                }
+            }
         }
     }
 
@@ -71,21 +127,25 @@ public class InputController implements Controller {
                 }
             }
             if(Keyboard.getEventKey() == Keyboard.KEY_RETURN || Keyboard.getEventKey() == Keyboard.KEY_SPACE) {
-                switch (((GameStateMainMenu)stateMachine).getActiveButtonState()) {
-                    case EXIT:
-                        ((GameStateMainMenu)stateMachine).exit();
-                        break;
-                    case GAME_OVER:
-                        break;
-                    case HIGH_SCORES:
-                        break;
-                    case MAIN_MENU:
-                        break;
-                    case PLAY:
-                        gameStateController.addGameState(new GameStatePlay(gameStateController));
-                        break;
-                    default:
-                        break;
+                if(!Keyboard.getEventKeyState()) {
+                    switch (((GameStateMainMenu)stateMachine).getActiveButtonState()) {
+                        case EXIT:
+                            ((GameStateMainMenu)stateMachine).exit();
+                            break;
+                        case GAME_OVER:
+                            break;
+                        case HIGH_SCORES:
+                            gameStateController.addGameState(new GameStateHighScores(gameStateController,
+                                    ((GameStateMainMenu)stateMachine).getGameObjectController(), false));
+                            break;
+                        case MAIN_MENU:
+                            break;
+                        case PLAY:
+                            gameStateController.addGameState(new GameStatePlay(gameStateController));
+                            break;
+                        default:
+                            break;
+                    }
                 }
             }
         }

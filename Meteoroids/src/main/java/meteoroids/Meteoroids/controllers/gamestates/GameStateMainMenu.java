@@ -122,6 +122,10 @@ public class GameStateMainMenu extends GameStateMachine {
         buttons.get(active).toggleActive();        
     }    
     
+    public GameObjectController getGameObjectController() {
+        return objectController;
+    }
+    
     /**
      * Get current active GameState in the menu.
      * 

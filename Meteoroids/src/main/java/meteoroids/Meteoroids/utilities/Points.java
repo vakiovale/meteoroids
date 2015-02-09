@@ -1,4 +1,4 @@
-package meteoroids.Meteoroids.gameobjects.utilities;
+package meteoroids.Meteoroids.utilities;
 
 /**
  * Player's points

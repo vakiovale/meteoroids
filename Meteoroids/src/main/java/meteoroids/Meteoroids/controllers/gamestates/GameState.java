@@ -10,6 +10,7 @@ public enum GameState {
     PLAY,
     MAIN_MENU,
     HIGH_SCORES,
+    GOT_HIGH_SCORE,
     GAME_OVER,
     EXIT
 }

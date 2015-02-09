@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import meteoroids.Meteoroids.gameobjects.GameObject;
-import meteoroids.Meteoroids.gameobjects.utilities.Points;
+import meteoroids.Meteoroids.utilities.Points;
 
 /**
  * Handles calculating the points.

@@ -81,4 +81,8 @@ public class TextHandler implements Drawable {
         return -1;
     }
 
+    public void clear() {
+        texts.clear();
+    }
+
 }

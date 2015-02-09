@@ -1,5 +1,7 @@
 package meteoroids.Meteoroids.utilities;
 
+import java.util.UUID;
+
 import meteoroids.Meteoroids.Game;
 
 /**
@@ -14,6 +16,7 @@ public class Text {
     private float x;
     private float y;
     private boolean active;
+    private UUID id;
     
     public Text(String text) {
         this(text, Game.WIDTH/2-(Game.WIDTH/14), Game.HEIGHT/2);
@@ -24,6 +27,7 @@ public class Text {
         this.x = x;
         this.y = y;
         active = false;
+        id = UUID.randomUUID();
     }
     
     public String getText() {
@@ -55,7 +59,7 @@ public class Text {
         }
         else {
             Text text = (Text)object;
-            return text.getText().equals(this.text);  
+            return text.getText().equals(this.text) && text.id == this.id;  
         }
     }
 

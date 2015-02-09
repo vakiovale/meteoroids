@@ -2,7 +2,7 @@ package meteoroids.Meteoroids.gameobjects.hud;
 
 import meteoroids.Meteoroids.Game;
 import meteoroids.Meteoroids.controllers.utilities.TextHandler;
-import meteoroids.Meteoroids.gameobjects.utilities.Points;
+import meteoroids.Meteoroids.utilities.Points;
 import meteoroids.Meteoroids.utilities.Text;
 
 /**
