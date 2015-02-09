@@ -17,4 +17,5 @@
 |  3.2.2015 | Uusia luokkia ja projektin organisointia             |           3 |
 |  4.2.2015 | Kontrolliluokkien säätämistä, uudet GameState-luokat |           8 |
 |  5.2.2015 | IO-luokat ja GameState-luokat järjestykseen + Menu   |          10 |
-
+|  6.2.2015 | Testausta eri laitteilla                             |           2 |
+|  7.2.2015 | Pistesysteemin kehittämistä                          |           4 |
