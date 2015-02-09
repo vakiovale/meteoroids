@@ -33,8 +33,7 @@ public class GameStateGameOver extends GameStateMachine {
         Text askToContinueText = new Text("New game? (Press N)", Game.WIDTH/2-(Game.WIDTH/8), Game.HEIGHT/2);
         
         textHandler.addText(textGameOver);
-        textHandler.addText(askToContinueText);
-        
+        textHandler.addText(askToContinueText);        
     }
 
     @Override
@@ -42,6 +41,8 @@ public class GameStateGameOver extends GameStateMachine {
         controller.getGraphicsController().update(deltaTime);
 
         gameOverCounter -= deltaTime;
+        
+        gameObjectController.getHUDController().update(deltaTime);
         
         textCounter = new Text(Integer.toString(gameOverCounter/1000) + "...", Game.WIDTH/2, Game.HEIGHT/2+(Game.HEIGHT/10));
         textHandler.addText(textCounter);
@@ -53,6 +54,7 @@ public class GameStateGameOver extends GameStateMachine {
         }
                 
         controller.getGraphicsController().draw(gameObjectController.getDrawables());
+        gameObjectController.getHUDController().draw();
         textHandler.draw();
         textHandler.removeText(textCounter);
     }
