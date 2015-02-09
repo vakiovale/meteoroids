@@ -107,11 +107,13 @@ public class CollisionRules {
     public boolean checkBulletToPlanetHit(BoundingSphere bsA, BoundingSphere bsB) {
         if(bsA instanceof Planet) {
             if(bsB instanceof Projectile) {
+                damageController.hitIEnergyObjectWithDamage((Planet)bsA, 10);
                 killed.add((GameObject)bsB);
                 return true;
             }
         } else if(bsB instanceof Planet) {
             if(bsA instanceof Projectile) {
+                damageController.hitIEnergyObjectWithDamage((Planet)bsB, 10);
                 killed.add((GameObject)bsA);
                 return true;
             }

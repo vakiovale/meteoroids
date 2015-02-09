@@ -28,5 +28,16 @@ public class DamageController implements Controller {
     public void hitIEnergyObject(IEnergy objectToHit, PhysicsObject hittingObject) {
         objectToHit.decreseEnergy((int)hittingObject.getMass()/100);
     }
+    
+    /**
+     * Hit some damage to the IEnergy object. There will be
+     * a decrease in object's energy.
+     * 
+     * @param objectToHit object that will have a decrease in it's energy
+     * @param damage      how much damage is dealt
+     */
+    public void hitIEnergyObjectWithDamage(IEnergy objectToHit, int damage) {
+        objectToHit.decreseEnergy(damage);
+    }
 
 }
