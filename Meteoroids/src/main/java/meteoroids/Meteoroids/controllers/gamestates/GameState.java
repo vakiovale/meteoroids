@@ -9,6 +9,7 @@ package meteoroids.Meteoroids.controllers.gamestates;
 public enum GameState {
     PLAY,
     MAIN_MENU,
+    PAUSE,
     HIGH_SCORES,
     GOT_HIGH_SCORE,
     GAME_OVER,

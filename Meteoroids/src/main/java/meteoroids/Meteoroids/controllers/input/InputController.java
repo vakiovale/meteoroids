@@ -9,6 +9,7 @@ import meteoroids.Meteoroids.controllers.gamestates.GameStateGameOver;
 import meteoroids.Meteoroids.controllers.gamestates.GameStateGotHighScore;
 import meteoroids.Meteoroids.controllers.gamestates.GameStateHighScores;
 import meteoroids.Meteoroids.controllers.gamestates.GameStateMachine;
+import meteoroids.Meteoroids.controllers.gamestates.GameStatePause;
 import meteoroids.Meteoroids.controllers.gamestates.GameStatePlay;
 import meteoroids.Meteoroids.controllers.gamestates.GameStateMainMenu;
 
@@ -41,6 +42,9 @@ public class InputController implements Controller {
         switch (state) {
             case GAME_OVER:
                 pollGameOverInputs(deltaTime);
+                break;
+            case PAUSE:
+                pollPauseInputs(deltaTime);
                 break;
             case HIGH_SCORES:
                 pollHighScoresInputs(deltaTime);
@@ -166,6 +170,19 @@ public class InputController implements Controller {
             ((GameStateGameOver)stateMachine).exit();
         }
     }
+    
+    /**
+     * GameState.PAUSE inputs
+     * 
+     * @param deltaTime
+     */
+    private void pollPauseInputs(float deltaTime) {
+        while(Keyboard.next()) {
+            if(Keyboard.getEventKey() == Keyboard.KEY_SPACE || Keyboard.getEventKey() == Keyboard.KEY_RETURN) {
+                ((GameStatePause)stateMachine).exit();
+            }
+        }
+    }
 
     /**
      * GameState.PLAY inputs
@@ -173,13 +190,6 @@ public class InputController implements Controller {
      * @param deltaTime
      */
     private void pollPlayInputs(float deltaTime) {
-        while(Keyboard.next()) {
-            if(Keyboard.getEventKey() == Keyboard.KEY_LCONTROL) {
-                if(!Keyboard.getEventKeyState()) {
-                    ((GameStatePlay)stateMachine).getObjectController().changeWeapon(((GameStatePlay)stateMachine).getShip());
-                }
-            }
-        }
         if(Keyboard.isKeyDown(Keyboard.KEY_LEFT)) {
             ((GameStatePlay)stateMachine).getShip().rotate(0.3f, deltaTime);
         }
@@ -198,6 +208,18 @@ public class InputController implements Controller {
         }
         if(Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)) {
             ((GameStatePlay)stateMachine).exit();
+        }
+        while(Keyboard.next()) {
+            if(Keyboard.getEventKey() == Keyboard.KEY_LCONTROL) {
+                if(!Keyboard.getEventKeyState()) {
+                    ((GameStatePlay)stateMachine).getObjectController().changeWeapon(((GameStatePlay)stateMachine).getShip());
+                }
+            }
+            if(Keyboard.getEventKey() == Keyboard.KEY_P) {
+                if(!Keyboard.getEventKeyState()) {
+                    gameStateController.addGameState(new GameStatePause(gameStateController, ((GameStatePlay)stateMachine).getObjectController()));
+                }
+            }
         }
     }
 
