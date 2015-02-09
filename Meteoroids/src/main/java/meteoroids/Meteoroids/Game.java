@@ -4,6 +4,7 @@ import meteoroids.Meteoroids.controllers.GameController;
 import meteoroids.Meteoroids.controllers.graphics.GraphicsController;
 import meteoroids.Meteoroids.controllers.utilities.TextHandler;
 import meteoroids.Meteoroids.utilities.GameTimer;
+import meteoroids.Meteoroids.utilities.RandomGenerator;
 
 import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.Display;
@@ -21,6 +22,9 @@ public class Game {
     
     /** Height of the screen */
     public static final int HEIGHT = 1080;
+    
+    /** Random generator */
+    public static RandomGenerator random;
     
     /** Frames per second - ALTERING THIS WILL ALSO AFFECT THE GAME PHYSICS*/
     private final int FPS = 60;
@@ -48,6 +52,7 @@ public class Game {
         graphicsController = new GraphicsController(Game.WIDTH, Game.HEIGHT);
         gameController = null;
         timer = new GameTimer();
+        RandomGenerator.randomPlusMinus(); // init random generator
     }
 
     /**

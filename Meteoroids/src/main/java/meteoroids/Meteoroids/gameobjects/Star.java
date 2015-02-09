@@ -1,5 +1,7 @@
 package meteoroids.Meteoroids.gameobjects;
 
+import meteoroids.Meteoroids.utilities.RandomGenerator;
+
 import org.lwjgl.opengl.GL11;
 
 /**
@@ -18,9 +20,9 @@ public class Star extends DrawableGameObject {
     public Star(float radius, float x, float y) {
         this.radius = radius;
         this.position.set(x, y);
-        red = radius/4+0.3f*(float)Math.random();
-        green = radius/4+0.2f*(float)Math.random();
-        blue = radius/4+0.4f*(float)Math.random();
+        red = radius/4+0.3f*RandomGenerator.random();
+        green = radius/4+0.2f*RandomGenerator.random();
+        blue = radius/4+0.4f*RandomGenerator.random();
     }
     
     @Override

@@ -12,6 +12,7 @@ import meteoroids.Meteoroids.gameobjects.StarField;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.Asteroid;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.Planet;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.ships.Ship;
+import meteoroids.Meteoroids.utilities.RandomGenerator;
 
 /**
  * Playing game state.
@@ -56,12 +57,12 @@ public class GameStatePlay extends GameStateMachine {
         float x;
         float y;
         do {
-            x = (float)Math.random()*Game.WIDTH;
-            y = (float)Math.random()*Game.HEIGHT;
+            x = RandomGenerator.random()*Game.WIDTH;
+            y = RandomGenerator.random()*Game.HEIGHT;
         } while(spawningFails(x, y));
         
-        float radius = (float)Math.random()*100.0f + 10.0f;
-        float mass = (float)(Math.random()*500000.0f+25000.0f)*(radius/10.0f);
+        float radius = RandomGenerator.random()*100.0f + 10.0f;
+        float mass = (RandomGenerator.random()*500000.0f+25000.0f)*(radius/10.0f);
         
         return objectController.getPlanet(x, y, radius, mass);
     }

@@ -7,6 +7,7 @@ import javax.vecmath.Vector2f;
 
 import meteoroids.Meteoroids.Game;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.Asteroid;
+import meteoroids.Meteoroids.utilities.RandomGenerator;
 
 /**
  * Asteroid controller for managing asteroids.
@@ -46,12 +47,12 @@ public class AsteroidController {
             Asteroid asteroidB = new Asteroid(position.x, position.y, mass, size);
             
             asteroidA.addForce(velocity);
-            asteroidA.addForce(((float)Math.random() - 0.5f) * 1.5f,
-                    ((float)Math.random() - 0.5f) * 1.5f);
+            asteroidA.addForce(RandomGenerator.randomPlusMinus() * 1.5f,
+                    RandomGenerator.randomPlusMinus() * 1.5f);
 
             asteroidB.addForce(velocity);
-            asteroidB.addForce(((float)Math.random() - 0.5f) * 1.5f,
-                    ((float)Math.random() - 0.5f) * 1.5f);
+            asteroidB.addForce(RandomGenerator.randomPlusMinus() * 1.5f,
+                    RandomGenerator.randomPlusMinus() * 1.5f);
             
             newAsteroids.add(asteroidA);
             newAsteroids.add(asteroidB);
@@ -70,12 +71,12 @@ public class AsteroidController {
         float y;
         for(int i = 0; i < asteroids.length; i++) {
             do {
-                x = Game.WIDTH * (float)Math.random();
-                y = Game.HEIGHT * (float)Math.random();
+                x = Game.WIDTH * RandomGenerator.random();
+                y = Game.HEIGHT * RandomGenerator.random();
             } while(spawningFails(x, y));                       
             asteroids[i] = new Asteroid(x, y, mass, size);
-            asteroids[i].addForce(((float)Math.random() - 0.5f) * 0.05f,
-                    ((float)Math.random() - 0.5f) * 0.05f);
+            asteroids[i].addForce(RandomGenerator.randomPlusMinus() * 0.05f,
+                    RandomGenerator.randomPlusMinus() * 0.05f);
         }
         return asteroids;
     }

@@ -2,6 +2,7 @@ package meteoroids.Meteoroids.gameobjects.physicsobjects;
 
 import meteoroids.Meteoroids.gameobjects.utilities.Energy;
 import meteoroids.Meteoroids.gameobjects.utilities.IEnergy;
+import meteoroids.Meteoroids.utilities.RandomGenerator;
 
 import org.lwjgl.opengl.GL11;
 
@@ -38,9 +39,9 @@ public class Planet extends GravityObject implements BoundingSphere, IEnergy {
         super(posX, posY, mass);
         this.radius = radius;
         this.energy = new Energy((int)(100*(radius/10.0f)));
-        this.red = (float)Math.random();
-        this.green = (float)Math.random();
-        this.blue = (float)Math.random();
+        this.red = RandomGenerator.random();
+        this.green = RandomGenerator.random();
+        this.blue = RandomGenerator.random();
     }
 
     @Override
