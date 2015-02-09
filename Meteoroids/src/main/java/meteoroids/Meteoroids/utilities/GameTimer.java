@@ -1,4 +1,4 @@
-package meteoroids.Meteoroids;
+package meteoroids.Meteoroids.utilities;
 
 import org.lwjgl.Sys;
 
@@ -8,11 +8,11 @@ import org.lwjgl.Sys;
  * @author vpyyhtia
  *
  */
-class GameTimer {
+public class GameTimer {
 
     private long lastTime;
 
-    GameTimer() {
+    public GameTimer() {
         lastTime = Sys.getTime();
     }
 
@@ -21,7 +21,7 @@ class GameTimer {
      * 
      * @return delta time (milliseconds from last frame)
      */
-    int getDeltaTime() {
+    public int getDeltaTime() {
         long currentTime = Sys.getTime();
         int delta = (int)(currentTime - lastTime);
         lastTime = currentTime;
@@ -33,7 +33,7 @@ class GameTimer {
      * 
      * @return time in milliseconds
      */
-    long getTime() {
+    public long getTime() {
         return (Sys.getTime() * 1000) / Sys.getTimerResolution();
     }
 

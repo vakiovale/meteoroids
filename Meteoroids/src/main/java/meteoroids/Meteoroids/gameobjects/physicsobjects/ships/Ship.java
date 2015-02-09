@@ -2,7 +2,6 @@ package meteoroids.Meteoroids.gameobjects.physicsobjects.ships;
 
 import javax.vecmath.Vector2f;
 
-import meteoroids.Meteoroids.Game;
 import meteoroids.Meteoroids.gameobjects.GameObject;
 import meteoroids.Meteoroids.gameobjects.Movable;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.BoundingSphere;

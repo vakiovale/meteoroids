@@ -1,5 +1,7 @@
 package meteoroids.Meteoroids;
 
+import meteoroids.Meteoroids.controllers.utilities.ErrorController;
+
 /**
  * Main application - Meteoroids
  *

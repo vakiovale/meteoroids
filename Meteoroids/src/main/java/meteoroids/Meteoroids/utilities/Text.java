@@ -1,4 +1,4 @@
-package meteoroids.Meteoroids.controllers.resources;
+package meteoroids.Meteoroids.utilities;
 
 import meteoroids.Meteoroids.Game;
 

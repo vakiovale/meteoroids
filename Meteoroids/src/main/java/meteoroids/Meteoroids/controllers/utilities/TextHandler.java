@@ -1,8 +1,7 @@
-package meteoroids.Meteoroids.controllers.resources;
+package meteoroids.Meteoroids.controllers.utilities;
 
 import java.awt.Font;
 import java.io.InputStream;
-import java.util.ArrayDeque;
 import java.util.HashSet;
 
 import org.lwjgl.opengl.GL11;
@@ -11,8 +10,8 @@ import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.util.ResourceLoader;
 
 import meteoroids.Meteoroids.Game;
-import meteoroids.Meteoroids.Main;
 import meteoroids.Meteoroids.gameobjects.Drawable;
+import meteoroids.Meteoroids.utilities.Text;
 
 /**
  * Handles drawing texts to the screen. Call initFont() method

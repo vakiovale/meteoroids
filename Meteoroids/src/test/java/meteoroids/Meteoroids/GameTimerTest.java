@@ -1,6 +1,7 @@
 package meteoroids.Meteoroids;
 
 import static org.junit.Assert.*;
+import meteoroids.Meteoroids.utilities.GameTimer;
 
 import org.junit.Before;
 import org.junit.Test;

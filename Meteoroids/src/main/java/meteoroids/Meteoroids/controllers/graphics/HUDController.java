@@ -5,7 +5,6 @@ import java.util.List;
 
 import meteoroids.Meteoroids.controllers.Controller;
 import meteoroids.Meteoroids.gameobjects.Drawable;
-import meteoroids.Meteoroids.gameobjects.hud.EnergyBar;
 import meteoroids.Meteoroids.gameobjects.hud.HUDElement;
 
 /**

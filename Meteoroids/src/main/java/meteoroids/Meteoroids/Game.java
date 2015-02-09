@@ -1,20 +1,12 @@
 package meteoroids.Meteoroids;
 
-import java.awt.Font;
-import java.io.InputStream;
-
 import meteoroids.Meteoroids.controllers.GameController;
 import meteoroids.Meteoroids.controllers.graphics.GraphicsController;
-import meteoroids.Meteoroids.controllers.resources.TextHandler;
+import meteoroids.Meteoroids.controllers.utilities.TextHandler;
+import meteoroids.Meteoroids.utilities.GameTimer;
 
 import org.lwjgl.LWJGLException;
-import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
-import org.lwjgl.opengl.DisplayMode;
-import org.lwjgl.opengl.GL11;
-import org.newdawn.slick.Color;
-import org.newdawn.slick.TrueTypeFont;
-import org.newdawn.slick.util.ResourceLoader;
 
 /**
  * Main Game Loop that handles the game

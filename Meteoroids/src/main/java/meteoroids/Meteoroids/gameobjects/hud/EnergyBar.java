@@ -2,7 +2,6 @@ package meteoroids.Meteoroids.gameobjects.hud;
 
 import org.lwjgl.opengl.GL11;
 
-import meteoroids.Meteoroids.gameobjects.DUGameObject;
 import meteoroids.Meteoroids.gameobjects.utilities.Energy;
 
 /**

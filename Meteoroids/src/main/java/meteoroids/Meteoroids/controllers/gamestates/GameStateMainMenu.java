@@ -6,9 +6,9 @@ import java.util.List;
 
 import meteoroids.Meteoroids.Game;
 import meteoroids.Meteoroids.controllers.gameobjects.GameObjectController;
-import meteoroids.Meteoroids.controllers.resources.Text;
-import meteoroids.Meteoroids.controllers.resources.TextHandler;
+import meteoroids.Meteoroids.controllers.utilities.TextHandler;
 import meteoroids.Meteoroids.gameobjects.StarField;
+import meteoroids.Meteoroids.utilities.Text;
 
 /**
  * Main menu.

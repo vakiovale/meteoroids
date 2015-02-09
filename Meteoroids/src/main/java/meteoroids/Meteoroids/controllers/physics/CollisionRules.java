@@ -2,7 +2,7 @@ package meteoroids.Meteoroids.controllers.physics;
 
 import java.util.List;
 
-import meteoroids.Meteoroids.controllers.PointsController;
+import meteoroids.Meteoroids.controllers.utilities.PointsController;
 import meteoroids.Meteoroids.gameobjects.GameObject;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.Asteroid;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.BoundingSphere;
@@ -10,7 +10,6 @@ import meteoroids.Meteoroids.gameobjects.physicsobjects.Planet;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.ships.PlasmaProjectile;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.ships.Projectile;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.ships.Ship;
-import meteoroids.Meteoroids.gameobjects.utilities.IEnergy;
 
 /**
  * Rules what happens when different objects collide.

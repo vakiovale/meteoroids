@@ -1,4 +1,4 @@
-package meteoroids.Meteoroids.controllers;
+package meteoroids.Meteoroids.controllers.utilities;
 
 import java.util.HashMap;
 import java.util.Map;

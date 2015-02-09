@@ -1,10 +1,8 @@
 package meteoroids.Meteoroids.gameobjects.hud;
 
-import org.lwjgl.opengl.GL11;
-
-import meteoroids.Meteoroids.controllers.resources.Text;
-import meteoroids.Meteoroids.controllers.resources.TextHandler;
+import meteoroids.Meteoroids.controllers.utilities.TextHandler;
 import meteoroids.Meteoroids.gameobjects.utilities.Points;
+import meteoroids.Meteoroids.utilities.Text;
 
 /**
  * Shows player's points.

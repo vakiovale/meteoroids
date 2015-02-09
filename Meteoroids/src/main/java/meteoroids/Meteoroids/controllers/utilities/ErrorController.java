@@ -1,4 +1,4 @@
-package meteoroids.Meteoroids;
+package meteoroids.Meteoroids.controllers.utilities;
 
 /**
  * Handles the error messages.

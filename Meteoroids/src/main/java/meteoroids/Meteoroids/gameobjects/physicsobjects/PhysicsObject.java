@@ -2,8 +2,6 @@ package meteoroids.Meteoroids.gameobjects.physicsobjects;
 
 import javax.vecmath.Vector2f;
 
-import org.lwjgl.opengl.GL11;
-
 import meteoroids.Meteoroids.gameobjects.DUGameObject;
 import meteoroids.Meteoroids.gameobjects.IPosition;
 

@@ -3,10 +3,10 @@ package meteoroids.Meteoroids.controllers.gamestates;
 import java.util.List;
 
 import meteoroids.Meteoroids.Game;
-import meteoroids.Meteoroids.controllers.PointsController;
 import meteoroids.Meteoroids.controllers.gameobjects.GameObjectController;
 import meteoroids.Meteoroids.controllers.graphics.GraphicsController;
 import meteoroids.Meteoroids.controllers.physics.PhysicsController;
+import meteoroids.Meteoroids.controllers.utilities.PointsController;
 import meteoroids.Meteoroids.gameobjects.GameObject;
 import meteoroids.Meteoroids.gameobjects.StarField;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.Asteroid;
@@ -25,8 +25,6 @@ public class GameStatePlay extends GameStateMachine {
 
     private GraphicsController graphicsController;
     private PhysicsController physicsController;
-    private PointsController pointsController;
-    
     private Ship ship;
     private Asteroid[] asteroids;
     private Planet planet;
