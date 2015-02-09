@@ -23,11 +23,12 @@ Try to keep the planet alive as long as you can by shooting all the meteoroids.
 Key       | Action
 ----------| -------------
 UP        | Accelerate
-DOWN      | Reverse
+DOWN      | Slow down
 LEFT      | Steer left
 RIGHT     | Steer right
 SPACE     | Fire
 LEFT CTRL | Change weapon
+P         | Pause game
 ESC       | Main menu
 
 ## Running Meteoroids from command line (Linux - easy)
