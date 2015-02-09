@@ -42,6 +42,7 @@ public class GameStateGameOver extends GameStateMachine {
         POINTS = PointsController.getPoints(PointsController.mainPlayer);
         HighScores highScores = new HighScores(HIGHSCORES_PATH);
         if(highScores.topTenCheck(POINTS)) {
+            this.exit();
             controller.addGameState(new GameStateGotHighScore(controller, gameObjectController));
         }
     }
