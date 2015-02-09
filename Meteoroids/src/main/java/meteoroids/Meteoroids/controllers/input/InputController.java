@@ -187,10 +187,11 @@ public class InputController implements Controller {
             ((GameStatePlay)stateMachine).getShip().rotate(-0.3f, deltaTime);
         }
         if(Keyboard.isKeyDown(Keyboard.KEY_UP)) {
-            ((GameStatePlay)stateMachine).getShip().accelerate(0.002f, deltaTime);
+            ((GameStatePlay)stateMachine).getShip().accelerate(0.0015f, deltaTime);
         }
         if(Keyboard.isKeyDown(Keyboard.KEY_DOWN)) {
-            ((GameStatePlay)stateMachine).getShip().accelerate(-0.002f, deltaTime);
+            // ((GameStatePlay)stateMachine).getShip().accelerate(-0.0015f, deltaTime);
+            ((GameStatePlay)stateMachine).getShip().slowDown(0.003f, deltaTime);
         }
         if(Keyboard.isKeyDown(Keyboard.KEY_SPACE)) {
             ((GameStatePlay)stateMachine).getObjectController().fire(((GameStatePlay)stateMachine).getShip());

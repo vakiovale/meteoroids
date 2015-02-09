@@ -22,6 +22,7 @@ public class Ship extends PhysicsObject implements Movable, BoundingSphere, Shoo
     private float rotation;
     private float radius;
     private Weapon weapon;
+    private final float MAX_SPEED = 0.25f;
 
     public Ship() {
         this(0.0f, 0.0f, 100.0f);
@@ -37,13 +38,14 @@ public class Ship extends PhysicsObject implements Movable, BoundingSphere, Shoo
         this.rotation = 0.0f;
         this.radius = 10.0f;
         this.weapon = null;
+        this.maxSpeed = MAX_SPEED;
     }
 
     @Override
     public void accelerate(float amount, float deltaTime) {
         Vector2f force = PhysicsObject.getRotationVector(rotation);
         force.normalize();
-        force.scale((float)(amount * deltaTime));
+        force.scale((float)(((amount/((velocity.length()/2)+1.0f)) * deltaTime)));        
         this.addForce(force);
     }
 
@@ -51,21 +53,24 @@ public class Ship extends PhysicsObject implements Movable, BoundingSphere, Shoo
     public void rotate(float angle, float deltaTime) {
         rotation = PhysicsObject.getRotation(rotation, angle, deltaTime);
     }
+    
+    @Override
+    public void slowDown(float amount, float deltaTime) {
+        float slowDownScale = 1.0f - (amount * deltaTime);
+        if(slowDownScale > 0.0f) { 
+            this.velocity.scale(slowDownScale);
+        }
+    }
 
     @Override
     public void update(float deltaTime) {
         super.update(deltaTime);
 
-        // MAX speed for space ship
-        if(this.velocity.length() > 0.3f) {
-            this.velocity.normalize();
-            this.velocity.scale(0.3f);
-        }
-
         GameObject.keepObjectInsideGameWindow(this.position);
         
-        if(weapon != null)
+        if(weapon != null) {
             weapon.update(deltaTime);
+        }
         
         thrustFlame.addFlame(this.position.x, this.position.y - 4.0f);
     }
@@ -126,5 +131,6 @@ public class Ship extends PhysicsObject implements Movable, BoundingSphere, Shoo
     public Weapon getWeapon() {
         return weapon;
     }
+
 
 }

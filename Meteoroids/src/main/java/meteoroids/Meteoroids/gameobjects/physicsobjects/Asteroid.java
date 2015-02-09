@@ -16,6 +16,7 @@ public class Asteroid extends PhysicsObject implements Movable, BoundingSphere {
 
     private float radius;
     private float rotation;
+    private final float MAX_SPEED = 0.2f;
     ThrustFlame flame;
 
     public Asteroid() {
@@ -35,18 +36,13 @@ public class Asteroid extends PhysicsObject implements Movable, BoundingSphere {
         this.radius = radius;
         this.rotation = 0.0f;
         this.flame = new ThrustFlame(posX, posY);
+        this.maxSpeed = MAX_SPEED;
     }
 
     @Override
     public void update(float deltaTime) {
         super.update(deltaTime);
         rotate(1.0f * this.velocity.length(), deltaTime);
-
-        // MAX speed for asteroid
-        if(this.velocity.length() > 0.2f) {
-            this.velocity.normalize();
-            this.velocity.scale(0.2f);
-        }
 
         GameObject.keepObjectInsideGameWindow(this.position);
 
@@ -95,6 +91,11 @@ public class Asteroid extends PhysicsObject implements Movable, BoundingSphere {
     @Override
     public void accelerate(float amount, float deltaTime) {
         // Don't accelerate
+    }
+    
+    @Override
+    public void slowDown(float amount, float deltaTime) {
+        // Don't slow down        
     }
 
     @Override

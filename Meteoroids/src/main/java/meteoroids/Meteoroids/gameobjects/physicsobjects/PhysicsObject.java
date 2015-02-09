@@ -18,6 +18,8 @@ public abstract class PhysicsObject extends DUGameObject implements IPosition {
 
     protected Vector2f acceleration;
     protected Vector2f velocity;
+    
+    protected float maxSpeed;
 
     // TODO: Instead of the actual mass, it could be wiser to use an inverse of
     // mass.
@@ -41,6 +43,7 @@ public abstract class PhysicsObject extends DUGameObject implements IPosition {
         this.mass = mass <= 1.0f ? 1.0f : mass; // Don't allow mass lower than
                                                 // 1.0
         this.inverseMass = 1 / mass;
+        this.maxSpeed = 10.0f;
     }
 
     public PhysicsObject(float posX, float posY) {
@@ -73,6 +76,12 @@ public abstract class PhysicsObject extends DUGameObject implements IPosition {
         Vector2f velocityAdd = (Vector2f)acceleration.clone();
         velocityAdd.scale(deltaTime);
         velocity.add(velocityAdd);
+        
+        // Check max velocity
+        if(velocity.length() > maxSpeed) {
+            velocity.normalize();
+            velocity.scale(maxSpeed);
+        }
 
         // Calculate position with delta time
         Vector2f positionAdd = (Vector2f)velocity.clone();

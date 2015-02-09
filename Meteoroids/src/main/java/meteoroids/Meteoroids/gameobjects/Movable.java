@@ -24,5 +24,13 @@ public interface Movable {
      */
     public void rotate(float angle, float deltaTime);
     
+    /**
+     * Slow down object.
+     * 
+     * @param amount
+     * @param deltaTime
+     */
+    public void slowDown(float amount, float deltaTime);
+    
     public float getRotation();
 }
