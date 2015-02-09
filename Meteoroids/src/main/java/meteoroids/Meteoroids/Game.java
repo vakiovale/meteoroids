@@ -2,6 +2,7 @@ package meteoroids.Meteoroids;
 
 import meteoroids.Meteoroids.controllers.GameController;
 import meteoroids.Meteoroids.controllers.graphics.GraphicsController;
+import meteoroids.Meteoroids.controllers.utilities.ErrorController;
 import meteoroids.Meteoroids.controllers.utilities.TextHandler;
 import meteoroids.Meteoroids.utilities.GameTimer;
 import meteoroids.Meteoroids.utilities.RandomGenerator;
@@ -63,13 +64,13 @@ public class Game {
 
         // Initialize LWJGL and OpenGL
         if(!init() || !graphicsController.init()) {
-            Main.error.displayError();
+            ErrorController.displayError();
             System.exit(0);
         }       
         
         // Initialize font resources
         if(!TextHandler.initFont(FONT_PATH)) {
-            Main.error.fontResourceError(FONT_PATH);
+            ErrorController.fontResourceError(FONT_PATH);
             System.exit(0);
         }
         
