@@ -9,6 +9,8 @@ import meteoroids.Meteoroids.controllers.physics.PhysicsController;
 import meteoroids.Meteoroids.controllers.utilities.PointsController;
 import meteoroids.Meteoroids.gameobjects.GameObject;
 import meteoroids.Meteoroids.gameobjects.StarField;
+import meteoroids.Meteoroids.gameobjects.hud.EnergyBar;
+import meteoroids.Meteoroids.gameobjects.hud.PointsBox;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.Asteroid;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.Planet;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.ships.Ship;
@@ -50,7 +52,8 @@ public class GameStatePlay extends GameStateMachine {
         // Add player's ship to the PointsController
         PointsController.addPlayer(ship);
         PointsController.bindMainPlayer(ship);
-        
+        objectController.getHUDController().addHUDElement(
+                new PointsBox(PointsController.getPointsObject(ship)));
     }
     
     private Planet initPlanet() {

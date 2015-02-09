@@ -27,7 +27,9 @@ public class HUDController implements Controller, Drawable {
     
     @Override
     public void update(float deltaTime) {
-        // Do nothing
+        for(HUDElement hudElement : hudElements) {
+            hudElement.update(deltaTime);
+        }
     }
 
     @Override

@@ -75,4 +75,14 @@ public class PointsController {
         return -1;
     }
     
+    /**
+     * Get player's Points object
+     * 
+     * @param player
+     * @return Points object from the player, null if player couldn't be found
+     */
+    public static Points getPointsObject(GameObject player) {
+        return players.get(player);
+    }
+    
 }
