@@ -2,7 +2,6 @@ package meteoroids.Meteoroids.controllers.gamestates;
 
 import meteoroids.Meteoroids.Game;
 import meteoroids.Meteoroids.controllers.gameobjects.GameObjectController;
-import meteoroids.Meteoroids.controllers.input.PollWriter;
 import meteoroids.Meteoroids.controllers.utilities.PointsController;
 import meteoroids.Meteoroids.controllers.utilities.TextHandler;
 import meteoroids.Meteoroids.utilities.Text;
@@ -30,14 +29,15 @@ public class GameStateGotHighScore extends GameStateMachine {
     public void update(float deltaTime) {
         textHandler.clear();
         //PollWriter.poll(name);
-        textHandler.addText(new Text("You did it!", Game.WIDTH/2-220.0f, Game.HEIGHT/10));
-        textHandler.addText(name.toString());
+        textHandler.addText(new Text("NEW HIGH SCORE!", Game.WIDTH/2-220.0f, Game.HEIGHT/10));
+        textHandler.addText(new Text("Enter name: ", Game.WIDTH/2-350.0f, Game.HEIGHT/2));
+        textHandler.addText(new Text(name.toString(), Game.WIDTH/2, Game.HEIGHT/2));
         controller.getGraphicsController().draw(objectController.getDrawables());
         textHandler.draw();
     }
 
     public void save() {
-        scores.saveScore(new Score(name.toString(), 
-                PointsController.getPoints(PointsController.mainPlayer)));
+        scores.saveScore(new Score(name.toString(), PointsController.getPoints(PointsController.mainPlayer)));
+        controller.addGameState(new GameStateHighScores(controller, objectController, true));
     }
 }

@@ -34,8 +34,6 @@ public class HighScores {
         loadScoreFile();
         Collections.sort(scores);
         
-        for(Score s : scores) System.out.println(s);
-        
         if(scores == null || scores.size() == 0) {
             return true;
         }

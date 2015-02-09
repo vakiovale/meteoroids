@@ -85,8 +85,9 @@ public class InputController implements Controller {
             if(Keyboard.getEventKey() == Keyboard.KEY_ESCAPE ||
                Keyboard.getEventKey() == Keyboard.KEY_RETURN) {
                 if(!Keyboard.getEventKeyState()) {
-                    ((GameStateGotHighScore)stateMachine).save();
-                    ((GameStateGotHighScore)stateMachine).exit();
+                    GameStateGotHighScore tmpState = (GameStateGotHighScore)stateMachine;
+                    tmpState.save();
+                    tmpState.exit();
                 }
             }
         }
