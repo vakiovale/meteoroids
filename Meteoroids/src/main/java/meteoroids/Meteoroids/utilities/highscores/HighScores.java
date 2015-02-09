@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import meteoroids.Meteoroids.controllers.utilities.ErrorController;
 import meteoroids.Meteoroids.utilities.RandomGenerator;
 
 /**
@@ -32,13 +33,18 @@ public class HighScores {
     public boolean topTenCheck(long points) {
         loadScoreFile();
         Collections.sort(scores);
+        
+        for(Score s : scores) System.out.println(s);
+        
         if(scores == null || scores.size() == 0) {
             return true;
         }
         if(scores.size() < 10) {
             return true;
         }
-        return points > scores.get(scores.size()-1).getPoints();
+        else {
+            return points > scores.get(9).getPoints();
+        }
     }
     
     public List<Score> getScores() {
@@ -57,17 +63,20 @@ public class HighScores {
             scoresObjectStream = new ObjectOutputStream(scoresOutputStream);
             scores.add(score);
             scoresObjectStream.writeObject(scores);
-        } catch (FileNotFoundException e1) {
-            e1.printStackTrace();
-        } catch (IOException e1) {
-            e1.printStackTrace();
+        } catch (FileNotFoundException e) {
+            ErrorController.highScoresSaveFileError();
+            System.exit(0);
+        } catch (IOException e) {
+            ErrorController.highScoresSaveFileError();
+            System.exit(0);
         } finally {
             if(scoresObjectStream != null) {
                 try {
                     scoresObjectStream.flush();
                     scoresObjectStream.close();
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    ErrorController.highScoresSaveFileError();
+                    System.exit(0);
                 }
             }
         }
@@ -82,18 +91,21 @@ public class HighScores {
             scoresInputStream = new FileInputStream(HIGHSCORES_PATH);
             scoresObjectStream = new ObjectInputStream(scoresInputStream);
             scores = (ArrayList<Score>)scoresObjectStream.readObject();
-        } catch (FileNotFoundException e1) {
-            e1.printStackTrace();
-        } catch (IOException e1) {
-            e1.printStackTrace();
+        } catch (FileNotFoundException e) {
+            System.out.println("No high scores.");
+        } catch (IOException e) {
+            ErrorController.highScoresFileError();
+            System.exit(0);
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            ErrorController.highScoresFileError();
+            System.exit(0);
         } finally {
             if(scoresObjectStream != null) {
                 try {
                     scoresObjectStream.close();
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    ErrorController.highScoresFileError();
+                    System.exit(0);
                 }
             }
         }
