@@ -30,7 +30,7 @@ public class GameStatePlay extends GameStateMachine {
     private PhysicsController physicsController;
     private Ship ship;
     private Asteroid[] asteroids;
-    private Planet planet;
+    private Planet[] planets;
     private StarField starField;
             
     public GameStatePlay(GameStateController controller) {
@@ -47,7 +47,10 @@ public class GameStatePlay extends GameStateMachine {
         this.starField = objectController.getStarField(Game.WIDTH, Game.HEIGHT);
         this.ship = objectController.getShip();
         this.asteroids = objectController.getAsteroids(4, 1000.0f, 30.0f);
-        this.planet = initPlanet();
+        this.planets = new Planet[1];
+        for(int i = 0; i < planets.length; i++) {
+            this.planets[i] = initPlanet();
+        }
         
         // Add player's ship to the PointsController
         PointsController.addPlayer(ship);
@@ -123,11 +126,12 @@ public class GameStatePlay extends GameStateMachine {
         System.out.println("    H O W   T O   P L A Y");
         System.out.println("******************************");
         System.out.println("UP:\t\tAccelerate");
-        System.out.println("DOWN:\t\tReverse");
+        System.out.println("DOWN:\t\tSlow down");
         System.out.println("LEFT:\t\tSteer left");
         System.out.println("RIGHT:\t\tSteer right");
         System.out.println("SPACE:\t\tFire");
         System.out.println("LEFT CTRL\tChange weapon");
+        System.out.println("P\t\tPause game");
         System.out.println("ESC:\t\tExit game");
         System.out.println("******************************");
     }
@@ -138,11 +142,14 @@ public class GameStatePlay extends GameStateMachine {
      * @return true if game is over
      */
     public void checkGameOver() {
-        if(planet != null && planet.isDead()) {               
-            exit();
-            objectController.killGameObject(planet);
-            GameStateGameOver gameOverGameState = new GameStateGameOver(controller, objectController);
-            controller.addGameState(gameOverGameState);                    
+        for(int i = 0; i < planets.length; i++) {
+            if(planets[i] != null && planets[i].isDead()) {               
+                exit();
+                objectController.killGameObject(planets[i]);
+                GameStateGameOver gameOverGameState = new GameStateGameOver(controller, objectController);
+                controller.addGameState(gameOverGameState);
+                break;
+            }
         }
     }
     
