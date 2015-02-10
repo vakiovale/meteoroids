@@ -19,3 +19,4 @@
 |  5.2.2015 | IO-luokat ja GameState-luokat järjestykseen + Menu   |          10 |
 |  6.2.2015 | Testausta eri laitteilla                             |           2 |
 |  7.2.2015 | Pistesysteemin kehittämistä                          |           4 |
+|  9.2.2015 | High scores -lista ja pistesysteemi                  |           8 |
