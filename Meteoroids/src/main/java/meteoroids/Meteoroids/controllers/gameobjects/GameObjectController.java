@@ -19,6 +19,7 @@ import meteoroids.Meteoroids.gameobjects.physicsobjects.Asteroid;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.GravityObject;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.PhysicsObject;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.Planet;
+import meteoroids.Meteoroids.gameobjects.physicsobjects.PlanetType;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.ships.Projectile;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.ships.Projectile.ProjectileType;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.ships.Ship;
@@ -152,6 +153,12 @@ public class GameObjectController implements Controller {
         addGameObject(asteroids);
         return asteroids;
     }
+    
+    public Asteroid createAsteroid(float posX, float posY, float mass, float size) {
+        Asteroid asteroid = asteroidController.createAsteroid(posX, posY, mass, size);
+        addGameObject(asteroid);
+        return asteroid;
+    }
 
     /**
      * Create a Planet.
@@ -185,6 +192,19 @@ public class GameObjectController implements Controller {
         }
         return planet;
     }
+    
+    /**
+     * Create a Planet at certain position with certain radius and mass.
+     * 
+     * @return Planet
+     */
+    public Planet getPlanet(float x, float y, float radius, float mass, PlanetType planetType) {
+        Planet planet = getPlanet(x, y, radius, mass);
+        if(textureController != null) {
+            planet.bindTextureDrawer(textureController.getPlanet(planetType));
+        }
+        return planet;
+    }
         
     /**
      * Get HUDController.
@@ -205,7 +225,7 @@ public class GameObjectController implements Controller {
             System.out.println("kill " + object);
         }
         firingController.update(deltaTime);
-        generateNewAsteroids(deltaTime);
+        generateNewAsteroids(deltaTime); // spawning asteroids
         hudController.update(deltaTime);
     }
     

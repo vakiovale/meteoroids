@@ -13,6 +13,7 @@ import meteoroids.Meteoroids.gameobjects.hud.EnergyBar;
 import meteoroids.Meteoroids.gameobjects.hud.PointsBox;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.Asteroid;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.Planet;
+import meteoroids.Meteoroids.gameobjects.physicsobjects.PlanetType;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.ships.Ship;
 import meteoroids.Meteoroids.utilities.RandomGenerator;
 
@@ -47,8 +48,13 @@ public class GameStatePlay extends GameStateMachine {
         // Initialize game objects
         this.starField = objectController.getStarField(Game.WIDTH, Game.HEIGHT);
         this.ship = objectController.getShip();
+        
         this.asteroids = objectController.getAsteroids(4, 1000.0f, 30.0f);
+        //initAsteroids();
+        
         this.planets = new Planet[1];
+        //this.planets[0] = objectController.getPlanet(200.0f, Game.HEIGHT/3, 20.0f, 10000.0f, PlanetType.MARS);
+        //this.planets[1] = objectController.getPlanet(Game.WIDTH-200.0f, Game.HEIGHT-Game.HEIGHT/3, 100.0f, 10000.0f, PlanetType.JUPITER);
         for(int i = 0; i < planets.length; i++) {
             this.planets[i] = initPlanet();
         }
@@ -60,6 +66,22 @@ public class GameStatePlay extends GameStateMachine {
                 new PointsBox(PointsController.getPointsObject(ship)));
     }
     
+    private void initAsteroids() {
+        float x = Game.WIDTH/2-200.0f;
+        float y = 100.0f;
+        for(int i = 0; i < 5; i++) {
+            objectController.createAsteroid(x, y, 1000.0f, 30.0f);
+            for(int j = 0; j < 5; j++) {
+                objectController.createAsteroid(RandomGenerator.randomPlusMinus()*200.0f+x, RandomGenerator.randomPlusMinus()*200.0f+y, 500.0f, 15.0f);
+                for(int k = 0; k < 5; k++) {
+                    objectController.createAsteroid(RandomGenerator.randomPlusMinus()*200.0f+x, RandomGenerator.randomPlusMinus()*200.0f+y, 200.0f, 6.0f);
+                }
+            }
+            x += 50.0f;
+            y += 220.0f;
+        }
+    }
+
     private Planet initPlanet() {
         float x;
         float y;

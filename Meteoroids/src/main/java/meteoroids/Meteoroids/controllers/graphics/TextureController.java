@@ -1,5 +1,6 @@
 package meteoroids.Meteoroids.controllers.graphics;
 
+import meteoroids.Meteoroids.gameobjects.physicsobjects.PlanetType;
 import meteoroids.Meteoroids.utilities.RandomGenerator;
 
 import org.newdawn.slick.opengl.Texture;
@@ -68,25 +69,30 @@ public class TextureController {
         return loadDrawer(shipFireTexture);
     }
     
-    public TextureDrawer getRandomPlanet() {
-        int planet = (int)(RandomGenerator.random()*7);
-        switch (planet) {
+
+    public TextureDrawer getPlanet(PlanetType planetType) {
+        switch (planetType) {
             default:
-            case 0:
+            case EARTH:
                 return loadDrawer(planetEarth);
-            case 1:
+            case MERCURY:
                 return loadDrawer(planetMercury);
-            case 2:
+            case VENUS:
                 return loadDrawer(planetVenus);
-            case 3:
+            case MARS:
                 return loadDrawer(planetMars);
-            case 4:
+            case JUPITER:
                 return loadDrawer(planetJupiter);
-            case 5:
+            case NEPTUNE:
                 return loadDrawer(planetNeptune);
-            case 6:
+            case PLUTO:
                 return loadDrawer(planetPluto);
         }
+    }
+    
+    public TextureDrawer getRandomPlanet() {
+        PlanetType type = PlanetType.values()[(int)(RandomGenerator.random()*7)];
+        return getPlanet(type);
     }
     
     public TextureDrawer getEarthTexture() {
@@ -116,5 +122,6 @@ public class TextureController {
     public TextureDrawer getPlutoTexture() {
         return loadDrawer(planetPluto);
     }
+
     
 }

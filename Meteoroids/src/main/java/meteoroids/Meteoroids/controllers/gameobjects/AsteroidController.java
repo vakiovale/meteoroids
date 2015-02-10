@@ -17,7 +17,7 @@ import meteoroids.Meteoroids.utilities.RandomGenerator;
  */
 public class AsteroidController {
     
-    private final int ASTEROIDS_BIRTH_TIME = 20000;
+    private final int ASTEROIDS_BIRTH_TIME = 30000;
     private final float BIG_ASTEROID_RADIUS_START = 30.0f;
     private final float BIG_ASTEROID_MASS_START = 1000.0f;
     private float bigAsteroidRadius;
@@ -118,5 +118,19 @@ public class AsteroidController {
             return asteroids;
         }
         return null;
+    }
+
+    /**
+     * Creates new asteroid.
+     * 
+     * @param posX
+     * @param posY
+     * @param mass
+     * @param size
+     * @return Asteroid
+     */
+    public Asteroid createAsteroid(float posX, float posY, float mass,
+            float size) {
+        return new Asteroid(posX, posY, mass, size);
     }
 }
