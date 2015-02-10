@@ -1,5 +1,6 @@
 package meteoroids.Meteoroids.gameobjects.physicsobjects;
 
+import meteoroids.Meteoroids.controllers.graphics.TextureDrawer;
 import meteoroids.Meteoroids.gameobjects.utilities.Energy;
 import meteoroids.Meteoroids.gameobjects.utilities.IEnergy;
 import meteoroids.Meteoroids.utilities.RandomGenerator;
@@ -18,6 +19,7 @@ public class Planet extends GravityObject implements BoundingSphere, IEnergy {
     private float red;
     private float green;
     private float blue;
+    private TextureDrawer texture;
 
     public Planet() {
         this(0.0f, 0.0f, 100.0f, 500.0f);
@@ -43,20 +45,31 @@ public class Planet extends GravityObject implements BoundingSphere, IEnergy {
         this.green = RandomGenerator.random();
         this.blue = RandomGenerator.random();
     }
+    
+    public void bindTextureDrawer(TextureDrawer textureDrawer) {
+        texture = textureDrawer;        
+    }
 
     @Override
     public void draw() {
         GL11.glPushMatrix();
-        GL11.glColor3f(red, green, blue);
-        GL11.glTranslatef(this.position.x, this.position.y, 0);
-        GL11.glScalef(radius, radius, 1);
-        GL11.glBegin(GL11.GL_TRIANGLE_FAN);
-        GL11.glVertex2f(0, 0);
-        for(int i = 0; i <= 64; i++) {
-            double angle = Math.PI * 2 * i / 64;
-            GL11.glVertex2f((float)Math.cos(angle), (float)Math.sin(angle));
+        
+        if(texture != null) {
+            texture.draw(this.position.x-radius, this.position.y-radius, 2*radius, this.energy.getPercentage());
         }
-        GL11.glEnd();
+        else {
+            GL11.glColor3f(red, green, blue);
+            GL11.glTranslatef(this.position.x, this.position.y, 0);
+            GL11.glScalef(radius, radius, 1);
+            GL11.glBegin(GL11.GL_TRIANGLE_FAN);
+            GL11.glVertex2f(0, 0);
+            for(int i = 0; i <= 64; i++) {
+                double angle = Math.PI * 2 * i / 64;
+                GL11.glVertex2f((float)Math.cos(angle), (float)Math.sin(angle));
+            }
+            GL11.glEnd();
+        }
+        
         GL11.glPopMatrix();
     }
 

@@ -180,6 +180,9 @@ public class GameObjectController implements Controller {
         Planet planet = new Planet(x, y, radius, mass);
         addGameObject(planet);
         hudController.addHUDElement(new EnergyBar(planet.getEnergy(), x-(radius*1.5f), y+(radius+10), radius*3));
+        if(textureController != null) {
+            planet.bindTextureDrawer(textureController.getRandomPlanet());
+        }
         return planet;
     }
         

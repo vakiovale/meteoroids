@@ -74,4 +74,13 @@ public class Energy {
     public int getEnergy() {
         return energy;
     }
+
+    /**
+     * How much energy is left. Range from 0.0f-1.0f
+     * 
+     * @return float percentage of energy left
+     */
+    public float getPercentage() {
+        return (float)this.energy/this.MAX_ENERGY;
+    }
 }
