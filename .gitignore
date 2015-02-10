@@ -1,5 +1,6 @@
 .settings
 .project
 .classpath
+highscores.dat
 nbactions.xml
 target/

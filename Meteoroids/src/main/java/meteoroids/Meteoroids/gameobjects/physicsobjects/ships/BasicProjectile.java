@@ -43,7 +43,7 @@ public class BasicProjectile extends Projectile {
         Projectile projectile = this.clone(position);
 
         velocity.add(orientation);
-        orientation.scale(0.03f * startSpeed * velocity.length());
+        orientation.scale(0.04f * startSpeed * velocity.length());
         projectile.setVelocity(orientation);
 
         return projectile;

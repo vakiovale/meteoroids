@@ -1,7 +1,10 @@
 package meteoroids.Meteoroids;
 
+import java.io.IOException;
+
 import meteoroids.Meteoroids.controllers.GameController;
 import meteoroids.Meteoroids.controllers.graphics.GraphicsController;
+import meteoroids.Meteoroids.controllers.graphics.TextureController;
 import meteoroids.Meteoroids.controllers.utilities.ErrorController;
 import meteoroids.Meteoroids.controllers.utilities.TextHandler;
 import meteoroids.Meteoroids.utilities.GameTimer;
@@ -9,6 +12,9 @@ import meteoroids.Meteoroids.utilities.RandomGenerator;
 
 import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.Display;
+import org.newdawn.slick.opengl.Texture;
+import org.newdawn.slick.opengl.TextureLoader;
+import org.newdawn.slick.util.ResourceLoader;
 
 /**
  * Main Game Loop that handles the game
@@ -36,6 +42,9 @@ public class Game {
     /** GraphicsControlelr for controlling initializing graphics and drawing OpenGL object */
     private GraphicsController graphicsController;
     
+    /** TextureController */
+    public static TextureController textureController; 
+    
     /** gamOver variable will exit the game when set to true */
     private static boolean gameOver = false;
     
@@ -53,6 +62,7 @@ public class Game {
         graphicsController = new GraphicsController(Game.WIDTH, Game.HEIGHT);
         gameController = null;
         timer = new GameTimer();
+        textureController = null;
         RandomGenerator.randomPlusMinus(); // init random generator
     }
 
@@ -73,6 +83,9 @@ public class Game {
             ErrorController.fontResourceError(FONT_PATH);
             System.exit(0);
         }
+        
+        // Load textures
+        textureController = new TextureController();
         
         gameController = new GameController(graphicsController);
         int deltaTime = 1 / FPS * 1000;

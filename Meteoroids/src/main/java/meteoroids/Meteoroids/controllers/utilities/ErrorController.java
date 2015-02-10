@@ -59,5 +59,15 @@ public class ErrorController {
         print("Oh my god! Meteors destroyed your village and your current high score is lost!\n"
             + "Damn those meteors! For some reason your high score couldn't be saved :(");        
     }
+
+    /**
+     * Print error message when failing to load textures.
+     */
+    public static void textureLoadError(final String PATH_TO_TEXTURE) {
+        print("Oops! Meteors have crashed your village and destroyed your nice looking textures!\n"
+            + "We could not find the file (" + PATH_TO_TEXTURE +") needed to "
+            + "display textures. :(\nPlease reinstall the game and "
+            + "don't forget the textures!");        
+    }
     
 }

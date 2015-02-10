@@ -2,6 +2,8 @@ package meteoroids.Meteoroids.gameobjects.physicsobjects.ships;
 
 import javax.vecmath.Vector2f;
 
+import meteoroids.Meteoroids.Game;
+import meteoroids.Meteoroids.controllers.graphics.TextureDrawer;
 import meteoroids.Meteoroids.gameobjects.GameObject;
 import meteoroids.Meteoroids.gameobjects.Movable;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.BoundingSphere;
@@ -9,6 +11,7 @@ import meteoroids.Meteoroids.gameobjects.physicsobjects.PhysicsObject;
 import meteoroids.Meteoroids.gameobjects.utilities.ThrustFlame;
 
 import org.lwjgl.opengl.GL11;
+import org.newdawn.slick.Color;
 
 /**
  * Player's ship class.
@@ -18,12 +21,12 @@ import org.lwjgl.opengl.GL11;
  */
 public class Ship extends PhysicsObject implements Movable, BoundingSphere, ShootingShip {
 
-    private ThrustFlame thrustFlame;
-    private float rotation;
-    private float radius;
-    private Weapon weapon;
-    private final float MAX_SPEED = 0.25f;
-
+    protected ThrustFlame thrustFlame;
+    protected float rotation;
+    protected float radius;
+    protected Weapon weapon;
+    protected final float MAX_SPEED = 0.25f;
+    
     public Ship() {
         this(0.0f, 0.0f, 100.0f);
     }
@@ -40,12 +43,12 @@ public class Ship extends PhysicsObject implements Movable, BoundingSphere, Shoo
         this.weapon = null;
         this.maxSpeed = MAX_SPEED;
     }
-
+    
     @Override
     public void accelerate(float amount, float deltaTime) {
         Vector2f force = PhysicsObject.getRotationVector(rotation);
         force.normalize();
-        force.scale((float)(((amount/((velocity.length()/2)+1.0f)) * deltaTime)));        
+        force.scale((float)(((amount/((velocity.length()/2)+1.0f)) * deltaTime)));
         this.addForce(force);
     }
 
@@ -92,7 +95,7 @@ public class Ship extends PhysicsObject implements Movable, BoundingSphere, Shoo
 
         GL11.glTranslatef(this.position.x, this.position.y, 0);
         GL11.glRotatef(rotation, 0f, 0f, 1f);
-        GL11.glTranslatef(-this.position.x, -this.position.y, 0);
+        GL11.glTranslatef(-this.position.x, -this.position.y, 0);     
 
         GL11.glColor3f(1.0f, 0.2f, 0.2f);
         GL11.glBegin(GL11.GL_QUADS);
@@ -101,6 +104,7 @@ public class Ship extends PhysicsObject implements Movable, BoundingSphere, Shoo
         GL11.glVertex2f(this.position.x + radius, this.position.y - radius);
         GL11.glVertex2f(this.position.x, this.position.y + radius);
         GL11.glEnd();
+               
         GL11.glPopMatrix();
     }
 
@@ -121,8 +125,13 @@ public class Ship extends PhysicsObject implements Movable, BoundingSphere, Shoo
     @Override
     public Projectile fire() {
         if(this.weapon != null) {
-            return weapon.fire(getPosition(), getVelocity(),
-                    PhysicsObject.getRotationVector(rotation));
+            Vector2f position = getPosition();
+            Vector2f rotationVec = PhysicsObject.getRotationVector(rotation);
+            Vector2f rotationTmp = (Vector2f)rotationVec.clone();
+            rotationTmp.scale(10.5f);
+            position.add(rotationTmp);
+            
+            return weapon.fire(position, getVelocity(), rotationVec);
         }
         return null;
     }

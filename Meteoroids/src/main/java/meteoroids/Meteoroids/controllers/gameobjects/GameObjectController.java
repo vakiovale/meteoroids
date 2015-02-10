@@ -6,6 +6,7 @@ import java.util.List;
 import meteoroids.Meteoroids.Game;
 import meteoroids.Meteoroids.controllers.Controller;
 import meteoroids.Meteoroids.controllers.graphics.HUDController;
+import meteoroids.Meteoroids.controllers.graphics.TextureController;
 import meteoroids.Meteoroids.controllers.utilities.PointsController;
 import meteoroids.Meteoroids.gameobjects.DUGameObject;
 import meteoroids.Meteoroids.gameobjects.Drawable;
@@ -22,6 +23,7 @@ import meteoroids.Meteoroids.gameobjects.physicsobjects.ships.Projectile;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.ships.Projectile.ProjectileType;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.ships.Ship;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.ships.ShootingShip;
+import meteoroids.Meteoroids.gameobjects.physicsobjects.ships.SpaceFighter;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.ships.Weapon;
 
 /**
@@ -44,6 +46,8 @@ public class GameObjectController implements Controller {
     private StarController starController;
     private HUDController hudController;
     
+    private TextureController textureController;
+    
     private List<PhysicsObject> physicsObjects;
     private List<GravityObject> gravityObjects;
     private List<Drawable> drawableObjects;
@@ -65,7 +69,20 @@ public class GameObjectController implements Controller {
         planetController = new PlanetController();
         starController = new StarController();
         hudController = new HUDController();
+        
+        textureController = null;
     }
+    
+    /**
+     * Binds TextureController to GameObjectController.
+     * This has to called before adding new game objects to the game
+     * or otherwise they will not have textures.
+     * 
+     * @param textureController
+     */
+    public void bindTextureController(TextureController textureController) {
+        this.textureController = textureController;
+    }   
 
     /**
      * Shoot with ship.
@@ -85,7 +102,13 @@ public class GameObjectController implements Controller {
      * @return Ship
      */
     public Ship getShip() {
-        Ship ship = shipController.getShip();
+        SpaceFighter ship = shipController.getSpaceFighter();
+        if(textureController != null) {
+            ship.bindTextureDrawer(textureController.getShipTexture(),
+                    textureController.getShipThrustTexture(),
+                    textureController.getShipBreakTexture(),
+                    textureController.getShipFireTexture());
+        }
         addGameObject(ship);
         return ship;
     }

@@ -5,6 +5,7 @@ import meteoroids.Meteoroids.gameobjects.physicsobjects.ships.BasicProjectile;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.ships.PlasmaProjectile;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.ships.Projectile;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.ships.Ship;
+import meteoroids.Meteoroids.gameobjects.physicsobjects.ships.SpaceFighter;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.ships.Weapon;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.ships.Projectile.ProjectileType;
 
@@ -23,6 +24,23 @@ public class ShipController {
      */
     public Ship getShip() {
         Ship ship = new Ship(100.0f, 300.0f, 100.0f);      
+        
+        BasicGun gun = new BasicGun();
+        bindProjectile(gun, ProjectileType.BASIC_PROJECTILE);
+
+        ship.bindWeapon(gun);
+
+        return ship;
+    }
+    
+    
+    /**
+     * Creates a more advanced new ship.
+     * 
+     * @return SpaceFighter
+     */
+    public SpaceFighter getSpaceFighter() {
+        SpaceFighter ship = new SpaceFighter(100.0f, 300.0f, 100.0f);      
         
         BasicGun gun = new BasicGun();
         bindProjectile(gun, ProjectileType.BASIC_PROJECTILE);

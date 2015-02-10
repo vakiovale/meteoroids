@@ -42,6 +42,7 @@ public class GameStatePlay extends GameStateMachine {
         objectController = new GameObjectController();
         physicsController = new PhysicsController();
         graphicsController = this.controller.getGraphicsController();
+        objectController.bindTextureController(textureController);
                 
         // Initialize game objects
         this.starField = objectController.getStarField(Game.WIDTH, Game.HEIGHT);
