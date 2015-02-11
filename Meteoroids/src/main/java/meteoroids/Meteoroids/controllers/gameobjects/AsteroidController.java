@@ -71,8 +71,8 @@ public class AsteroidController {
         float y;
         for(int i = 0; i < asteroids.length; i++) {
             do {
-                x = Game.WIDTH * RandomGenerator.random();
-                y = Game.HEIGHT * RandomGenerator.random();
+                x = Game.WIDTH*3 * RandomGenerator.randomPlusMinus();
+                y = Game.HEIGHT*3 * RandomGenerator.randomPlusMinus();
             } while(spawningFails(x, y));                       
             asteroids[i] = new Asteroid(x, y, mass, size);
             asteroids[i].addForce(RandomGenerator.randomPlusMinus() * 0.05f,
@@ -90,10 +90,10 @@ public class AsteroidController {
      * @return true if spawning fails
      */
     private boolean spawningFails(float x, float y) {
-        if(x < Game.WIDTH*0.1f || x > Game.WIDTH*0.9f) {
+        if(x < -Game.WIDTH || x > Game.WIDTH*2) {
             return false;
         }
-        else if(y < Game.HEIGHT*0.1f || y > Game.HEIGHT*0.9f) {
+        else if(y < -Game.HEIGHT || y > Game.HEIGHT*2) {
             return false;
         }
         return true;

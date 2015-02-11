@@ -14,6 +14,10 @@ public class DUGameObject extends GameObject implements Drawable, Updateable {
     public DUGameObject() {
         this.dead = false;
     }
+    
+    public DUGameObject(float posX, float posY) {
+        this.position.set(posX, posY);
+    }
 
     @Override
     public void update(float deltaTime) {

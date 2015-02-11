@@ -25,6 +25,9 @@ public class TextHandler implements Drawable {
     private HashSet<Text> texts;
 
     private static TrueTypeFont font = null;
+    private static TrueTypeFont fontSmall = null;
+    private static TrueTypeFont fontBig = null;
+    private static TrueTypeFont fontTiny = null;
     
     public TextHandler() {
         texts = new HashSet<>();
@@ -41,8 +44,18 @@ public class TextHandler implements Drawable {
             InputStream inputStream = ResourceLoader.getResourceAsStream(fontPath);
             
             Font awtFont = Font.createFont(Font.TRUETYPE_FONT, inputStream);
-            awtFont = awtFont.deriveFont(30f*2);
+
+            awtFont = awtFont.deriveFont(18f);
+            fontTiny = new TrueTypeFont(awtFont, false);           
+            
+            awtFont = awtFont.deriveFont(36f);
+            fontSmall = new TrueTypeFont(awtFont, false);
+            
+            awtFont = awtFont.deriveFont(60f);
             font = new TrueTypeFont(awtFont, false);
+            
+            awtFont = awtFont.deriveFont(72f);
+            fontBig = new TrueTypeFont(awtFont, false);
             return true;     
         } catch (Exception e) {
             return false;
@@ -71,7 +84,24 @@ public class TextHandler implements Drawable {
             GL11.glOrtho(0, Game.WIDTH, Game.HEIGHT, 0, 1, -1);
             GL11.glMatrixMode(GL11.GL_MODELVIEW);
             for(Text text : texts) {
-                font.drawString(text.getX(), text.getY(), text.toString(), text.isActive() ? Color.yellow : Color.lightGray);
+                TrueTypeFont f = null;
+                switch(text.getSize()) {
+                    case -1:
+                        f = fontTiny;
+                        break;
+                    case 0:
+                        f = fontSmall;
+                        break;
+                    case 1:
+                        f = font;
+                        break;
+                    case 2:
+                        f = fontBig;
+                        break;
+                }
+                if(f != null) {
+                    f.drawString(text.getX(), text.getY(), text.toString(), text.isActive() ? Color.yellow : Color.lightGray);
+                }
             }
         }
     }

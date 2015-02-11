@@ -31,13 +31,31 @@ public class Star extends DrawableGameObject {
         GL11.glColor3f(red, green, blue);
         GL11.glTranslatef(this.position.x, this.position.y, 0);
         GL11.glScalef(radius, radius, 1);
-        GL11.glBegin(GL11.GL_TRIANGLE_FAN);
+        
+        drawOffset(0);
+        drawOffset(220);
+        drawOffset(-220);
+        drawOffset(820);
+        drawOffset(-920);
+        
+        /*
         GL11.glVertex2f(0, 0);
-        for(int i = 0; i <= 24; i++) {
-            double angle = Math.PI * 2 * i / 24;
+        for(int i = 0; i <= 12; i++) {
+            double angle = Math.PI * 2 * i / 12;
             GL11.glVertex2f((float)Math.cos(angle), (float)Math.sin(angle));
-        }
+        }*/
         GL11.glEnd();
         GL11.glPopMatrix();
+    }
+
+    private void drawOffset(float offset) {
+        GL11.glBegin(GL11.GL_QUADS);
+        
+        GL11.glVertex2d(0+offset, 0+offset);
+        GL11.glVertex2d(4+offset, 0+offset);
+        GL11.glVertex2d(4+offset, 4+offset);
+        GL11.glVertex2d(0+offset, 4+offset);
+
+        GL11.glEnd();
     }
 }

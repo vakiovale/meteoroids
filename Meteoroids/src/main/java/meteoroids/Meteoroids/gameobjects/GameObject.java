@@ -14,8 +14,10 @@ public class GameObject implements IPosition {
 
     protected Vector2f position;
     protected int id;
+    protected boolean keepInsideWindow;
 
     public GameObject() {
+        this.keepInsideWindow = false;
         position = new Vector2f(0, 0);
         id = 0;
     }
@@ -26,6 +28,10 @@ public class GameObject implements IPosition {
 
     public void setID(int id) {
         this.id = id;
+    }
+    
+    public void setKeepInsideWindow(boolean keepInWindow) {
+        keepInsideWindow = keepInWindow;
     }
 
     @Override
@@ -62,17 +68,19 @@ public class GameObject implements IPosition {
      * 
      * @param position vector
      */
-    public static void keepObjectInsideGameWindow(Vector2f position) {
-        if(position.x > Game.WIDTH) {
-            position.x = 0.0f;
-        } else if(position.x < 0.0f) {
-            position.x = Game.WIDTH;
+    public void keepObjectInsideGameWindow(Vector2f position) {
+        if(keepInsideWindow) {
+            if(position.x > Game.WIDTH) {
+                position.x = 0.0f;
+            } else if(position.x < 0.0f) {
+                position.x = Game.WIDTH;
+            }
+            if(position.y > Game.HEIGHT) {
+                position.y = 0.0f;
+            } else if(position.y < 0.0f) {
+                position.y = Game.HEIGHT;
+            }
         }
-        if(position.y > Game.HEIGHT) {
-            position.y = 0.0f;
-        } else if(position.y < 0.0f) {
-            position.y = Game.HEIGHT;
-        }        
     }
     
     @Override

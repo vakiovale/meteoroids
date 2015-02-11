@@ -83,4 +83,9 @@ public class Energy {
     public float getPercentage() {
         return (float)this.energy/this.MAX_ENERGY;
     }
+
+    public void reset() {
+        dead = false;
+        this.energy = this.MAX_ENERGY;
+    }
 }

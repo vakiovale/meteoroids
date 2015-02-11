@@ -44,7 +44,7 @@ public class Asteroid extends PhysicsObject implements Movable, BoundingSphere {
         super.update(deltaTime);
         rotate(1.0f * this.velocity.length(), deltaTime);
 
-        GameObject.keepObjectInsideGameWindow(this.position);
+        keepObjectInsideGameWindow(this.position);
 
         this.flame.addFlame(this.position.x, this.position.y);
     }

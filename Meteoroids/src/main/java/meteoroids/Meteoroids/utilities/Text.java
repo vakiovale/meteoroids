@@ -17,6 +17,7 @@ public class Text {
     private float y;
     private boolean active;
     private UUID id;
+    private int size;
     
     public Text(String text) {
         this(text, Game.WIDTH/2-(Game.WIDTH/14), Game.HEIGHT/2);
@@ -26,8 +27,17 @@ public class Text {
         this.text = text;
         this.x = x;
         this.y = y;
+        this.size = 1;
         active = false;
         id = UUID.randomUUID();
+    }
+    
+    public void setSize(int size) {
+        this.size = size;
+    }
+    
+    public int getSize() {
+        return size;
     }
     
     public String getText() {

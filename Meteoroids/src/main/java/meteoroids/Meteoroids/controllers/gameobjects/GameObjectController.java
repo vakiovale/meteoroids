@@ -15,6 +15,7 @@ import meteoroids.Meteoroids.gameobjects.GameObject;
 import meteoroids.Meteoroids.gameobjects.StarField;
 import meteoroids.Meteoroids.gameobjects.Updateable;
 import meteoroids.Meteoroids.gameobjects.hud.EnergyBar;
+import meteoroids.Meteoroids.gameobjects.hud.Radar;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.Asteroid;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.GravityObject;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.PhysicsObject;
@@ -142,6 +143,10 @@ public class GameObjectController implements Controller {
     public void changeWeapon(Ship ship) {
         shipController.changeWeapon(ship);
     }
+    
+    public void addRadar(GameObject object) {
+        hudController.addHUDElement(new Radar(this, object));
+    }
 
     /**
      * Creates Asteroids.
@@ -225,7 +230,7 @@ public class GameObjectController implements Controller {
             System.out.println("kill " + object);
         }
         firingController.update(deltaTime);
-        generateNewAsteroids(deltaTime); // spawning asteroids
+        // generateNewAsteroids(deltaTime); // spawning asteroids
         hudController.update(deltaTime);
     }
     
@@ -236,8 +241,8 @@ public class GameObjectController implements Controller {
      * @param height of the star field
      * @return
      */
-    public StarField getStarField(float width, float height) {
-        StarField starField = starController.generateStarField(width, height);
+    public StarField getStarField(float width, float height, int numberOfStars) {
+        StarField starField = starController.generateStarField(width, height, numberOfStars);
         addGameObject(starField);
         return starField;
     }
@@ -371,6 +376,18 @@ public class GameObjectController implements Controller {
                 break;
             if(((GameObject)list.get(i)).getID() == id) {
                 list.remove(i);
+                break;
+            }
+        }
+    }
+
+    public void killRandomAsteroid() {
+        for(int i = 0; i < physicsObjects.size(); i++) {
+            PhysicsObject o = physicsObjects.get(i);
+            if(o instanceof Asteroid) {
+                Asteroid asteroid = (Asteroid)o;
+                destroyAsteroid(asteroid);
+                killGameObject(asteroid);
                 break;
             }
         }

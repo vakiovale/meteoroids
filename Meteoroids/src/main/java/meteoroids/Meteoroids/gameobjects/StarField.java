@@ -15,13 +15,13 @@ public class StarField extends DrawableGameObject {
 
     List<Star> stars;
     
-    public StarField(float width, float height) {
+    public StarField(float width, float height, int numberOfStars) {
         stars = new ArrayList<>();
         
-        for(int i = 0; i < 1000; i++) {
+        for(int i = 0; i < numberOfStars; i++) {
             stars.add(new Star(RandomGenerator.random(),
-                    RandomGenerator.random()*width,
-                    RandomGenerator.random()*height));
+                    RandomGenerator.randomPlusMinus()*2*width,
+                    RandomGenerator.randomPlusMinus()*2*height));
         }
     }
     

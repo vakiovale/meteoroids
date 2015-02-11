@@ -10,4 +10,7 @@ import meteoroids.Meteoroids.gameobjects.DUGameObject;
  */
 public abstract class HUDElement extends DUGameObject {
 
+    public HUDElement() {
+        super(0.0f, 0.0f);
+    }
 }

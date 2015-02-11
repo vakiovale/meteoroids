@@ -26,7 +26,7 @@ public class DamageController implements Controller {
      * @param hittingObject object that is hitting the other object
      */
     public void hitIEnergyObject(IEnergy objectToHit, PhysicsObject hittingObject) {
-        objectToHit.decreseEnergy((int)hittingObject.getMass()/100);
+        objectToHit.decreseEnergy((int)(hittingObject.getMass()/10.0f));
     }
     
     /**

@@ -21,8 +21,8 @@ public class StarController implements Controller {
      * 
      * @return starField
      */
-    public StarField generateStarField(float width, float height) {
-        StarField starField = new StarField(width, height);
+    public StarField generateStarField(float width, float height, int numberOfStars) {
+        StarField starField = new StarField(width, height, numberOfStars);
         return starField;
     }
 

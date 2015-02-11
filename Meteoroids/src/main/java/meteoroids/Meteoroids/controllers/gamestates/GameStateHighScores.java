@@ -38,7 +38,7 @@ public class GameStateHighScores extends GameStateMachine {
     
     public GameStateHighScores(GameStateController controller) {
         this(controller, new GameObjectController(), false);
-        objectController.getStarField(Game.WIDTH, Game.HEIGHT);
+        objectController.getStarField(Game.WIDTH, Game.HEIGHT, 100);
     }
 
     private void initHighScores() {

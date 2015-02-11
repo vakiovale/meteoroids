@@ -69,7 +69,7 @@ public class Ship extends PhysicsObject implements Movable, BoundingSphere, Shoo
     public void update(float deltaTime) {
         super.update(deltaTime);
 
-        GameObject.keepObjectInsideGameWindow(this.position);
+        keepObjectInsideGameWindow(this.position);
         
         if(weapon != null) {
             weapon.update(deltaTime);

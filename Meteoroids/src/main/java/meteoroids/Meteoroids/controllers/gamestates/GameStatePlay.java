@@ -7,6 +7,7 @@ import meteoroids.Meteoroids.controllers.gameobjects.GameObjectController;
 import meteoroids.Meteoroids.controllers.graphics.GraphicsController;
 import meteoroids.Meteoroids.controllers.physics.PhysicsController;
 import meteoroids.Meteoroids.controllers.utilities.PointsController;
+import meteoroids.Meteoroids.controllers.utilities.TextHandler;
 import meteoroids.Meteoroids.gameobjects.GameObject;
 import meteoroids.Meteoroids.gameobjects.StarField;
 import meteoroids.Meteoroids.gameobjects.hud.EnergyBar;
@@ -16,6 +17,7 @@ import meteoroids.Meteoroids.gameobjects.physicsobjects.Planet;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.PlanetType;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.ships.Ship;
 import meteoroids.Meteoroids.utilities.RandomGenerator;
+import meteoroids.Meteoroids.utilities.Text;
 
 /**
  * Playing game state.
@@ -33,6 +35,10 @@ public class GameStatePlay extends GameStateMachine {
     private Asteroid[] asteroids;
     private Planet[] planets;
     private StarField starField;
+    private TextHandler textHandler;
+    private boolean levelFinished;
+    
+    private int finalDestroyCounter;
             
     public GameStatePlay(GameStateController controller) {
         super(controller);
@@ -44,41 +50,69 @@ public class GameStatePlay extends GameStateMachine {
         physicsController = new PhysicsController();
         graphicsController = this.controller.getGraphicsController();
         objectController.bindTextureController(textureController);
-                
+                        
         // Initialize game objects
-        this.starField = objectController.getStarField(Game.WIDTH, Game.HEIGHT);
+        this.starField = objectController.getStarField(Game.WIDTH*3, Game.HEIGHT*3, 1000);
         this.ship = objectController.getShip();
         
-        this.asteroids = objectController.getAsteroids(4, 1000.0f, 30.0f);
-        //initAsteroids();
+        // this.asteroids = objectController.getAsteroids(4, 1000.0f, 30.0f);
+        initAsteroidBelt();
+        // initHugeAsteroid();
         
-        this.planets = new Planet[1];
-        //this.planets[0] = objectController.getPlanet(200.0f, Game.HEIGHT/3, 20.0f, 10000.0f, PlanetType.MARS);
-        //this.planets[1] = objectController.getPlanet(Game.WIDTH-200.0f, Game.HEIGHT-Game.HEIGHT/3, 100.0f, 10000.0f, PlanetType.JUPITER);
+        this.planets = new Planet[2];
+        this.planets[0] = objectController.getPlanet(Game.WIDTH*-0.5f, Game.HEIGHT/3, 200.0f, 1000000.0f, PlanetType.MARS);
+        this.planets[1] = objectController.getPlanet(Game.WIDTH*2.2f, Game.HEIGHT-Game.HEIGHT/3, 1000.0f, 25000000.0f, PlanetType.JUPITER);
         for(int i = 0; i < planets.length; i++) {
-            this.planets[i] = initPlanet();
-        }
+            // this.planets[i] = initPlanet();
+        }        
+
+        // Initialize radar
+        objectController.addRadar(ship);
         
         // Add player's ship to the PointsController
         PointsController.addPlayer(ship);
         PointsController.bindMainPlayer(ship);
         objectController.getHUDController().addHUDElement(
                 new PointsBox(PointsController.getPointsObject(ship)));
+        
+        // Initialize follow up camera
+        graphicsController.setFollowPlayerCamera(true, ship);
+        
+        textHandler = new TextHandler();
+        Text levelText = new Text("LEVEL 3:", Game.WIDTH/8-100.0f, Game.HEIGHT/3-300.0f);
+        Text lineText = new Text("---------", Game.WIDTH/8-100.0f, Game.HEIGHT/3-260.0f);
+        levelText.setSize(2);
+        Text levelSubText = new Text("Asteroid field", Game.WIDTH/8-100.0f, Game.HEIGHT/3-220.0f);
+        Text levelInfoText = new Text("- get 400 points before Jupiter is destroyed!", Game.WIDTH/8-100.0f, Game.HEIGHT/3-120.0f);
+        levelSubText.setSize(0);
+        levelInfoText.setSize(-1);
+        textHandler.addText(levelText);
+        textHandler.addText(lineText);
+        textHandler.addText(levelSubText);
+        textHandler.addText(levelInfoText);
+        
+        finalDestroyCounter = 10;  
+        levelFinished = false;
+        
     }
     
-    private void initAsteroids() {
+    private void initHugeAsteroid() {
+        objectController.createAsteroid(0.0f, Game.HEIGHT*2.0f, 10000.0f, 1000.0f);        
+    }
+
+    private void initAsteroidBelt() {
         float x = Game.WIDTH/2-200.0f;
-        float y = 100.0f;
+        float y = -Game.HEIGHT;
         for(int i = 0; i < 5; i++) {
             objectController.createAsteroid(x, y, 1000.0f, 30.0f);
             for(int j = 0; j < 5; j++) {
-                objectController.createAsteroid(RandomGenerator.randomPlusMinus()*200.0f+x, RandomGenerator.randomPlusMinus()*200.0f+y, 500.0f, 15.0f);
+                objectController.createAsteroid(RandomGenerator.randomPlusMinus()*200.0f+x, RandomGenerator.randomPlusMinus()*1000.0f+y, 500.0f, 15.0f);
                 for(int k = 0; k < 5; k++) {
-                    objectController.createAsteroid(RandomGenerator.randomPlusMinus()*200.0f+x, RandomGenerator.randomPlusMinus()*200.0f+y, 200.0f, 6.0f);
+                    objectController.createAsteroid(RandomGenerator.randomPlusMinus()*200.0f+x, RandomGenerator.randomPlusMinus()*1000.0f+y, 200.0f, 6.0f);
                 }
             }
             x += 50.0f;
-            y += 220.0f;
+            y += 1000.0f;
         }
     }
 
@@ -129,11 +163,36 @@ public class GameStatePlay extends GameStateMachine {
         // Draw
         graphicsController.draw(objectController.getDrawables());
         graphicsController.draw(objectController.getHUDController());
-
+        textHandler.draw();
+        
         // Check if game is over
-        checkGameOver();    
+        levelFinished = checkLevelFinished(deltaTime);
+        if(!levelFinished) {
+            checkGameOver();
+        }
     }
     
+    private boolean checkLevelFinished(float deltaTime) {
+        if(PointsController.getPoints(PointsController.mainPlayer) >= 400) {
+            if(!levelFinished) {
+                Text text = new Text("LEVEL FINISHED!", Game.WIDTH/2-200.0f, Game.HEIGHT/2-100.0f);
+                text.setSize(2);
+                textHandler.addText(text);
+                for(Planet p : planets) {
+                    p.revive();
+                }
+            }
+            finalDestroyCounter -= deltaTime;
+            if(finalDestroyCounter <= 0) {
+                objectController.killRandomAsteroid();
+                finalDestroyCounter = 20;
+                return true;
+            }
+            return true;
+        }        
+        return false;
+    }
+
     /**
      * Kills GameObject and removes it from the game.
      * 

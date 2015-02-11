@@ -8,6 +8,7 @@ import meteoroids.Meteoroids.Game;
 import meteoroids.Meteoroids.controllers.gameobjects.GameObjectController;
 import meteoroids.Meteoroids.controllers.utilities.TextHandler;
 import meteoroids.Meteoroids.gameobjects.StarField;
+import meteoroids.Meteoroids.gameobjects.physicsobjects.Asteroid;
 import meteoroids.Meteoroids.utilities.Text;
 
 /**
@@ -35,8 +36,11 @@ public class GameStateMainMenu extends GameStateMachine {
         super(controller);
         gameState = GameState.MAIN_MENU;
         objectController = new GameObjectController();
-        starField = objectController.getStarField(Game.WIDTH, Game.HEIGHT);
-        objectController.getAsteroids(25, 100.0f, 15.0f);
+        starField = objectController.getStarField(Game.WIDTH, Game.HEIGHT, 100);
+        Asteroid asteroids[] = objectController.getAsteroids(25, 100.0f, 15.0f);
+        for(Asteroid a : asteroids) {
+            a.setKeepInsideWindow(true);
+        }
         textHandler = new TextHandler();
         buttons = new HashMap<>();
         createMenu();
@@ -78,6 +82,7 @@ public class GameStateMainMenu extends GameStateMachine {
     
     @Override
     public void update(float deltaTime) {
+        controller.getGraphicsController().setFollowPlayerCamera(false, null);
         objectController.update(deltaTime);
         controller.getGraphicsController().draw(objectController.getDrawables());
         textHandler.draw();

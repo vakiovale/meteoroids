@@ -7,11 +7,13 @@ import meteoroids.Meteoroids.controllers.graphics.GraphicsController;
 import meteoroids.Meteoroids.controllers.graphics.TextureController;
 import meteoroids.Meteoroids.controllers.utilities.ErrorController;
 import meteoroids.Meteoroids.controllers.utilities.TextHandler;
+import meteoroids.Meteoroids.gameobjects.physicsobjects.ships.Ship;
 import meteoroids.Meteoroids.utilities.GameTimer;
 import meteoroids.Meteoroids.utilities.RandomGenerator;
 
 import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.Display;
+import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.opengl.Texture;
 import org.newdawn.slick.opengl.TextureLoader;
 import org.newdawn.slick.util.ResourceLoader;
@@ -99,7 +101,7 @@ public class Game {
             
             // Update game world
             gameController.update(deltaTime);
-            
+                        
             Display.update();
             Display.sync(FPS);
         }
