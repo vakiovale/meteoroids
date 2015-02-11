@@ -60,8 +60,8 @@ public class GameStatePlay extends GameStateMachine {
         // initHugeAsteroid();
         
         this.planets = new Planet[2];
-        this.planets[0] = objectController.getPlanet(Game.WIDTH*-0.5f, Game.HEIGHT/3, 200.0f, 1000000.0f, PlanetType.MARS);
-        this.planets[1] = objectController.getPlanet(Game.WIDTH*2.2f, Game.HEIGHT-Game.HEIGHT/3, 1000.0f, 25000000.0f, PlanetType.JUPITER);
+        this.planets[0] = objectController.getPlanet(Game.WIDTH*-0.4f, Game.HEIGHT/3, 200.0f, 1000000.0f, PlanetType.MARS);
+        this.planets[1] = objectController.getPlanet(Game.WIDTH*2.2f, Game.HEIGHT-Game.HEIGHT/3, 600.0f, 25000000.0f, PlanetType.JUPITER);
         for(int i = 0; i < planets.length; i++) {
             // this.planets[i] = initPlanet();
         }        
@@ -83,13 +83,18 @@ public class GameStatePlay extends GameStateMachine {
         Text lineText = new Text("---------", Game.WIDTH/8-100.0f, Game.HEIGHT/3-260.0f);
         levelText.setSize(2);
         Text levelSubText = new Text("Asteroid field", Game.WIDTH/8-100.0f, Game.HEIGHT/3-220.0f);
-        Text levelInfoText = new Text("- get 400 points before Jupiter is destroyed!", Game.WIDTH/8-100.0f, Game.HEIGHT/3-120.0f);
+
+        Text levelInfoText1 = new Text("- protect Jupiter and Mars from nasty asteroids!", Game.WIDTH/8-100.0f, Game.HEIGHT/3-120.0f);
+        Text levelInfoText2 = new Text("- get 400 points", Game.WIDTH/8-100.0f, Game.HEIGHT/3-100.0f);
         levelSubText.setSize(0);
-        levelInfoText.setSize(-1);
+        levelInfoText1.setSize(-1);
+        levelInfoText2.setSize(-1);
         textHandler.addText(levelText);
         textHandler.addText(lineText);
         textHandler.addText(levelSubText);
-        textHandler.addText(levelInfoText);
+        textHandler.addText(levelInfoText1);
+        textHandler.addText(levelInfoText2);
+        
         
         finalDestroyCounter = 10;  
         levelFinished = false;
@@ -180,6 +185,7 @@ public class GameStatePlay extends GameStateMachine {
                 textHandler.addText(text);
                 for(Planet p : planets) {
                     p.revive();
+                    p.invincible();
                 }
             }
             finalDestroyCounter -= deltaTime;

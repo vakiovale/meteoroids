@@ -20,6 +20,7 @@ public class Planet extends GravityObject implements BoundingSphere, IEnergy {
     private float green;
     private float blue;
     private TextureDrawer texture;
+    private boolean invincible;
 
     public Planet() {
         this(0.0f, 0.0f, 100.0f, 500.0f);
@@ -44,6 +45,7 @@ public class Planet extends GravityObject implements BoundingSphere, IEnergy {
         this.red = RandomGenerator.random();
         this.green = RandomGenerator.random();
         this.blue = RandomGenerator.random();
+        this.invincible = false;
     }
     
     public void bindTextureDrawer(TextureDrawer textureDrawer) {
@@ -94,12 +96,16 @@ public class Planet extends GravityObject implements BoundingSphere, IEnergy {
 
     @Override
     public void decreaseEnergy() {
-        energy.decrease();        
+        if(!invincible) {
+            energy.decrease();        
+        }
     }
 
     @Override
     public void decreseEnergy(int amount) {
-        energy.decrease(amount);
+        if(!invincible) {
+            energy.decrease(amount);
+        }
     }
 
     @Override
@@ -114,6 +120,10 @@ public class Planet extends GravityObject implements BoundingSphere, IEnergy {
 
     public void revive() {
         this.energy.reset();
+    }
+
+    public void invincible() {
+        invincible = true;
     }
 
 }

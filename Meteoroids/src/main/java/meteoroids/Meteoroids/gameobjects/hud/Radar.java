@@ -106,7 +106,7 @@ public class Radar extends HUDElement {
         if(o instanceof Planet) {
             red = 0.0f;
             blue = 1.0f;
-            radius = 3.0f;
+            radius = 6.0f;
         }
         
         GL11.glMatrixMode(GL11.GL_PROJECTION);
@@ -120,12 +120,16 @@ public class Radar extends HUDElement {
         GL11.glTranslatef(150, 150, 0);
         
         GL11.glColor4f(red, green, blue, 0.5f);
-        GL11.glBegin(GL11.GL_QUADS);
+        GL11.glBegin(GL11.GL_TRIANGLE_FAN);
         
-        GL11.glVertex2f(x-radius, y-radius);
-        GL11.glVertex2f(x+radius, y-radius);
-        GL11.glVertex2f(x+radius, y+radius);
-        GL11.glVertex2f(x-radius, y+radius);
+        GL11.glVertex2f(x-radius, y-radius/2);
+        GL11.glVertex2f(x-radius/2, y-radius);
+        GL11.glVertex2f(x+radius/2, y-radius);
+        GL11.glVertex2f(x+radius, y-radius/2);
+        GL11.glVertex2f(x+radius, y+radius/2);
+        GL11.glVertex2f(x+radius/2, y+radius);
+        GL11.glVertex2f(x-radius/2, y+radius);
+        GL11.glVertex2f(x-radius, y+radius/2);
 
         GL11.glEnd();
         
