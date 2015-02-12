@@ -7,6 +7,9 @@ import meteoroids.Meteoroids.Game;
 import meteoroids.Meteoroids.controllers.gameobjects.GameObjectController;
 import meteoroids.Meteoroids.controllers.gamestates.levels.Level;
 import meteoroids.Meteoroids.controllers.gamestates.levels.LevelAsteroidField;
+import meteoroids.Meteoroids.controllers.gamestates.levels.LevelHelpPluto;
+import meteoroids.Meteoroids.controllers.gamestates.levels.LevelNeptuneInTrouble;
+import meteoroids.Meteoroids.controllers.gamestates.levels.LevelTutorial;
 import meteoroids.Meteoroids.controllers.gamestates.levels.LevelType;
 import meteoroids.Meteoroids.controllers.graphics.GraphicsController;
 import meteoroids.Meteoroids.controllers.physics.PhysicsController;
@@ -42,6 +45,7 @@ public class GameStatePlay extends GameStateMachine {
                 
     public GameStatePlay(GameStateController controller) {
         super(controller);
+        PointsController.resetPoints();
         gameState = GameState.PLAY;
         printHelp();
         initLevels();
@@ -50,6 +54,9 @@ public class GameStatePlay extends GameStateMachine {
     
     private void initLevels() {
         levels = new ArrayDeque<>();
+        levels.add(LevelType.TUTORIAL);
+        levels.add(LevelType.SAVE_PLUTO);
+        levels.add(LevelType.NEPTUNE_IN_TROUBLE);
         levels.add(LevelType.ASTEROID_FIELD);
     }
 
@@ -76,7 +83,9 @@ public class GameStatePlay extends GameStateMachine {
         objectController.addRadar(ship);
         
         // Add player's ship to the PointsController
-        PointsController.addPlayer(ship);
+        if(PointsController.mainPlayer == null) {
+            PointsController.addPlayer(ship);
+        }
         PointsController.bindMainPlayer(ship);
         objectController.getHUDController().addHUDElement(
                 new PointsBox(PointsController.getPointsObject(ship)));
@@ -94,6 +103,15 @@ public class GameStatePlay extends GameStateMachine {
 
     private void initLevel(LevelType levelType) {
         switch (levelType) {
+            case TUTORIAL:
+                this.level = new LevelTutorial(controller, this);
+                break;
+            case SAVE_PLUTO:
+                this.level = new LevelHelpPluto(controller, this);
+                break;
+            case NEPTUNE_IN_TROUBLE:
+                this.level = new LevelNeptuneInTrouble(controller, this);
+                break;
             case ASTEROID_FIELD:
                 this.level = new LevelAsteroidField(controller, this);
                 break;
@@ -191,6 +209,7 @@ public class GameStatePlay extends GameStateMachine {
         }
         else {
             exit();
+            controller.addGameState(new GameStateGameOver(controller, objectController));
         }
     }
 

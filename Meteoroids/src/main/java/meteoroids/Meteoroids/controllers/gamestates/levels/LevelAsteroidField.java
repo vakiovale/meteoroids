@@ -19,14 +19,16 @@ import meteoroids.Meteoroids.utilities.Text;
  */
 public class LevelAsteroidField extends Level {
     
+    private long targetPoints;
+    
     public LevelAsteroidField(GameStateController controller, GameStatePlay play) {
-        super(controller, play);       
-        initTexts();
+        super(controller, play); 
+        targetPoints = PointsController.getPoints(PointsController.mainPlayer);
     }
     
     @Override
     protected void initTexts() {
-        addLevelText("LEVEL 3", "Asteroid field");
+        addLevelText("LEVEL 4", "Asteroid field");
         addLevelInfoText("protect Jupiter and Mars from nasty asteroids!");
         addLevelInfoText("get 400 points");
     }
@@ -56,39 +58,14 @@ public class LevelAsteroidField extends Level {
     }
 
     @Override
-    public void update(float deltaTime) {
-        // Draw texts
-        textHandler.draw();
-        
-        super.update(deltaTime);
-    }
-
-    @Override
     protected boolean checkLevelFinished(float deltaTime) {
-        if(PointsController.getPoints(PointsController.mainPlayer) >= 400) {
+        if(PointsController.getPoints(PointsController.mainPlayer) >= targetPoints) {
             if(!levelFinished) {
-                Text text = new Text("LEVEL FINISHED!", Game.WIDTH/2-200.0f, Game.HEIGHT/2-100.0f);
-                text.setSize(2);
-                textHandler.addText(text);
-                for(Planet p : planets) {
-                    p.revive();
-                    p.invincible();
-                }
+                levelDone();
             }
-            killAsteroids(deltaTime);
             return true;
         }        
         return false;
-    }
-
-    @Override
-    protected void checkGameOver() {
-        for(int i = 0; i < planets.length; i++) {
-            if(planets[i] != null && planets[i].isDead()) {               
-                gameOver(planets[i]);
-                break;
-            }
-        }       
     }
 
 }

@@ -7,5 +7,5 @@ package meteoroids.Meteoroids.controllers.gamestates.levels;
  *
  */
 public enum LevelType {
-    ASTEROID_FIELD
+    ASTEROID_FIELD, TUTORIAL, SAVE_PLUTO, NEPTUNE_IN_TROUBLE
 }

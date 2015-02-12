@@ -1,5 +1,8 @@
 package meteoroids.Meteoroids.controllers.gamestates.levels;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import meteoroids.Meteoroids.Game;
 import meteoroids.Meteoroids.controllers.gameobjects.GameObjectController;
 import meteoroids.Meteoroids.controllers.gamestates.GameStateController;
@@ -10,6 +13,7 @@ import meteoroids.Meteoroids.controllers.utilities.TextHandler;
 import meteoroids.Meteoroids.gameobjects.GameObject;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.Asteroid;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.Planet;
+import meteoroids.Meteoroids.utilities.GameTimer;
 import meteoroids.Meteoroids.utilities.RandomGenerator;
 import meteoroids.Meteoroids.utilities.Text;
 
@@ -31,22 +35,30 @@ public abstract class Level extends GameStateMachine {
     protected Asteroid[] asteroids;
     
     private float infoTextHeight;
+    private float helpTextHeight;
     
-    private int nextLevelCountDown;
+    private List<Text> helpTexts;
+    
+    protected int nextLevelCountDown;
+    
+    protected int levelFinishedTimer;
     
     public Level(GameStateController controller, GameStatePlay play) {
         super(controller);
-        
         this.play = play;
         finalDestroyCounter = 10;  
         levelFinished = false;
         this.objectController = play.getObjectController();
         this.textHandler = new TextHandler();
         this.infoTextHeight = -120.0f;
+        this.helpTextHeight = -250.0f;
         this.nextLevelCountDown = 10000;
+        this.helpTexts = new ArrayList<>();
+        this.levelFinishedTimer = 30000;
         
         initPlanets();
         initAsteroids();
+        initTexts();
     }
     
     protected abstract void initTexts();
@@ -56,8 +68,17 @@ public abstract class Level extends GameStateMachine {
     protected abstract void initPlanets();
     
     protected abstract boolean checkLevelFinished(float deltaTime);
-    
-    protected abstract void checkGameOver();
+        
+    protected void checkGameOver() {
+        if(planets != null) {
+            for(int i = 0; i < planets.length; i++) {
+                if(planets[i] != null && planets[i].isDead()) {               
+                    gameOver(planets[i]);
+                    break;
+                }
+            }
+        }
+    }
     
     protected void gameOver(GameObject kill) {
         exit();
@@ -68,12 +89,19 @@ public abstract class Level extends GameStateMachine {
     
     @Override
     public void update(float deltaTime) {              
+        // Draw texts
+        textHandler.draw();
+        
+        // Decrease level finished timer
+        levelFinishedTimer -= deltaTime;
+        
         // Check if game is over
         levelFinished = checkLevelFinished(deltaTime);
         if(!levelFinished) {
             checkGameOver();
         }
         if(levelFinished) {
+            removeHelpTexts();
             nextLevelCountDown -= deltaTime;
             if(nextLevelCountDown <= 0) {
                 play.nextLevel();
@@ -81,6 +109,27 @@ public abstract class Level extends GameStateMachine {
         }
     }
     
+    private void removeHelpTexts() {
+        for(Text text : helpTexts) {
+            textHandler.removeText(text);
+        }        
+    }
+    
+    protected void levelDone() {
+        if(planets != null) {
+            for(Planet p : planets) {
+                p.revive();
+                p.invincible();
+            }
+        }
+        Text textTop = new Text("GOOD JOB!", Game.WIDTH/2-140.0f, Game.HEIGHT/2-250.0f);
+        Text text = new Text("LEVEL FINISHED!", Game.WIDTH/2-200.0f, Game.HEIGHT/2-100.0f);
+        text.setSize(2);
+        textTop.setSize(2);
+        textHandler.addText(textTop);
+        textHandler.addText(text);
+    }
+
     protected void killAsteroids(float deltaTime) {
         finalDestroyCounter -= deltaTime;
         if(finalDestroyCounter <= 0) {
@@ -105,6 +154,14 @@ public abstract class Level extends GameStateMachine {
         float mass = (RandomGenerator.random()*500000.0f+25000.0f)*(radius/10.0f);
         
         return objectController.getPlanet(x, y, radius, mass);
+    }
+    
+    protected void addHelpText(String helpText) {
+        Text text = new Text(helpText, Game.WIDTH/2.0f, Game.HEIGHT/3+helpTextHeight);
+        helpTextHeight += 50.0f;
+        text.setSize(0);
+        textHandler.addText(text);
+        helpTexts.add(text);
     }
     
     protected void addLevelText(String levelTextString, String levelSubTextString) {

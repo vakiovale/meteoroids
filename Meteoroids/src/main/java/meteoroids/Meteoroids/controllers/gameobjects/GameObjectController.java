@@ -392,4 +392,12 @@ public class GameObjectController implements Controller {
             }
         }
     }
+
+    /**
+     * Spawn some asteroids!
+     * 
+     */
+    public void spawnAsteroids(float deltaTime) {
+        addGameObject(asteroidController.generateNewAsteroids(deltaTime));
+    }
 }
