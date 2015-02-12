@@ -19,8 +19,6 @@ import meteoroids.Meteoroids.utilities.Text;
  */
 public class LevelAsteroidField extends Level {
     
-    private Planet[] planets;
-    
     public LevelAsteroidField(GameStateController controller, GameStatePlay play) {
         super(controller, play);       
         initTexts();
@@ -87,10 +85,7 @@ public class LevelAsteroidField extends Level {
     protected void checkGameOver() {
         for(int i = 0; i < planets.length; i++) {
             if(planets[i] != null && planets[i].isDead()) {               
-                exit();
-                objectController.killGameObject(planets[i]);
-                GameStateGameOver gameOverGameState = new GameStateGameOver(controller, objectController);
-                controller.addGameState(gameOverGameState);
+                gameOver(planets[i]);
                 break;
             }
         }       

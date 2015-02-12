@@ -36,9 +36,6 @@ public class GameStatePlay extends GameStateMachine {
     private GraphicsController graphicsController;
     private PhysicsController physicsController;
     private Ship ship;
-    private Asteroid[] asteroids;
-    private Planet[] planets;
-    private StarField starField;
 
     private ArrayDeque<LevelType> levels;
     private Level level;
@@ -53,7 +50,6 @@ public class GameStatePlay extends GameStateMachine {
     
     private void initLevels() {
         levels = new ArrayDeque<>();
-        levels.add(LevelType.ASTEROID_FIELD);
         levels.add(LevelType.ASTEROID_FIELD);
     }
 
@@ -70,7 +66,7 @@ public class GameStatePlay extends GameStateMachine {
         objectController.bindTextureController(textureController);
         
         // Initialize game objects
-        this.starField = objectController.getStarField(Game.WIDTH*3, Game.HEIGHT*3, 1000);
+        objectController.getStarField(Game.WIDTH*3, Game.HEIGHT*3, 1000);
         this.ship = objectController.getShip();
         
         // Initialize level
@@ -108,15 +104,7 @@ public class GameStatePlay extends GameStateMachine {
     public Ship getShip() {
         return ship;
     }
-    
-    public Planet[] getPlanets() {
-        return planets;
-    }
-    
-    public Asteroid[] getAsteroids() {
-        return asteroids;
-    }
-    
+        
     /**
      * Current GameObjectController
      * 

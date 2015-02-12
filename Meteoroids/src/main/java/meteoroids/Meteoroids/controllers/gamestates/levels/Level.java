@@ -3,9 +3,11 @@ package meteoroids.Meteoroids.controllers.gamestates.levels;
 import meteoroids.Meteoroids.Game;
 import meteoroids.Meteoroids.controllers.gameobjects.GameObjectController;
 import meteoroids.Meteoroids.controllers.gamestates.GameStateController;
+import meteoroids.Meteoroids.controllers.gamestates.GameStateGameOver;
 import meteoroids.Meteoroids.controllers.gamestates.GameStateMachine;
 import meteoroids.Meteoroids.controllers.gamestates.GameStatePlay;
 import meteoroids.Meteoroids.controllers.utilities.TextHandler;
+import meteoroids.Meteoroids.gameobjects.GameObject;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.Asteroid;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.Planet;
 import meteoroids.Meteoroids.utilities.RandomGenerator;
@@ -56,7 +58,15 @@ public abstract class Level extends GameStateMachine {
     protected abstract boolean checkLevelFinished(float deltaTime);
     
     protected abstract void checkGameOver();
-
+    
+    protected void gameOver(GameObject kill) {
+        exit();
+        if(kill != null) {
+            objectController.killGameObject(kill);
+        }
+        GameStateGameOver gameOverGameState = new GameStateGameOver(controller, objectController);
+        controller.addGameState(gameOverGameState);
+    }
     
     @Override
     public void update(float deltaTime) {              
