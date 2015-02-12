@@ -64,8 +64,6 @@ public abstract class Level extends GameStateMachine {
         if(kill != null) {
             objectController.killGameObject(kill);
         }
-        GameStateGameOver gameOverGameState = new GameStateGameOver(controller, objectController);
-        controller.addGameState(gameOverGameState);
     }
     
     @Override

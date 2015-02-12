@@ -83,8 +83,15 @@ public class GameStatePlay extends GameStateMachine {
         
         // Initialize follow up camera
         graphicsController.setFollowPlayerCamera(true, ship);
+        
     }
     
+    private void gameOver() {
+        exit();
+        GameStateGameOver gameOverGameState = new GameStateGameOver(controller, objectController);
+        controller.addGameState(gameOverGameState);        
+    }
+
     private void initLevel(LevelType levelType) {
         switch (levelType) {
             case ASTEROID_FIELD:
@@ -125,14 +132,18 @@ public class GameStatePlay extends GameStateMachine {
 
         // Update game world
         objectController.update(deltaTime);
+        
+        // Level update
+        level.update(deltaTime);
             
         // Draw
         graphicsController.draw(objectController.getDrawables());
         graphicsController.draw(objectController.getHUDController());
         
-        // Level update
-        level.update(deltaTime);
-        
+        // Check game over
+        if(level.isFinished()) {
+            gameOver();
+        }
     }
     
     /**

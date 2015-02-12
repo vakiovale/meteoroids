@@ -69,5 +69,4 @@ public class GameStateGameOver extends GameStateMachine {
         textHandler.draw();
         textHandler.removeText(textCounter);
     }
-
 }
