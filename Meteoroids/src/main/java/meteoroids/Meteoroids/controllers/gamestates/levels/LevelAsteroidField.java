@@ -2,14 +2,11 @@ package meteoroids.Meteoroids.controllers.gamestates.levels;
 
 import meteoroids.Meteoroids.Game;
 import meteoroids.Meteoroids.controllers.gamestates.GameStateController;
-import meteoroids.Meteoroids.controllers.gamestates.GameStateGameOver;
 import meteoroids.Meteoroids.controllers.gamestates.GameStatePlay;
 import meteoroids.Meteoroids.controllers.utilities.PointsController;
-import meteoroids.Meteoroids.controllers.utilities.TextHandler;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.Planet;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.PlanetType;
 import meteoroids.Meteoroids.utilities.RandomGenerator;
-import meteoroids.Meteoroids.utilities.Text;
 
 /**
  * Level - Asteroid field
@@ -23,7 +20,7 @@ public class LevelAsteroidField extends Level {
     
     public LevelAsteroidField(GameStateController controller, GameStatePlay play) {
         super(controller, play); 
-        targetPoints = PointsController.getPoints(PointsController.mainPlayer);
+        targetPoints = PointsController.getPoints(PointsController.mainPlayer) + 400;
     }
     
     @Override

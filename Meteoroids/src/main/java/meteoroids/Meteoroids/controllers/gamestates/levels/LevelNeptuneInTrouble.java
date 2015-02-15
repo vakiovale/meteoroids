@@ -30,7 +30,7 @@ public class LevelNeptuneInTrouble extends Level {
     @Override
     protected void initPlanets() {
         this.planets = new Planet[1];
-        planets[0] = objectController.getPlanet(500.0f, 700.0f, 200.0f, 5000000, PlanetType.NEPTUNE);
+        planets[0] = objectController.getPlanet(500.0f, 700.0f, 100.0f, 5000000, PlanetType.NEPTUNE);
     }
 
     @Override
