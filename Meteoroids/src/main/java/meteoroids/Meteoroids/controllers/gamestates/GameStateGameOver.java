@@ -16,6 +16,7 @@ import meteoroids.Meteoroids.utilities.highscores.HighScores;
 public class GameStateGameOver extends GameStateMachine {
 
     private int gameOverCounter;
+    private GameStatePlay gameStatePlay;
     private GameObjectController gameObjectController;
     private TextHandler textHandler;
     private Text textGameOver;
@@ -23,10 +24,12 @@ public class GameStateGameOver extends GameStateMachine {
     private Text textCounter;
     private final long POINTS;
     private final String HIGHSCORES_PATH = "highscores.dat";
+    private HighScores highScores;
         
-    public GameStateGameOver(GameStateController controller, GameObjectController gameObjectController) {
+    public GameStateGameOver(GameStateController controller, GameObjectController gameObjectController, GameStatePlay gameStatePlay) {
         super(controller);
         
+        this.gameStatePlay = gameStatePlay;
         this.gameObjectController = gameObjectController;        
         this.textHandler = new TextHandler();
         
@@ -35,15 +38,17 @@ public class GameStateGameOver extends GameStateMachine {
         
         Text textGameOver = new Text("Game Over!", Game.WIDTH/2-(Game.WIDTH/14), Game.HEIGHT/2-(Game.HEIGHT/10));
         Text askToContinueText = new Text("New game? (Press N)", Game.WIDTH/2-(Game.WIDTH/8), Game.HEIGHT/2);
+        Text newHighScore = new Text("NEW HIGHSCORE: " + PointsController.getPoints(PointsController.mainPlayer), Game.WIDTH/2-(Game.WIDTH/8), Game.HEIGHT/2-(Game.HEIGHT/4));
+        newHighScore.setSize(1);
         
         textHandler.addText(textGameOver);
         textHandler.addText(askToContinueText);  
         
         POINTS = PointsController.getPoints(PointsController.mainPlayer);
-        HighScores highScores = new HighScores(HIGHSCORES_PATH);
+        highScores = new HighScores(HIGHSCORES_PATH);
+        
         if(highScores.topTenCheck(POINTS)) {
-            this.exit();
-            controller.addGameState(new GameStateGotHighScore(controller, gameObjectController));
+            textHandler.addText(newHighScore);
         }
     }
 
@@ -60,13 +65,26 @@ public class GameStateGameOver extends GameStateMachine {
         
         if(gameOverCounter <= 0) {
             exit();
+            this.gameStatePlay.exit();
             textHandler.removeText(textGameOver);
             textHandler.removeText(askToContinueText);
+            
+            if(highScores.topTenCheck(POINTS)) {
+                controller.addGameState(new GameStateGotHighScore(controller, gameObjectController));
+            }
         }
                 
         controller.getGraphicsController().draw(gameObjectController.getDrawables());
         gameObjectController.getHUDController().draw();
         textHandler.draw();
         textHandler.removeText(textCounter);
+    }
+
+    /**
+     * Retry level.
+     * 
+     */
+    public void retry() {
+        gameStatePlay.retry();
     }
 }

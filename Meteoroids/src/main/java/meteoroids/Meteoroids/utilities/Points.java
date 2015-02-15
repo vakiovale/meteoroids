@@ -27,6 +27,15 @@ public class Points {
         }
     }
     
+    /**
+     * Set points.
+     * 
+     * @param points
+     */
+    public void setPoints(long points) {
+        this.points = points;
+    }
+    
     public long getPoints() {
         return points;
     }

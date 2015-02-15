@@ -34,14 +34,13 @@ public abstract class Level extends GameStateMachine {
     protected Planet[] planets;
     protected Asteroid[] asteroids;
     
+    protected int nextLevelCountDown;
+    protected int levelFinishedTimer;
+    
     private float infoTextHeight;
     private float helpTextHeight;
     
     private List<Text> helpTexts;
-    
-    protected int nextLevelCountDown;
-    
-    protected int levelFinishedTimer;
     
     public Level(GameStateController controller, GameStatePlay play) {
         super(controller);

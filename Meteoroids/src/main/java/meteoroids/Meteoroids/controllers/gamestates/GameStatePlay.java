@@ -9,6 +9,7 @@ import meteoroids.Meteoroids.controllers.gamestates.levels.Level;
 import meteoroids.Meteoroids.controllers.gamestates.levels.LevelAsteroidField;
 import meteoroids.Meteoroids.controllers.gamestates.levels.LevelHelpPluto;
 import meteoroids.Meteoroids.controllers.gamestates.levels.LevelNeptuneInTrouble;
+import meteoroids.Meteoroids.controllers.gamestates.levels.LevelRedPlanet;
 import meteoroids.Meteoroids.controllers.gamestates.levels.LevelTutorial;
 import meteoroids.Meteoroids.controllers.gamestates.levels.LevelType;
 import meteoroids.Meteoroids.controllers.graphics.GraphicsController;
@@ -42,9 +43,15 @@ public class GameStatePlay extends GameStateMachine {
 
     private ArrayDeque<LevelType> levels;
     private Level level;
+
+    private LevelType currentLevel;
+    
+    private long pointsAtStartOfLevel;
                 
     public GameStatePlay(GameStateController controller) {
         super(controller);
+        pointsAtStartOfLevel = 0;
+        currentLevel = null;
         PointsController.resetPoints();
         gameState = GameState.PLAY;
         printHelp();
@@ -58,6 +65,7 @@ public class GameStatePlay extends GameStateMachine {
         levels.add(LevelType.SAVE_PLUTO);
         levels.add(LevelType.NEPTUNE_IN_TROUBLE);
         levels.add(LevelType.ASTEROID_FIELD);
+        levels.add(LevelType.RED_PLANET);
     }
 
     /**
@@ -96,12 +104,13 @@ public class GameStatePlay extends GameStateMachine {
     }
     
     private void gameOver() {
-        exit();
-        GameStateGameOver gameOverGameState = new GameStateGameOver(controller, objectController);
+        // exit();
+        GameStateGameOver gameOverGameState = new GameStateGameOver(controller, objectController, this);
         controller.addGameState(gameOverGameState);        
     }
 
     private void initLevel(LevelType levelType) {
+        this.currentLevel = levelType;
         switch (levelType) {
             case TUTORIAL:
                 this.level = new LevelTutorial(controller, this);
@@ -114,6 +123,9 @@ public class GameStatePlay extends GameStateMachine {
                 break;
             case ASTEROID_FIELD:
                 this.level = new LevelAsteroidField(controller, this);
+                break;
+            case RED_PLANET:
+                this.level = new LevelRedPlanet(controller, this);
                 break;
             default:
                 this.level = new LevelAsteroidField(controller, this);
@@ -203,14 +215,25 @@ public class GameStatePlay extends GameStateMachine {
      * 
      */
     public void nextLevel() {
+        pointsAtStartOfLevel = PointsController.getPoints(PointsController.mainPlayer);
         LevelType nextLevel = levels.poll();
+        currentLevel = nextLevel;
         if(nextLevel != null) {
             init(nextLevel);
         }
         else {
             exit();
-            controller.addGameState(new GameStateGameOver(controller, objectController));
+            controller.addGameState(new GameStateGameOver(controller, objectController, this));
         }
+    }
+    
+    /**
+     * Retry previously played level.
+     * 
+     */
+    public void retry() {
+        PointsController.getPointsObject(PointsController.mainPlayer).setPoints(pointsAtStartOfLevel);
+        init(currentLevel);
     }
 
 }

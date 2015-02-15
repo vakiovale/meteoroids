@@ -190,14 +190,32 @@ public class GameObjectController implements Controller {
      */
     public Planet getPlanet(float x, float y, float radius, float mass) {
         Planet planet = new Planet(x, y, radius, mass);
-        addGameObject(planet);
-        hudController.addHUDElement(new EnergyBar(planet.getEnergy(), x-(radius*1.5f), y+(radius+10), radius*3));
-        if(textureController != null) {
-            planet.bindTextureDrawer(textureController.getRandomPlanet());
-        }
+        initPlanet(planet);
         return planet;
     }
     
+    /**
+     * Create a Planet at certain position with certain radius and mass and energy.
+     * 
+     * @return Planet
+     */
+    public Planet getPlanet(float x, float y, float radius, float mass, int energy) {
+        Planet planet = new Planet(x, y, radius, mass, energy);
+        initPlanet(planet);
+        return planet;
+    }
+    
+    private void initPlanet(Planet planet) {
+        addGameObject(planet);
+        hudController.addHUDElement(new EnergyBar(planet.getEnergy(), 
+                planet.getX()-(planet.getRadius()*1.5f), 
+                planet.getY()+(planet.getRadius()+10), 
+                planet.getRadius()*3));
+        if(textureController != null) {
+            planet.bindTextureDrawer(textureController.getRandomPlanet());
+        }      
+    }
+
     /**
      * Create a Planet at certain position with certain radius and mass.
      * 
@@ -207,7 +225,20 @@ public class GameObjectController implements Controller {
         Planet planet = getPlanet(x, y, radius, mass);
         if(textureController != null) {
             planet.bindTextureDrawer(textureController.getPlanet(planetType));
-        }
+        }        
+        return planet;
+    }
+    
+    /**
+     * Create a Planet at certain position with certain radius and mass and energy.
+     * 
+     * @return Planet
+     */
+    public Planet getPlanet(float x, float y, float radius, float mass, int energy, PlanetType planetType) {
+        Planet planet = getPlanet(x, y, radius, mass, energy);
+        if(textureController != null) {
+            planet.bindTextureDrawer(textureController.getPlanet(planetType));
+        }        
         return planet;
     }
         
