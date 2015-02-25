@@ -13,8 +13,13 @@ public class Energy {
     private boolean dead;
     
     public Energy(final int MAX_ENERGY) {
-        this.MAX_ENERGY = MAX_ENERGY;
-        this.energy = MAX_ENERGY;
+        if(MAX_ENERGY == 0) {
+            this.MAX_ENERGY = 100;
+        }
+        else {
+            this.MAX_ENERGY = MAX_ENERGY;
+        }
+        this.energy = this.MAX_ENERGY;
         this.dead = false;
     }
     
