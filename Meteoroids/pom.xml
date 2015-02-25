@@ -110,10 +110,61 @@
         <version>0.30</version>
         <configuration>
           <targetClasses>
-            <param>meteoroids.Meteoroids.gameobjects.*</param>
+            <param>meteoroids.Meteoroids.Game</param>
+            <param>meteoroids.Meteoroids.GameTimer</param>
+
+            <param>meteoroids.Meteoroids.controllers.physics.CollisionController</param>
+            <param>meteoroids.Meteoroids.controllers.physics.CollisionRules</param>
+            <param>meteoroids.Meteoroids.controllers.physics.PhysicsController</param>
+
+            <param>meteoroids.Meteoroids.gameobjects.DUGameObject</param>
+            <param>meteoroids.Meteoroids.gameobjects.GameObject</param>
+
+            <param>meteoroids.Meteoroids.gameobjects.physicsobjects.Asteroid</param>
+            <param>meteoroids.Meteoroids.gameobjects.physicsobjects.PhysicsObject</param>
+            <param>meteoroids.Meteoroids.gameobjects.physicsobjects.Planet</param>
+
+            <param>meteoroids.Meteoroids.gameobjects.physicsobjects.ships.BasicGun</param>
+            <param>meteoroids.Meteoroids.gameobjects.physicsobjects.ships.BasicProjectile</param>
+            <param>meteoroids.Meteoroids.gameobjects.physicsobjects.ships.PlasmaProjectile</param>
+            <param>meteoroids.Meteoroids.gameobjects.physicsobjects.ships.Ship</param>
+
+            <param>meteoroids.Meteoroids.gameobjects.gameobjects.utilities.Energy</param>
+            <param>meteoroids.Meteoroids.gameobjects.gameobjects.utilities.ThrustFlame</param>
+
+            <param>meteoroids.Meteoroids.gameobjects.utilities.highscores.Score</param>
+
+            <param>meteoroids.Meteoroids.utilities.Points</param>
+            <param>meteoroids.Meteoroids.utilities.Text</param>
+
           </targetClasses>
           <targetTests>
-            <param>meteoroids.Meteoroids.gameobjects.*</param>
+            <param>meteoroids.Meteoroids.Game</param>
+            <param>meteoroids.Meteoroids.GameTimerTest</param>
+
+            <param>meteoroids.Meteoroids.controllers.physics.CollisionControllerTest</param>
+            <param>meteoroids.Meteoroids.controllers.physics.CollisionRulesTest</param>
+            <param>meteoroids.Meteoroids.controllers.physics.PhysicsControllerTest</param>
+
+            <param>meteoroids.Meteoroids.gameobjects.DUGameObjectTest</param>
+            <param>meteoroids.Meteoroids.gameobjects.GameObjectTest</param>
+
+            <param>meteoroids.Meteoroids.gameobjects.physicsobjects.AsteroidTest</param>
+            <param>meteoroids.Meteoroids.gameobjects.physicsobjects.PhysicsObjectTest</param>
+            <param>meteoroids.Meteoroids.gameobjects.physicsobjects.PlanetTest</param>
+
+            <param>meteoroids.Meteoroids.gameobjects.physicsobjects.ships.BasicGunTest</param>
+            <param>meteoroids.Meteoroids.gameobjects.physicsobjects.ships.BasicProjectileTest</param>
+            <param>meteoroids.Meteoroids.gameobjects.physicsobjects.ships.PlasmaProjectileTest</param>
+            <param>meteoroids.Meteoroids.gameobjects.physicsobjects.ships.ShipTest</param>
+
+            <param>meteoroids.Meteoroids.gameobjects.gameobjects.utilities.EnergyTest</param>
+            <param>meteoroids.Meteoroids.gameobjects.gameobjects.utilities.ThrustFlameTest</param>
+
+            <param>meteoroids.Meteoroids.gameobjects.utilities.highscores.ScoreTest</param>
+
+            <param>meteoroids.Meteoroids.utilities.PointsTest</param>
+            <param>meteoroids.Meteoroids.utilities.TextTest</param>
           </targetTests>       
         </configuration>
       </plugin>
