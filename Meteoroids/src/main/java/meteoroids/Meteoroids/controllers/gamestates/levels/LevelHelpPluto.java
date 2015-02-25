@@ -11,6 +11,7 @@ public class LevelHelpPluto extends Level {
         super(controller, play);
         this.nextLevelCountDown = 5000;
         this.levelFinishedTimer = 70000;
+        initTimer();
     }
 
     @Override

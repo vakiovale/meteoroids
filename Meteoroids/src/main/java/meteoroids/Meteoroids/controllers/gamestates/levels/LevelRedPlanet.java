@@ -2,23 +2,24 @@ package meteoroids.Meteoroids.controllers.gamestates.levels;
 
 import meteoroids.Meteoroids.controllers.gamestates.GameStateController;
 import meteoroids.Meteoroids.controllers.gamestates.GameStatePlay;
+import meteoroids.Meteoroids.controllers.utilities.Timer;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.Planet;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.PlanetType;
 
 public class LevelRedPlanet extends Level {
-
+    
     public LevelRedPlanet(GameStateController controller, GameStatePlay play) {
         super(controller, play);
-        this.nextLevelCountDown = 10000;
+        this.nextLevelCountDown = 5000;
         this.levelFinishedTimer = 120000;
-    }
-    
-    @Override
-    public void update(float deltaTime) {
-        objectController.spawnAsteroids(deltaTime);
-        super.update(deltaTime);
+        initTimer();
     }
 
+    @Override
+    public void update(float deltaTime) {
+        super.update(deltaTime);
+    }
+    
     @Override
     protected void initTexts() {
         addLevelText("LEVEL 5", "The 'Dead' Red Planet");

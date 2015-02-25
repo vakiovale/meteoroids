@@ -33,7 +33,9 @@ public class Points {
      * @param points
      */
     public void setPoints(long points) {
-        this.points = points;
+        if(points >= 0L) {
+            this.points = points;
+        }
     }
     
     public long getPoints() {

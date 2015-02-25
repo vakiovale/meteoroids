@@ -10,6 +10,7 @@ import meteoroids.Meteoroids.controllers.gamestates.GameStateGameOver;
 import meteoroids.Meteoroids.controllers.gamestates.GameStateMachine;
 import meteoroids.Meteoroids.controllers.gamestates.GameStatePlay;
 import meteoroids.Meteoroids.controllers.utilities.TextHandler;
+import meteoroids.Meteoroids.controllers.utilities.Timer;
 import meteoroids.Meteoroids.gameobjects.GameObject;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.Asteroid;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.Planet;
@@ -42,6 +43,8 @@ public abstract class Level extends GameStateMachine {
     
     private List<Text> helpTexts;
     
+    private Timer timer;
+    
     public Level(GameStateController controller, GameStatePlay play) {
         super(controller);
         this.play = play;
@@ -54,6 +57,7 @@ public abstract class Level extends GameStateMachine {
         this.nextLevelCountDown = 10000;
         this.helpTexts = new ArrayList<>();
         this.levelFinishedTimer = 30000;
+        this.timer = null;
         
         initPlanets();
         initAsteroids();
@@ -79,6 +83,10 @@ public abstract class Level extends GameStateMachine {
         }
     }
     
+    protected void initTimer() {
+        this.timer = new Timer(textHandler, this.levelFinishedTimer/1000);
+    }
+    
     protected void gameOver(GameObject kill) {
         exit();
         if(kill != null) {
@@ -88,12 +96,17 @@ public abstract class Level extends GameStateMachine {
     
     @Override
     public void update(float deltaTime) {              
+        // Update timer
+        if(timer != null) {
+            timer.update(deltaTime);
+        }
+        
         // Draw texts
         textHandler.draw();
         
         // Decrease level finished timer
         levelFinishedTimer -= deltaTime;
-        
+                
         // Check if game is over
         levelFinished = checkLevelFinished(deltaTime);
         if(!levelFinished) {

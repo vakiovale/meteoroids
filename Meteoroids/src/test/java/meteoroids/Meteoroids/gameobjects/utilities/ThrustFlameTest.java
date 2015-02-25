@@ -1,4 +1,4 @@
-package meteoroids.Meteoroids.gameobjects;
+package meteoroids.Meteoroids.gameobjects.utilities;
 
 import static org.junit.Assert.*;
 
