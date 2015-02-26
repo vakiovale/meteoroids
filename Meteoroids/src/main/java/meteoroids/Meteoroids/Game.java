@@ -129,6 +129,7 @@ public class Game {
      */
     boolean init() {
         try {
+            Display.setTitle("Meteoroids");
             //Display.setDisplayMode(new DisplayMode(WIDTH, HEIGHT));
             Display.setFullscreen(true);
             Display.setResizable(true);
