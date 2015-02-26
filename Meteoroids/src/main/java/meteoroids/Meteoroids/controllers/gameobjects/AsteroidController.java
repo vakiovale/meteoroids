@@ -17,7 +17,7 @@ import meteoroids.Meteoroids.utilities.RandomGenerator;
  */
 public class AsteroidController {
     
-    private final int ASTEROIDS_BIRTH_TIME = 20000;
+    private final int ASTEROIDS_BIRTH_TIME = 15000;
     private final float BIG_ASTEROID_RADIUS_START = 30.0f;
     private final float BIG_ASTEROID_MASS_START = 1000.0f;
     private float bigAsteroidRadius;

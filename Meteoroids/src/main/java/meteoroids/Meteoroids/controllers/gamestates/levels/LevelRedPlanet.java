@@ -11,7 +11,7 @@ public class LevelRedPlanet extends Level {
     public LevelRedPlanet(GameStateController controller, GameStatePlay play) {
         super(controller, play);
         this.nextLevelCountDown = 5000;
-        this.levelFinishedTimer = 120000;
+        this.levelFinishedTimer = 100000;
         initTimer();
     }
 

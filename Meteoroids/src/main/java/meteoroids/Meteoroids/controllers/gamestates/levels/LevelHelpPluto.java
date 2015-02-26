@@ -10,7 +10,7 @@ public class LevelHelpPluto extends Level {
     public LevelHelpPluto(GameStateController controller, GameStatePlay play) {
         super(controller, play);
         this.nextLevelCountDown = 5000;
-        this.levelFinishedTimer = 70000;
+        this.levelFinishedTimer = 50000;
         initTimer();
     }
 
@@ -26,7 +26,7 @@ public class LevelHelpPluto extends Level {
     @Override
     protected void initPlanets() {
         this.planets = new Planet[1];
-        planets[0] = objectController.getPlanet(500.0f, 500.0f, 100.0f, 2500000, PlanetType.PLUTO);
+        planets[0] = objectController.getPlanet(500.0f, 500.0f, 50.0f, 2500000, 3500, PlanetType.PLUTO);
     }
 
     @Override
