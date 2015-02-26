@@ -162,13 +162,19 @@ public class InputController implements Controller {
      * @param deltaTime
      */
     private void pollGameOverInputs(float deltaTime) {
-        if(Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)) {
-            ((GameStateGameOver)stateMachine).exit();
-        }
-        if(Keyboard.isKeyDown(Keyboard.KEY_Y)) {
-            ((GameStateGameOver)stateMachine).exit();
-            ((GameStateGameOver)stateMachine).retry();
-            //gameStateController.addGameState(new GameStatePlay(gameStateController));
+        while(Keyboard.next()) {
+            if(Keyboard.getEventKey() == Keyboard.KEY_ESCAPE) {
+                if(!Keyboard.getEventKeyState()) {
+                    ((GameStateGameOver)stateMachine).skip();
+                }
+            }
+            if(Keyboard.getEventKey() == Keyboard.KEY_Y) {
+                if(!Keyboard.getEventKeyState()) {
+                    ((GameStateGameOver)stateMachine).exit();
+                    ((GameStateGameOver)stateMachine).retry();
+                    //gameStateController.addGameState(new GameStatePlay(gameStateController));
+                }    
+            }
         }
     }
     

@@ -64,20 +64,29 @@ public class GameStateGameOver extends GameStateMachine {
         textHandler.addText(textCounter);
         
         if(gameOverCounter <= 0) {
-            exit();
-            this.gameStatePlay.exit();
-            textHandler.removeText(textGameOver);
-            textHandler.removeText(askToContinueText);
-            
-            if(highScores.topTenCheck(POINTS)) {
-                controller.addGameState(new GameStateGotHighScore(controller, gameObjectController));
-            }
+            skip();
         }
                 
         controller.getGraphicsController().draw(gameObjectController.getDrawables());
         gameObjectController.getHUDController().draw();
         textHandler.draw();
         textHandler.removeText(textCounter);
+    }
+    
+    /**
+     * Skip from Game Over state. Goes to the High scores if player has enough points.
+     * Also exits from Game Over state.
+     * 
+     */
+    public void skip() {
+        exit();
+        this.gameStatePlay.exit();
+        textHandler.removeText(textGameOver);
+        textHandler.removeText(askToContinueText);
+        
+        if(highScores.topTenCheck(POINTS)) {
+            controller.addGameState(new GameStateGotHighScore(controller, gameObjectController));
+        }
     }
 
     /**
