@@ -32,8 +32,6 @@ LEFT CTRL | Change weapon
 P         | Pause game
 ESC       | Main menu
 
-<img src="https://github.com/valtteripyyhtia/meteoroids/blob/master/doc/Meteoroids_Menu.png" alt="Menu - Meteoroids" width="800px" />
-
 ## Running Meteoroids from command line (Linux - easy)
 
 This is the easiest way to build and run Meteoroids when you are in Linux environment.
@@ -125,5 +123,3 @@ After this, the program should start. Hope this works!
   - some objects are drawn wrong when OpenGL version > 3.0
 - <code>mvn package</code> does not include native libraries
 - tests run with <code>mvn test</code> doesn't work if native libraries are needed (works well when using IDE)
-
-<img src="https://github.com/valtteripyyhtia/meteoroids/blob/master/doc/Meteoroids_Play_Level7.png" alt="Other planets needs You!" width="800px" />
