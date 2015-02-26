@@ -58,7 +58,7 @@ public abstract class Level extends GameStateMachine {
         this.helpTexts = new ArrayList<>();
         this.levelFinishedTimer = 30000;
         this.timer = null;
-        
+                
         initPlanets();
         initAsteroids();
         initTexts();

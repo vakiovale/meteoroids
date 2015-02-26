@@ -13,6 +13,7 @@ public class LevelNeptuneInTrouble extends Level {
         this.nextLevelCountDown = 5000;
         this.levelFinishedTimer = 70000;
         initTimer();
+        play.fixedScreen(false);
     }
         
     @Override

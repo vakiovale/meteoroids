@@ -11,5 +11,6 @@ public enum LevelType {
     SAVE_PLUTO, 
     NEPTUNE_IN_TROUBLE, 
     ASTEROID_FIELD, 
-    RED_PLANET
+    RED_PLANET,
+    WHATS_UP_NEIGHBOR
 }

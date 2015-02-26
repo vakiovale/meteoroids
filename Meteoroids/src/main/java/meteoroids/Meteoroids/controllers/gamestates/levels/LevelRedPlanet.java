@@ -1,5 +1,6 @@
 package meteoroids.Meteoroids.controllers.gamestates.levels;
 
+import meteoroids.Meteoroids.Game;
 import meteoroids.Meteoroids.controllers.gamestates.GameStateController;
 import meteoroids.Meteoroids.controllers.gamestates.GameStatePlay;
 import meteoroids.Meteoroids.controllers.utilities.Timer;
@@ -13,6 +14,7 @@ public class LevelRedPlanet extends Level {
         this.nextLevelCountDown = 5000;
         this.levelFinishedTimer = 100000;
         initTimer();
+        play.fixedScreen(true);
     }
 
     @Override
@@ -29,7 +31,7 @@ public class LevelRedPlanet extends Level {
     @Override
     protected void initPlanets() {
         this.planets = new Planet[1];
-        planets[0] = objectController.getPlanet(500.0f, 700.0f, 80.0f, 4000000, 50000, PlanetType.MARS);
+        planets[0] = objectController.getPlanet(Game.WIDTH/2, Game.HEIGHT/2, 80.0f, 4000000, 50000, PlanetType.MARS);
     }
 
     @Override

@@ -12,6 +12,7 @@ import meteoroids.Meteoroids.controllers.gamestates.levels.LevelNeptuneInTrouble
 import meteoroids.Meteoroids.controllers.gamestates.levels.LevelRedPlanet;
 import meteoroids.Meteoroids.controllers.gamestates.levels.LevelTutorial;
 import meteoroids.Meteoroids.controllers.gamestates.levels.LevelType;
+import meteoroids.Meteoroids.controllers.gamestates.levels.LevelWhatsUpNeighbor;
 import meteoroids.Meteoroids.controllers.graphics.GraphicsController;
 import meteoroids.Meteoroids.controllers.physics.PhysicsController;
 import meteoroids.Meteoroids.controllers.utilities.PointsController;
@@ -62,10 +63,11 @@ public class GameStatePlay extends GameStateMachine {
     private void initLevels() {
         levels = new ArrayDeque<>();
         levels.add(LevelType.TUTORIAL);
+        levels.add(LevelType.WHATS_UP_NEIGHBOR);
+        levels.add(LevelType.RED_PLANET);
         levels.add(LevelType.SAVE_PLUTO);
         levels.add(LevelType.NEPTUNE_IN_TROUBLE);
         levels.add(LevelType.ASTEROID_FIELD);
-        levels.add(LevelType.RED_PLANET);
     }
 
     /**
@@ -99,7 +101,7 @@ public class GameStatePlay extends GameStateMachine {
                 new PointsBox(PointsController.getPointsObject(ship)));
         
         // Initialize follow up camera
-        graphicsController.setFollowPlayerCamera(true, ship);
+        // fixedScreen(false);
         
     }
     
@@ -126,6 +128,9 @@ public class GameStatePlay extends GameStateMachine {
                 break;
             case RED_PLANET:
                 this.level = new LevelRedPlanet(controller, this);
+                break;
+            case WHATS_UP_NEIGHBOR:
+                this.level = new LevelWhatsUpNeighbor(controller, this);
                 break;
             default:
                 this.level = new LevelAsteroidField(controller, this);
@@ -234,6 +239,25 @@ public class GameStatePlay extends GameStateMachine {
     public void retry() {
         PointsController.getPointsObject(PointsController.mainPlayer).setPoints(pointsAtStartOfLevel);
         init(currentLevel);
+    }
+    
+    /**
+     * This method changes how the camera works. Setting keepStuffInsideWindow true, 
+     * camera stops following player and player's ship can move from other edge to the other.
+     * Setting it false, player will be in the middle of the window with a following camera.
+     * 
+     * 
+     * @param keepStuffInsideWindow true keeps the window still and doesn't follow the player
+     */
+    public void fixedScreen(boolean keepStuffInsideWindow) {
+        if(keepStuffInsideWindow) {
+            graphicsController.setFollowPlayerCamera(false, ship);
+            ship.setKeepInsideWindow(true);
+        }
+        else {
+            graphicsController.setFollowPlayerCamera(true, ship);
+            ship.setKeepInsideWindow(false);
+        }
     }
 
 }

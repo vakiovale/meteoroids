@@ -20,11 +20,6 @@ public abstract class PhysicsObject extends DUGameObject implements IPosition {
     protected Vector2f velocity;
     
     protected float maxSpeed;
-
-    // TODO: Instead of the actual mass, it could be wiser to use an inverse of
-    // mass.
-    // The mass itself is rarely used and it's inverse mass is more common.
-    // One way could be to add also an inverse mass variable;
     protected float mass;
     private float inverseMass;
 

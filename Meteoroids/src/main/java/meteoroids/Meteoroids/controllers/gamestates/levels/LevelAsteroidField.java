@@ -21,6 +21,7 @@ public class LevelAsteroidField extends Level {
     public LevelAsteroidField(GameStateController controller, GameStatePlay play) {
         super(controller, play); 
         targetPoints = PointsController.getPoints(PointsController.mainPlayer) + 400;
+        play.fixedScreen(false);
     }
     
     @Override

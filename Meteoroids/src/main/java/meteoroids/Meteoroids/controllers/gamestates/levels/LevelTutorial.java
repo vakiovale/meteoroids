@@ -10,6 +10,7 @@ public class LevelTutorial extends Level {
     public LevelTutorial(GameStateController controller, GameStatePlay play) {
         super(controller, play);
         this.nextLevelCountDown = 5000;
+        play.fixedScreen(false);
     }
 
     @Override
