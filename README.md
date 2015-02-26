@@ -13,12 +13,13 @@ Clone of the classic Asteroids game.
 
 You must protect Earth from flying meteoroids! Destroy all the meteoroids before they hit the ground.
 
-<img src="https://github.com/valtteripyyhtia/meteoroids/blob/master/doc/Meteoroids_Play.png" alt="Save Earth! - Meteoroids" width="800px" />
-<img src="https://github.com/valtteripyyhtia/meteoroids/blob/master/doc/Meteoroids_Menu.png" alt="Menu - Meteoroids" width="800px" />
+<img src="https://github.com/valtteripyyhtia/meteoroids/blob/master/doc/Meteoroids_Play_Level8.png" alt="Save Earth! - Meteoroids" width="800px" />
+
+<img src="https://github.com/valtteripyyhtia/meteoroids/blob/master/doc/Meteoroids_Play_Level4.png" alt="Jupiter needs your help!" width="800px" />
 
 ## How to play
 
-Try to keep the planet alive as long as you can by shooting all the meteoroids.
+Try to keep planets alive as long as you can by shooting all the meteoroids.
 
 Key       | Action
 ----------| -------------
@@ -30,6 +31,8 @@ SPACE     | Fire
 LEFT CTRL | Change weapon
 P         | Pause game
 ESC       | Main menu
+
+<img src="https://github.com/valtteripyyhtia/meteoroids/blob/master/doc/Meteoroids_Menu.png" alt="Menu - Meteoroids" width="800px" />
 
 ## Running Meteoroids from command line (Linux - easy)
 
@@ -122,3 +125,5 @@ After this, the program should start. Hope this works!
   - some objects are drawn wrong when OpenGL version > 3.0
 - <code>mvn package</code> does not include native libraries
 - tests run with <code>mvn test</code> doesn't work if native libraries are needed (works well when using IDE)
+
+<img src="https://github.com/valtteripyyhtia/meteoroids/blob/master/doc/Meteoroids_Play_Level7.png" alt="Other planets needs You!" width="800px" />
