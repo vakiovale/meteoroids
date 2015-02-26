@@ -27,6 +27,10 @@ public class GameStateGameOver extends GameStateMachine {
     private HighScores highScores;
         
     public GameStateGameOver(GameStateController controller, GameObjectController gameObjectController, GameStatePlay gameStatePlay) {
+        this(controller, gameObjectController, gameStatePlay, false);
+    }
+    
+    public GameStateGameOver(GameStateController controller, GameObjectController gameObjectController, GameStatePlay gameStatePlay, boolean win) {
         super(controller);
         
         this.gameStatePlay = gameStatePlay;
@@ -36,7 +40,13 @@ public class GameStateGameOver extends GameStateMachine {
         gameState = GameState.GAME_OVER;
         gameOverCounter = 10000;
         
-        Text textGameOver = new Text("Game Over!", Game.WIDTH/2-(Game.WIDTH/14), Game.HEIGHT/2-(Game.HEIGHT/10));
+        Text textGameOver;
+        if(!win) {
+            textGameOver = new Text("Game Over!", Game.WIDTH/2-(Game.WIDTH/14), Game.HEIGHT/2-(Game.HEIGHT/10));
+        }
+        else {
+            textGameOver = new Text("THE END! YOU WON!", Game.WIDTH/2-(Game.WIDTH/9), Game.HEIGHT/2-(Game.HEIGHT/10));
+        }
         Text askToContinueText = new Text("Try again? (Press Y)", Game.WIDTH/2-(Game.WIDTH/8), Game.HEIGHT/2);
         Text newHighScore = new Text("NEW HIGHSCORE: " + PointsController.getPoints(PointsController.mainPlayer), Game.WIDTH/2-(Game.WIDTH/8), Game.HEIGHT/2-(Game.HEIGHT/4));
         newHighScore.setSize(1);

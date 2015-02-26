@@ -65,13 +65,13 @@ public class GameStatePlay extends GameStateMachine {
     private void initLevels() {
         levels = new ArrayDeque<>();
         levels.add(LevelType.TUTORIAL);
-        levels.add(LevelType.HOME_SWEET_HOME);
         levels.add(LevelType.SAVE_PLUTO);
         levels.add(LevelType.NEPTUNE_IN_TROUBLE);
         levels.add(LevelType.ASTEROID_FIELD);
         levels.add(LevelType.RED_PLANET);
         levels.add(LevelType.WHATS_UP_NEIGHBOR);
         levels.add(LevelType.TUNNEL_OF_LOVE);
+        levels.add(LevelType.HOME_SWEET_HOME);
     }
 
     /**
@@ -238,7 +238,7 @@ public class GameStatePlay extends GameStateMachine {
         }
         else {
             exit();
-            controller.addGameState(new GameStateGameOver(controller, objectController, this));
+            controller.addGameState(new GameStateGameOver(controller, objectController, this, true));
         }
     }
     

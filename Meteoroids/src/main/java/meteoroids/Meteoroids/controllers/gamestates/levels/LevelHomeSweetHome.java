@@ -12,6 +12,8 @@ public class LevelHomeSweetHome extends Level {
     public LevelHomeSweetHome(GameStateController controller, GameStatePlay play) {
         super(controller, play);
         this.nextLevelCountDown = 5000;
+        this.levelFinishedTimer = 300000;
+        initTimer();
         play.fixedScreen(false);
         Ship ship = play.getShip();
         ship.setPosition(Game.WIDTH/2, Game.HEIGHT/2-1800);
@@ -43,7 +45,7 @@ public class LevelHomeSweetHome extends Level {
 
     @Override
     protected boolean checkLevelFinished(float deltaTime) {
-        if(objectController.numberOfAsteroidsAlive() <= 0) {
+        if(objectController.numberOfAsteroidsAlive() <= 0 || levelFinishedTimer <= 0) {
             if(!levelFinished) {
                 levelDone();
             }
