@@ -13,12 +13,13 @@ Clone of the classic Asteroids game.
 
 You must protect Earth from flying meteoroids! Destroy all the meteoroids before they hit the ground.
 
-<img src="https://github.com/valtteripyyhtia/meteoroids/blob/master/doc/Meteoroids_Play.png" alt="Save Earth! - Meteoroids" width="800px" />
-<img src="https://github.com/valtteripyyhtia/meteoroids/blob/master/doc/Meteoroids_Menu.png" alt="Menu - Meteoroids" width="800px" />
+<img src="https://github.com/valtteripyyhtia/meteoroids/blob/master/doc/Meteoroids_Play_Level8.png" alt="Save Earth! - Meteoroids" width="800px" />
+
+<img src="https://github.com/valtteripyyhtia/meteoroids/blob/master/doc/Meteoroids_Play_Level4.png" alt="Jupiter needs your help!" width="800px" />
 
 ## How to play
 
-Try to keep the planet alive as long as you can by shooting all the meteoroids.
+Try to keep planets alive as long as you can by shooting all the meteoroids.
 
 Key       | Action
 ----------| -------------
