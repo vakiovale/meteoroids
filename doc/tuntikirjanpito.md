@@ -23,3 +23,4 @@
 | 10.2.2015 | Pelisysteemin kehitystä, uudet tekstuurit            |           9 |
 | 11.2.2015 | Kameranäkymän muuttaminen ja uusi pelisysteemi       |          10 |
 | 12.2.2015 | Projektin siistimistä ja korjailua (testejä uupuu)   |           5 |
+| 25.2.2015 | Testausta                                            |           3 |
