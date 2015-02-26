@@ -8,6 +8,7 @@ import meteoroids.Meteoroids.controllers.gameobjects.GameObjectController;
 import meteoroids.Meteoroids.controllers.gamestates.levels.Level;
 import meteoroids.Meteoroids.controllers.gamestates.levels.LevelAsteroidField;
 import meteoroids.Meteoroids.controllers.gamestates.levels.LevelHelpPluto;
+import meteoroids.Meteoroids.controllers.gamestates.levels.LevelHomeSweetHome;
 import meteoroids.Meteoroids.controllers.gamestates.levels.LevelNeptuneInTrouble;
 import meteoroids.Meteoroids.controllers.gamestates.levels.LevelRedPlanet;
 import meteoroids.Meteoroids.controllers.gamestates.levels.LevelTunnelOfLove;
@@ -64,6 +65,7 @@ public class GameStatePlay extends GameStateMachine {
     private void initLevels() {
         levels = new ArrayDeque<>();
         levels.add(LevelType.TUTORIAL);
+        levels.add(LevelType.HOME_SWEET_HOME);
         levels.add(LevelType.SAVE_PLUTO);
         levels.add(LevelType.NEPTUNE_IN_TROUBLE);
         levels.add(LevelType.ASTEROID_FIELD);
@@ -136,6 +138,9 @@ public class GameStatePlay extends GameStateMachine {
                 break;
             case TUNNEL_OF_LOVE:
                 this.level = new LevelTunnelOfLove(controller, this);
+                break;
+            case HOME_SWEET_HOME:
+                this.level = new LevelHomeSweetHome(controller, this);
                 break;
             default:
                 this.level = new LevelAsteroidField(controller, this);

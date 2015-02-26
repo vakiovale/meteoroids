@@ -13,5 +13,6 @@ public enum LevelType {
     ASTEROID_FIELD, 
     RED_PLANET,
     WHATS_UP_NEIGHBOR,
-    TUNNEL_OF_LOVE
+    TUNNEL_OF_LOVE,
+    HOME_SWEET_HOME
 }

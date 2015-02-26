@@ -74,16 +74,14 @@ public class GraphicsController implements Controller {
      * 
      * @param object drawable
      */
-    public void draw(Drawable object) {
-        
+    public void draw(Drawable object) {        
         if(followPlayerCamera) {
             drawFollowCamera();
         }
         else {
             drawBasic();
         }
-        object.draw();
-        
+        object.draw();        
     }
     
     /**
