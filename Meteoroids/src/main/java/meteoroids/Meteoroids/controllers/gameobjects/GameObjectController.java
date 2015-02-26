@@ -7,7 +7,6 @@ import meteoroids.Meteoroids.Game;
 import meteoroids.Meteoroids.controllers.Controller;
 import meteoroids.Meteoroids.controllers.graphics.HUDController;
 import meteoroids.Meteoroids.controllers.graphics.TextureController;
-import meteoroids.Meteoroids.controllers.utilities.PointsController;
 import meteoroids.Meteoroids.gameobjects.DUGameObject;
 import meteoroids.Meteoroids.gameobjects.Drawable;
 import meteoroids.Meteoroids.gameobjects.DrawableGameObject;

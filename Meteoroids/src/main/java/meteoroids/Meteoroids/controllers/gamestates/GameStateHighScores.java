@@ -1,6 +1,5 @@
 package meteoroids.Meteoroids.controllers.gamestates;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import meteoroids.Meteoroids.Game;

@@ -11,7 +11,6 @@ import java.util.Collections;
 import java.util.List;
 
 import meteoroids.Meteoroids.controllers.utilities.ErrorController;
-import meteoroids.Meteoroids.utilities.RandomGenerator;
 
 /**
  * High scores

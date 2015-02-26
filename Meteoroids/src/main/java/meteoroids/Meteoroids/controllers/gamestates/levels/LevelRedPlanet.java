@@ -3,7 +3,6 @@ package meteoroids.Meteoroids.controllers.gamestates.levels;
 import meteoroids.Meteoroids.Game;
 import meteoroids.Meteoroids.controllers.gamestates.GameStateController;
 import meteoroids.Meteoroids.controllers.gamestates.GameStatePlay;
-import meteoroids.Meteoroids.controllers.utilities.Timer;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.Planet;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.PlanetType;
 

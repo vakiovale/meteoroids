@@ -6,7 +6,6 @@ import java.util.List;
 import meteoroids.Meteoroids.Game;
 import meteoroids.Meteoroids.controllers.gameobjects.GameObjectController;
 import meteoroids.Meteoroids.controllers.gamestates.GameStateController;
-import meteoroids.Meteoroids.controllers.gamestates.GameStateGameOver;
 import meteoroids.Meteoroids.controllers.gamestates.GameStateMachine;
 import meteoroids.Meteoroids.controllers.gamestates.GameStatePlay;
 import meteoroids.Meteoroids.controllers.utilities.TextHandler;
@@ -14,7 +13,6 @@ import meteoroids.Meteoroids.controllers.utilities.Timer;
 import meteoroids.Meteoroids.gameobjects.GameObject;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.Asteroid;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.Planet;
-import meteoroids.Meteoroids.utilities.GameTimer;
 import meteoroids.Meteoroids.utilities.RandomGenerator;
 import meteoroids.Meteoroids.utilities.Text;
 

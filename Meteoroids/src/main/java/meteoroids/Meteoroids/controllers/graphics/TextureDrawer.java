@@ -4,7 +4,6 @@ import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.opengl.Texture;
 
-import meteoroids.Meteoroids.Game;
 import meteoroids.Meteoroids.gameobjects.Drawable;
 
 /**

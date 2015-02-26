@@ -18,17 +18,9 @@ import meteoroids.Meteoroids.controllers.gamestates.levels.LevelWhatsUpNeighbor;
 import meteoroids.Meteoroids.controllers.graphics.GraphicsController;
 import meteoroids.Meteoroids.controllers.physics.PhysicsController;
 import meteoroids.Meteoroids.controllers.utilities.PointsController;
-import meteoroids.Meteoroids.controllers.utilities.TextHandler;
 import meteoroids.Meteoroids.gameobjects.GameObject;
-import meteoroids.Meteoroids.gameobjects.StarField;
-import meteoroids.Meteoroids.gameobjects.hud.EnergyBar;
 import meteoroids.Meteoroids.gameobjects.hud.PointsBox;
-import meteoroids.Meteoroids.gameobjects.physicsobjects.Asteroid;
-import meteoroids.Meteoroids.gameobjects.physicsobjects.Planet;
-import meteoroids.Meteoroids.gameobjects.physicsobjects.PlanetType;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.ships.Ship;
-import meteoroids.Meteoroids.utilities.RandomGenerator;
-import meteoroids.Meteoroids.utilities.Text;
 
 /**
  * Playing game state.
@@ -103,9 +95,6 @@ public class GameStatePlay extends GameStateMachine {
         PointsController.bindMainPlayer(ship);
         objectController.getHUDController().addHUDElement(
                 new PointsBox(PointsController.getPointsObject(ship)));
-        
-        // Initialize follow up camera
-        // fixedScreen(false);
         
     }
     

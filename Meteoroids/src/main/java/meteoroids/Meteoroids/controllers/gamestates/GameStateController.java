@@ -5,7 +5,6 @@ import java.util.ArrayDeque;
 import meteoroids.Meteoroids.Game;
 import meteoroids.Meteoroids.controllers.Controller;
 import meteoroids.Meteoroids.controllers.graphics.GraphicsController;
-import meteoroids.Meteoroids.controllers.graphics.TextureController;
 import meteoroids.Meteoroids.controllers.input.InputController;
 
 /**

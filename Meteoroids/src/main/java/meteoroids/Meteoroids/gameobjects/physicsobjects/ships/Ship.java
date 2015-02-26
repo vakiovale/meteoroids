@@ -2,16 +2,12 @@ package meteoroids.Meteoroids.gameobjects.physicsobjects.ships;
 
 import javax.vecmath.Vector2f;
 
-import meteoroids.Meteoroids.Game;
-import meteoroids.Meteoroids.controllers.graphics.TextureDrawer;
-import meteoroids.Meteoroids.gameobjects.GameObject;
 import meteoroids.Meteoroids.gameobjects.Movable;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.BoundingSphere;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.PhysicsObject;
 import meteoroids.Meteoroids.gameobjects.utilities.ThrustFlame;
 
 import org.lwjgl.opengl.GL11;
-import org.newdawn.slick.Color;
 
 /**
  * Player's ship class.
