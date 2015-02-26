@@ -34,10 +34,10 @@ public class GameStateGameOver extends GameStateMachine {
         this.textHandler = new TextHandler();
         
         gameState = GameState.GAME_OVER;
-        gameOverCounter = 5000;
+        gameOverCounter = 10000;
         
         Text textGameOver = new Text("Game Over!", Game.WIDTH/2-(Game.WIDTH/14), Game.HEIGHT/2-(Game.HEIGHT/10));
-        Text askToContinueText = new Text("New game? (Press N)", Game.WIDTH/2-(Game.WIDTH/8), Game.HEIGHT/2);
+        Text askToContinueText = new Text("Try again? (Press Y)", Game.WIDTH/2-(Game.WIDTH/8), Game.HEIGHT/2);
         Text newHighScore = new Text("NEW HIGHSCORE: " + PointsController.getPoints(PointsController.mainPlayer), Game.WIDTH/2-(Game.WIDTH/8), Game.HEIGHT/2-(Game.HEIGHT/4));
         newHighScore.setSize(1);
         

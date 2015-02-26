@@ -165,7 +165,7 @@ public class InputController implements Controller {
         if(Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)) {
             ((GameStateGameOver)stateMachine).exit();
         }
-        if(Keyboard.isKeyDown(Keyboard.KEY_N)) {
+        if(Keyboard.isKeyDown(Keyboard.KEY_Y)) {
             ((GameStateGameOver)stateMachine).exit();
             ((GameStateGameOver)stateMachine).retry();
             //gameStateController.addGameState(new GameStatePlay(gameStateController));
