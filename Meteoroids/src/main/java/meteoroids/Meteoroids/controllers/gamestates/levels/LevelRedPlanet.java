@@ -31,7 +31,7 @@ public class LevelRedPlanet extends Level {
     @Override
     protected void initPlanets() {
         this.planets = new Planet[1];
-        planets[0] = objectController.getPlanet(Game.WIDTH/2, Game.HEIGHT/2, 80.0f, 4000000, 50000, PlanetType.MARS);
+        planets[0] = objectController.getPlanet(Game.WIDTH/2, Game.HEIGHT/2, 80.0f, 4000000, 40000, PlanetType.MARS);
     }
 
     @Override

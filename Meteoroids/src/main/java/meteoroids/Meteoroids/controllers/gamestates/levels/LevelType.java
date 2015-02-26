@@ -12,5 +12,6 @@ public enum LevelType {
     NEPTUNE_IN_TROUBLE, 
     ASTEROID_FIELD, 
     RED_PLANET,
-    WHATS_UP_NEIGHBOR
+    WHATS_UP_NEIGHBOR,
+    TUNNEL_OF_LOVE
 }

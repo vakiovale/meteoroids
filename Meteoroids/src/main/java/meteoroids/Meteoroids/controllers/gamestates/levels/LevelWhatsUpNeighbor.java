@@ -25,8 +25,8 @@ public class LevelWhatsUpNeighbor extends Level {
 
     @Override
     protected void initTexts() {
-        addLevelText("LEVEL 5", "What's up neighbor?");
-        addLevelInfoText("Venus is in trouble!");
+        addLevelText("LEVEL 6", "What's up neighbor?");
+        addLevelInfoText("Venus is feeling weak! Protect her at all costs!");
         addLevelInfoText("Try to destroy as many asteroids as possible");
     }
 
