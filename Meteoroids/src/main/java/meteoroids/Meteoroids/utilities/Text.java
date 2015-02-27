@@ -19,10 +19,22 @@ public class Text {
     private UUID id;
     private int size;
     
+    /**
+     * Constructor for Text that's almost centered in the window
+     * 
+     * @param text
+     */
     public Text(String text) {
         this(text, Game.WIDTH/2-(Game.WIDTH/14), Game.HEIGHT/2);
     }
     
+    /**
+     * Constructor for Text with a specific location
+     * 
+     * @param text
+     * @param x
+     * @param y
+     */
     public Text(String text, float x, float y) {
         this.text = text;
         this.x = x;

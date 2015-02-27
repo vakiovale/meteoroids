@@ -5,7 +5,8 @@ import org.lwjgl.opengl.GL11;
 import meteoroids.Meteoroids.gameobjects.utilities.Energy;
 
 /**
- * Energy bar for game object.
+ * Energy bar for game object. EnergyBar is extended from a HUDElement and it
+ * is used in HUDController.
  * 
  * @author vpyyhtia
  *
@@ -17,6 +18,14 @@ public class EnergyBar extends HUDElement {
     private float green;
     private float size;
     
+    /**
+     * Constructor for EnergyBar
+     * 
+     * @param energy to be binded in the EnergyBar
+     * @param x
+     * @param y
+     * @param size
+     */
     public EnergyBar(Energy energy, float x, float y, float size) {
         this.energy = energy;
         this.red = 0.0f;

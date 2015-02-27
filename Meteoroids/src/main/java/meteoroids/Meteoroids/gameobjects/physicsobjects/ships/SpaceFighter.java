@@ -8,7 +8,7 @@ import meteoroids.Meteoroids.controllers.graphics.TextureDrawer;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.PhysicsObject;
 
 /**
- * More advanced ship.
+ * SpaceFighter extended from a default Ship. More advanced ship with nice textures.
  * 
  * @author vpyyhtia
  *

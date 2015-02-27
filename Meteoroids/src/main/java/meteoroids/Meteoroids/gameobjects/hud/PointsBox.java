@@ -17,6 +17,11 @@ public class PointsBox extends HUDElement {
     private TextHandler textHandler;
     private Text pointsText;
     
+    /**
+     * Constructor for PointsBox
+     * 
+     * @param points to be binded to the PointsBox
+     */
     public PointsBox(Points points) {
         this.points = points;
         this.textHandler = new TextHandler();

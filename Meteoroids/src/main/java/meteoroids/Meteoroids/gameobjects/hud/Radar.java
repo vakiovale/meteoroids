@@ -24,6 +24,12 @@ public class Radar extends HUDElement {
     private GameObjectController objectController;
     private GameObject objectToFollow;
     
+    /**
+     * Constructor for Radar
+     * 
+     * @param objectController for drawing objects in the radar
+     * @param object that is going to be the center object in the radar
+     */
     public Radar(GameObjectController objectController, GameObject object) {
         this.objectController = objectController;
         this.objectToFollow = object;

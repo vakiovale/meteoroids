@@ -24,11 +24,23 @@ public class HighScores {
     
     private final String HIGHSCORES_PATH;
     
+    /**
+     * Constructor for high scores. Creates a new file in the specific path if there's not
+     * already a high scores table in the file location.
+     * 
+     * @param PATH to the file location
+     */
     public HighScores(final String PATH) {
         this.HIGHSCORES_PATH = PATH;
         scores = new ArrayList<>();
     }
     
+    /**
+     * Check if player with specific points is allowed to the Top Ten
+     * 
+     * @param points of the player
+     * @return true if player is allowed to the top ten
+     */
     public boolean topTenCheck(long points) {
         loadScoreFile();
         Collections.sort(scores);
@@ -50,6 +62,11 @@ public class HighScores {
         return scores;
     }
     
+    /**
+     * Save Score to the high scores table.
+     * 
+     * @param score of the player
+     */
     public void saveScore(Score score) {
         loadScoreFile();
         FileOutputStream scoresOutputStream = null;

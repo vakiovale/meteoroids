@@ -16,6 +16,12 @@ public class Score implements Serializable, Comparable<Score> {
     private final long points;
     private final Date date;
     
+    /**
+     * Creates a Score with a specific name and points.
+     * 
+     * @param name of the player
+     * @param points of the player
+     */
     public Score(String name, long points) {
         this.date = new Date();
         if(name.length() > 8) {

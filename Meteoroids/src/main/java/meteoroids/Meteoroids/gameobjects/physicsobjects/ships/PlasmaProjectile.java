@@ -4,6 +4,13 @@ import javax.vecmath.Vector2f;
 
 import org.lwjgl.opengl.GL11;
 
+/**
+ * PlasmaProjectile that is extended from a BasicProjectile.
+ * More powerful projectile.
+ * 
+ * @author vpyyhtia
+ *
+ */
 public class PlasmaProjectile extends BasicProjectile {
 
     public PlasmaProjectile(float posX, float posY) {
