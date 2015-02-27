@@ -17,6 +17,13 @@ public class Star extends DrawableGameObject {
     private float green;
     private float blue;
     
+    /**
+     * Constructor for a shining Star.
+     * 
+     * @param radius
+     * @param x
+     * @param y
+     */
     public Star(float radius, float x, float y) {
         this.radius = radius;
         this.position.set(x, y);

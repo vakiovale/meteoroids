@@ -44,7 +44,7 @@ public class GameObjectController implements Controller {
 
     private int idCounter;
     private int asteroidCounter;
-
+    
     private FiringController firingController;
     private ShipController shipController;
     private AsteroidController asteroidController;

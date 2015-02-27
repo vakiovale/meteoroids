@@ -19,9 +19,15 @@ import meteoroids.Meteoroids.utilities.RandomGenerator;
  */
 public class AsteroidController {
     
+    /** Default time for asteroids to spawn */
     private final int ASTEROIDS_BIRTH_TIME = 15000;
+    
+    /** Default radius for first spawned asteroids */
     private final float BIG_ASTEROID_RADIUS_START = 30.0f;
+    
+    /** Default mass for first spawned asteroids */
     private final float BIG_ASTEROID_MASS_START = 1000.0f;
+    
     private float bigAsteroidRadius;
     private float bigAsteroidMass;
     private int newAsteroidsCounter;

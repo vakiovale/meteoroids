@@ -13,8 +13,10 @@ import meteoroids.Meteoroids.controllers.graphics.GraphicsController;
  */
 public class GameController implements Controller {
 
+    /** Can be used to speed up or slow down the game */
     private static float timeFactor = 1.0f;
     
+    /** Main GameStateController for handling the game */
     private GameStateController stateController;
     
     /**

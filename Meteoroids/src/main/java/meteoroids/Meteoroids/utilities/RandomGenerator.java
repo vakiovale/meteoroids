@@ -25,7 +25,7 @@ public class RandomGenerator {
     
     /**
      * Random float between 0.0f and 1.0f
-     * 
+     * If object has to be kept inside the game window
      * @return random float number
      */
     public static float random() {
