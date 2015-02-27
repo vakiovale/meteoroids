@@ -173,6 +173,7 @@ public class GameStatePlay extends GameStateMachine {
         // Draw
         graphicsController.draw(objectController.getDrawables());
         graphicsController.draw(objectController.getHUDController());
+        level.getTextHandler().draw();
         
         // Check game over
         if(level.isFinished()) {

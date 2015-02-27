@@ -98,10 +98,7 @@ public abstract class Level extends GameStateMachine {
         if(timer != null) {
             timer.update(deltaTime);
         }
-        
-        // Draw texts
-        textHandler.draw();
-        
+                
         // Decrease level finished timer
         levelFinishedTimer -= deltaTime;
                 
@@ -117,6 +114,16 @@ public abstract class Level extends GameStateMachine {
                 play.nextLevel();
             }
         }
+    }
+    
+    /**
+     * Get TextHandler used in the current level.
+     * Main usage is for textHandler is to draw texts on the screen.
+     * 
+     * @return textHandler
+     */
+    public TextHandler getTextHandler() {
+        return textHandler;
     }
     
     private void removeHelpTexts() {
