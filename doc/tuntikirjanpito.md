@@ -25,3 +25,4 @@
 | 12.2.2015 | Projektin siistimistä ja korjailua (testejä uupuu)   |           5 |
 | 25.2.2015 | Testausta                                            |           3 |
 | 26.2.2015 | Projektin viimeistelyä ja testausta                  |           6 |
+| 27.2.2015 | Viimeiset diagrammit, testit, dokumentaatiot, yms.   |          10 |
