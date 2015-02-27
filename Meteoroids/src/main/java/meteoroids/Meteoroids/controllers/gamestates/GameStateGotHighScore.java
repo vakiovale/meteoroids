@@ -8,6 +8,12 @@ import meteoroids.Meteoroids.utilities.Text;
 import meteoroids.Meteoroids.utilities.highscores.HighScores;
 import meteoroids.Meteoroids.utilities.highscores.Score;
 
+/**
+ * Got high scores game state where user is asked to write a name for new high score.
+ * 
+ * @author vpyyhtia
+ *
+ */
 public class GameStateGotHighScore extends GameStateMachine {
 
     private GameObjectController objectController;
@@ -16,6 +22,12 @@ public class GameStateGotHighScore extends GameStateMachine {
     public static StringBuilder name;
     private TextHandler textHandler;
     
+    /**
+     * Constructor for GameStateGotHighScore
+     * 
+     * @param controller the main GameStateController
+     * @param objectController objectController for showing the game object's behind the high scores table
+     */
     public GameStateGotHighScore(GameStateController controller, GameObjectController objectController) {
         super(controller);
         this.objectController = objectController;
@@ -36,6 +48,10 @@ public class GameStateGotHighScore extends GameStateMachine {
         textHandler.draw();
     }
 
+    /**
+     * Saves the new high score.
+     * 
+     */
     public void save() {
         scores.saveScore(new Score(name.toString(), PointsController.getPoints(PointsController.mainPlayer)));
         controller.addGameState(new GameStateHighScores(controller, objectController, true));

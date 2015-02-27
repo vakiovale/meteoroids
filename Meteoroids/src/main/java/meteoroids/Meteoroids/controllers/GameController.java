@@ -6,7 +6,7 @@ import meteoroids.Meteoroids.controllers.gamestates.GameStateMainMenu;
 import meteoroids.Meteoroids.controllers.graphics.GraphicsController;
 
 /**
- * Handles all the controllers in the game
+ * Handles the GameStateController and updates it with deltaTime
  * 
  * @author vpyyhtia
  *
@@ -17,6 +17,11 @@ public class GameController implements Controller {
     
     private GameStateController stateController;
     
+    /**
+     * Constructor for GameController
+     * 
+     * @param graphics GraphicsController which will be binded to the GameStateController
+     */
     public GameController(GraphicsController graphics) {
         this.stateController = new GameStateController(graphics);
         GameStateMachine startingGameState = new GameStateMainMenu(stateController);
@@ -25,7 +30,6 @@ public class GameController implements Controller {
 
     @Override
     public void update(float deltaTime) {
-
         deltaTime = deltaTime * timeFactor;
         stateController.update(deltaTime);
     }

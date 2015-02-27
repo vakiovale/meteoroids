@@ -8,7 +8,7 @@ import meteoroids.Meteoroids.utilities.Text;
 import meteoroids.Meteoroids.utilities.highscores.HighScores;
 
 /**
- * Game Over state
+ * Game Over state. Will be shown to the player after there will be game over.
  * 
  * @author vpyyhtia
  *
@@ -26,10 +26,25 @@ public class GameStateGameOver extends GameStateMachine {
     private final String HIGHSCORES_PATH = "highscores.dat";
     private HighScores highScores;
         
+    /**
+     * Constructor for GameStateGameOver
+     * 
+     * @param controller game's main GameStateController
+     * @param gameObjectController objectController for showing the object's behind the GameOver view
+     * @param gameStatePlay current GameStatePlay
+     */
     public GameStateGameOver(GameStateController controller, GameObjectController gameObjectController, GameStatePlay gameStatePlay) {
         this(controller, gameObjectController, gameStatePlay, false);
     }
     
+    /**
+     * Constructor for GameStateGameOver
+     * 
+     * @param controller game's main GameStateController
+     * @param gameObjectController objectController for showing the object's behind the GameOver view
+     * @param gameStatePlay current GameStatePlay
+     * @param win true if GameOver came because the game was actually finished
+     */
     public GameStateGameOver(GameStateController controller, GameObjectController gameObjectController, GameStatePlay gameStatePlay, boolean win) {
         super(controller);
         
@@ -100,7 +115,7 @@ public class GameStateGameOver extends GameStateMachine {
     }
 
     /**
-     * Retry level.
+     * Retry current level.
      * 
      */
     public void retry() {

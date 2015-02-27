@@ -24,6 +24,13 @@ public class GameStateHighScores extends GameStateMachine {
     private final int MAX_SCORES = 10; 
     private boolean staticBackground;
     
+    /**
+     * Constructor for GameStateHighScores
+     * 
+     * @param controller the main GameStateController
+     * @param objectController objectController for showing the game object's behind the high scores table
+     * @param isStaticBackground
+     */
     public GameStateHighScores(GameStateController controller, GameObjectController objectController, boolean isStaticBackground) {
         super(controller);
         staticBackground = isStaticBackground;

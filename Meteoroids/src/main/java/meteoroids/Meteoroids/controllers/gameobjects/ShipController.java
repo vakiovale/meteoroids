@@ -10,7 +10,9 @@ import meteoroids.Meteoroids.gameobjects.physicsobjects.ships.Weapon;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.ships.Projectile.ProjectileType;
 
 /**
- * Ship controller for managing ships.
+ * Ship controller for managing ships. ShipController creates new Ships and
+ * SpaceFighter. ShipController is also used for binding Projectiles to
+ * specific ships and weapons.
  * 
  * @author vpyyhtia
  *
@@ -18,7 +20,7 @@ import meteoroids.Meteoroids.gameobjects.physicsobjects.ships.Projectile.Project
 public class ShipController {
     
     /**
-     * Creates new ship.
+     * Creates new ship with a BasicGun and BasicProjectile.
      * 
      * @return Ship
      */
@@ -35,7 +37,8 @@ public class ShipController {
     
     
     /**
-     * Creates a more advanced new ship.
+     * Creates a more advanced new ship. SpaceFighter will have
+     * a BasicGun and BasicProjectile.
      * 
      * @return SpaceFighter
      */
@@ -53,8 +56,8 @@ public class ShipController {
     /**
      * Bind projectile to the ship's main weapon.
      * 
-     * @param ship
-     * @param projectileType
+     * @param ship that's going to have a new ProjectileType like ProjectileType.PLASMA_PROJECTILE
+     * @param projectileType that's going to be binded to the ship's main weapon
      */
     public void bindProjectile(Ship ship, ProjectileType projectileType) {
         Weapon weapon = ship.getWeapon();
@@ -66,8 +69,8 @@ public class ShipController {
     /**
      * Bind projectile to the specific weapon.
      * 
-     * @param weapon
-     * @param projectileType
+     * @param weapon that's going to have a new ProjectileType like ProjectileType.PLASMA_PROJECTILE
+     * @param projectileType that's going to be binded to the specific Weapon
      */
     public void bindProjectile(Weapon weapon, ProjectileType projectileType) {
         Projectile projectile = null;
@@ -85,9 +88,10 @@ public class ShipController {
     }
     
     /**
-     * Change to the next weapon from specific ship.
+     * Change to the next weapon from specific ship. Goes through all the different
+     * ProjectileTypes that are in the ship and changes to the next one.
      * 
-     * @param ship
+     * @param ship that's going to change its weapon
      */
     public void changeWeapon(Ship ship) {
         ProjectileType[] types = ProjectileType.values();

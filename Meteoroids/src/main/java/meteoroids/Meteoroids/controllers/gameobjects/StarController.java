@@ -4,7 +4,7 @@ import meteoroids.Meteoroids.controllers.Controller;
 import meteoroids.Meteoroids.gameobjects.StarField;
 
 /**
- * Controller for handling a star field to the background.
+ * Controller for handling and drawing a star field to the background.
  * 
  * @author vpyyhtia
  *
@@ -17,7 +17,7 @@ public class StarController implements Controller {
     }
 
     /**
-     * Generates new StarField.
+     * Generates a new StarField.
      * 
      * @return starField
      */

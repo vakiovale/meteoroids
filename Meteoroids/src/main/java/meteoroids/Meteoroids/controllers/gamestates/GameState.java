@@ -1,7 +1,8 @@
 package meteoroids.Meteoroids.controllers.gamestates;
 
 /**
- * Game states.
+ * Game states. GameStates represents the state of the GameStateMachine.
+ * All the different states in the game should have own GameState.
  * 
  * @author vpyyhtia
  *

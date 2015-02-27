@@ -62,7 +62,8 @@ public class Game {
     }
 
     /**
-     * Starts the main game loop. Uses GameController to update the game world.
+     * Starts the main game loop. Uses GameController to update the game world
+     * and GraphicsController for drawing.
      * 
      */
     void start() {
@@ -103,7 +104,7 @@ public class Game {
     }
     
     /**
-     * Quit game.
+     * Quit game
      * 
      */
     public static void gameOver() {
@@ -111,7 +112,7 @@ public class Game {
     }
 
     /**
-     * Display destroy
+     * Destroy display (window)
      * 
      * @return true
      * 

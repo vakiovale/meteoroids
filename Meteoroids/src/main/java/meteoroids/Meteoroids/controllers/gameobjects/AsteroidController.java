@@ -12,6 +12,8 @@ import meteoroids.Meteoroids.utilities.RandomGenerator;
 /**
  * Asteroid controller for managing asteroids.
  * 
+ * Manages destroying and creating single and multiple asteroids.
+ * 
  * @author vpyyhtia
  *
  */
@@ -24,6 +26,12 @@ public class AsteroidController {
     private float bigAsteroidMass;
     private int newAsteroidsCounter;
     
+    /**
+     * Constructor for AsteroidController. Initializes default
+     * values for starting mass and radius for asteroids and also
+     * the spawning time.
+     * 
+     */
     public AsteroidController() {
         newAsteroidsCounter = ASTEROIDS_BIRTH_TIME;
         bigAsteroidRadius = BIG_ASTEROID_RADIUS_START;
@@ -31,9 +39,11 @@ public class AsteroidController {
     }
     
     /**
-     * Destroys an asteroid and creates two smaller one from it.
+     * Destroys an asteroid and creates two smaller one from it. If new size
+     * for the asteroids would be smaller than 3.0, then there won't be any
+     * new asteroids.
      * 
-     * @param a Asteroid to be destroyed
+     * @param asteroid to be destroyed
      * @return list of asteroids
      */
     public List<Asteroid> destroyAsteroid(Asteroid asteroid) {
@@ -61,9 +71,12 @@ public class AsteroidController {
     }
     
     /**
-     * Creates Asteroids.
+     * Creates randomly new asteroids to the game window.
      * 
-     * @return array of Asteroids
+     * @param numberOfAsteroids that will be generated
+     * @param mass of the new asteroids
+     * @param size of the asteroids (radius)
+     * @return array of new Asteroids
      */
     public Asteroid[] getAsteroids(int numberOfAsteroids, float mass, float size) {
         Asteroid[] asteroids = new Asteroid[numberOfAsteroids];
@@ -100,10 +113,13 @@ public class AsteroidController {
     }
     
     /**
-     * Generates new asteroids.
+     * Generates two new asteroids if asteroid time counter has dropped to zero.
+     * Every time this method is called, asteroid time counter will be decreased by
+     * delta time. After new generated asteroids, next ones will be even bigger.
+     * Maximum size for new asteroids is 150 in radius.
      * 
      * @param deltaTime
-     * @return array of asteroids
+     * @return array of Asteroids
      */
     public Asteroid[] generateNewAsteroids(float deltaTime) {
         newAsteroidsCounter -= deltaTime;
@@ -123,7 +139,7 @@ public class AsteroidController {
     }
 
     /**
-     * Creates new asteroid.
+     * Creates a new Asteroid.
      * 
      * @param posX
      * @param posY

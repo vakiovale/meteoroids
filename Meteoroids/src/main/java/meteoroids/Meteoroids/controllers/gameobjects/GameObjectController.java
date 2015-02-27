@@ -28,7 +28,12 @@ import meteoroids.Meteoroids.gameobjects.physicsobjects.ships.SpaceFighter;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.ships.Weapon;
 
 /**
- * Controller for game objects.
+ * Controller for all the game objects. The most important controller in the game
+ * which holds the information of all the other controllers. This controller is the
+ * main interface for other classes to communicate with each other.
+ * <p>
+ * Holds the data for drawable and updateable game objects and manages creating and
+ * destroying of all the objects.
  * 
  * @author vpyyhtia
  *
@@ -53,6 +58,10 @@ public class GameObjectController implements Controller {
     private List<Drawable> drawableObjects;
     private List<Updateable> updateableObjects; 
 
+    /**
+     * Constructor for GameObjectController. Initializes all other controllers.
+     * 
+     */
     public GameObjectController() {
         idCounter = 0;
         asteroidCounter = 0;
@@ -84,9 +93,9 @@ public class GameObjectController implements Controller {
     }   
 
     /**
-     * Shoot with ship.
+     * Shoot with ship. Uses FiringController for firing.
      * 
-     * @param ship
+     * @param ship that's going to fire
      */
     public void fire(ShootingShip ship) {
         Projectile projectile = firingController.fire(ship);
@@ -96,9 +105,10 @@ public class GameObjectController implements Controller {
     }
 
     /**
-     * Creates new ship.
+     * Creates a new ship. Default ship is SpaceFighter which
+     * will be created in the ShipController.
      * 
-     * @return Ship
+     * @return Ship new SpaceFighter object
      */
     public Ship getShip() {
         SpaceFighter ship = shipController.getSpaceFighter();
@@ -115,8 +125,8 @@ public class GameObjectController implements Controller {
     /**
      * Bind projectile to the ship's main weapon.
      * 
-     * @param ship
-     * @param projectileType
+     * @param ship that's going to get a new projectileType
+     * @param projectileType type of the Projectile that are going to be shot from the ship
      */
     public void bindProjectile(Ship ship, ProjectileType projectileType) {
         shipController.bindProjectile(ship, projectileType);
@@ -125,15 +135,16 @@ public class GameObjectController implements Controller {
     /**
      * Bind projectile to the specific weapon.
      * 
-     * @param weapon
-     * @param projectileType
+     * @param weapon that's going to get a new projectileType
+     * @param projectileType type of the Projectile to be used in the selected weapon
      */
     public void bindProjectile(Weapon weapon, ProjectileType projectileType) {
         shipController.bindProjectile(weapon, projectileType);
     }
     
     /**
-     * Change to the next weapon from specific ship.
+     * Change to the next weapon from a specific ship. Doesn't do anything if there's
+     * only one weapon in the ship (or no weapons at all).
      * 
      * @param ship
      */
@@ -141,13 +152,23 @@ public class GameObjectController implements Controller {
         shipController.changeWeapon(ship);
     }
     
+    /**
+     * Creates a radar in the game window. Radar shows player's position in the center
+     * and other important game objects near the player. It's also possible to use
+     * other GameObject's for the radar's center object.
+     * 
+     * @param object that's going to be the center point in the radar
+     */
     public void addRadar(GameObject object) {
         hudController.addHUDElement(new Radar(this, object));
     }
 
     /**
-     * Creates Asteroids.
+     * Creates Asteroids with AsteroidController.
      * 
+     * @param numberOfAsteroids number of new Asteroids to be generated
+     * @param mass of the new Asteroids
+     * @param size of the new Asteroids (radius)
      * @return array of Asteroids
      */
     public Asteroid[] getAsteroids(int numberOfAsteroids, float mass, float size) {
@@ -156,6 +177,15 @@ public class GameObjectController implements Controller {
         return asteroids;
     }
     
+    /**
+     * Creates Asteroids with AsteroidController.
+     * 
+     * @param posX
+     * @param posY
+     * @param mass of the new Asteroid
+     * @param size of the new Asteroid (radius)
+     * @return a new Asteroid
+     */
     public Asteroid createAsteroid(float posX, float posY, float mass, float size) {
         Asteroid asteroid = asteroidController.createAsteroid(posX, posY, mass, size);
         addGameObject(asteroid);
@@ -163,7 +193,7 @@ public class GameObjectController implements Controller {
     }
 
     /**
-     * Create a Planet.
+     * Create a Planet in the center of screen.
      * 
      * @return Planet
      */
@@ -174,6 +204,8 @@ public class GameObjectController implements Controller {
     /**
      * Create a Planet at certain position.
      * 
+     * @param x
+     * @param y
      * @return Planet
      */
     public Planet getPlanet(float x, float y) {
@@ -183,6 +215,10 @@ public class GameObjectController implements Controller {
     /**
      * Create a Planet at certain position with certain radius and mass.
      * 
+     * @param x
+     * @param y
+     * @param radius of the Planet
+     * @param mass of the Planet
      * @return Planet
      */
     public Planet getPlanet(float x, float y, float radius, float mass) {
@@ -194,7 +230,12 @@ public class GameObjectController implements Controller {
     /**
      * Create a Planet at certain position with certain radius and mass and energy.
      * 
-     * @return Planet
+     * @param x
+     * @param y
+     * @param radius of the Planet
+     * @param mass of the Planet
+     * @param energy for the Planet
+     * @return Planet 
      */
     public Planet getPlanet(float x, float y, float radius, float mass, int energy) {
         Planet planet = new Planet(x, y, radius, mass, energy);
@@ -214,8 +255,13 @@ public class GameObjectController implements Controller {
     }
 
     /**
-     * Create a Planet at certain position with certain radius and mass.
+     * Create a Planet at certain position with certain radius and mass and PlanetType.
      * 
+     * @param x
+     * @param y
+     * @param radius of the Planet
+     * @param mass of the Planet
+     * @param planetType of the Planet. Can be anything from the PlanetType. Example: PlanetType.EARTH
      * @return Planet
      */
     public Planet getPlanet(float x, float y, float radius, float mass, PlanetType planetType) {
@@ -227,8 +273,14 @@ public class GameObjectController implements Controller {
     }
     
     /**
-     * Create a Planet at certain position with certain radius and mass and energy.
+     * Create a Planet at certain position with certain radius, mass, energy and PlanetType.
      * 
+     * @param x
+     * @param y
+     * @param radius of the Planet
+     * @param mass of the Planet
+     * @param energy for the Planet
+     * @param planetType of the Planet. Can be anything from the PlanetType. Example: PlanetType.EARTH
      * @return Planet
      */
     public Planet getPlanet(float x, float y, float radius, float mass, int energy, PlanetType planetType) {
@@ -240,7 +292,7 @@ public class GameObjectController implements Controller {
     }
         
     /**
-     * Get HUDController.
+     * Get HUDController. HUDController holds and displays all the HUDElements.
      * 
      * @return hudController
      */
@@ -267,7 +319,7 @@ public class GameObjectController implements Controller {
      *  
      * @param width of the star field
      * @param height of the star field
-     * @return
+     * @return StarField
      */
     public StarField getStarField(float width, float height, int numberOfStars) {
         StarField starField = starController.generateStarField(width, height, numberOfStars);
@@ -288,7 +340,7 @@ public class GameObjectController implements Controller {
     /**
      * Destroys an asteroid and creates two smaller one from it.
      * 
-     * @param a Asteroid to be destroyed
+     * @param asteroid to be destroyed
      */
     private void destroyAsteroid(Asteroid asteroid) {
         for(Asteroid a : asteroidController.destroyAsteroid(asteroid)) {
@@ -323,7 +375,7 @@ public class GameObjectController implements Controller {
     }
     
     /**
-     * Kills game object and removes from the game.
+     * Kills a GameObject and removes it from the game.
      * 
      * @param object to be removed
      */
@@ -346,7 +398,7 @@ public class GameObjectController implements Controller {
     /**
      * Add a DrawableGameObject to the game.
      * 
-     * @param object
+     * @param object to be added
      */
     public void addGameObject(DrawableGameObject object) {
         drawableObjects.add(object);
@@ -390,6 +442,11 @@ public class GameObjectController implements Controller {
         return gravityObjects;
     }
 
+    /**
+     * Clears the ID counter. Should be used only when removing
+     * all the current GameObjects from the game.
+     * 
+     */
     public void clearIdCounter() {
         idCounter = 0;
     }
@@ -410,6 +467,13 @@ public class GameObjectController implements Controller {
         }
     }
 
+    /**
+     * Starts destroying asteroids from the game. This method is usually
+     * used after the level is finished and all the remaining asteroids
+     * is going to be destroyed. This goes through all the PhysicsObjects
+     * and destroyed the Asteroids from that list.
+     * 
+     */
     public void killRandomAsteroid() {
         for(int i = 0; i < physicsObjects.size(); i++) {
             PhysicsObject o = physicsObjects.get(i);
@@ -423,8 +487,9 @@ public class GameObjectController implements Controller {
     }
 
     /**
-     * Spawn some asteroids!
+     * Spawn new asteroids
      * 
+     * @param deltaTime 
      */
     public void spawnAsteroids(float deltaTime) {
         addGameObject(asteroidController.generateNewAsteroids(deltaTime));
