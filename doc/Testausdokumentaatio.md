@@ -1,7 +1,7 @@
 # Testausdokumentaatio
 
 ## Yleistä
-Ohjelmassa on testattu yksikkötestauksella lähinnä gameobjects-paketin luokkia. Pelissä on kuitenkin paljon komponentteja, jotka perustuvat fysiikkaan ja grafiikkaan ja näiden testaaminen yksikkötestauksen avulla osoittautui hankalaksi.
+Ohjelmassa on testattu yksikkötestauksella lähinnä gameobjects-paketin luokkia. Pelissä on kuitenkin paljon komponentteja, jotka perustuvat fysiikkaan ja grafiikkaan ja näiden testaaminen yksikkötestauksen avulla osoittautui hankalaksi. Tätä varten suurin osa projektin ajasta menikin käsin testaukseen.
 
 ## Käsin testaus
 
