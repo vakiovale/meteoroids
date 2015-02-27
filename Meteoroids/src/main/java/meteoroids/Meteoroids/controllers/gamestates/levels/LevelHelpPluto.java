@@ -5,6 +5,12 @@ import meteoroids.Meteoroids.controllers.gamestates.GameStatePlay;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.Planet;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.PlanetType;
 
+/**
+ * Level - Help Pluto
+ * 
+ * @author vpyyhtia
+ *
+ */
 public class LevelHelpPluto extends Level {
 
     public LevelHelpPluto(GameStateController controller, GameStatePlay play) {

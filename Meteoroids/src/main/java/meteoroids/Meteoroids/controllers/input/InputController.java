@@ -14,7 +14,8 @@ import meteoroids.Meteoroids.controllers.gamestates.GameStatePlay;
 import meteoroids.Meteoroids.controllers.gamestates.GameStateMainMenu;
 
 /**
- * Handles the game input in all different game states.
+ * Handles the game input in all different game states. Depending on the current
+ * game state, different inputs are used.
  * 
  * @author vpyyhtia
  *
@@ -25,6 +26,11 @@ public class InputController implements Controller {
     private GameStateMachine stateMachine;
     private GameStateController gameStateController;
     
+    /**
+     * Constructor for InputController
+     * 
+     * @param gameStateController the main GameStateController
+     */
     public InputController(GameStateController gameStateController) {
         this.gameStateController = gameStateController;
         state = null;

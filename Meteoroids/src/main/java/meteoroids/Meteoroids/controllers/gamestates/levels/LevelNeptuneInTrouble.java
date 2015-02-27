@@ -6,6 +6,12 @@ import meteoroids.Meteoroids.controllers.gamestates.GameStatePlay;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.Planet;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.PlanetType;
 
+/**
+ * Level - Neptune in trouble
+ * 
+ * @author vpyyhtia
+ *
+ */
 public class LevelNeptuneInTrouble extends Level {
 
     public LevelNeptuneInTrouble(GameStateController controller,

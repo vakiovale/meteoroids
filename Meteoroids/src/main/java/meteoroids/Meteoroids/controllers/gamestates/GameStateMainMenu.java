@@ -30,6 +30,11 @@ public class GameStateMainMenu extends GameStateMachine {
     private MenuButton active;    
     private HashMap<MenuButton, Text> buttons;
             
+    /**
+     * Constructor for GameStateMainMenu
+     * 
+     * @param controller the main GameStateController
+     */
     public GameStateMainMenu(GameStateController controller) {
         super(controller);
         gameState = GameState.MAIN_MENU;

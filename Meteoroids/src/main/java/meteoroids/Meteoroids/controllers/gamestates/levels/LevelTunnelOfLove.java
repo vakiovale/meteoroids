@@ -7,6 +7,12 @@ import meteoroids.Meteoroids.gameobjects.physicsobjects.Planet;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.PlanetType;
 import meteoroids.Meteoroids.utilities.RandomGenerator;
 
+/**
+ * Level - Rush Hour
+ * 
+ * @author vpyyhtia
+ *
+ */
 public class LevelTunnelOfLove extends Level {
 
     public LevelTunnelOfLove(GameStateController controller, GameStatePlay play) {

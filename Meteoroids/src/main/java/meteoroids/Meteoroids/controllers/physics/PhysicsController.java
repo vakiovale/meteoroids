@@ -8,7 +8,8 @@ import meteoroids.Meteoroids.gameobjects.physicsobjects.GravityObject;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.PhysicsObject;
 
 /**
- * PhysicsController updates all the physics.
+ * PhysicsController updates all the physics. Moves and controls 
+ * the PhysicsObjects and GravityObjects and update them.
  * 
  * @author vpyyhtia
  *
@@ -23,6 +24,13 @@ public class PhysicsController implements Controller {
         this.collisionController = new CollisionController();
     }
 
+    /**
+     * Update the movement of PhysicsObjects
+     * 
+     * @param gravityObjects all GravityObjects
+     * @param objects all PhysicsObjects
+     * @param deltaTime
+     */
     public void update(List<GravityObject> gravityObjects,
             List<PhysicsObject> objects, float deltaTime) {
         if(gravityObjects == null || objects == null) return;

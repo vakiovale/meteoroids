@@ -12,7 +12,7 @@ import meteoroids.Meteoroids.gameobjects.GameObject;
 import org.lwjgl.opengl.GL11;
 
 /**
- * Handles drawing all the objects. OpenGL is also handled here.
+ * Handles drawing all the objects. Initializing OpenGL is also handled here.
  * 
  * @author vpyyhtia
  *
@@ -57,7 +57,7 @@ public class GraphicsController implements Controller {
     /**
      * Set camera to follow player.
      * 
-     * @param true if camera follow player
+     * @param true if camera follows player
      */
     public void setFollowPlayerCamera(boolean follow, GameObject object) {
         followPlayerCamera = follow;
@@ -72,7 +72,7 @@ public class GraphicsController implements Controller {
     /**
      * Draw a single object to the screen.
      * 
-     * @param object drawable
+     * @param object to be drawn
      */
     public void draw(Drawable object) {        
         if(followPlayerCamera) {

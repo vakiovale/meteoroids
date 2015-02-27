@@ -17,7 +17,8 @@ import meteoroids.Meteoroids.utilities.RandomGenerator;
 import meteoroids.Meteoroids.utilities.Text;
 
 /**
- * Abstract class for different levels.
+ * Abstract class for different levels. All the different levels should extend
+ * from this class. Level has the information for the current level.
  * 
  * @author vpyyhtia
  *
@@ -43,6 +44,12 @@ public abstract class Level extends GameStateMachine {
     
     private Timer timer;
     
+    /**
+     * Constructor for Level
+     * 
+     * @param controller the main GameStateController
+     * @param play current GameStatePlay
+     */
     public Level(GameStateController controller, GameStatePlay play) {
         super(controller);
         this.play = play;

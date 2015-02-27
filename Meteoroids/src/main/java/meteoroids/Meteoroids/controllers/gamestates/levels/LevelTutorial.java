@@ -4,7 +4,12 @@ import meteoroids.Meteoroids.Game;
 import meteoroids.Meteoroids.controllers.gamestates.GameStateController;
 import meteoroids.Meteoroids.controllers.gamestates.GameStatePlay;
 
-
+/**
+ * Level - Tutorial
+ * 
+ * @author vpyyhtia
+ *
+ */
 public class LevelTutorial extends Level {
 
     public LevelTutorial(GameStateController controller, GameStatePlay play) {

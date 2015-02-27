@@ -6,6 +6,12 @@ import meteoroids.Meteoroids.controllers.gamestates.GameStatePlay;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.Planet;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.PlanetType;
 
+/**
+ * Level - What's up neighbor
+ * 
+ * @author vpyyhtia
+ *
+ */
 public class LevelWhatsUpNeighbor extends Level {
 
     public LevelWhatsUpNeighbor(GameStateController controller,

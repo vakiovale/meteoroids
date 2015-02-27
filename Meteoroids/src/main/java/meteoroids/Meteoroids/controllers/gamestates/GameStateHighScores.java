@@ -29,7 +29,7 @@ public class GameStateHighScores extends GameStateMachine {
      * 
      * @param controller the main GameStateController
      * @param objectController objectController for showing the game object's behind the high scores table
-     * @param isStaticBackground
+     * @param isStaticBackground true if background should be static, false if updating the background
      */
     public GameStateHighScores(GameStateController controller, GameObjectController objectController, boolean isStaticBackground) {
         super(controller);
@@ -42,6 +42,11 @@ public class GameStateHighScores extends GameStateMachine {
         initHighScores();
     }
     
+    /**
+     * Constructor for GameStateHighScores. Basic view when there's only a star field behind the screen.
+     * 
+     * @param controller the main GameStateController
+     */
     public GameStateHighScores(GameStateController controller) {
         this(controller, new GameObjectController(), false);
         objectController.getStarField(Game.WIDTH, Game.HEIGHT, 100);

@@ -1,7 +1,7 @@
 package meteoroids.Meteoroids.controllers.gamestates.levels;
 
 /** 
- * Different levels
+ * Different levels. All levels should have their own LevelType.
  * 
  * @author vpyyhtia
  *

@@ -13,7 +13,7 @@ public class GameStatePause extends GameStateMachine {
 
     private GameObjectController gameObjectController;
     private TextHandler textHandler;
-    
+        
     public GameStatePause(GameStateController controller, GameObjectController gameObjectController) {
         super(controller);
         this.gameState = GameState.PAUSE;

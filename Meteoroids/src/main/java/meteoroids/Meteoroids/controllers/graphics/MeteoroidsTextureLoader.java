@@ -18,6 +18,12 @@ public class MeteoroidsTextureLoader {
 
     private Texture texture;
     
+    /**
+     * Constructor for MeteoroidsTextureLoader. If texture won't be found
+     * program will be shut down.
+     * 
+     * @param PATH_TO_TEXTURE loads the desired texture
+     */
     public MeteoroidsTextureLoader(final String PATH_TO_TEXTURE) {
         try {
             texture = TextureLoader.getTexture("PNG", ResourceLoader.getResourceAsStream(PATH_TO_TEXTURE));

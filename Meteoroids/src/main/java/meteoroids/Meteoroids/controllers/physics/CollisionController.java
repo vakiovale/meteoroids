@@ -11,7 +11,8 @@ import meteoroids.Meteoroids.gameobjects.physicsobjects.BoundingSphere;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.PhysicsObject;
 
 /**
- * Handles collision detection.
+ * Handles collision detection. Checks if BoundingSpheres collide
+ * and destroys them if needed.
  * 
  * @author vpyyhtia
  *
@@ -21,6 +22,10 @@ public class CollisionController implements Controller {
     private List<GameObject> killed;
     private CollisionRules collisionRules;
 
+    /**
+     * Constructor for CollisionController
+     * 
+     */
     public CollisionController() {
         this.killed = new ArrayList<>();
         collisionRules = new CollisionRules(killed);
@@ -28,12 +33,13 @@ public class CollisionController implements Controller {
 
     /**
      * Checks collisions. Works only with objects that implements
-     * BoundingSphere.
+     * BoundingSphere. If two objects collide, there will be a specific
+     * event for that (usually they bounce from each other).
      * 
      * TODO: Implement collision detection for objects with other geometry if
      * needed.
      * 
-     * @param objects
+     * @param objects to be checked
      * @param deltaTime
      */
     public void update(List<PhysicsObject> objects, float deltaTime) {
@@ -59,7 +65,8 @@ public class CollisionController implements Controller {
     }
 
     /**
-     * Check if two BoundingSphere objects collide.
+     * Check if two BoundingSphere objects collide. If two objects collide
+     * there will be a collision and a specific event.
      * 
      * @param bsA
      * @param bsB
@@ -77,13 +84,6 @@ public class CollisionController implements Controller {
         return false;
     }
 
-    /**
-     * TODO:
-     * 
-     * Better collision response. Now objects just reverse their velocity and
-     * they get easily stuck. This is just a demo collision !!!
-     * 
-     */
     private void collide(BoundingSphere bsA, BoundingSphere bsB) {
         // Use a special rule for collision
         if(collisionRules.checkHits(bsA, bsB)) {

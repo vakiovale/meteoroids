@@ -6,6 +6,12 @@ import meteoroids.Meteoroids.controllers.gamestates.GameStatePlay;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.Planet;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.PlanetType;
 
+/**
+ * Level - The Red 'Dead' Planet
+ * 
+ * @author vpyyhtia
+ *
+ */
 public class LevelRedPlanet extends Level {
     
     public LevelRedPlanet(GameStateController controller, GameStatePlay play) {

@@ -23,7 +23,8 @@ import meteoroids.Meteoroids.gameobjects.hud.PointsBox;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.ships.Ship;
 
 /**
- * Playing game state.
+ * Playing game state. This holds all the different levels and initializes them when needed.
+ * GameStatePlay changes the levels and keeps track of the current play.
  * 
  * @author vpyyhtia
  *
@@ -43,6 +44,11 @@ public class GameStatePlay extends GameStateMachine {
     
     private long pointsAtStartOfLevel;
                 
+    /**
+     * Constructor for GameStatePlay
+     * 
+     * @param controller the main GameStateController
+     */
     public GameStatePlay(GameStateController controller) {
         super(controller);
         pointsAtStartOfLevel = 0;
@@ -67,8 +73,9 @@ public class GameStatePlay extends GameStateMachine {
     }
 
     /**
-     * Initialize GameStatePlay
-     * @param asteroidField 
+     * Initialize GameStatePlay with a specifc LevelType
+     * 
+     * @param levelType changes to the desired Level and initializes it
      * 
      */
     public void init(LevelType levelType) {
@@ -99,7 +106,6 @@ public class GameStatePlay extends GameStateMachine {
     }
     
     private void gameOver() {
-        // exit();
         GameStateGameOver gameOverGameState = new GameStateGameOver(controller, objectController, this);
         controller.addGameState(gameOverGameState);        
     }
@@ -184,7 +190,7 @@ public class GameStatePlay extends GameStateMachine {
     /**
      * Kills GameObject and removes it from the game.
      * 
-     * @param object(float)
+     * @param objects
      */
     public void killGameObjects(List<GameObject> objects) {
         for(GameObject object : objects)

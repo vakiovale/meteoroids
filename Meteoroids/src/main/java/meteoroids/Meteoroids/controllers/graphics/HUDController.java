@@ -17,10 +17,20 @@ public class HUDController implements Controller, Drawable {
 
     private List<HUDElement> hudElements;
         
+    /**
+     * Constructor for HUDController
+     * 
+     */
     public HUDController() {
         this.hudElements = new ArrayList<>();
     }
     
+    /**
+     * Add a HUDElement to the game hud. Element will be drawn
+     * to the hud.
+     * 
+     * @param element to be added to the HUDController
+     */
     public void addHUDElement(HUDElement element) {
         hudElements.add(element);
     }

@@ -30,6 +30,10 @@ public class TextureController {
     private Texture planetNeptune;
     private Texture planetPluto;
 
+    /**
+     * Initialize all the textures for GameObjects.
+     * 
+     */
     public TextureController() {
         shipTexture = load("resources/ship.png");
         shipThrustTexture = load("resources/ship_thrust.png");
@@ -90,6 +94,11 @@ public class TextureController {
         }
     }
     
+    /**
+     * Randomly selects a texture for a Planet
+     * 
+     * @return
+     */
     public TextureDrawer getRandomPlanet() {
         PlanetType type = PlanetType.values()[(int)(RandomGenerator.random()*7)];
         return getPlanet(type);

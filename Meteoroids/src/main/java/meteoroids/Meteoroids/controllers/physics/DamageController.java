@@ -5,7 +5,7 @@ import meteoroids.Meteoroids.gameobjects.physicsobjects.PhysicsObject;
 import meteoroids.Meteoroids.gameobjects.utilities.IEnergy;
 
 /**
- * Handles the damage control of objects implementin IEnergy
+ * Handles the damage control of objects implementing IEnergy
  * 
  * @author vpyyhtia
  *

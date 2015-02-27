@@ -7,6 +7,12 @@ import meteoroids.Meteoroids.gameobjects.physicsobjects.Planet;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.PlanetType;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.ships.Ship;
 
+/**
+ * Level - Home Sweet Home
+ * 
+ * @author vpyyhtia
+ *
+ */
 public class LevelHomeSweetHome extends Level {
 
     public LevelHomeSweetHome(GameStateController controller, GameStatePlay play) {
