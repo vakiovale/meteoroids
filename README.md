@@ -119,7 +119,8 @@ After this, the program should start. Hope this works!
 
 ## Known issues
 
-- graphics are still in testing phase and some graphical glitches appear
+- some graphical glitches appear
+  - star field isn't drawn on some Windows machines when running from jar/exe-file
   - some objects are drawn wrong when OpenGL version > 3.0
-- <code>mvn package</code> does not include native libraries
+- <code>mvn package</code> does not include native libraries (using JarSplice instead)
 - tests run with <code>mvn test</code> doesn't work if native libraries are needed (works well when using IDE)
