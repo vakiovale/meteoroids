@@ -29,6 +29,10 @@ public class TextHandler implements Drawable {
     private static TrueTypeFont fontBig = null;
     private static TrueTypeFont fontTiny = null;
     
+    /**
+     * Constructor for TextHandler
+     * 
+     */
     public TextHandler() {
         texts = new HashSet<>();
     }
@@ -62,14 +66,30 @@ public class TextHandler implements Drawable {
         }
     }
     
+    /**
+     * Adds a text to the screen
+     * 
+     * @param text
+     */
     public void addText(String text) {
         texts.add(new Text(text));
     }
     
+    /**
+     * Adds a text to the screen
+     * 
+     * @param text
+     */
     public void addText(Text text) {
         texts.add(text);
     }
     
+    /**
+     * Removes a specif text from the screen
+     * 
+     * @param text to be removed
+     * @return true if text was successfully removed
+     */
     public boolean removeText(Text text) {
         return texts.remove(text);
     }

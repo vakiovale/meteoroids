@@ -27,6 +27,11 @@ public class PointsController {
         }
     }
     
+    /**
+     * Bind a specific GameObject that's going to be the main player.
+     * 
+     * @param player to be binded as main player
+     */
     public static void bindMainPlayer(GameObject player) {
         mainPlayer = player;
     }

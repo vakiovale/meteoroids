@@ -5,7 +5,7 @@ import meteoroids.Meteoroids.gameobjects.Updateable;
 import meteoroids.Meteoroids.utilities.Text;
 
 /**
- * Draws timer to the screen.
+ * Draws and handles a timer on the screen.
  * 
  * @author vpyyhtia
  *
@@ -16,6 +16,12 @@ public class Timer implements Updateable {
     private Text textCounter;
     private int timer;
     
+    /**
+     * Constructor for Timer
+     * 
+     * @param textHandler that's going to draw the timer on the screen
+     * @param timeInSeconds the starting time for the timer
+     */
     public Timer(TextHandler textHandler, int timeInSeconds) {
         this.textHandler = textHandler;
         this.timer = timeInSeconds * 1000;
