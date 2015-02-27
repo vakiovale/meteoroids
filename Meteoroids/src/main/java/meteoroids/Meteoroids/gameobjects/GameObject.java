@@ -5,7 +5,7 @@ import javax.vecmath.Vector2f;
 import meteoroids.Meteoroids.Game;
 
 /**
- * Basic GameObject
+ * Basic GameObject. Almost every thing drawn in the screen is a GameObject with a specific position.
  * 
  * @author vpyyhtia
  *
@@ -16,6 +16,10 @@ public class GameObject implements IPosition {
     protected int id;
     protected boolean keepInsideWindow;
 
+    /**
+     * Constructor for GameObject
+     * 
+     */
     public GameObject() {
         this.keepInsideWindow = false;
         position = new Vector2f(0, 0);
@@ -30,6 +34,13 @@ public class GameObject implements IPosition {
         this.id = id;
     }
     
+    /**
+     * Sets tha keepInsideWindow parameter to true if object
+     * has to be kept inside the window. Usually used for player's ship
+     * when it flies from other border to the other.
+     * 
+     * @param keepInWindow true if keep object inside the window
+     */
     public void setKeepInsideWindow(boolean keepInWindow) {
         keepInsideWindow = keepInWindow;
     }

@@ -32,5 +32,10 @@ public interface Movable {
      */
     public void slowDown(float amount, float deltaTime);
     
+    /**
+     * Get rotation as a degree
+     * 
+     * @return float number
+     */
     public float getRotation();
 }

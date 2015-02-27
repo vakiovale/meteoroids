@@ -6,7 +6,7 @@ import java.util.List;
 import meteoroids.Meteoroids.utilities.RandomGenerator;
 
 /**
- * Star field.
+ * Star field which creates multiple stars in it.
  * 
  * @author vpyyhtia
  *
@@ -15,6 +15,13 @@ public class StarField extends DrawableGameObject {
 
     List<Star> stars;
     
+    /**
+     * Constructor for StarField. StarField is built from multiple stars.
+     * 
+     * @param width of the star field
+     * @param height of the star field
+     * @param numberOfStars in the star field
+     */
     public StarField(float width, float height, int numberOfStars) {
         stars = new ArrayList<>();
         

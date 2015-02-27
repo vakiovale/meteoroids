@@ -11,10 +11,20 @@ public class DUGameObject extends GameObject implements Drawable, Updateable {
 
     protected boolean dead;
 
+    /**
+     * Constructor for DUGameObject
+     * 
+     */
     public DUGameObject() {
         this.dead = false;
     }
-    
+
+    /**
+     * Constructor for DUGameObject
+     * 
+     * @param posX
+     * @param posY
+     */
     public DUGameObject(float posX, float posY) {
         this.position.set(posX, posY);
     }
@@ -32,7 +42,7 @@ public class DUGameObject extends GameObject implements Drawable, Updateable {
     /**
      * Check if GameObject is dead and can be removed.
      * 
-     * @return
+     * @return true if dead
      */
     public boolean isDead() {
         return dead;
