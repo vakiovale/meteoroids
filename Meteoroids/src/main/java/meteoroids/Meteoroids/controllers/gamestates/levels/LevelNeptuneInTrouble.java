@@ -1,5 +1,6 @@
 package meteoroids.Meteoroids.controllers.gamestates.levels;
 
+import meteoroids.Meteoroids.Game;
 import meteoroids.Meteoroids.controllers.gamestates.GameStateController;
 import meteoroids.Meteoroids.controllers.gamestates.GameStatePlay;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.Planet;
@@ -14,6 +15,7 @@ public class LevelNeptuneInTrouble extends Level {
         this.levelFinishedTimer = 70000;
         initTimer();
         play.fixedScreen(false);
+        play.getShip().setPosition(Game.WIDTH/2+300, Game.HEIGHT/2-300);
     }
         
     @Override
@@ -32,7 +34,7 @@ public class LevelNeptuneInTrouble extends Level {
     @Override
     protected void initPlanets() {
         this.planets = new Planet[1];
-        planets[0] = objectController.getPlanet(100.0f, -100.0f, 60.0f, 4000000, 7000, PlanetType.NEPTUNE);
+        planets[0] = objectController.getPlanet(Game.WIDTH/2, Game.HEIGHT/2, 60.0f, 4000000, 7000, PlanetType.NEPTUNE);
     }
 
     @Override

@@ -33,7 +33,7 @@ public class LevelWhatsUpNeighbor extends Level {
     @Override
     protected void initPlanets() {
         this.planets = new Planet[1];
-        planets[0] = objectController.getPlanet(Game.WIDTH/2, Game.HEIGHT/2, 50.0f, 2000000, 3500, PlanetType.VENUS);
+        planets[0] = objectController.getPlanet(Game.WIDTH/2, Game.HEIGHT/2, 50.0f, 2000000, 4500, PlanetType.VENUS);
     }
 
     @Override

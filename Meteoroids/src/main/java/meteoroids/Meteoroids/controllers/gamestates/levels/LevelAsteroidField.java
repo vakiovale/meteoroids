@@ -20,7 +20,7 @@ public class LevelAsteroidField extends Level {
     
     public LevelAsteroidField(GameStateController controller, GameStatePlay play) {
         super(controller, play); 
-        targetPoints = PointsController.getPoints(PointsController.mainPlayer) + 400;
+        targetPoints = PointsController.getPoints(PointsController.mainPlayer) + 500;
         play.fixedScreen(false);
     }
     
@@ -28,7 +28,7 @@ public class LevelAsteroidField extends Level {
     protected void initTexts() {
         addLevelText("LEVEL 4", "Asteroid field");
         addLevelInfoText("protect Jupiter and Mars from nasty asteroids!");
-        addLevelInfoText("get 400 points");
+        addLevelInfoText("get 500 points");
     }
 
     @Override
