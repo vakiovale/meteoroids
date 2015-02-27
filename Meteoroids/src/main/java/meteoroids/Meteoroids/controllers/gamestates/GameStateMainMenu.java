@@ -7,7 +7,6 @@ import java.util.List;
 import meteoroids.Meteoroids.Game;
 import meteoroids.Meteoroids.controllers.gameobjects.GameObjectController;
 import meteoroids.Meteoroids.controllers.utilities.TextHandler;
-import meteoroids.Meteoroids.gameobjects.StarField;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.Asteroid;
 import meteoroids.Meteoroids.utilities.Text;
 
@@ -19,7 +18,6 @@ import meteoroids.Meteoroids.utilities.Text;
  */
 public class GameStateMainMenu extends GameStateMachine {
 
-    private StarField starField;
     private GameObjectController objectController;
     private TextHandler textHandler;
     
@@ -36,7 +34,7 @@ public class GameStateMainMenu extends GameStateMachine {
         super(controller);
         gameState = GameState.MAIN_MENU;
         objectController = new GameObjectController();
-        starField = objectController.getStarField(Game.WIDTH, Game.HEIGHT, 100);
+        objectController.getStarField(Game.WIDTH, Game.HEIGHT, 100);
         Asteroid asteroids[] = objectController.getAsteroids(25, 100.0f, 15.0f);
         for(Asteroid a : asteroids) {
             a.setKeepInsideWindow(true);

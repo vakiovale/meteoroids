@@ -9,6 +9,7 @@ import java.util.Date;
  * @author vpyyhtia
  *
  */
+@SuppressWarnings("serial")
 public class Score implements Serializable, Comparable<Score> {
     
     private final String name;

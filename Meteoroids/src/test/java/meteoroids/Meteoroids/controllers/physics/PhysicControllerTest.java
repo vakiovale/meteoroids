@@ -2,25 +2,16 @@ package meteoroids.Meteoroids.controllers.physics;
 
 import static org.junit.Assert.*;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import meteoroids.Meteoroids.gameobjects.physicsobjects.GravityObject;
-import meteoroids.Meteoroids.gameobjects.physicsobjects.PhysicsObject;
 import org.junit.Before;
 import org.junit.Test;
 
 public class PhysicControllerTest {
 
     private PhysicsController controller;
-    private List<GravityObject> gravityObjects;
-    private List<PhysicsObject> objects;
     
     @Before
     public void setUp() {
         this.controller = new PhysicsController();
-        this.gravityObjects = new ArrayList<>();
-        this.objects = new ArrayList<>();
     }
         
     @Test

@@ -43,7 +43,6 @@ public class GameObjectController implements Controller {
     private FiringController firingController;
     private ShipController shipController;
     private AsteroidController asteroidController;
-    private PlanetController planetController;
     private StarController starController;
     private HUDController hudController;
     
@@ -67,7 +66,6 @@ public class GameObjectController implements Controller {
         firingController = new FiringController(this);
         shipController = new ShipController();
         asteroidController = new AsteroidController();
-        planetController = new PlanetController();
         starController = new StarController();
         hudController = new HUDController();
         
@@ -282,6 +280,7 @@ public class GameObjectController implements Controller {
      * 
      * @param deltaTime
      */
+    @SuppressWarnings("unused")
     private void generateNewAsteroids(float deltaTime) {
         addGameObject(asteroidController.generateNewAsteroids(deltaTime));      
     }

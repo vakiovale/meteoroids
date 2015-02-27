@@ -2,11 +2,7 @@ package meteoroids.Meteoroids.controllers.physics;
 
 import static org.junit.Assert.*;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import meteoroids.Meteoroids.gameobjects.physicsobjects.Asteroid;
-import meteoroids.Meteoroids.gameobjects.physicsobjects.PhysicsObject;
 import meteoroids.Meteoroids.gameobjects.physicsobjects.Planet;
 
 import org.junit.Before;
@@ -15,12 +11,10 @@ import org.junit.Test;
 public class CollisionControllerTest {
 
     private CollisionController controller;
-    private List<PhysicsObject> objects;
     
     @Before
     public void setUp() {
         controller = new CollisionController();
-        objects = new ArrayList<>();
     }
     
     @Test
